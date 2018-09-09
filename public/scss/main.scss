@@ -1,0 +1,126 @@
+//Variables
+$main-dark: #2C3E50;
+$main-light: #ECF0F1;
+$color-on: #27AE60;
+$color-on-h: #2ECC71;
+$color-off: #C0392B;
+$color-off-h: #E74C3C;
+$main-board:#16A085;
+$color-text-dark: #fff;
+$color-btn-gr: #2980B9;
+$ground: #000;
+$power:#D35400;
+
+//General
+body{
+  box-sizing: border-box;
+  background: $main-dark;
+}
+
+//Process board
+.process-board{
+margin-top: 30px;
+}
+
+.board{
+  position: relative;
+  font-size: 32px;
+  color: $color-text-dark;
+  background: $main-board;
+  border: 1px solid $main-board;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  width: 100%;
+  height: 60px;
+  margin: 10px;
+  padding: 0;
+  i{
+    position: absolute;
+    display: inline-block;
+    width: 30%;
+    height: 50%;
+    margin: auto 0;
+    top: 0; left: 0; bottom: 0; right: 0;
+    padding-left: 10px;
+  }
+}
+
+//Button group
+.gpio-main{
+  margin-top: 30px;
+}
+
+.btn-gr {
+  background: $color-btn-gr;
+  color: $color-text-dark;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  height: 25px;
+  padding: 0;
+  margin-bottom: 10px;
+  .btn-gpio {
+    display: inline-block;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    width: 20%;
+    height: 25px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 1em;
+    font-weight: bold;
+  }
+}
+  .btn-on {
+    background: $color-on;
+    &:hover{
+      background:$color-on-h;
+    }
+  }
+
+  .btn-off {
+    background: $color-off;
+    &:hover{
+      background: $color-off-h;
+    }
+  }
+
+
+
+
+
+.btn-right p{
+  display: inline-block;
+  width: 80%;
+  float: left;
+  right: 0;
+  font-size: 1em;
+  margin: 0;
+  text-align: center;
+}
+
+.btn-left p{
+  display: inline-block;
+  width: 80%;
+  float: right;
+  right: 0;
+  font-size: 1em;
+  margin: 0;
+  text-align: center;
+}
+
+.gnd{
+  background: $ground;
+ p{
+   width: 100%;
+ }
+}
+
+.power {
+  background: $power;
+  p{
+    width: 100%;
+  }
+}
