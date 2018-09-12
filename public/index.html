@@ -8,6 +8,7 @@
     <link href="img/logo.png" rel="shortcut icon" type="image/x-icon"/>
 
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="scss/reset.css">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="scss/main.css">
 
@@ -17,6 +18,7 @@
 </head>
 
 <body>
+
     <div class="process-board">
         <div class="container">
             <div class="row">
@@ -32,194 +34,251 @@
             </div>
         </div>
     </div>
+
     <div class="gpio-main">
         <div class="container">
             <div class="row">
-                <div class="btn-gr btn-right power col-sm-5">
+                <div class="btn-container power col-sm-5">
                     <p>+3.3V Power</p>
                 </div>
-                <div class="btn-gr btn-left power offset-sm-2 col-sm-5">
+                <div class="btn-container power offset-sm-2 col-sm-5">
                     <p>+5V Power</p>
                 </div>
             </div>
             <div class="row">
-                <div class="btn-gr btn-right col-sm-5">
-                    <p>PA12/TWI0/SDA/DI_RX</p>
+                <div class="btn-container col-sm-5">
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PA12/TWI0/SDA/DI_RX"></i>
+                    <p class="btn-text">wPi 8</p>
+                    <div class="btn-gpio btn-off">OUT</div>
                     <div class="btn-gpio btn-off">OFF</div>
                 </div>
-                <div class="btn-gr btn-left power offset-sm-2 col-sm-5">
+                <div class="btn-container power offset-sm-2 col-sm-5">
                     <p>+5V Power</p>
                 </div>
             </div>
             <div class="row">
-                <div class="btn-gr btn-right col-sm-5">
-                    <p>PA11/TWI0_SCK/DI_TX</p>
+                <div class="btn-container col-sm-5">
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PA11/TWI0_SCK/DI_TX/SLC"></i>
+                    <p class="btn-text">wPi 9</p>
+                    <div class="btn-gpio btn-off">OUT</div>
                     <div class="btn-gpio btn-off">OFF</div>
                 </div>
-                <div class="btn-gr btn-left gnd offset-sm-2 col-sm-5">
+                <div class="btn-container gnd offset-sm-2 col-sm-5">
                     <p>Ground</p>
                 </div>
             </div>
             <div class="row">
-                <div class="btn-gr btn-right  col-sm-5">
-                    <p>PA6/SIM_PWREN/PWM1</p>
+                <div class="btn-container col-sm-5">
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PA6/SIM_PWREN/PWM1"></i>
+                    <p class="btn-text">wPi 7</p>
+                    <div class="btn-gpio btn-off">OUT</div>
                     <div class="btn-gpio btn-off">OFF</div>
                 </div>
-                <div class="btn-gr btn-left offset-sm-2 col-sm-5">
+                <div class="btn-container offset-sm-2 col-sm-5">
                     <div class="btn-gpio btn-off">OFF</div>
-                    <p>PA13/SPI1_CS/UART3_TX</p>
+                    <div class="btn-gpio btn-off">OUT</div>
+                    <p class="btn-text">wPi 15</p>
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PA13/SPI1_CS/UART3_TX"></i>
                 </div>
             </div>
             <div class="row">
-                <div class="btn-gr btn-right gnd col-sm-5">
+                <div class="btn-container gnd col-sm-5">
                     <p>Ground</p>
                 </div>
-                <div class="btn-gr btn-left offset-sm-2 col-sm-5">
+                <div class="btn-container offset-sm-2 col-sm-5">
                     <div class="btn-gpio btn-off">OFF</div>
-                    <p>PA14/SPI1_CLK/UART_RX</p>
+                    <div class="btn-gpio btn-off">OUT</div>
+                    <p class="btn-text">wPi 16</p>
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PA14/SPI1_CLK/UART_RX"></i>
                 </div>
             </div>
             <div class="row">
-                <div class="btn-gr btn-right col-sm-5">
-                    <p>PA1/UART2_RX/JTAG_CK</p>
-                    <div class="btn-gpio btn-off ">OFF</div>
-                </div>
-                <div class="btn-gr btn-left offset-sm-2 col-sm-5">
+                <div class="btn-container col-sm-5">
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PA1/UART2_RX/JTAG_CK"></i>
+                    <p class="btn-text">wPi 0</p>
+                    <div class="btn-gpio btn-off ">OUT</div>
                     <div class="btn-gpio btn-off">OFF</div>
-                    <p>PD14/RGMII_NULL</p>
+                </div>
+                <div class="btn-container offset-sm-2 col-sm-5">
+                    <div class="btn-gpio btn-off">OFF</div>
+                    <div class="btn-gpio btn-off">OUT</div>
+                    <p class="btn-text">wPi 1</p>
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PD14/RGMII_NULL"></i>
                 </div>
             </div>
             <div class="row">
-                <div class="btn-gr btn-right col-sm-5">
-                    <p>PA0/UART2_TX/JTAG_MS</p>
+                <div class="btn-container col-sm-5">
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PA0/UART2_TX/JTAG_MS"></i>
+                    <p class="btn-text">wPi 2</p>
+                    <div class="btn-gpio btn-off">OUT</div>
                     <div class="btn-gpio btn-off">OFF</div>
                 </div>
-                <div class="btn-gr btn-left gnd offset-sm-2 col-sm-5">
+                <div class="btn-container gnd offset-sm-2 col-sm-5">
                     <p>Ground</p>
                 </div>
             </div>
             <div class="row">
-                <div class="btn-gr btn-right col-sm-5">
-                    <p>PA3/UART2_CTS/JTAG_DI</p>
+                <div class="btn-container col-sm-5">
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PA3/UART2_CTS/JTAG_DI"></i>
+                    <p class="btn-text">wPi 3</p>
+                    <div class="btn-gpio btn-off">OUT</div>
                     <div class="btn-gpio btn-off">OFF</div>
                 </div>
-                <div class="btn-gr btn-left offset-sm-2 col-sm-5">
+                <div class="btn-container offset-sm-2 col-sm-5">
                     <div class="btn-gpio btn-off">OFF</div>
-                    <p>PC4/NCE0</p>
+                    <div class="btn-gpio btn-off">OUT</div>
+                    <p class="btn-text">wPi 4</p>
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PC4/NCE0"></i>
                 </div>
             </div>
             <div class="row">
-                <div class="btn-gr btn-right power col-sm-5">
+                <div class="btn-container power col-sm-5">
                     <p>+3.3V Power</p>
                 </div>
-                <div class="btn-gr btn-left offset-sm-2 col-sm-5">
+                <div class="btn-container offset-sm-2 col-sm-5">
                     <div class="btn-gpio btn-off">OFF</div>
-                    <p>PC7/NRB1</p>
+                    <div class="btn-gpio btn-off">OUT</div>
+                    <p class="btn-text">wPi 5</p>
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PC7/NRB1"></i>
                 </div>
             </div>
             <div class="row">
-                <div class="btn-gr btn-right col-sm-5">
-                    <p>PC0/NAND_WE#/SPI0_MOSI</p>
+                <div class="btn-container col-sm-5">
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PC0/NAND_WE#/SPI0_MOSI"></i>
+                    <p class="btn-text">wPi 12</p>
+                    <div class="btn-gpio btn-off">OUT</div>
                     <div class="btn-gpio btn-off">OFF</div>
                 </div>
-                <div class="btn-gr btn-left gnd offset-sm-2 col-sm-5">
+                <div class="btn-container gnd offset-sm-2 col-sm-5">
                     <p>Ground</p>
                 </div>
             </div>
             <div class="row">
-                <div class="btn-gr btn-right col-sm-5">
-                    <p>PC1/NALE/SPI0_MISO</p>
+                <div class="btn-container col-sm-5">
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PC1/NALE/SPI0_MISO"></i>
+                    <p class="btn-text">wPi 13</p>
+                    <div class="btn-gpio btn-off">OUT</div>
                     <div class="btn-gpio btn-off">OFF</div>
                 </div>
-                <div class="btn-gr btn-left offset-sm-2 col-sm-5">
+                <div class="btn-container offset-sm-2 col-sm-5">
                     <div class="btn-gpio btn-off">OFF</div>
-                    <p>PA2/UART2_RTS/JTAG_DO</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="btn-gr btn-right col-sm-5">
-                    <p>PC2/NCLE/SPI0_CLK</p>
-                    <div class="btn-gpio btn-off">OFF</div>
-                </div>
-                <div class="btn-gr btn-left offset-sm-2 col-sm-5">
-                    <div class="btn-gpio btn-off">OFF</div>
-                    <p>PC3/NCE1/SPI0_CS</p>
+                    <div class="btn-gpio btn-off">OUT</div>
+                    <p class="btn-text">wPi 6</p>
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PA2/UART2_RTS/JTAG_DO"></i>
                 </div>
             </div>
             <div class="row">
-                <div class="btn-gr btn-right gnd col-sm-5">
+                <div class="btn-container col-sm-5">
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PC2/NCLE/SPI0_CLK"></i>
+                    <p class="btn-text">wPi 14</p>
+                    <div class="btn-gpio btn-off">OUT</div>
+                    <div class="btn-gpio btn-off">OFF</div>
+                </div>
+                <div class="btn-container offset-sm-2 col-sm-5">
+                    <div class="btn-gpio btn-off">OFF</div>
+                    <div class="btn-gpio btn-off">OUT</div>
+                    <p class="btn-text">wPi 10</p>
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PC3/NCE1/SPI0_CS"></i>
+                </div>
+            </div>
+            <div class="row">
+                <div class="btn-container gnd col-sm-5">
                     <p>Ground</p>
                 </div>
-                <div class="btn-gr btn-left offset-sm-2 col-sm-5">
+                <div class="btn-container offset-sm-2 col-sm-5">
                     <div class="btn-gpio btn-off">OFF</div>
-                    <p>PA21/PCM0_DIN/SIM_VPPEN</p>
+                    <div class="btn-gpio btn-off">OUT</div>
+                    <p class="btn-text">wPi 11</p>
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PA21/PCM0_DIN/SIM_VPPEN"></i>
                 </div>
             </div>
             <div class="row">
-                <div class="btn-gr btn-right col-sm-5">
-                    <p>PA19/PCM0_CLK/TWI1_SDA</p>
+                <div class="btn-container col-sm-5">
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PA19/PCM0_CLK/TWI1_SDA"></i>
+                    <p class="btn-text">wPi 30</p>
+                    <div class="btn-gpio btn-off">OUT</div>
                     <div class="btn-gpio btn-off">OFF</div>
                 </div>
-                <div class="btn-gr btn-left offset-sm-2 col-sm-5">
+                <div class="btn-container offset-sm-2 col-sm-5">
                     <div class="btn-gpio btn-off">OFF</div>
-                    <p>PA18/PCM0_SYNC/TWI1_SCK</p>
+                    <div class="btn-gpio btn-off">OUT</div>
+                    <p class="btn-text">wPi 31</p>
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PA18/PCM0_SYNC/TWI1_SCK"></i>
                 </div>
             </div>
             <div class="row">
-                <div class="btn-gr btn-right col-sm-5">
-                    <p>PA7/SIM_CLK</p>
+                <div class="btn-container col-sm-5">
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PA7/SIM_CLK"></i>
+                    <p class="btn-text">wPi 21</p>
+                    <div class="btn-gpio btn-off">OUT</div>
                     <div class="btn-gpio btn-off">OFF</div>
                 </div>
-                <div class="btn-gr btn-left gnd offset-sm-2 col-sm-5">
-                    <p>Ground</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="btn-gr btn-right col-sm-5">
-                    <p>PA8/SIM_DATA</p>
-                    <div class="btn-gpio btn-off">OFF</div>
-                </div>
-                <div class="btn-gr btn-left offset-sm-2 col-sm-5">
-                    <div class="btn-gpio btn-off">OFF</div>
-                    <p>PG8/UART1_RTS</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="btn-gr btn-right col-sm-5">
-                    <p>PA9/SIM_RST</p>
-                    <div class="btn-gpio btn-off">OFF</div>
-                </div>
-                <div class="btn-gr btn-left gnd offset-sm-2 col-sm-5">
+                <div class="btn-container gnd offset-sm-2 col-sm-5">
                     <p>Ground</p>
                 </div>
             </div>
             <div class="row">
-                <div class="btn-gr btn-right col-sm-5">
-                    <p>PA10/SIM_DET</p>
+                <div class="btn-container col-sm-5">
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PA8/SIM_DATA"></i>
+                    <p class="btn-text">wPi 22</p>
+                    <div class="btn-gpio btn-off">OUT</div>
                     <div class="btn-gpio btn-off">OFF</div>
                 </div>
-                <div class="btn-gr btn-left offset-sm-2 col-sm-5">
+                <div class="btn-container offset-sm-2 col-sm-5">
                     <div class="btn-gpio btn-off">OFF</div>
-                    <p>PG9/UART1_CTS</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="btn-gr btn-right col-sm-5">
-                    <p>PA20/PCM0_DOUT/SIM_VPPEN</p>
-                    <div class="btn-gpio btn-off">OFF</div>
-                </div>
-                <div class="btn-gr btn-left offset-sm-2 col-sm-5">
-                    <div class="btn-gpio btn-off">OFF</div>
-                    <p>PG6/UART1_TX</p>
+                    <div class="btn-gpio btn-off">OUT</div>
+                    <p class="btn-text">wPi 26</p>
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PG8/UART1_RTS"></i>
                 </div>
             </div>
             <div class="row">
-                <div class="btn-gr btn-right gnd col-sm-5">
+                <div class="btn-container col-sm-5">
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PA9/SIM_RST"></i>
+                    <p class="btn-text">wPi 23</p>
+                    <div class="btn-gpio btn-off">OUT</div>
+                    <div class="btn-gpio btn-off">OFF</div>
+                </div>
+                <div class="btn-container gnd offset-sm-2 col-sm-5">
                     <p>Ground</p>
                 </div>
-                <div class="btn-gr btn-left offset-sm-2 col-sm-5">
+            </div>
+            <div class="row">
+                <div class="btn-container col-sm-5">
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PA10/SIM_DET"></i>
+                    <p class="btn-text">wPi 24</p>
+                    <div class="btn-gpio btn-off">OUT</div>
                     <div class="btn-gpio btn-off">OFF</div>
-                    <p>PG7/UART1_RX</p>
+                </div>
+                <div class="btn-container offset-sm-2 col-sm-5">
+                    <div class="btn-gpio btn-off">OFF</div>
+                    <div class="btn-gpio btn-off">OUT</div>
+                    <p class="btn-text">wPi 27</p>
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PG9/UART1_CTS"></i>
+                </div>
+            </div>
+            <div class="row">
+                <div class="btn-container col-sm-5">
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PA20/PCM0_DOUT/SIM_VPPEN"></i>
+                    <p class="btn-text">wPi 25</p>
+                    <div class="btn-gpio btn-off">OUT</div>
+                    <div class="btn-gpio btn-off">OFF</div>
+                </div>
+                <div class="btn-container offset-sm-2 col-sm-5">
+                    <div class="btn-gpio btn-off">OFF</div>
+                    <div class="btn-gpio btn-off">OUT</div>
+                    <p class="btn-text">wPi 28</p>
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PG6/UART1_TX"></i>
+                </div>
+            </div>
+            <div class="row">
+                <div class="btn-container gnd col-sm-5">
+                    <p>Ground</p>
+                </div>
+                <div class="btn-container offset-sm-2 col-sm-5">
+                    <div class="btn-gpio btn-off">OFF</div>
+                    <div class="btn-gpio btn-off">OUT</div>
+                    <p class="btn-text">wPi 29</p>
+                    <i class="icon fas fa-info-circle" data-toggle="tooltip" title="PG7/UART1_RX"></i>
                 </div>
             </div>
 

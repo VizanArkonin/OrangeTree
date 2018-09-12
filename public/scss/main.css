@@ -10,7 +10,6 @@ body {
   font-size: 32px;
   color: #fff;
   background: #16A085;
-  border: 1px solid #16A085;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
@@ -33,26 +32,25 @@ body {
 .gpio-main {
   margin-top: 30px; }
 
-.btn-gr {
+.btn-container {
+  display: inline-flex;
   background: #2980B9;
   color: #fff;
+  height: 25px;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 10px;
+  text-align: center;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
-  border-radius: 10px;
+  border-radius: 10px; }
+
+.btn-gpio {
   height: 25px;
-  padding: 0;
-  margin-bottom: 10px; }
-  .btn-gr .btn-gpio {
-    display: inline-block;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    width: 20%;
-    height: 25px;
-    cursor: pointer;
-    text-align: center;
-    font-size: 1em;
-    font-weight: bold; }
+  min-width: 15%;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold; }
 
 .btn-on {
   background: #27AE60; }
@@ -64,32 +62,21 @@ body {
   .btn-off:hover {
     background: #E74C3C; }
 
-.btn-right p {
-  display: inline-block;
-  width: 80%;
-  float: left;
-  right: 0;
-  font-size: 1em;
-  margin: 0;
-  text-align: center; }
-
-.btn-left p {
-  display: inline-block;
-  width: 80%;
-  float: right;
-  right: 0;
-  font-size: 1em;
-  margin: 0;
-  text-align: center; }
-
 .gnd {
   background: #000; }
   .gnd p {
-    width: 100%; }
+    min-width: 100%; }
 
 .power {
   background: #D35400; }
   .power p {
-    width: 100%; }
+    min-width: 100%; }
+
+.btn-text {
+  width: 65%; }
+
+.icon {
+  min-width: 5%;
+  padding: 5px; }
 
 /*# sourceMappingURL=main.css.map */
