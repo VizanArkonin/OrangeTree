@@ -5,13 +5,15 @@ import logging
 logging.basicConfig()
 
 
-def default_callback(pin_instance):
+def default_callback():
     """
     Default callback, used for both HIGH and LOW input states if no other callbacks specified
     :param pin_instance: Instance of Pin object
     :return:
     """
-    pin_instance.get_logger().info("PIN-{0} - Input state change detected".format(pin_instance.get_pin()))
+    logger = logging.getLogger("undefined")
+    logger.setLevel(logging.DEBUG)
+    logger.debug("Default callback triggered")
 
 
 class Pin:
@@ -45,11 +47,13 @@ class Pin:
 
     def lock_pin(self):
         self._locked = True
+        self._logger.info("PIN-{0} - Pin locked".format(self._pin))
 
         return self
 
     def unlock_pin(self):
         self._locked = False
+        self._logger.info("PIN-{0} - Pin unlocked".format(self._pin))
 
         return self
 
@@ -69,10 +73,9 @@ class Pin:
         if not self._locked:
             self._mode = mode
             if mode == 0:
-                self.__start_input_monitor(self)
+                self.__start_input_monitor()
                 self.lock_pin()
-                self._logger.info("PIN-{0} - mode set to {1}. Input monitor is enabled. Pin locked".
-                                  format(self._pin, mode))
+                self._logger.info("PIN-{0} - mode set to {1}".format(self._pin, mode))
 
         return self
 
@@ -92,7 +95,7 @@ class Pin:
 
     # Private service methods
 
-    def __input_monitor(self, low_callback=default_callback, high_callback=default_callback, *args):
+    def __input_monitor(self, low_callback=default_callback, high_callback=default_callback):
         """
         Thread payload, that listens to state change of the input pin.
         :return: None
@@ -105,20 +108,21 @@ class Pin:
                                   format(self._pin, self._state, new_state))
                 self._state = new_state
                 if new_state == 0:
-                    self._input_control = Thread(target=low_callback, args=args)
+                    self._input_control = Thread(target=low_callback)
                 elif new_state == 1:
-                    self._input_control = Thread(target=high_callback, args=args)
+                    self._input_control = Thread(target=high_callback)
                 self._input_control.setDaemon(True)
                 self._input_control.start()
 
             sleep(0.05)
 
-    def __start_input_monitor(self, *args):
+    def __start_input_monitor(self):
         """
         Method creates and starts s pin listening thread
         :return: None
         """
-        self._input_monitor = Thread(target=self.__input_monitor(), args=args)
+        self._logger.info("PIN-{0} - Starting input monitor".format(self._pin))
+        self._input_monitor = Thread(target=self.__input_monitor)
         self._input_monitor.setDaemon(True)
         self._input_monitor.start()
 
