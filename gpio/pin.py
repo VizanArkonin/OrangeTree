@@ -2,6 +2,7 @@ import wiringpi
 from threading import Thread
 from time import sleep
 import logging
+logging.basicConfig()
 
 
 class Pin:
@@ -25,6 +26,7 @@ class Pin:
         :param mode: operational mode (ranges from 0 to 6, see wiringpi modes)
         """
         self._logger = logging.getLogger("GPIO_PIN_{0}".format(pin))
+        self._logger.setLevel(logging.DEBUG)
         self._logger.info("Initializing {0} GPIO Pin controller with {1} mode".format(pin, mode))
         self._pin = pin
         self._mode = mode

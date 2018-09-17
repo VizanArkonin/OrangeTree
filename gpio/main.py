@@ -1,6 +1,7 @@
 import wiringpi
 import logging
 from gpio.pin import Pin
+logging.basicConfig()
 
 # Copied from wiringpi root
 # Pin modes
@@ -21,6 +22,7 @@ class GpioController:
     _PINS = {}
 
     def __init__(self):
+        self._logger.setLevel(logging.DEBUG)
         self._logger.info("Initializing GPIO Controller")
         wiringpi.wiringPiSetup()
         # Since there is a gap between 17 and 20 pins (they do not exist), we use 2 separate for loops for creation
