@@ -47,13 +47,13 @@ class Pin:
 
     def lock_pin(self):
         self._locked = True
-        self._logger.info("PIN-{0} - Pin locked".format(self._pin))
+        self._logger.info("Pin locked".format(self._pin))
 
         return self
 
     def unlock_pin(self):
         self._locked = False
-        self._logger.info("PIN-{0} - Pin unlocked".format(self._pin))
+        self._logger.info("Pin unlocked".format(self._pin))
 
         return self
 
@@ -72,10 +72,14 @@ class Pin:
     def set_mode(self, mode):
         if not self._locked:
             self._mode = mode
+            wiringpi.pinMode(self._pin, mode)
             if mode == 0:
                 self.__start_input_monitor()
                 self.lock_pin()
-                self._logger.info("PIN-{0} - mode set to {1}".format(self._pin, mode))
+
+            self._logger.info("Mode set to {1}".format(self._pin, mode))
+        else:
+            self._logger.warning("Attempt to change mode of a locked pin. Unlock it first")
 
         return self
 
@@ -85,7 +89,7 @@ class Pin:
     def set_output_state(self, state):
         if not self._locked:
             if self._mode == 1:
-                self._logger.info("PIN-{0} - setting output to {1}".format(self._pin, state))
+                self._logger.info("Setting output to {1}".format(self._pin, state))
 
                 wiringpi.digitalWrite(self._pin, state)
                 self._state = state
@@ -104,7 +108,7 @@ class Pin:
             new_state = wiringpi.digitalRead(self._pin)
 
             if self._state != new_state:
-                self._logger.info("PIN-{0} - Input state change detected. Was {1}, now {2}".
+                self._logger.info("Input state change detected. Was {1}, now {2}".
                                   format(self._pin, self._state, new_state))
                 self._state = new_state
                 if new_state == 0:
@@ -121,7 +125,7 @@ class Pin:
         Method creates and starts s pin listening thread
         :return: None
         """
-        self._logger.info("PIN-{0} - Starting input monitor".format(self._pin))
+        self._logger.info("Starting input monitor".format(self._pin))
         self._input_monitor = Thread(target=self.__input_monitor)
         self._input_monitor.setDaemon(True)
         self._input_monitor.start()
@@ -131,5 +135,5 @@ class Pin:
         Throws a logger warning when user attempts to use locked pin
         :return: None
         """
-        self._logger.warning("PIN-{0} - attempt to change output value for locked pin. Unlock it first".
+        self._logger.warning("Attempt to change output value for locked pin. Unlock it first".
                              format(self._pin))
