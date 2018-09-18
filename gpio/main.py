@@ -1,7 +1,8 @@
 import wiringpi
 import logging
 from gpio.pin import Pin
-logging.basicConfig()
+from utils.log_formatter import get_formatter
+logging.basicConfig(format=get_formatter())
 
 # Copied from wiringpi root
 # Pin modes

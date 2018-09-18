@@ -1,13 +1,13 @@
 import logging
 from gpio.main import GpioController
+from time import sleep
 
-logging.basicConfig()
+from utils.log_formatter import get_formatter
+
+logging.basicConfig(format=get_formatter())
 logger = logging.getLogger("main")
 logger.setLevel(logging.DEBUG)
-logger.info("starting up")
+logger.info("Starting up")
 
 # Singleton initialization area
 gpio_controller = GpioController()
-
-
-
