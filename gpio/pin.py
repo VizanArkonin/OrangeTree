@@ -5,6 +5,7 @@ from threading import Thread
 from time import sleep
 import logging
 from utils.log_formatter import get_formatter
+
 logging.basicConfig(format=get_formatter())
 
 
@@ -62,10 +63,23 @@ class Pin:
     def get_state(self):
         return self._state
 
+    def get_pin_status(self):
+        """
+        Generates and returns dict with pin status (pin. mode, state, lock)
+        :return: Dict with status values
+        """
+        return {
+            "pin": self._pin,
+            "mode": self._mode,
+            "state": self._state,
+            "locked": self._locked
+        }
+
     """
     Locking pin forbids a number of procedures from running. 
     This is done to safeguard current pin state and prevent mode/value collisions
     """
+
     def lock_pin(self):
         self._locked = True
         self.__log("info", "Pin locked")
