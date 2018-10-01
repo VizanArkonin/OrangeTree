@@ -22,6 +22,3 @@ import web
 # End of service imports
 
 logger.info("Start-up complete")
-
-
-

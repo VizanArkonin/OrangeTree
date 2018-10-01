@@ -33,4 +33,3 @@ since we intend it to work constantly until process is terminated.
 """
 service = Thread(target=web_service.run, kwargs={"host": "0.0.0.0"})
 service.start()
-
