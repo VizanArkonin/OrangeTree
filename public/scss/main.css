@@ -1,34 +1,3 @@
-body {
-  box-sizing: border-box;
-  background: #2C3E50; }
-
-.process-board {
-  margin-top: 30px; }
-
-.board {
-  position: relative;
-  font-size: 32px;
-  color: #fff;
-  background: #16A085;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
-  width: 100%;
-  height: 60px;
-  margin: 10px;
-  padding: 0; }
-  .board i {
-    position: absolute;
-    display: inline-block;
-    width: 30%;
-    height: 50%;
-    margin: auto 0;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    padding-left: 10px; }
-
 .gpio-main {
   margin-top: 30px; }
 
@@ -40,10 +9,7 @@ body {
   width: 100%;
   padding: 0;
   margin-bottom: 10px;
-  text-align: center;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px; }
+  text-align: center; }
 
 .btn-gpio {
   height: 25px;
@@ -78,5 +44,46 @@ body {
 .icon {
   min-width: 5%;
   padding: 5px; }
+
+html {
+  position: relative;
+  min-height: 100%; }
+
+body {
+  font-family: 'Sarpanch', sans-serif;
+  height: 100%;
+  box-sizing: border-box; }
+
+.navbar-custom {
+  background: #16A085;
+  font-size: 18px;
+  padding-bottom: 10px; }
+
+.nav-logo-custom img {
+  max-height: 50px; }
+
+.process-board {
+  margin-top: 30px; }
+
+.board {
+  position: relative;
+  font-size: 32px;
+  color: #fff;
+  background: #16A085;
+  width: 100%;
+  height: 60px;
+  margin: 10px;
+  padding: 0; }
+  .board i {
+    position: absolute;
+    display: inline-block;
+    width: 30%;
+    height: 50%;
+    margin: auto 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding-left: 10px; }
 
 /*# sourceMappingURL=main.css.map */

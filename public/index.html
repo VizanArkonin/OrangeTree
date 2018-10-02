@@ -4,21 +4,41 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Orange Pi Lie Web Interface</title>
-    <link href="img/logo.png" rel="shortcut icon" type="image/x-icon"/>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Orange Pi Lite Web Interface</title>
 
-    <!-- Bootstrap CSS -->
+    <!--Logo-->
+    <link href="img/logo.png" rel="shortcut icon" type="image/x-icon"/>
+    <link rel="apple-touch-icon" href="img/logo.png">
+
+    <!-- Bootstrap and CSS -->
     <link rel="stylesheet" href="scss/reset.css">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="scss/main.css">
 
     <!--Fonts-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Sarpanch" rel="stylesheet">
 
 </head>
 
 <body>
+    <!--Navigation bar-->
+    <nav class="navbar-custom">
+        <a href="#" class="nav-logo-custom"><img src="img/logo.png" title="Orange Pi" alt="Orange Pi Lite Web Interface"></a>
+        <span class="navbar-toggle" id="navbar-toggle">
+            <i class="fas fa-bars"></i>
+        </span>
+        <ul class="main-nav" id="toggle-menu">
+            <li><a href="#" class="nav-links-custom"><i class="fas fa-thermometer-half"></i></a></li>
+            <li><a href="#" class="nav-links-custom"><i class="fas fa-exclamation-triangle"></i></a></li>
+            <li><a href="#" class="nav-links-custom"><i class="fas fa-cog"></i></a></li>
+            <li><a href="#" class="nav-links-custom"><i class="fas fa-power-off"></i></a></li>
+        </ul>
+    </nav>
 
+<div class="main-container-flex">
     <div class="process-board">
         <div class="container">
             <div class="row">
@@ -284,11 +304,12 @@
 
         </div>
     </div>
+</div>
 
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="js/jquery/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="bootstrap/js/bootstrap.js"></script>
 <script src="js/main.js"></script>
