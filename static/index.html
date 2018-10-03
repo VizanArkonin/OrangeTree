@@ -12,9 +12,8 @@
     <link href="img/logo.png" rel="shortcut icon" type="image/x-icon"/>
     <link rel="apple-touch-icon" href="img/logo.png">
 
-    <!-- Bootstrap and CSS -->
+    <!-- CSS -->
     <link rel="stylesheet" href="scss/reset.css">
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="scss/main.css">
 
     <!--Fonts-->
@@ -24,36 +23,52 @@
 </head>
 
 <body>
-    <!--Navigation bar-->
-    <nav class="navbar-custom">
-        <a href="#" class="nav-logo-custom"><img src="img/logo.png" title="Orange Pi" alt="Orange Pi Lite Web Interface"></a>
-        <span class="navbar-toggle" id="navbar-toggle">
-            <i class="fas fa-bars"></i>
-        </span>
-        <ul class="main-nav" id="toggle-menu">
-            <li><a href="#" class="nav-links-custom"><i class="fas fa-thermometer-half"></i></a></li>
-            <li><a href="#" class="nav-links-custom"><i class="fas fa-exclamation-triangle"></i></a></li>
-            <li><a href="#" class="nav-links-custom"><i class="fas fa-cog"></i></a></li>
-            <li><a href="#" class="nav-links-custom"><i class="fas fa-power-off"></i></a></li>
-        </ul>
-    </nav>
+    <!--Sidebar navigation-->
+    <aside class="aside">
 
-<div class="main-container-flex">
-    <div class="process-board">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm board ">
-                    <i class="fas fa-tachometer-alt "></i>
-                </div>
-                <div class="col-sm board">
-                    <i class="fas fa-thermometer-half"></i>
-                </div>
-                <div class="col-sm board">
-                    <i class="fas fa-microchip"></i>
-                </div>
+    </aside>
+
+    <!--Main container with main content and top navigation bar-->
+    <div class="container">
+
+        <!--Navigation bar on top-->
+        <nav class="nav">
+            <div class="nav-content nav-left nav-element">
+                <ul>
+                    <li><a href="#"><i class="fas fa-bars"></i></a></li>
+                </ul>
             </div>
-        </div>
+
+            <div class="nav-content nav-right">
+                <ul class="nav-box nav-element">
+                    <li><a href="#">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Oleg Sorokin</span>
+                    </a></li>
+                    <li><a href="#">
+                        <i class="fas fa-thermometer-full"></i>
+                        <span>43 C°</span>
+                    </a></li>
+                    <li><a href="#">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </a></li>
+                    <li><a href="#">
+                        <i class="fas fa-cog"></i>
+                    </a></li>
+                    <li><a href="#">
+                        <i class="fas fa-power-off"></i>
+                    </a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!--Main content section-->
+        <main class="main-section">
+
+        </main>
     </div>
+
+<!--<div class="main-container-flex">
 
     <div class="gpio-main">
         <div class="container">
@@ -304,14 +319,9 @@
 
         </div>
     </div>
-</div>
-
-
+</div>-->
 <!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="js/jquery/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="bootstrap/js/bootstrap.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

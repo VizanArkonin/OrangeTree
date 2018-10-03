@@ -1,17 +1,14 @@
-//body color
+// Variables for the section with navigation
+$nav-bg-color: #22a6b3;
+$aside-bg-color: #3b3b3b;
+$body-bg-color: #dcdcdc;
+$text-light: #fff;
 
-//navbar color
-$nav-color-blue:#16A085;
+// Variables for buttons and links
+$aside-btn-active-color: #8CC1C9;
+$btn-on-color: #7ed6df;
+$btn-off-color: #ff5b42;
 
-//buttons color
-$color-on: #27AE60;
-$color-on-h: #2ECC71;
-$color-off: #C0392B;
-$color-off-h: #E74C3C;
-
-//components color
-$main-board:#16A085;
-$color-text-dark: #fff;
-$color-btn-gr: #2980B9;
-$ground: #000;
-$power:#D35400;
+// Variables for all other elements that are not included in a separate category.
+$ground-color: #484848;
+$power-color:#e2907a;

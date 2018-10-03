@@ -1,12 +1,26 @@
-//General
-html {
-  position: relative;
-  min-height: 100%;
-}
+//General page styles
 
-body {
-  font-family: 'Sarpanch', sans-serif;
-  height: 100%;
+* {
   box-sizing: border-box;
 }
 
+:root {
+  font-size: 10px;
+}
+
+body {
+  height: 100%;
+  display: flex;
+  font-family: 'Sarpanch', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  flex-basis: 80%;
+}

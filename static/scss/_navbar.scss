@@ -1,12 +1,49 @@
+//Styling the navigation bar and sidebar
 
-.navbar-custom{
-  background: $nav-color-blue;
-  font-size: 18px;
-  padding-bottom: 10px;
+.nav {
+  background-color: $nav-bg-color;
+  display: flex;
+  min-height: 60px;
+  align-items: center;
+  .nav-content {
+    height: 60px;
+  }
+  .nav-right {
+    flex-grow: 10;
+    & li {
+      padding-right: 20px;
+    }
+    & span {
+      padding-left: 10px;
+    }
+  }
+  .nav-left {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-start;
+    align-items: center;
+    & li {
+      padding-left: 15px;
+    }
+  }
 }
-.main-nav{
-  //display: inline-flex;
+
+.nav-box {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
 }
-.nav-logo-custom img{
-  max-height: 50px;
+
+.nav-element i, span {
+  color: $text-light;
+  font-size: 2rem;
+}
+
+.aside {
+  background-color: $aside-bg-color;
+  display: flex;
+  height: 100vh;
+  flex-basis: 20%;
+  overflow-y: hidden;
 }

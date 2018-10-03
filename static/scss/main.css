@@ -1,89 +1,63 @@
-.gpio-main {
-  margin-top: 30px; }
-
-.btn-container {
-  display: inline-flex;
-  background: #2980B9;
-  color: #fff;
-  height: 25px;
-  width: 100%;
-  padding: 0;
-  margin-bottom: 10px;
-  text-align: center; }
-
-.btn-gpio {
-  height: 25px;
-  min-width: 15%;
-  cursor: pointer;
-  font-size: 1em;
-  font-weight: bold; }
-
-.btn-on {
-  background: #27AE60; }
-  .btn-on:hover {
-    background: #2ECC71; }
-
-.btn-off {
-  background: #C0392B; }
-  .btn-off:hover {
-    background: #E74C3C; }
-
-.gnd {
-  background: #000; }
-  .gnd p {
-    min-width: 100%; }
-
-.power {
-  background: #D35400; }
-  .power p {
-    min-width: 100%; }
-
-.btn-text {
-  width: 65%; }
-
-.icon {
-  min-width: 5%;
-  padding: 5px; }
-
-html {
-  position: relative;
-  min-height: 100%; }
-
-body {
-  font-family: 'Sarpanch', sans-serif;
-  height: 100%;
+* {
   box-sizing: border-box; }
 
-.navbar-custom {
-  background: #16A085;
-  font-size: 18px;
-  padding-bottom: 10px; }
+:root {
+  font-size: 10px; }
 
-.nav-logo-custom img {
-  max-height: 50px; }
+body {
+  height: 100%;
+  display: flex;
+  font-family: 'Sarpanch', sans-serif; }
 
-.process-board {
-  margin-top: 30px; }
+a {
+  text-decoration: none; }
 
-.board {
-  position: relative;
-  font-size: 32px;
+.container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  flex-basis: 80%; }
+
+.nav {
+  background-color: #22a6b3;
+  display: flex;
+  min-height: 60px;
+  align-items: center; }
+  .nav .nav-content {
+    height: 60px; }
+  .nav .nav-right {
+    flex-grow: 10; }
+    .nav .nav-right li {
+      padding-right: 20px; }
+    .nav .nav-right span {
+      padding-left: 10px; }
+  .nav .nav-left {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-start;
+    align-items: center; }
+    .nav .nav-left li {
+      padding-left: 15px; }
+
+.nav-box {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%; }
+
+.nav-element i, span {
   color: #fff;
-  background: #16A085;
-  width: 100%;
-  height: 60px;
-  margin: 10px;
-  padding: 0; }
-  .board i {
-    position: absolute;
-    display: inline-block;
-    width: 30%;
-    height: 50%;
-    margin: auto 0;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    padding-left: 10px; }
+  font-size: 2rem; }
+
+.aside {
+  background-color: #3b3b3b;
+  display: flex;
+  height: 100vh;
+  flex-basis: 20%;
+  overflow-y: hidden; }
+
+.main-section {
+  background-color: #dcdcdc;
+  height: 100%; }
 
 /*# sourceMappingURL=main.css.map */
