@@ -16,6 +16,6 @@ def import_all_modules_from(relative_path_from_main):
                 if file_name != "__init__.py":
                     # strip the extension
                     module = file_name[:-3]
-                    # set the module name in the current global name space:
 
+                    # reformat the path string and import the module
                     importlib.import_module(root.replace("/", ".") + "." + module)
