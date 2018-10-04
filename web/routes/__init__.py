@@ -1,6 +1,10 @@
 """
 Routes library initialization area
-NOTE: Due to initialization nature, we can't contain it in module's __all__ list, so we import them here, one by one.
+NOTE: Since this sub-module is intended to be structured storage for Flask routes, we recursively import EVERYTHING
+that is included in this package. Restrain from adding any utils or misc functions/classes here to keep namespace clean.
 """
-from . import general
-from . import gpio_service
+import os
+
+from utils.general import import_all_modules_from
+
+import_all_modules_from(os.path.dirname(__file__).replace(os.getcwd(), "")[1:])
