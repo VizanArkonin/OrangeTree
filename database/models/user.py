@@ -3,10 +3,11 @@ Database models definitions library.
 We use SQLAlchemy as primary ORM, adding in elements of Flask-Security features.
 """
 
-from database.connector import Base
 from flask_security import UserMixin, RoleMixin
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy import Boolean, DateTime, Column, Integer, String, ForeignKey
+
+from database import Base
 
 
 class UserRoles(Base):
