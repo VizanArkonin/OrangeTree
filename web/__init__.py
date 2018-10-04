@@ -10,10 +10,11 @@ from flask import Flask
 from flask_security import Security, SQLAlchemySessionUserDatastore
 
 from config import WEB_SERVICE_CONFIG
-from database.connector import db_session
-from database.models import Users, Role
 
 # First, we initialize Flask application itself, injecting SQLAlchemy binding to provide user data for Flask-Security
+from database import db_session
+from database.models.user import Users, Role
+
 web_service = Flask(__name__, static_url_path=WEB_SERVICE_CONFIG["static_url_path"],
                     static_folder=WEB_SERVICE_CONFIG["static_files_path"],
                     template_folder=WEB_SERVICE_CONFIG["templates_path"])
@@ -27,8 +28,7 @@ user_datastore = SQLAlchemySessionUserDatastore(db_session,
 security = Security(web_service, user_datastore)
 
 # Then we import modules with routes
-import web.general
-import web.gpio_service
+import web.routes
 
 """
 Once done, we run the web service. We run it threaded, to prevent process lock on main level.
