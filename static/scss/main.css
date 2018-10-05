@@ -5,26 +5,63 @@
   font-size: 10px; }
 
 body {
-  height: 100%;
   display: flex;
   font-family: 'Sarpanch', sans-serif; }
 
 a {
   text-decoration: none; }
 
-.container {
+.aside {
+  background-color: #3b3b3b;
   display: flex;
-  flex-wrap: nowrap;
+  min-height: 100vh;
+  overflow-y: hidden;
+  width: 20%; }
+  .aside .aside-nav {
+    position: fixed;
+    width: 20%; }
+    .aside .aside-nav .aside-nav-box {
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: column; }
+      .aside .aside-nav .aside-nav-box li {
+        min-height: 50px; }
+      .aside .aside-nav .aside-nav-box a {
+        display: flex;
+        align-items: center;
+        min-height: 50px; }
+      .aside .aside-nav .aside-nav-box img {
+        height: 16px;
+        padding: 0 15px; }
+      .aside .aside-nav .aside-nav-box i {
+        padding: 0 15px; }
+    .aside .aside-nav .aside-element i, .aside .aside-nav .aside-element span {
+      color: white;
+      font-size: 1.5rem; }
+    .aside .aside-nav .aside-hover {
+      opacity: 0.7; }
+      .aside .aside-nav .aside-hover:hover {
+        background: #303030;
+        opacity: 1; }
+      .aside .aside-nav .aside-hover:active {
+        background: #8cc1c9;
+        opacity: 1; }
+
+.main-navigation {
+  display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
-  flex-basis: 80%; }
+  width: 80%; }
 
 .nav {
   background-color: #22a6b3;
   display: flex;
-  min-height: 60px;
-  align-items: center; }
+  align-items: center;
+  position: fixed;
+  min-height: 50px;
+  width: 80%; }
   .nav .nav-content {
-    height: 60px; }
+    height: 50px; }
   .nav .nav-right {
     flex-grow: 10; }
     .nav .nav-right li {
@@ -45,19 +82,25 @@ a {
   align-items: center;
   height: 100%; }
 
-.nav-element i, span {
-  color: #fff;
+.nav-element i, .nav-element span {
+  color: white;
   font-size: 2rem; }
+.nav-element a {
+  display: block;
+  min-height: 100%; }
 
-.aside {
-  background-color: #3b3b3b;
+#temp {
+  display: inline-block;
+  min-width: 80px;
+  text-align: right; }
+
+#logo {
+  background-color: #187881; }
+
+.main-container {
   display: flex;
-  height: 100vh;
-  flex-basis: 20%;
-  overflow-y: hidden; }
-
-.main-section {
-  background-color: #dcdcdc;
-  height: 100%; }
+  background-color: gainsboro;
+  height: 100%;
+  margin-top: 50px; }
 
 /*# sourceMappingURL=main.css.map */

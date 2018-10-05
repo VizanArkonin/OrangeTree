@@ -1,6 +1,12 @@
 //Styling main classes for all other pages.
 
-.main-section {
+.main-container {
+  display: flex;
   background-color: $body-bg-color;
   height: 100%;
+  margin-top: 50px;
+}
+
+.flex-container {
+
 }

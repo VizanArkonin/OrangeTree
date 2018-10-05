@@ -1,14 +1,16 @@
 // Variables for the section with navigation
-$nav-bg-color: #22a6b3;
-$aside-bg-color: #3b3b3b;
-$body-bg-color: #dcdcdc;
-$text-light: #fff;
+$nav-bg-color: rgba(34, 166, 179, 1);
+$aside-bg-color-logo: rgba(24, 120, 129, 1);
+$aside-bg-color: rgba(59, 59, 59, 1);
+$aside-bg-color-hover: rgba(48, 48, 48, 1);
+$body-bg-color: rgba(220, 220, 220, 1);
+$text-light: rgba(255, 255, 255, 1);
 
 // Variables for buttons and links
-$aside-btn-active-color: #8CC1C9;
-$btn-on-color: #7ed6df;
-$btn-off-color: #ff5b42;
+$aside-btn-active-color: rgba(140, 193, 201, 1);
+$btn-on-color: rgba(126, 214, 223, 1);
+$btn-off-color: rgba(255, 91, 66, 1);
 
 // Variables for all other elements that are not included in a separate category.
-$ground-color: #484848;
-$power-color:#e2907a;
+$ground-color: rgba(72, 72, 72, 1);
+$power-color:rgba(226, 144, 122, 1);
