@@ -84,7 +84,7 @@ a {
 
 .nav-element i, .nav-element span {
   color: white;
-  font-size: 2rem; }
+  font-size: 1.8rem; }
 .nav-element a {
   display: block;
   min-height: 100%; }
@@ -102,5 +102,29 @@ a {
   background-color: gainsboro;
   height: 100%;
   margin-top: 50px; }
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 15px; }
+  .flex-container .pin-container {
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 40%;
+    height: 3vh;
+    margin: 5px 5%;
+    font-size: 1.3rem; }
+
+.pin-power {
+  background: #e2907a !important;
+  color: white; }
+
+.pin-gnd {
+  background: #484848 !important;
+  color: white; }
 
 /*# sourceMappingURL=main.css.map */

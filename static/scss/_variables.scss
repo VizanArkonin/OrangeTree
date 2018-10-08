@@ -4,7 +4,7 @@ $aside-bg-color-logo: rgba(24, 120, 129, 1);
 $aside-bg-color: rgba(59, 59, 59, 1);
 $aside-bg-color-hover: rgba(48, 48, 48, 1);
 $body-bg-color: rgba(220, 220, 220, 1);
-$text-light: rgba(255, 255, 255, 1);
+$text-light: rgb(255, 255, 255);
 
 // Variables for buttons and links
 $aside-btn-active-color: rgba(140, 193, 201, 1);
@@ -12,5 +12,6 @@ $btn-on-color: rgba(126, 214, 223, 1);
 $btn-off-color: rgba(255, 91, 66, 1);
 
 // Variables for all other elements that are not included in a separate category.
-$ground-color: rgba(72, 72, 72, 1);
-$power-color:rgba(226, 144, 122, 1);
+$ground-color: rgba(72, 72, 72, 1)!important;
+$power-color:rgba(226, 144, 122, 1)!important;
+$pin-bg-color: rgb(255, 255, 255);

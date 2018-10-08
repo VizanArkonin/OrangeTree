@@ -1,2 +1,28 @@
 //Main styles for the page "Pin configuration"
 
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
+  .pin-container {
+    background: $pin-bg-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 40%;
+    height: 3vh;
+    margin: 5px 5%;
+    font-size: 1.3rem;
+  }
+}
+
+.pin-power {
+  background: $power-color;
+  color: $text-light;
+}
+.pin-gnd {
+  background: $ground-color;
+  color: $text-light;
+}
