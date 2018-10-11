@@ -3,6 +3,7 @@ from setuptools import setup, find_packages
 requires = [
     "flask",
     "Flask-Security",
+    "flask-socketio",
     "sqlalchemy",
     "bcrypt"
 ]
