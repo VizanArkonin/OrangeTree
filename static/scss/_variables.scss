@@ -8,10 +8,13 @@ $text-light: rgb(255, 255, 255);
 
 // Variables for buttons and links
 $aside-btn-active-color: rgba(140, 193, 201, 1);
-$btn-on-color: rgba(126, 214, 223, 1);
+$btn-on-color: rgba(34, 226, 246, 1);
+$btn-on-color-hover: rgba(9, 195, 215, 1);
 $btn-off-color: rgba(255, 91, 66, 1);
+$btn-off-color-hover: rgba(255, 61, 31, 1);
 
 // Variables for all other elements that are not included in a separate category.
 $ground-color: rgba(72, 72, 72, 1)!important;
-$power-color: rgba(226, 144, 122, 1) !important;
+$power-color: rgba(246, 144, 122, 1) !important;
 $pin-bg-color: rgb(255, 255, 255);
+$gpio-icon-color: rgba(200, 200, 200, 1);

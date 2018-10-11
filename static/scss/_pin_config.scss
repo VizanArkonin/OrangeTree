@@ -18,6 +18,40 @@
   }
 }
 
+.icon-gpio i {
+  color: $gpio-icon-color;
+  flex: 1 1 10%;
+  text-align: center;
+}
+
+.text-gpio span {
+  flex: 1 0 50%;
+  text-align: center;
+}
+
+.btn-gpio {
+  color: $text-light;
+  height: 100%;
+  flex: 1 0 15%;
+  border: 0;
+}
+
+.btn-off {
+  background: $btn-off-color;
+  @include transition-duration;
+  &:hover {
+    background: $btn-off-color-hover;
+  }
+}
+
+.btn-on {
+  background: $btn-on-color;
+  @include transition-duration;
+  &:hover {
+    background: $btn-on-color-hover;
+  }
+}
+
 .pin-power {
   background: $power-color;
   color: $text-light;
