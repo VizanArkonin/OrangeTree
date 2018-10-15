@@ -1,8 +1,9 @@
-import wiringpi
 import logging
 from datetime import datetime
+
+from gpio.utils import wiringpi_is_used
 from gpio.pin import Pin
-from utils.log_formatter import get_formatter
+from utils.general import get_formatter
 
 logging.basicConfig(format=get_formatter())
 
@@ -33,7 +34,9 @@ class GpioController:
     def __init__(self):
         self._logger.setLevel(logging.DEBUG)
         self._logger.info("Initializing GPIO Controller")
-        wiringpi.wiringPiSetup()
+        if wiringpi_is_used():
+            import wiringpi
+            wiringpi.wiringPiSetup()
         # Since there is a gap between 17 and 20 pins (they do not exist), we use 2 separate for loops for creation
         for pin in range(0, 17):
             self._PINS[pin] = Pin(pin, OUTPUT)
