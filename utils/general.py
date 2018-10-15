@@ -19,3 +19,11 @@ def import_all_modules_from(relative_path_from_main):
 
                     # reformat the path string and import the module
                     importlib.import_module(root.replace("/", ".") + "." + module)
+
+
+def get_formatter():
+    """
+    Logger format provider
+    :return: Format String
+    """
+    return "%(asctime)s; %(levelname)s; %(message)s"

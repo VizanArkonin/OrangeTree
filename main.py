@@ -1,6 +1,7 @@
 import logging
 from time import sleep
-from utils.web import get_formatter
+
+from utils.general import get_formatter
 
 logging.basicConfig(format=get_formatter())
 logger = logging.getLogger("main")
