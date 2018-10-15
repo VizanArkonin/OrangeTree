@@ -25,7 +25,7 @@ def import_all_modules_from(relative_path_from_main):
                         importlib.import_module(root.replace("/", ".") + "." + module)
                     elif sys.platform.lower() == "win32" or sys.platform.lower() == "win64":
                         # Windows-based formatting
-                        importlib.import_module(root.replace("\\\\", ".") + "." + module)
+                        importlib.import_module(root.replace("\\", ".") + "." + module)
 
 
 def get_formatter():
