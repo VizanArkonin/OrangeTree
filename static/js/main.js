@@ -1,5 +1,3 @@
-"use strict";
-
 $(function(){
 // Variables
 
@@ -29,4 +27,3 @@ $(function(){
     $('[data-toggle="tooltip"]').tooltip();
 
 });
-
