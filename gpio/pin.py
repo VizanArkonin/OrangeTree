@@ -1,12 +1,16 @@
 import types
 
-import wiringpi
 from threading import Thread
 from time import sleep
 import logging
-from utils.log_formatter import get_formatter
+
+from gpio.utils import wiringpi_is_used
+from utils.general import get_formatter
 
 logging.basicConfig(format=get_formatter())
+
+if wiringpi_is_used():
+    import wiringpi
 
 
 def default_callback(pin_instance):
@@ -47,8 +51,11 @@ class Pin:
         self.__log("info", "Initializing {0} GPIO Pin controller with {1} mode".format(pin, mode))
         self._pin = pin
         self._mode = mode
-        wiringpi.pinMode(pin, mode)
-        self._state = wiringpi.digitalRead(pin)
+        if wiringpi_is_used():
+            wiringpi.pinMode(pin, mode)
+            self._state = wiringpi.digitalRead(pin)
+        else:
+            self._state = 0
         self.set_low_callback(default_callback, self)
         self.set_high_callback(default_callback, self)
         self._reset_callbacks = False
@@ -100,7 +107,8 @@ class Pin:
         """
         if not self._locked:
             self._mode = mode
-            wiringpi.pinMode(self._pin, mode)
+            if wiringpi_is_used():
+                wiringpi.pinMode(self._pin, mode)
             if mode == 0:
                 self.__start_input_monitor()
                 self.lock_pin()
@@ -124,7 +132,8 @@ class Pin:
             if self._mode == 1:
                 self.__log("info", "Setting output to {0}".format(state))
 
-                wiringpi.digitalWrite(self._pin, state)
+                if wiringpi_is_used():
+                    wiringpi.digitalWrite(self._pin, state)
                 self._state = state
             else:
                 self.__log("warning", "Set Output is only available for PIN working in OUTPUT mode")
@@ -174,7 +183,13 @@ class Pin:
         :return: None
         """
         while self._mode == 0:
-            new_state = wiringpi.digitalRead(self._pin)
+            if wiringpi_is_used():
+                new_state = wiringpi.digitalRead(self._pin)
+            else:
+                if self._state == 0:
+                    new_state = 1
+                else:
+                    new_state = 0
 
             if self._state != new_state:
                 self.__log("info", "Input state change detected. Was {0}, now {1}".

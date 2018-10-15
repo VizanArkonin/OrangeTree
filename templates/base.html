@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% block head %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Orange Pi Lite Web Interface</title>
+
+    <!--Logo-->
+    <link href="img/logo.png" rel="shortcut icon" type="image/x-icon"/>
+    <link rel="apple-touch-icon" href="img/logo.png">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="scss/reset.css">
+    <link rel="stylesheet" href="scss/main.css">
+
+    <!--Fonts-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="scss/font-faces.css">
+
+    <!-- JS -->
+    <script src="js/jquery/jquery.js"></script>
+    {% endblock %}
+</head>
+
+<body>
+    <!--Sidebar navigation-->
+    <aside class="aside">
+        <div class="aside-nav">
+            <ul class="aside-nav-box aside-element">
+                <li id="logo">
+                    <a href="#">
+                    <img src="img/logo.png" alt="Orange Pi Logo" title="Orange Pi Web interface">
+                    <span>Orange Pi Admin</span>
+                    </a>
+                </li>
+                <li class="aside-hover">
+                    <a href="#">
+                    <i class="fas fa-chart-area"></i>
+                    <span>System monitor</span>
+                    </a>
+                </li>
+                <li class="aside-hover">
+                    <a href="#">
+                    <i class="fas fa-microchip"></i>
+                    <span>Pin configuration</span>
+                    </a>
+                </li>
+                <li class="aside-hover">
+                    <a href="#">
+                    <i class="fas fa-brain"></i>
+                    <span>Training module</span>
+                    </a>
+                </li>
+                <li class="aside-hover">
+                    <a href="#">
+                    <i class="fas fa-book"></i>
+                    <span>General information</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <!--Main container with main content and top navigation bar-->
+    <div class="main-navigation">
+        <!--Navigation bar on top-->
+        <nav class="nav">
+            <div class="nav-content nav-left nav-element">
+                <ul>
+                    <li><a href="#"><i class="fas fa-bars"></i></a></li>
+                </ul>
+            </div>
+
+            <div class="nav-content nav-right">
+                <ul class="nav-box nav-element">
+                    <li>
+                        <a href="#">
+                        <i class="fas fa-user-circle"></i>
+                        {% if g.user %}
+                        <span>{{ g.user['username'] }}</span>
+                        {% else %}
+                        <span>Anonymous</span>
+                        {% endif %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                        <i class="fas fa-thermometer-full"></i>
+                        <span id="temp">54 C°</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fas fa-exclamation-triangle"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fas fa-cog"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fas fa-power-off"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!--Main content section-->
+        <main class="main-container">
+            {% block content %}{% endblock %}
+        </main>
+
+    </div>
+</body>
+</html>
