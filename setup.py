@@ -1,9 +1,9 @@
 from setuptools import setup, find_packages
 
 requires = [
-    "flask",
+    "Flask",
     "Flask-Security",
-    "sqlalchemy",
+    "SQLAlchemy",
     "bcrypt"
 ]
 
