@@ -1,5 +1,6 @@
 import importlib
 import os
+import sys
 
 
 def import_all_modules_from(relative_path_from_main):
@@ -18,7 +19,13 @@ def import_all_modules_from(relative_path_from_main):
                     module = file_name[:-3]
 
                     # reformat the path string and import the module
-                    importlib.import_module(root.replace("/", ".") + "." + module)
+
+                    if sys.platform.lower() == "linux" or sys.platform.lower() == "posix":
+                        # Linux-based formatting
+                        importlib.import_module(root.replace("/", ".") + "." + module)
+                    elif sys.platform.lower() == "win32" or sys.platform.lower() == "win64":
+                        # Windows-based formatting
+                        importlib.import_module(root.replace("\\\\", ".") + "." + module)
 
 
 def get_formatter():
