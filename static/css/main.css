@@ -120,47 +120,47 @@ a {
     font-size: 1.3rem; }
 
 .icon-gpio i {
-    color: #c8c8c8;
-    flex: 1 1 10%;
-    text-align: center;
+  color: #c8c8c8;
+  flex: 1 1 10%;
+  text-align: center;
 }
 
 .text-gpio span {
-    flex: 1 0 50%;
-    text-align: center;
+  flex: 1 0 50%;
+  text-align: center;
 }
 
 .btn-gpio {
-    color: white;
-    height: 100%;
-    flex: 1 0 15%;
-    border: 0;
+  color: white;
+  height: 100%;
+  flex: 1 0 15%;
+  border: 0;
 }
 
 .btn-off {
-    background: #ff5b42;
-    -webkit-transition-duration: 0.3s;
-    /* Safari */
-    transition-duration: 0.3s;
+  background: #ff5b42;
+  -webkit-transition-duration: 0.3s;
+  /* Safari */
+  transition-duration: 0.3s;
 }
 
 .btn-off:hover {
-    background: #ff3d1f;
+  background: #ff3d1f;
 }
 
 .btn-on {
-    background: #22e2f6;
-    -webkit-transition-duration: 0.3s;
-    /* Safari */
-    transition-duration: 0.3s;
+  background: #22e2f6;
+  -webkit-transition-duration: 0.3s;
+  /* Safari */
+  transition-duration: 0.3s;
 }
 
 .btn-on:hover {
-    background: #09c3d7;
+  background: #09c3d7;
 }
 
 .pin-power {
-    background: #f6907a !important;
+  background: #f6907a !important;
   color: white; }
 
 .pin-gnd {
