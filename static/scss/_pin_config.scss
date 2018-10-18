@@ -15,6 +15,11 @@
     height: 3vh;
     margin: 5px 5%;
     font-size: 1.3rem;
+    .fa-lock, fa-lock-open {
+      &:before {
+        cursor: pointer;
+      }
+    }
   }
 }
 

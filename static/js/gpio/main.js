@@ -23,7 +23,12 @@ $(function(){
             }
     });
 
-// Create a Tooltip
+    // Create a Tooltip
     $('[data-toggle="tooltip"]').tooltip();
 
 });
+
+// Just a class change, without involving jQuery
+function toggleIcon(x) {
+    x.classList.toggle("fa-lock-open")
+}
