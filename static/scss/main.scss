@@ -1,8 +1,7 @@
 //Compiling all scss files into a common main.css file
-
+@import "_mixins";
 @import "_variables";
 @import "_global";
-@import "_mixins";
 @import "_buttons";
 @import "_navbar";
 @import "_sections";
