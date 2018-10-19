@@ -1,32 +1,99 @@
 "use strict";
+const MODE_SWITCH_BUTTON = "button[class *= 'mode-switch']";
+const STATUS_SWITCH_BUTTON = "button[class *= 'status-switch']";
+const LOCK_ICON = ".lock-icon";
 
-$(function(){
+const MODE_SWITCH_INPUT = "input[class = 'mode-switch-input']";
+const STATUS_SWITCH_INPUT = "input[class = 'status-switch-input']";
+const LOCK_INPUT = "input[class = 'lock-input']";
 
-// Create button on/off and out/in
-    $(".btn-gpio").click(function(){
-        $(this).toggleClass("btn-on btn-off");
-        let nameButton = $(this).text();
-        switch (nameButton){
-            case "OFF":
-                $(this).text("ON");
-                break;
-            case "ON":
-                $(this).text("OFF");
-                break;
-            case "OUT":
-                $(this).text("IN");
-                break;
-            case "IN":
-                $(this).text("OUT");
-                break;
-            default:
-                $(this).text("not used");
+/**
+ * Main processing workhorse, takes the JSON list with pin statuses (received by socket) and applies it's state to page elements.
+ * @param pinsList: JSON - list of pin objects
+ */
+function processPins(pinsList) {
+    for (let index = 0; index < pinsList.length; index++) {
+        let pin = pinsList[index];
+        let pin_container = "[data-pinid = " + pin.pin + "]";
+        $(pin_container).children(MODE_SWITCH_INPUT).val(pin.mode).trigger('change');
+        $(pin_container).children(STATUS_SWITCH_INPUT).val(pin.state).trigger('change');
+        $(pin_container).children(LOCK_INPUT).val(pin.locked).trigger('change');
+    }
+}
+
+$(document).ready(function() {
+    // NOTE: Socket variable is created and imported in template file in order to pass parameters through template
+    /**
+     * We use trigger/observer pairs for mode, state and lock indicators.
+     * Trigger initiates socket message with value change, another socket receives the new board state and changes the
+     * observer-targeted inputs, which in turn triggers the elements processing.
+     */
+    // Mode trigger
+    $(MODE_SWITCH_BUTTON).click(function() {
+        let newMode;
+        if ($(this).siblings(MODE_SWITCH_INPUT).val() === "0") {
+            newMode = 1;
+        } else {
+            newMode = 0
+        }
+
+        socket.emit("setPinMode",
+            {"pinID": $(this).parent().attr("data-pinId"),
+             "modeID": newMode});
+        if (newMode === 1) {
+            socket.emit("setOutput",
+                {"pinID": $(this).parent().attr("data-pinId"),
+                 "value": 0});
+        }
+    });
+    // Mode observer
+    $(MODE_SWITCH_INPUT).on("change", function() {
+        if ($(this).val() === "0") {
+            $(this).siblings(MODE_SWITCH_BUTTON).removeClass("btn-off").addClass("btn-on").html("IN");
+        } else {
+            $(this).siblings(MODE_SWITCH_BUTTON).removeClass("btn-on").addClass("btn-off").html("OUT");
         }
     });
 
-    // Function of opening and closing locks
-    $(".lock-icon").click(function () {
-        $(this).toggleClass("fa-lock-open fa-lock");
+    // Status trigger
+    $(STATUS_SWITCH_BUTTON).click(function() {
+        if ($(this).siblings(MODE_SWITCH_INPUT).val() === "1") {
+            let newValue;
+            if ($(this).siblings(STATUS_SWITCH_INPUT).val() === "0") {
+                newValue = 1
+            } else {
+                newValue = 0
+            }
+
+            socket.emit("setOutput",
+                {"pinID": $(this).parent().attr("data-pinId"),
+                 "value": newValue})
+        }
+    });
+    // Status observer
+    $(STATUS_SWITCH_INPUT).on("change", function() {
+        if ($(this).val() === "0") {
+            $(this).siblings(STATUS_SWITCH_BUTTON).removeClass("btn-on").addClass("btn-off").html("OFF");
+        } else {
+            $(this).siblings(STATUS_SWITCH_BUTTON).removeClass("btn-off").addClass("btn-on").html("ON");
+        }
     });
 
+    // Lock trigger
+    $(LOCK_ICON).click(function() {
+        let newMode;
+        newMode = $(this).siblings(LOCK_INPUT).val() === "false";
+
+        socket.emit("setPinLock",
+            {"pinID": $(this).parent().attr("data-pinId"),
+             "locked": newMode})
+    });
+    // Lock observer
+    $(LOCK_INPUT).on("change", function() {
+        if ($(this).val() === "false") {
+            $(this).siblings(LOCK_ICON).removeClass("fa-lock").addClass("fa-lock-open");
+        } else {
+            $(this).siblings(LOCK_ICON).removeClass("fa-lock-open").addClass("fa-lock");
+        }
+    });
 });

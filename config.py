@@ -4,7 +4,7 @@ Core configuration file
 
 # DB section
 DATABASE_CONFIG = {
-    "connection_string": "sqlite:///database.db",
+    "connection_string": "sqlite:///database.db?check_same_thread=False",
     "autocommit": False,
     "autoflush": False
 }
@@ -12,13 +12,15 @@ DATABASE_CONFIG = {
 # Flask (web-service) section
 WEB_SERVICE_CONFIG = {
     "host": "0.0.0.0",
-    "port": 5000,
+    "web_port": 5000,
+    "socket_port": 5001,
     "debug": False,
     "use_wiringpi": False,
     "security_secret_key": "super-secret",
     "security_password_hash": "bcrypt",
     "security_password_salt": "$2a$06$6sSyl34Zw.48NBXwGBSURO",
     "session_timeout_in_minutes": 10,
+    "refresh_session_on_each_request": True,
     "static_url_path": "",
     "static_files_path": "../static",
     "templates_path": "../templates"
