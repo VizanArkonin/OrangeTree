@@ -7,6 +7,7 @@ from utils.general import get_formatter
 
 logging.basicConfig(format=get_formatter())
 
+
 # Copied from wiringpi root
 # Pin modes
 INPUT = 0
