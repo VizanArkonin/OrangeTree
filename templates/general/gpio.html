@@ -5,20 +5,20 @@
 <script src="js/socket/socket.io.min.js"></script>
 <script src="js/gpio/main.js"></script>
 <script>
-    let socket;
+    let gpioSocket;
 
     /**
-     * Here we initiate socket client and define 2 main routes we will be using.
+     * Here we initiate Socket client and define 2 main routes we will be using.
      */
     $(document).ready(function() {
-        socket = io.connect('http://{{ socket_url }}:{{ socket_port }}/gpio');
-        // This route gathers board status just for this client and executed when socket client is connected to server.
-        socket.on('connect', function() {
-            socket.emit("join");
-            socket.emit("getStatus", {"justForMe": true})
+        gpioSocket = io.connect('http://{{ socket_url }}:{{ socket_port }}/gpio');
+        // This route gathers board status just for this client and executed when Socket client is connected to server.
+        gpioSocket.on('connect', function() {
+            gpioSocket.emit("join");
+            gpioSocket.emit("getStatus", {"justForMe": true})
         });
         // Main workhorse - retrieves the current board state, populates container elements with data and triggers further processing.
-        socket.on("status", function(data) {
+        gpioSocket.on("status", function(data) {
             processPins(data.pins_status);
         })
     });
@@ -41,9 +41,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <button class="btn-gpio mode-switch btn-off">OUT</button>
         <button class="btn-gpio status-switch btn-off">OFF</button>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="pin-container pin-power">
         <span>+5V Power</span>
@@ -54,9 +54,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <button class="btn-gpio mode-switch btn-off">OUT</button>
         <button class="btn-gpio status-switch btn-off">OFF</button>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="pin-container pin-gnd">
         <span>Ground</span>
@@ -67,9 +67,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <button class="btn-gpio mode-switch btn-off">OUT</button>
         <button class="btn-gpio status-switch btn-off">OFF</button>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="btn pin-container icon-gpio text-gpio" data-pinId="15">
         <button class="btn-gpio status-switch btn-off">OFF</button>
@@ -77,9 +77,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <span>wPi 15</span>
         <i class="icon-info fas fa-info-circle" data-toggle="tooltip" title="PA13/SPI1_CS/UART3_TX"></i>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="pin-container pin-gnd">
         <span>Ground</span>
@@ -90,9 +90,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <span>wPi 16</span>
         <i class="icon-info fas fa-info-circle" data-toggle="tooltip" title="PA14/SPI1_CLK/UART_RX"></i>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="btn pin-container icon-gpio text-gpio" data-pinId="0">
         <i class="icon-info fas fa-info-circle" data-toggle="tooltip" title="PA1/UART2_RX/JTAG_CK"></i>
@@ -100,9 +100,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <button class="btn-gpio mode-switch btn-off">OUT</button>
         <button class="btn-gpio status-switch btn-off">OFF</button>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="btn pin-container icon-gpio text-gpio" data-pinId="1">
         <button class="btn-gpio status-switch btn-off">OFF</button>
@@ -110,9 +110,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <span>wPi 1</span>
         <i class="icon-info fas fa-info-circle" data-toggle="tooltip" title="PD14/RGMII_NULL"></i>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="btn pin-container icon-gpio text-gpio" data-pinId="2">
         <i class="icon-info fas fa-info-circle" data-toggle="tooltip" title="PA0/UART2_TX/JTAG_MS"></i>
@@ -120,9 +120,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <button class="btn-gpio mode-switch btn-off">OUT</button>
         <button class="btn-gpio status-switch btn-off">OFF</button>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="pin-container pin-gnd">
         <span>Ground</span>
@@ -133,9 +133,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <button class="btn-gpio mode-switch btn-off">OUT</button>
         <button class="btn-gpio status-switch btn-off">OFF</button>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="btn pin-container icon-gpio text-gpio" data-pinId="4">
         <button class="btn-gpio status-switch btn-off">OFF</button>
@@ -143,9 +143,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <span>wPi 4</span>
         <i class="icon-info fas fa-info-circle" data-toggle="tooltip" title="PC4/NCE0"></i>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="pin-container pin-power">
         <span>+3.3V Power</span>
@@ -156,9 +156,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <span>wPi 5</span>
         <i class="icon-info fas fa-info-circle" data-toggle="tooltip" title="PC7/NRB1"></i>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="btn pin-container icon-gpio text-gpio" data-pinId="12">
         <i class="icon-info fas fa-info-circle" data-toggle="tooltip" title="PC0/NAND_WE#/SPI0_MOSI"></i>
@@ -166,9 +166,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <button class="btn-gpio mode-switch btn-off">OUT</button>
         <button class="btn-gpio status-switch btn-off">OFF</button>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="pin-container pin-gnd">
         <span>Ground</span>
@@ -179,9 +179,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <button class="btn-gpio mode-switch btn-off">OUT</button>
         <button class="btn-gpio status-switch btn-off">OFF</button>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="btn pin-container icon-gpio text-gpio" data-pinId="6">
         <button class="btn-gpio status-switch btn-off">OFF</button>
@@ -189,9 +189,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <span>wPi 6</span>
         <i class="icon-info fas fa-info-circle" data-toggle="tooltip" title="PA2/UART2_RTS/JTAG_DO"></i>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="btn pin-container icon-gpio text-gpio" data-pinId="14">
         <i class="icon-info fas fa-info-circle" data-toggle="tooltip" title="PC2/NCLE/SPI0_CLK"></i>
@@ -199,9 +199,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <button class="btn-gpio mode-switch btn-off">OUT</button>
         <button class="btn-gpio status-switch btn-off">OFF</button>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="btn pin-container icon-gpio text-gpio" data-pinId="10">
         <button class="btn-gpio status-switch btn-off">OFF</button>
@@ -209,9 +209,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <span>wPi 10</span>
         <i class="icon-info fas fa-info-circle" data-toggle="tooltip" title="PC3/NCE1/SPI0_CS"></i>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="pin-container pin-gnd">
         <span>Ground</span>
@@ -222,9 +222,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <span>wPi 11</span>
         <i class="icon-info fas fa-info-circle" data-toggle="tooltip" title="PA21/PCM0_DIN/SIM_VPPEN"></i>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="btn pin-container icon-gpio text-gpio" data-pinId="30">
         <i class="icon-info fas fa-info-circle" data-toggle="tooltip" title="PA19/PCM0_CLK/TWI1_SDA"></i>
@@ -232,9 +232,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <button class="btn-gpio mode-switch btn-off">OUT</button>
         <button class="btn-gpio status-switch btn-off">OFF</button>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="btn pin-container icon-gpio text-gpio" data-pinId="31">
         <button class="btn-gpio status-switch btn-off">OFF</button>
@@ -242,9 +242,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <span>wPi 31</span>
         <i class="icon-info fas fa-info-circle" data-toggle="tooltip" title="PA18/PCM0_SYNC/TWI1_SCK"></i>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="btn pin-container icon-gpio text-gpio" data-pinId="21">
         <i class="icon-info fas fa-info-circle" data-toggle="tooltip" title="PA7/SIM_CLK"></i>
@@ -252,9 +252,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <button class="btn-gpio mode-switch btn-off">OUT</button>
         <button class="btn-gpio status-switch btn-off">OFF</button>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="pin-container pin-gnd">
         <span>Ground</span>
@@ -265,9 +265,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <button class="btn-gpio mode-switch btn-off">OUT</button>
         <button class="btn-gpio status-switch btn-off">OFF</button>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="btn pin-container icon-gpio text-gpio" data-pinId="26">
         <button class="btn-gpio status-switch btn-off">OFF</button>
@@ -275,9 +275,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <span>wPi 26</span>
         <i class="icon-info fas fa-info-circle" data-toggle="tooltip" title="PG8/UART1_RTS"></i>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="btn pin-container icon-gpio text-gpio" data-pinId="23">
         <i class="icon-info fas fa-info-circle" data-toggle="tooltip" title="PA9/SIM_RST"></i>
@@ -285,9 +285,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <button class="btn-gpio mode-switch btn-off">OUT</button>
         <button class="btn-gpio status-switch btn-off">OFF</button>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="pin-container pin-gnd">
         <span>Ground</span>
@@ -298,9 +298,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <button class="btn-gpio mode-switch btn-off">OUT</button>
         <button class="btn-gpio status-switch btn-off">OFF</button>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="btn pin-container icon-gpio text-gpio" data-pinId="27">
         <button class="btn-gpio status-switch btn-off">OFF</button>
@@ -308,9 +308,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <span>wPi 27</span>
         <i class="icon-info fas fa-info-circle" data-toggle="tooltip" title="PG9/UART1_CTS"></i>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="btn pin-container icon-gpio text-gpio" data-pinId="25">
         <i class="icon-info fas fa-info-circle" data-toggle="tooltip" title="PA20/PCM0_DOUT/SIM_VPPEN"></i>
@@ -318,9 +318,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <button class="btn-gpio mode-switch btn-off">OUT</button>
         <button class="btn-gpio status-switch btn-off">OFF</button>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="btn pin-container icon-gpio text-gpio" data-pinId="28">
         <button class="btn-gpio status-switch btn-off">OFF</button>
@@ -328,9 +328,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <span>wPi 28</span>
         <i class="icon-info fas fa-info-circle" data-toggle="tooltip" title="PG6/UART1_TX"></i>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
     <div class="pin-container pin-gnd">
         <span>Ground</span>
@@ -341,9 +341,9 @@
         <i class="fas fa-lock-open lock-icon"></i>
         <span>wPi 29</span>
         <i class="icon-info fas fa-info-circle" data-toggle="tooltip" title="PG7/UART1_RX"></i>
-        <input type="hidden" class="mode-switch-input" value="0">
-        <input type="hidden" class="status-switch-input" value="0">
-        <input type="hidden" class="lock-input" value="0">
+        <input type="hidden" class="mode-switch-input" value="">
+        <input type="hidden" class="status-switch-input" value="">
+        <input type="hidden" class="lock-input" value="">
     </div>
 </div>
 {% endblock %}

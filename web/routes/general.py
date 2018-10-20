@@ -18,6 +18,5 @@ def monitor():
     :return: Rendered template
     """
     return render_template("general/gpio.html",
-                           socket_url="127.0.0.1" if WEB_SERVICE_CONFIG["host"] == "0.0.0.0"
-                                                  else WEB_SERVICE_CONFIG["host"],
+                           socket_url=WEB_SERVICE_CONFIG["host"],
                            socket_port=WEB_SERVICE_CONFIG["socket_port"])

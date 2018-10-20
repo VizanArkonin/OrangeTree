@@ -15,9 +15,21 @@ function processPins(pinsList) {
     for (let index = 0; index < pinsList.length; index++) {
         let pin = pinsList[index];
         let pin_container = "[data-pinid = " + pin.pin + "]";
-        $(pin_container).children(MODE_SWITCH_INPUT).val(pin.mode).trigger('change');
-        $(pin_container).children(STATUS_SWITCH_INPUT).val(pin.state).trigger('change');
-        $(pin_container).children(LOCK_INPUT).val(pin.locked).trigger('change');
+
+        let mode_switch_input = $(pin_container).children(MODE_SWITCH_INPUT);
+        let status_switch_input = $(pin_container).children(STATUS_SWITCH_INPUT);
+        let lock_input = $(pin_container).children(LOCK_INPUT);
+
+        // To prevent excessive change triggering, we validate if value has indeed changed.
+        if (parseInt(mode_switch_input.val()) !== pin.mode) {
+            mode_switch_input.val(pin.mode).trigger('change');
+        }
+        if (parseInt(status_switch_input.val()) !== pin.state) {
+            status_switch_input.val(pin.state).trigger('change');
+        }
+        if ((lock_input.val() === "true") !== pin.locked || lock_input.val().length === 0) {
+            lock_input.val(pin.locked).trigger('change');
+        }
     }
 }
 
@@ -37,11 +49,11 @@ $(document).ready(function() {
             newMode = 0
         }
 
-        socket.emit("setPinMode",
+        gpioSocket.emit("setPinMode",
             {"pinID": $(this).parent().attr("data-pinId"),
              "modeID": newMode});
         if (newMode === 1) {
-            socket.emit("setOutput",
+            gpioSocket.emit("setOutput",
                 {"pinID": $(this).parent().attr("data-pinId"),
                  "value": 0});
         }
@@ -65,7 +77,7 @@ $(document).ready(function() {
                 newValue = 0
             }
 
-            socket.emit("setOutput",
+            gpioSocket.emit("setOutput",
                 {"pinID": $(this).parent().attr("data-pinId"),
                  "value": newValue})
         }
@@ -84,7 +96,7 @@ $(document).ready(function() {
         let newMode;
         newMode = $(this).siblings(LOCK_INPUT).val() === "false";
 
-        socket.emit("setPinLock",
+        gpioSocket.emit("setPinLock",
             {"pinID": $(this).parent().attr("data-pinId"),
              "locked": newMode})
     });

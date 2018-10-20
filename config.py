@@ -11,7 +11,7 @@ DATABASE_CONFIG = {
 
 # Flask (web-service) section
 WEB_SERVICE_CONFIG = {
-    "host": "0.0.0.0",
+    "host": "127.0.0.1",
     "web_port": 5000,
     "socket_port": 5001,
     "debug": False,
