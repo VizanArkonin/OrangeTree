@@ -5,6 +5,7 @@ General routing library
 from flask import render_template
 from flask_security import login_required, roles_required, roles_accepted
 
+from config import WEB_SERVICE_CONFIG
 from web import web_service
 
 
@@ -16,4 +17,6 @@ def monitor():
     Maps monitor path to a static index file
     :return: Rendered template
     """
-    return render_template("general/gpio.html")
+    return render_template("general/gpio.html",
+                           socket_url=WEB_SERVICE_CONFIG["host"],
+                           socket_port=WEB_SERVICE_CONFIG["socket_port"])

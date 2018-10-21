@@ -4,6 +4,8 @@ requires = [
     "Flask",
     "Flask-Security",
     "SQLAlchemy",
+    "Flask-SocketIO",
+    "SQLAlchemy",
     "bcrypt"
 ]
 

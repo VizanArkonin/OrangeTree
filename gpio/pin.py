@@ -182,14 +182,14 @@ class Pin:
         Thread payload, that listens to state change of the input pin.
         :return: None
         """
+        if self._state == 0:
+            new_state = 1
+        else:
+            new_state = 0
+
         while self._mode == 0:
             if wiringpi_is_used():
                 new_state = wiringpi.digitalRead(self._pin)
-            else:
-                if self._state == 0:
-                    new_state = 1
-                else:
-                    new_state = 0
 
             if self._state != new_state:
                 self.__log("info", "Input state change detected. Was {0}, now {1}".
@@ -241,4 +241,4 @@ class Pin:
         Throws a logger warning when user attempts to use locked pin
         :return: None
         """
-        self.__log("info", "Attempt to change output value for locked pin. Unlock it first")
+        self.__log("warning", "Attempt to change output value for locked pin. Unlock it first")
