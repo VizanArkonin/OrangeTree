@@ -1,3 +1,7 @@
+/*Font sizes for the default page:
+- Small (s);
+- Normal (n);
+- Large (l)*/
 * {
   box-sizing: border-box; }
 
@@ -6,13 +10,20 @@
 
 body {
   display: flex;
-  font-family: 'Sarpanch', sans-serif; }
+    font-family: 'Sarpanch', sans-serif;
+    /* fallback for old browsers */
+    background: #d2a065;
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(135deg, #584b5d, #72555a, #d2a065, #9c8679);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(135deg, #584b5d, #72555a, #d2a065, #9c8679);
+}
 
 a {
   text-decoration: none; }
 
 .aside {
-  background-color: #3b3b3b;
+    background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   min-height: 100vh;
   overflow-y: hidden;
@@ -41,10 +52,10 @@ a {
     .aside .aside-nav .aside-hover {
       opacity: 0.7; }
       .aside .aside-nav .aside-hover:hover {
-        background: #303030;
+          background: rgba(0, 0, 0, 0.3);
         opacity: 1; }
       .aside .aside-nav .aside-hover:active {
-        background: #8cc1c9;
+          background: #ffc761;
         opacity: 1; }
 
 .main-navigation {
@@ -54,7 +65,7 @@ a {
   width: 80%; }
 
 .nav {
-  background-color: #22a6b3;
+    background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
   position: fixed;
@@ -95,84 +106,98 @@ a {
   text-align: right; }
 
 #logo {
-  background-color: #187881; }
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#logo span {
+    width: 100%;
+    text-align: center;
+    font-size: 1.8rem;
+}
 
 .main-container {
   display: flex;
-  background-color: gainsboro;
+    flex-direction: column;
   height: 100%;
   margin-top: 50px; }
+
+.head-info {
+    color: white;
+    font-size: 1.8rem;
+    margin: 15px 5% 0;
+}
 
 .flex-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin: 15px; }
+    margin: 15px 0;
+}
   .flex-container .pin-container {
-    background: white;
+      background: rgba(255, 255, 255, 0.8);
     display: flex;
     justify-content: center;
     align-items: center;
     flex-basis: 40%;
     min-height: 3vh;
-    margin: 5px 5%;
+      margin: 5px 5%;
     font-size: 1.3rem; }
 
 .icon-gpio i {
   color: #c8c8c8;
   flex: 1 1 10%;
-  text-align: center;
+    text-align: center;
 }
 
 .text-gpio span {
   flex: 1 0 50%;
-  text-align: center;
+    text-align: center;
 }
 
 .btn-gpio {
   color: white;
   min-height: 3vh;
   flex: 0 0 15%;
-  border: 0;
+    border: 0;
 }
 
 .btn-off {
-  background: #ff5b42 !important;
+    background: #ff5d5d !important;
   -webkit-transition-duration: 0.3s;
   /* Safari */
-  transition-duration: 0.3s;
+    transition-duration: 0.3s;
 }
 
 .btn-off:hover {
-  background: #ff3d1f;
+    background: #f64949;
 }
 
 .btn-on {
-  background: #22e2f6 !important;
+    background: #64c1bb;
   -webkit-transition-duration: 0.3s;
   /* Safari */
-  transition-duration: 0.3s;
+    transition-duration: 0.3s;
 }
 
 .btn-on:hover {
-  background: #09c3d7;
+    background: #56a39e;
 }
 
 .pin-power {
-  background: #f6907a !important;
+    background: #ffc761 !important;
   color: white; }
 
 .pin-gnd {
-  background: #484848 !important;
+    background: rgba(0, 0, 0, 0.4) !important;
   color: white; }
 
 .fa-lock:before, .fa-lock-open:before {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .fa-lock {
-  color: #ff5b42 !important;
+    color: #ff5d5d !important;
 }
 
 /*# sourceMappingURL=main.css.map */

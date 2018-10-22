@@ -5,7 +5,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin: 15px;
+  margin: 15px 0;
   .pin-container {
     background: $pin-bg-color;
     display: flex;
@@ -14,7 +14,7 @@
     flex-basis: 40%;
     min-height: 3vh;
     margin: 5px 5%;
-    font-size: 1.3rem;
+    font-size: $text-size-default-s;
   }
 }
 

@@ -2,7 +2,13 @@
 
 .main-container {
   display: flex;
-  background-color: $body-bg-color;
+  flex-direction: column;
   height: 100%;
   margin-top: 50px;
+}
+
+.head-info {
+  color: $text-light;
+  font-size: $text-size-default-l;
+  margin: 15px 5% 0;
 }

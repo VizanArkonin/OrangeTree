@@ -4,3 +4,12 @@
   -webkit-transition-duration: 0.3s; /* Safari */
   transition-duration: 0.3s;
 }
+
+@mixin bg-gradient-default {
+  /* fallback for old browsers */
+  background: $bg-gr-color-default;
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(135deg, $bg-gr-color-one, $bg-gr-color-two, $bg-gr-color-three, $bg-gr-color-four);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(135deg, $bg-gr-color-one, $bg-gr-color-two, $bg-gr-color-three, $bg-gr-color-four);
+}
