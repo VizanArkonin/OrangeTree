@@ -1,10 +1,10 @@
 // Variables for the section with navigation
-$nav-bg-color: rgba(0, 0, 0, 0.4);
-$nav-bg-color-hover: rgba(0, 0, 0, 0.3);
+$aside-bg-color: rgba(0, 0, 0, 0.4);
+$aside-bg-color-hover: rgba(0, 0, 0, 0.3);
 $text-light: rgb(255, 255, 255);
 
 // Variables for buttons and links
-$nav-bg-color-active: rgba(255, 199, 97, 1);
+$nav-bg-color-active: rgba(222, 166, 64, 1);
 $btn-on-color: rgba(100, 193, 187, 1);
 $btn-on-color-hover: rgba(86, 163, 158, 1);
 $btn-off-color: rgba(255, 93, 93, 1) !important;
@@ -12,16 +12,24 @@ $btn-off-color-hover: rgba(246, 73, 73, 1);
 
 // Variables for all other elements that are not included in a separate category.
 $ground-color: rgba(0, 0, 0, 0.4) !important;
-$power-color: rgba(255, 199, 97, 1) !important;
+$power-color: rgba(222, 166, 64, 1) !important;
 $pin-bg-color: rgba(255, 255, 255, 0.8);
 $gpio-icon-color: rgba(200, 200, 200, 1);
 
 //Variables for mixins
+//For background
 $bg-gr-color-default: rgba(210, 160, 101, 1);
 $bg-gr-color-one: rgba(88, 75, 93, 1);
 $bg-gr-color-two: rgba(114, 85, 90, 1);
 $bg-gr-color-three: rgba(210, 160, 101, 1);
 $bg-gr-color-four: rgba(156, 134, 121, 1);
+
+//For navigation bar
+$nav-gr-color-default: rgba(53, 45, 56, 1);
+$nav-gr-color-one: rgba(53, 45, 56, 1);
+$nav-gr-color-two: rgba(65, 49, 54, 1);
+$nav-gr-color-three: rgba(88, 65, 55, 1);
+$nav-gr-color-four: rgba(115, 86, 58, 1);
 
 /*Font sizes for the default page:
 - Small (s);

@@ -1,7 +1,7 @@
 //Styling the navigation bar and sidebar
 
 .aside {
-  background-color: $nav-bg-color;
+  background-color: $aside-bg-color;
   display: flex;
   min-height: 100vh;
   overflow-y: hidden;
@@ -38,7 +38,7 @@
     .aside-hover {
       opacity: 0.7;
       &:hover {
-        background: $nav-bg-color-hover;
+        background: $aside-bg-color-hover;
         opacity: 1;
       }
       &:active {
@@ -57,7 +57,7 @@
 }
 
 .nav {
-  background-color: $nav-bg-color;
+  @include nav-gradient-default;
   display: flex;
   align-items: center;
   position: fixed;
@@ -111,7 +111,7 @@
 }
 
 #logo {
-  background-color: $nav-bg-color;
+  background-color: $aside-bg-color;
   & span {
     width: 100%;
     text-align: center;

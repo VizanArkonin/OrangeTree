@@ -55,7 +55,7 @@ a {
           background: rgba(0, 0, 0, 0.3);
         opacity: 1; }
       .aside .aside-nav .aside-hover:active {
-          background: #ffc761;
+          background: #dea640;
         opacity: 1; }
 
 .main-navigation {
@@ -65,7 +65,12 @@ a {
   width: 80%; }
 
 .nav {
-    background-color: rgba(0, 0, 0, 0.4);
+    /* fallback for old browsers */
+    background: #352d38;
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(135deg, #352d38, #413136, #584137, #73563a);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(135deg, #352d38, #413136, #584137, #73563a);
   display: flex;
   align-items: center;
   position: fixed;
@@ -185,7 +190,7 @@ a {
 }
 
 .pin-power {
-    background: #ffc761 !important;
+    background: #dea640 !important;
   color: white; }
 
 .pin-gnd {
