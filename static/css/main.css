@@ -168,7 +168,7 @@ a {
 }
 
 .btn-off {
-    background: #ff5d5d !important;
+    background: #ff5d5d;
   -webkit-transition-duration: 0.3s;
   /* Safari */
     transition-duration: 0.3s;
