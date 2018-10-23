@@ -30,19 +30,17 @@ class Role(Base, RoleMixin):
     description = Column(String(255))
 
 
-class Users(Base, UserMixin):
+class User(Base, UserMixin):
     """
     User representation object
     """
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
     email = Column(String(255), unique=True)
-    username = Column(String(255))
+    first_name = Column(String(40))
+    last_name = Column(String(40))
     password = Column(String(255))
     last_login_at = Column(DateTime())
-    current_login_at = Column(DateTime())
-    last_login_ip = Column(String(100))
-    current_login_ip = Column(String(100))
     login_count = Column(Integer)
     active = Column(Boolean())
     confirmed_at = Column(DateTime())
