@@ -11,6 +11,7 @@
 body {
   display: flex;
   font-family: 'Sarpanch', sans-serif;
+  @include bg-gradient-default;
 }
 
 a {

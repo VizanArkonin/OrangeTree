@@ -32,7 +32,7 @@
     .aside-element {
       & i, span {
         color: $text-light;
-        font-size: 1.5rem;
+        font-size: $text-size-default-n;
       }
     }
     .aside-hover {
@@ -42,7 +42,7 @@
         opacity: 1;
       }
       &:active {
-        background: $aside-btn-active-color;
+        background: $nav-bg-color-active;
         opacity: 1;
       }
     }
@@ -57,7 +57,7 @@
 }
 
 .nav {
-  background-color: $nav-bg-color;
+  @include nav-gradient-default;
   display: flex;
   align-items: center;
   position: fixed;
@@ -96,7 +96,7 @@
 .nav-element {
   & i, span {
     color: $text-light;
-    font-size: 1.8rem;
+    font-size: $text-size-default-l;
   }
   & a {
     display: block;
@@ -111,5 +111,10 @@
 }
 
 #logo {
-  background-color: $aside-bg-color-logo;
+  background-color: $aside-bg-color;
+  & span {
+    width: 100%;
+    text-align: center;
+    font-size: $text-size-default-l;
+  }
 }
