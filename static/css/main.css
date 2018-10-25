@@ -8,7 +8,12 @@
 :root {
   font-size: 10px; }
 
+html {
+    height: 100%;
+}
+
 body {
+    height: 100%;
   display: flex;
     font-family: 'Sarpanch', sans-serif;
     /* fallback for old browsers */
