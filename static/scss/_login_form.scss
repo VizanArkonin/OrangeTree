@@ -1,0 +1,37 @@
+//Styles for the login form page
+
+.login-form-container {
+  background: $container-bg-color;
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  margin: 10px;
+}
+
+.login-header {
+  background: $container-bg-color;
+  color: $text-light;
+  font-size: $font-size-default-l;
+  width: 100%;
+  padding: 15px;
+  text-align: center;
+}
+
+.login-form {
+  padding: 20px;
+  .input-container {
+    margin: 20px 0;
+    height: 35px;
+    & input[type=text], input[type=password] {
+      background: $container-bg-color;
+      padding: 5px;
+      height: 100%;
+      border: 0;
+    }
+    .icon-form {
+      color: $text-light;
+      background: $container-bg-color;
+      height: 100%;
+    }
+  }
+}
