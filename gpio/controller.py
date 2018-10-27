@@ -3,6 +3,7 @@ from datetime import datetime
 
 from gpio.utils import wiringpi_is_used
 from gpio.pin import Pin
+from utils.class_base import ClassBase
 from utils.general import get_formatter
 
 logging.basicConfig(format=get_formatter())
@@ -21,19 +22,18 @@ LOW = 0
 HIGH = 1
 
 
-class GpioController:
+class GpioController(ClassBase):
     """
     Main GPIO board control center.
     Serves as programatical representation of GPIO board, providing access to it's pins and allowing monitoring.
     Note - this class is intended to be a singleton (to prevent data/flow collisions).
     """
-    _logger = logging.getLogger("gpio_controller")
     # Since this class is intended to be a singleton, we instantiate static dict for pins
     _PINS = {}
 
     def __init__(self):
-        self._logger.setLevel(logging.DEBUG)
-        self._logger.info("Initializing GPIO Controller")
+        super().__init__()
+        self._log("info", "Initializing GPIO Controller")
         if wiringpi_is_used():
             import wiringpi
             wiringpi.wiringPiSetup()

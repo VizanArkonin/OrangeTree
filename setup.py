@@ -6,7 +6,8 @@ requires = [
     "SQLAlchemy",
     "Flask-SocketIO",
     "SQLAlchemy",
-    "bcrypt"
+    "bcrypt",
+    "pycrypto"
 ]
 
 setup(

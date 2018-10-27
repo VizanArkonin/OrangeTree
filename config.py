@@ -25,3 +25,11 @@ WEB_SERVICE_CONFIG = {
     "static_files_path": "../static",
     "templates_path": "../templates"
 }
+
+# Board socket service section
+BOARD_SERVICE_CONFIG = {
+    "host": "127.0.0.1",
+    "port": 5002,
+    "crypto_key": "SOME_AWESOME_ENCRYPT_KEY",
+    "crypto_iv": "SOME_AWESOMEE_IV"
+}
