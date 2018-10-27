@@ -7,10 +7,12 @@ Server has it's own authentication system, data packets structure and uses AES e
 from threading import Thread
 
 import config
+from board_controller.server.interface import SocketInterface
 from board_controller.server.socket_server import SocketServer
 
-# First, we create SocketServer instance
-server = SocketServer(config.BOARD_SERVICE_CONFIG["host"], config.BOARD_SERVICE_CONFIG["port"])
+# First, we create SocketServer instance and it's interface
+__server = SocketServer(config.BOARD_SERVICE_CONFIG["host"], config.BOARD_SERVICE_CONFIG["port"])
+server_interface = SocketInterface(__server)
 
 # Then we import everything from respective routing library. DO NOT REMOVE THIS IMPORT!
 import board_controller.routes.server
@@ -22,9 +24,9 @@ def listen():
     :return: None
     """
     try:
-        server.listen()
+        __server.listen()
     except KeyboardInterrupt:
-        server.shut_down()
+        __server.shut_down()
 
 
 # Finally, we initiate the server thread and start it

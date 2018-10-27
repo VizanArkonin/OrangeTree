@@ -2,7 +2,7 @@
 Socket server - general calls routing library.
 """
 
-from board_controller.server import server
+from board_controller.server import __server as server
 
 
 @server.route(packet_name="Echo")
@@ -11,9 +11,9 @@ def echo(client, data):
     Basic Echo-test route. Used to validate client connectivity without triggering any system changes.
 
     :param client: ClientThread instance
-    :param data: Serialized and encrypted data byte array
+    :param data: Decrypted and deserialized packet dict.
     :return: None
     """
     response = data
-    client.client.send(response)
+    client.send(response)
     print("Sent '{0}' response to {1}".format(data, client.address))

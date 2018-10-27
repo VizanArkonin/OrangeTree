@@ -17,7 +17,7 @@ class ClassBase(object):
         self._logger = logging.getLogger(__class__.__name__)
         self._logger.setLevel(logging.DEBUG)
 
-    def _log(self, level, text):
+    def log(self, level, text):
         """
         Main logger workhorse - used to simplify access to Pin's logger
         :param level: String - level of log message

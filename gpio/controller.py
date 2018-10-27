@@ -33,7 +33,7 @@ class GpioController(ClassBase):
 
     def __init__(self):
         super().__init__()
-        self._log("info", "Initializing GPIO Controller")
+        self.log("info", "Initializing GPIO Controller")
         if wiringpi_is_used():
             import wiringpi
             wiringpi.wiringPiSetup()

@@ -37,7 +37,7 @@ class Pin(ClassBase):
         super().__init__()
         self._logger = logging.getLogger("GPIO_PIN_{0}".format(pin))
         self._logger.setLevel(logging.DEBUG)
-        super()._log("info", "Initializing {0} GPIO Pin controller with {1} mode".format(pin, mode))
+        super().log("info", "Initializing {0} GPIO Pin controller with {1} mode".format(pin, mode))
         self._pin = pin
         self._mode = mode
         if wiringpi_is_used():
@@ -78,13 +78,13 @@ class Pin(ClassBase):
 
     def lock_pin(self):
         self._locked = True
-        self._log("info", "Pin locked")
+        self.log("info", "Pin locked")
 
         return self
 
     def unlock_pin(self):
         self._locked = False
-        self._log("info", "Pin unlocked")
+        self.log("info", "Pin unlocked")
 
         return self
 
@@ -105,9 +105,9 @@ class Pin(ClassBase):
                 if self._reset_callbacks:
                     self.perform_callbacks_reset()
 
-            self._log("info", "Mode set to {0}".format(mode))
+            self.log("info", "Mode set to {0}".format(mode))
         else:
-            self._log("warning", "Attempt to change mode of a locked pin. Unlock it first")
+            self.log("warning", "Attempt to change mode of a locked pin. Unlock it first")
 
         return self
 
@@ -119,13 +119,13 @@ class Pin(ClassBase):
         """
         if not self._locked:
             if self._mode == 1:
-                self._log("info", "Setting output to {0}".format(state))
+                self.log("info", "Setting output to {0}".format(state))
 
                 if wiringpi_is_used():
                     wiringpi.digitalWrite(self._pin, state)
                 self._state = state
             else:
-                self._log("warning", "Set Output is only available for PIN working in OUTPUT mode")
+                self.log("warning", "Set Output is only available for PIN working in OUTPUT mode")
         else:
             self.__lock_access_warning()
         return self
@@ -143,16 +143,16 @@ class Pin(ClassBase):
     def set_low_callback(self, fun, *args):
         if isinstance(fun, types.FunctionType):
             self._low_callback = (fun, args)
-            self._log("info", "Low callback was set")
+            self.log("info", "Low callback was set")
         else:
-            self._log("warning", "Callback must be a function. Did you remove () from the end of the name?")
+            self.log("warning", "Callback must be a function. Did you remove () from the end of the name?")
 
     def set_high_callback(self, fun, *args):
         if isinstance(fun, types.FunctionType):
             self._high_callback = (fun, args)
-            self._log("info", "High callback was set")
+            self.log("info", "High callback was set")
         else:
-            self._log("warning", "Callback must be a function. Did you remove () from the end of the name?")
+            self.log("warning", "Callback must be a function. Did you remove () from the end of the name?")
 
     def reset_callbacks(self, true_or_false):
         self._reset_callbacks = bool(true_or_false)
@@ -160,7 +160,7 @@ class Pin(ClassBase):
     def perform_callbacks_reset(self):
         self.set_low_callback(default_callback, self)
         self.set_high_callback(default_callback, self)
-        self._log("info", "Default callbacks were set")
+        self.log("info", "Default callbacks were set")
 
     """
     Private service methods
@@ -181,8 +181,8 @@ class Pin(ClassBase):
                 new_state = wiringpi.digitalRead(self._pin)
 
             if self._state != new_state:
-                self._log("info", "Input state change detected. Was {0}, now {1}".
-                           format(self._state, new_state))
+                self.log("info", "Input state change detected. Was {0}, now {1}".
+                         format(self._state, new_state))
                 self._state = new_state
                 if new_state == 0:
                     self._input_control = Thread(target=self._low_callback[0], args=self._low_callback[1])
@@ -198,12 +198,12 @@ class Pin(ClassBase):
         Method creates and starts s pin listening thread
         :return: None
         """
-        self._log("info", "Starting input monitor")
+        self.log("info", "Starting input monitor")
         self._input_monitor = Thread(target=self.__input_monitor)
         self._input_monitor.setDaemon(True)
         self._input_monitor.start()
 
-    def _log(self, level, text):
+    def log(self, level, text):
         """
         Main logger workhorse - used to simplify access to Pin's logger
         :param level: String - level of log message
@@ -211,11 +211,11 @@ class Pin(ClassBase):
         :return: None
         """
         start = "PIN-{0} - ".format(self._pin) if self._pin != None else ""
-        super()._log(level, "{0}{1}".format(start, text))
+        super().log(level, "{0}{1}".format(start, text))
 
     def __lock_access_warning(self):
         """
         Throws a logger warning when user attempts to use locked pin
         :return: None
         """
-        self._log("warning", "Attempt to change output value for locked pin. Unlock it first")
+        self.log("warning", "Attempt to change output value for locked pin. Unlock it first")
