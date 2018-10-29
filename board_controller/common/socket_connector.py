@@ -15,7 +15,8 @@ class SocketConnector(ClassBase):
         self.host = host
         self.port = port
         self.client_routes = {}
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.sock = None
+        self.create_socket()
         self.active = True
 
     def route(self, packet_name):
@@ -55,3 +56,12 @@ class SocketConnector(ClassBase):
         else:
             self.client_routes[packet_name] = function
 
+    def create_socket(self, family=socket.AF_INET, type=socket.SOCK_STREAM):
+        """
+        Creates a socket object and assigns it to self.sock variable
+
+        :param family: Connection family
+        :param type: Connection type
+        :return: None
+        """
+        self.sock = socket.socket(family, type)

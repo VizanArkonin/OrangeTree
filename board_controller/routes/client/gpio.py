@@ -1,7 +1,6 @@
 """
-Socket server - GPIO board calls routing library.
+Socket client - GPIO board calls routing library.
 """
-from board_controller.common.packets.packet_status import PacketStatus
 from gpio import gpio_controller
 from board_controller.client import client
 from board_controller.common.packets.gpio import *
@@ -19,7 +18,6 @@ def status(client, data):
     message = GET_STATUS(status=gpio_controller.get_pins_status())
 
     client.send(message)
-    client.log("info", "GPIO status sent to client. Packet: {0}".format(message))
 
 
 @client.route(packet_name="SetGPIOPinMode")
@@ -35,9 +33,9 @@ def set_mode(client, data):
     pin_mode = data["payload"]["pinMode"]
     try:
         gpio_controller.get_pin(pin_id).set_mode(pin_mode)
-        client.send(SET_PIN_MODE(pin_id, pin_mode, PacketStatus.SUCCESS.value))
+        client.send(GET_STATUS(status=gpio_controller.get_pins_status()))
     except Exception as exception:
-        client.send(SET_PIN_MODE(pin_id, pin_mode, PacketStatus.FAILED.value, errors=[exception]))
+        client.send(GET_STATUS(status=gpio_controller.get_pins_status(), errors=[exception]))
 
 
 @client.route(packet_name="SetGPIOPinOutput")
@@ -53,9 +51,9 @@ def set_output(client, data):
     value = data["payload"]["outputValue"]
     try:
         gpio_controller.get_pin(pin_id).set_output(value)
-        client.send(SET_PIN_OUTPUT(pin_id, value, PacketStatus.SUCCESS.value))
+        client.send(GET_STATUS(status=gpio_controller.get_pins_status()))
     except Exception as exception:
-        client.send(SET_PIN_OUTPUT(pin_id, value, PacketStatus.FAILED.value, errors=[exception]))
+        client.send(GET_STATUS(status=gpio_controller.get_pins_status(), errors=[exception]))
 
 
 @client.route(packet_name="SetGPIOPinLock")
@@ -74,6 +72,6 @@ def set_lock(client, data):
             gpio_controller.get_pin(pin_id).lock_pin()
         else:
             gpio_controller.get_pin(pin_id).unlock_pin()
-        client.send(SET_PIN_LOCK(pin_id, locked, PacketStatus.SUCCESS.value))
+        client.send(GET_STATUS(status=gpio_controller.get_pins_status()))
     except Exception as exception:
-        client.send(SET_PIN_LOCK(pin_id, locked, PacketStatus.FAILED.value, errors=[exception]))
+        client.send(GET_STATUS(status=gpio_controller.get_pins_status(), errors=[exception]))

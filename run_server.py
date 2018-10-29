@@ -18,7 +18,7 @@ logger.info("Starting Database module")
 import database
 logger.info("Starting Web service")
 import web
-logger.info("Device server")
+logger.info("Starting Device server")
 import board_controller.server
 # End of service imports
 

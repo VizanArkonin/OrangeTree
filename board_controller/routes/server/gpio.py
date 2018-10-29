@@ -1,7 +1,6 @@
 """
 Socket server - GPIO board calls routing library.
 """
-from board_controller.common.packets.packet_status import PacketStatus
 from board_controller.common.utils import generic_response_validator
 from board_controller.server import __server as server
 
@@ -17,17 +16,12 @@ def status(client, data):
     """
     status = data["payload"]["status"]
     errors = data["errors"]
-    if status == PacketStatus.SUCCESS.value:
-        client.client_gpio_status = status
-        print(client.client_gpio_status)
-    elif status == PacketStatus.FAILED.value:
-        if errors:
-            client.log("error", "{0} Client - GetGPIOBoardStatus route processing errors:")
-            for error in errors:
-                client.log("error", error)
-            return
-    else:
-        client.log("error", "{0} Client - Unknown status response: {0}".format(status))
+
+    client.client_gpio_status = status
+    if errors:
+        client.log("error", "{0} Client - GetGPIOBoardStatus route processing errors:")
+        for error in errors:
+            client.log("error", error)
 
 
 @server.route(packet_name="SetGPIOPinMode")

@@ -2,6 +2,7 @@ import json
 import logging
 import socket
 from json import JSONDecodeError
+from time import sleep
 
 from board_controller.common.packets.packet_status import PacketStatus
 from board_controller.common.socket_connector import SocketConnector
@@ -44,14 +45,16 @@ class SocketServer(SocketConnector):
                         if self._device_is_allowed(deserialized_data):
                             self._accept_and_add_client(client, address, deserialized_data)
                         else:
-                            response_packet = Packets.AUTH(deserialized_data["payload"]["deviceID"],
+                            device_id = deserialized_data["payload"]["deviceID"]
+                            response_packet = Packets.AUTH(device_id,
                                                            deserialized_data["payload"]["deviceType"],
+                                                           deserialized_data["payload"]["key"],
                                                            PacketStatus.DENIED.value,
                                                            ["Device is not allowed in the system"])
                             client.sendall(self.get_cipher().encrypt(json.dumps(response_packet)))
                             client.close()
-                            self.log("warning", "Client '{0}' is not allowed. Rejecting auth and closing client".
-                                     format(address))
+                            self.log("warning", "Client '{0} {1}' is not allowed. Rejecting auth and closing client".
+                                     format(deserialized_data["payload"]["deviceID"], address))
                     else:
                         self.log("warning", "Invalid authorization packet received from {0}. Disconnecting".
                                  format(address))
@@ -61,13 +64,22 @@ class SocketServer(SocketConnector):
                              format(decoded_data))
                     client.close()
 
-    def get_client_by_id(self, id):
+    def get_client_by_id(self, client_id):
         """
         Returns client instance by given device ID.
-        :param id: Device ID
+        :param client_id: Device ID
         :return: ClientThread instance (or none, if client doesn't exist)
         """
-        return self.clients[id]
+        try:
+            client = self.clients[client_id]
+            if client.is_alive():
+                return client
+            else:
+                self.log("error", "Client with ID '{0}' got disconnected.".format(client_id))
+                return None
+        except KeyError:
+            self.log("error", "Client with ID '{0}' is not connected yet.".format(client_id))
+            return None
 
     def _device_is_allowed(self, data):
         """
@@ -94,7 +106,7 @@ class SocketServer(SocketConnector):
         client_handler = ClientThread(client, address, device_id)
         client_handler.routes = self.client_routes
         self.clients[device_id] = client_handler
-        self._logger.info("Authorization for '{0}' has passed. Client registered.".format(address))
+        self._logger.info("Authorization for '{0} {1}' has passed. Client registered.".format(device_id, address))
         client.sendall(self.get_cipher().encrypt(json.dumps(Packets.AUTH(device_id,
                                                                          request_data["payload"]["deviceType"],
                                                                          request_data["payload"]["key"],

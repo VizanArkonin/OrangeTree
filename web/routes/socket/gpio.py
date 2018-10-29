@@ -1,5 +1,5 @@
+from time import sleep
 from flask import request
-
 from flask_login import login_required
 from flask_socketio import emit, join_room
 
@@ -54,11 +54,16 @@ def set_pin_mode(message):
 
     :return: None
     """
-    pin_id = int(message["pinID"])
-    mode = int(message["modeID"])
-    server_interface.set_pin_mode(BOARD_ID, pin_id, mode)
+    if server_interface.is_client_alive(BOARD_ID):
+        current_status = server_interface.get_board_status(BOARD_ID)
+        current_timestamp = current_status["timestamp"]
+        pin_id = int(message["pinID"])
+        mode = int(message["modeID"])
+        server_interface.set_pin_mode(BOARD_ID, pin_id, mode)
+        while server_interface.get_board_status(BOARD_ID)["timestamp"] == current_timestamp:
+            sleep(0.01)
 
-    emit('status', server_interface.get_board_status(BOARD_ID), room=ROOM)
+        emit('status', server_interface.get_board_status(BOARD_ID), room=ROOM)
 
 
 @socket_service.on("setOutput", namespace="/gpio")
@@ -75,11 +80,15 @@ def set_pin_output(message):
 
     :return: None
     """
-    pin_id = int(message["pinID"])
-    value = int(message["value"])
-    server_interface.set_pin_output(BOARD_ID, pin_id, value)
+    if server_interface.is_client_alive(BOARD_ID):
+        current_timestamp = server_interface.get_board_status(BOARD_ID)["timestamp"]
+        pin_id = int(message["pinID"])
+        value = int(message["value"])
+        server_interface.set_pin_output(BOARD_ID, pin_id, value)
+        while server_interface.get_board_status(BOARD_ID)["timestamp"] == current_timestamp:
+            sleep(0.01)
 
-    emit('status', server_interface.get_board_status(BOARD_ID), room=ROOM)
+        emit('status', server_interface.get_board_status(BOARD_ID), room=ROOM)
 
 
 @socket_service.on("setPinLock", namespace="/gpio")
@@ -96,8 +105,12 @@ def set_pin_lock(message):
 
     :return: None
     """
-    pin_id = int(message["pinID"])
-    locked = bool(message["locked"])
-    server_interface.set_pin_lock(BOARD_ID, pin_id, locked)
+    if server_interface.is_client_alive(BOARD_ID):
+        current_timestamp = server_interface.get_board_status(BOARD_ID)["timestamp"]
+        pin_id = int(message["pinID"])
+        locked = bool(message["locked"])
+        server_interface.set_pin_lock(BOARD_ID, pin_id, locked)
+        while server_interface.get_board_status(BOARD_ID)["timestamp"] == current_timestamp:
+            sleep(0.01)
 
-    emit('status', server_interface.get_board_status(BOARD_ID), room=ROOM)
+        emit('status', server_interface.get_board_status(BOARD_ID), room=ROOM)

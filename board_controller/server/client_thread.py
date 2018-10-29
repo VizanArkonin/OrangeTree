@@ -10,6 +10,7 @@ class ClientThread(ClassBase):
     Client handler interface - created and assigned after client have passed authentication.
     Inner thread listens to incoming messages and routes them to respective processor functions.
     """
+
     def __init__(self, client, address, device_id):
         super().__init__()
         self.client = client
@@ -28,15 +29,18 @@ class ClientThread(ClassBase):
         :param data: Raw, encrypted byte array
         :return: None
         """
-        decoded_data = self.get_cipher().decrypt(data)
         try:
+            decoded_data = self.get_cipher().decrypt(data)
             deserialized_data = json.loads(decoded_data)
             call_name = deserialized_data["call"]
             if call_name in self.routes:
                 self.routes[call_name](self, deserialized_data)
             else:
                 self.log("error", "No routes for call '{0}' were found".format(call_name))
-        except JSONDecodeError as error:
+        except UnicodeDecodeError as exception:
+            self.log("error", "UnicodeDecode Exception raised - {0}\n{1}".format(exception, exception.args))
+            self.log("error", "Ignoring request")
+        except JSONDecodeError:
             self.log("error", "Failed to process request. Raw data - {0}".format(decoded_data))
 
     def send(self, data):
@@ -66,9 +70,13 @@ class ClientThread(ClassBase):
                 if data:
                     self.process_request(data)
                 else:
-                    self.log("info", "Client '{0}' disconnected".format(self.address))
+                    self.log("info", "Client '{0} {1}' disconnected".format(self.client_id, self.address))
                     break
             except Exception as exception:
-                self.log("error", "Caught exception: '{0}'\nClosing client '{1}'".format(exception, self.client_id))
+                self.log("error", "Caught unhandled exception '{0}': '{1}\n{2}'\nClosing client '{3}'".
+                         format(type(exception).__name__,
+                                exception,
+                                exception.args,
+                                self.client_id))
                 self.client.close()
                 return False

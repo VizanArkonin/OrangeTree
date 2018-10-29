@@ -35,6 +35,7 @@ BOARD_SERVICE_CONFIG = {
 }
 
 # Client socket service section
+# NOTE: Client uses both BOARD_SERVICE and CLIENT_CONFIG dicts, so make sure to update both
 CLIENT_CONFIG = {
     "device_id": "DEV_LITE",
     "device_type": 1,
