@@ -32,7 +32,7 @@
     .aside-element {
       & i, span {
         color: $text-light;
-        font-size: $text-size-default-n;
+        font-size: $font-size-default-n;
       }
     }
     .aside-hover {
@@ -42,7 +42,7 @@
         opacity: 1;
       }
       &:active {
-        background: $nav-bg-color-active;
+        background: $btn-default-color-hover;
         opacity: 1;
       }
     }
@@ -61,7 +61,7 @@
   display: flex;
   align-items: center;
   position: fixed;
-  min-height: 50px;
+  height: 50px;
   width: 80%;
   .nav-content {
     height: 50px;
@@ -96,7 +96,7 @@
 .nav-element {
   & i, span {
     color: $text-light;
-    font-size: $text-size-default-l;
+    font-size: $font-size-default-l;
   }
   & a {
     display: block;
@@ -115,6 +115,6 @@
   & span {
     width: 100%;
     text-align: center;
-    font-size: $text-size-default-l;
+    font-size: $font-size-default-l;
   }
 }

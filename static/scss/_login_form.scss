@@ -11,27 +11,76 @@
 .login-header {
   background: $container-bg-color;
   color: $text-light;
-  font-size: $font-size-default-l;
+  font-size: 5rem;
   width: 100%;
-  padding: 15px;
+  padding: 25px 15px;
   text-align: center;
 }
 
 .login-form {
   padding: 20px;
-  .input-container {
+  .input-container, .input-focus-within {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 20px 0;
-    height: 35px;
+    height: 50px;
+    font-size: $font-size-default-n;
+    color: $text-light;
     & input[type=text], input[type=password] {
       background: $container-bg-color;
-      padding: 5px;
+      caret-color: $text-light;
+      padding: 5px 0;
       height: 100%;
+      width: 100%;
       border: 0;
+      &:valid {
+        color: $text-gray;
+      }
+      &:focus {
+        color: $text-light;
+      }
     }
-    .icon-form {
+    & input[type=submit] {
+      background: $btn-default-color;
+      color: $text-light;
+      height: 100%;
+      width: 100%;
+      text-align: center;
+      border: 0;
+      @include transition-duration;
+      &:hover {
+        background: $btn-default-color-hover;
+      }
+      &:active {
+        background: $btn-on-color;
+      }
+    }
+    & input[type=checkbox] {
+      margin: 0 5px;
+      border-radius: 0;
+    }
+  }
+  .icon-form {
       color: $text-light;
       background: $container-bg-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
       height: 100%;
+    min-width: 50px;
+    & i {
+      opacity: 0.6;
     }
+  }
+}
+
+.input-focus-within {
+  &:focus-within {
+    color: $text-light;
+    @include input-box-shadow;
+  }
+  &:focus-within i {
+    opacity: 1;
   }
 }

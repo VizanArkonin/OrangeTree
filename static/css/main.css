@@ -1,21 +1,16 @@
-/*Font sizes for the default page:
-- Small (s);
-- Normal (n);
-- Large (l)*/
-* {
+*, :before, :after {
   box-sizing: border-box; }
 
 :root {
   font-size: 10px; }
 
-html {
-    height: 100%;
+body, input {
+    font-family: 'Sarpanch', sans-serif;
 }
 
 body {
     height: 100%;
   display: flex;
-    font-family: 'Sarpanch', sans-serif;
     /* fallback for old browsers */
     background: #d2a065;
     /* Chrome 10-25, Safari 5.1-6 */
@@ -26,6 +21,116 @@ body {
 
 a {
   text-decoration: none; }
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: rgba(255, 255, 255, 0.6);
+    -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+input:-webkit-autofill:focus {
+    -webkit-text-fill-color: white;
+    -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.login-form-container {
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    margin: 10px;
+}
+
+.login-header {
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    font-size: 5rem;
+    width: 100%;
+    padding: 25px 15px;
+    text-align: center;
+}
+
+.login-form {
+    padding: 20px;
+}
+
+.login-form .input-container, .login-form .input-focus-within {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    height: 50px;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.login-form .input-container input[type=text], .login-form .input-container input[type=password], .login-form .input-focus-within input[type=text], .login-form .input-focus-within input[type=password] {
+    background: rgba(0, 0, 0, 0.4);
+    caret-color: white;
+    padding: 5px 0;
+    height: 100%;
+    width: 100%;
+    border: 0;
+}
+
+.login-form .input-container input[type=text]:valid, .login-form .input-container input[type=password]:valid, .login-form .input-focus-within input[type=text]:valid, .login-form .input-focus-within input[type=password]:valid {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.login-form .input-container input[type=text]:focus, .login-form .input-container input[type=password]:focus, .login-form .input-focus-within input[type=text]:focus, .login-form .input-focus-within input[type=password]:focus {
+    color: white;
+}
+
+.login-form .input-container input[type=submit], .login-form .input-focus-within input[type=submit] {
+    background: #dea640;
+    color: white;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    border: 0;
+    -webkit-transition-duration: 0.3s;
+    /* Safari */
+    transition-duration: 0.3s;
+}
+
+.login-form .input-container input[type=submit]:hover, .login-form .input-focus-within input[type=submit]:hover {
+    background: #f1a213;
+}
+
+.login-form .input-container input[type=submit]:active, .login-form .input-focus-within input[type=submit]:active {
+    background: #64c1bb;
+}
+
+.login-form .input-container input[type=checkbox], .login-form .input-focus-within input[type=checkbox] {
+    margin: 0 5px;
+    border-radius: 0;
+}
+
+.login-form .icon-form {
+    color: white;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    min-width: 50px;
+}
+
+.login-form .icon-form i {
+    opacity: 0.6;
+}
+
+.input-focus-within:focus-within {
+    color: white;
+    -webkit-box-shadow: 0px 0px 5px 2px #dea640 !important;
+    -moz-box-shadow: 0px 0px 5px 2px #dea640 !important;
+    box-shadow: 0px 0px 5px 2px #dea640 !important;
+}
+
+.input-focus-within:focus-within i {
+    opacity: 1;
+}
 
 .aside {
     background-color: rgba(0, 0, 0, 0.4);
@@ -60,7 +165,7 @@ a {
           background: rgba(0, 0, 0, 0.3);
         opacity: 1; }
       .aside .aside-nav .aside-hover:active {
-          background: #dea640;
+          background: #f1a213;
         opacity: 1; }
 
 .main-navigation {
@@ -79,7 +184,7 @@ a {
   display: flex;
   align-items: center;
   position: fixed;
-  min-height: 50px;
+    height: 50px;
   width: 80%; }
   .nav .nav-content {
     height: 50px; }
@@ -123,6 +228,14 @@ a {
     width: 100%;
     text-align: center;
     font-size: 1.8rem;
+}
+
+.container-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
 }
 
 .main-container {
