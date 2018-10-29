@@ -16,4 +16,3 @@ def echo(client, data):
     """
     response = data
     client.send(response)
-    print("Sent '{0}' response to {1}".format(data, client.address))

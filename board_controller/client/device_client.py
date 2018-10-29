@@ -21,7 +21,7 @@ class DeviceClient(SocketConnector):
 
     def connect(self):
         """
-        Connection loop - attempts to connect to the server, retrying each 2 seconds of connection is being refused.
+        Connection loop - attempts to connect to the server, retrying each 2 seconds if connection is being refused.
         :return: None
         """
         try:
@@ -41,18 +41,22 @@ class DeviceClient(SocketConnector):
         self.sock.sendall(self.get_cipher().encrypt(json.dumps(auth_packet)))
         res = self.sock.recv(1024)
         response = json.loads(self.get_cipher().decrypt(res))
+        device_id = response["payload"]["deviceID"]
+        status = response["payload"]["status"]
 
-        if response["payload"]["deviceID"] == self.client_id \
-                and response["payload"]["status"] == PacketStatus.ACCEPTED.value:
+        if device_id == self.client_id and status == PacketStatus.ACCEPTED.value:
             self.log("info", "Authorization request accepted. Proceeding")
-        elif response["payload"]["deviceID"] == self.client_id \
-                and response["payload"]["status"] == PacketStatus.DENIED.value:
+        elif device_id == self.client_id and status == PacketStatus.DENIED.value:
             self.log("error", "Authorization denied.")
             for error in response["errors"]:
                 self.log("error", error)
             self.sock.close()
 
     def listen(self):
+        """
+        Listens to incoming transmission, handles data processing and exceptions handling.
+        :return: None
+        """
         while self.active:
             try:
                 data = self.sock.recv(10240)
@@ -77,17 +81,17 @@ class DeviceClient(SocketConnector):
         :param data: Raw, encrypted byte array
         :return: None
         """
-        decoded_data = self.get_cipher().decrypt(data)
         try:
+            decoded_data = self.get_cipher().decrypt(data)
             deserialized_data = json.loads(decoded_data)
+            call_name = deserialized_data["call"]
+            if call_name in self.client_routes:
+                self.client_routes[call_name](self, deserialized_data)
+            else:
+                self.log("error", "No routes for call '{0}' were found".format(call_name))
         except UnicodeDecodeError as error:
             self.log("error", "Processing error - {0}".format(error))
             self.log("error", "Decoded data - {0}".format(decoded_data))
-        call_name = deserialized_data["call"]
-        if call_name in self.client_routes:
-            self.client_routes[call_name](self, deserialized_data)
-        else:
-            self.log("error", "No routes for call '{0}' were found".format(call_name))
 
     def send(self, data):
         """

@@ -1,6 +1,6 @@
 """
 Socket client.
-Provides low-level connection interface for Orange PI board connection. 1 Instance of socket server is run on host
+Provides low-level connection interface for Orange PI boards. 1 Instance of socket server is run on host
 and 1 Instance of client is run on single given board.
 """
 from threading import Thread
@@ -8,7 +8,7 @@ from threading import Thread
 import config
 from board_controller.client.device_client import DeviceClient
 
-# First, we create SocketServer instance
+# First, we create DeviceClient instance
 client = DeviceClient(config.BOARD_SERVICE_CONFIG["host"], config.BOARD_SERVICE_CONFIG["port"],
                       config.CLIENT_CONFIG["device_id"], config.CLIENT_CONFIG["device_type"],
                       config.CLIENT_CONFIG["device_key"])
@@ -28,6 +28,6 @@ def listen():
         client.shut_down()
 
 
-# Finally, we initiate the server thread and start it
+# Finally, we initiate the client thread and start it
 client_thread = Thread(target=listen)
 client_thread.start()

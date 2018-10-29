@@ -10,6 +10,7 @@ from web import socket_service
 
 ROOM = "gpio"
 
+# Until Home page and device selection is available, we hard-code it to a single configured client
 BOARD_ID = config.CLIENT_CONFIG["device_id"]
 
 

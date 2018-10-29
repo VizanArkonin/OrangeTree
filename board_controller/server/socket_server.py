@@ -2,7 +2,6 @@ import json
 import logging
 import socket
 from json import JSONDecodeError
-from time import sleep
 
 from board_controller.common.packets.packet_status import PacketStatus
 from board_controller.common.socket_connector import SocketConnector
@@ -32,7 +31,7 @@ class SocketServer(SocketConnector):
         Listens for new connections, validates if they're allowed and puts them in clients list.
         :return: None
         """
-        self.sock.listen(5)
+        self.sock.listen()
         while self.active:
             client, address = self.sock.accept()
             self._logger.info("Accepted new connection from '{0}'. Waiting for authorization packet".format(address))
@@ -68,7 +67,7 @@ class SocketServer(SocketConnector):
         """
         Returns client instance by given device ID.
         :param client_id: Device ID
-        :return: ClientThread instance (or none, if client doesn't exist)
+        :return: ClientThread instance (or None, if client doesn't exist)
         """
         try:
             client = self.clients[client_id]

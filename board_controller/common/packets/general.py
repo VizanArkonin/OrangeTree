@@ -10,9 +10,9 @@ def AUTH(device_id, device_type, key, status, errors=[]):
     """
     Core authorization packet.
 
-    :param device_id: Device ID. Refers to device_id column of devices_list table.
-    :param device_type: Device Type ID. Refers to type_id column of device_types table.
-    :param key: Device key. Refers to key column of devices_list_table
+    :param device_id: Device ID. Refers to device_id column in devices_list table.
+    :param device_type: Device Type ID. Refers to type_id column in device_types table.
+    :param key: Device key. Refers to key column in devices_list_table
     :param status: Response status. Can be "requested", "accepted" or "denied" (see PacketStatus enum for reference)
     :param errors: Error strings list.
     :return: Packet dict

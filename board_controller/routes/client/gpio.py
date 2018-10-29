@@ -2,14 +2,14 @@
 Socket client - GPIO board calls routing library.
 """
 from gpio import gpio_controller
-from board_controller.client import client
+from board_controller.client import client as Client
 from board_controller.common.packets.gpio import *
 
 
-@client.route(packet_name="GetGPIOBoardStatus")
+@Client.route(packet_name="GetGPIOBoardStatus")
 def status(client, data):
     """
-    GPIO board status processor. Covers both incoming and outcoming calls
+    GPIO board status processor - gets current board status and sends it in status packet.
 
     :param client: DeviceClient instance
     :param data: Serialized and encrypted data byte array
@@ -20,10 +20,10 @@ def status(client, data):
     client.send(message)
 
 
-@client.route(packet_name="SetGPIOPinMode")
+@Client.route(packet_name="SetGPIOPinMode")
 def set_mode(client, data):
     """
-    Validates if client GPIO pin mode change was successful
+    Processes pin mode change request. As a response, it sends out updated status packet.
 
     :param client: DeviceClient instance
     :param data: Decrypted and deserialized packet dict
@@ -38,10 +38,10 @@ def set_mode(client, data):
         client.send(GET_STATUS(status=gpio_controller.get_pins_status(), errors=[exception]))
 
 
-@client.route(packet_name="SetGPIOPinOutput")
+@Client.route(packet_name="SetGPIOPinOutput")
 def set_output(client, data):
     """
-    Validates if client GPIO pin output change was successful
+    Processes pin output value change request. As a response, it sends out updated status packet.
 
     :param client: DeviceClient instance
     :param data: Decrypted and deserialized packet dict
@@ -56,10 +56,10 @@ def set_output(client, data):
         client.send(GET_STATUS(status=gpio_controller.get_pins_status(), errors=[exception]))
 
 
-@client.route(packet_name="SetGPIOPinLock")
+@Client.route(packet_name="SetGPIOPinLock")
 def set_lock(client, data):
     """
-    Validates if client GPIO pin output change was successful
+    Processes pin lock change request. As a response, it sends out updated status packet.
 
     :param client: DeviceClient instance
     :param data: Decrypted and deserialized packet dict

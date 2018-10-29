@@ -51,7 +51,7 @@ def set_output(client, data):
 @server.route(packet_name="SetGPIOPinLock")
 def set_lock(client, data):
     """
-    Validates if client GPIO pin output change was successful
+    Validates if client GPIO pin lock change was successful
 
     :param client: ClientThread instance
     :param data: Decrypted and deserialized packet dict

@@ -10,7 +10,7 @@ def GET_STATUS(status={}, errors=[]):
     """
     Packet for GPIO board status request. Payload contains the dict with status on all pins.
 
-    :param status: Dict with pins status. Client request sends it as empty dict, server response pulls data from
+    :param status: Dict with pins status. Server sends it as empty dict, client response pulls data from
     GPIO controller's get_pins_status() method.
     :param errors: Error strings list.
     :return: Packet dict.

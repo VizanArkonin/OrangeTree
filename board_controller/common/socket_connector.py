@@ -10,8 +10,6 @@ class SocketConnector(ClassBase):
     """
     def __init__(self, host, port):
         super().__init__()
-        self._logger = logging.getLogger(__class__.__name__)
-        self._logger.setLevel(logging.DEBUG)
         self.host = host
         self.port = port
         self.client_routes = {}
@@ -37,7 +35,7 @@ class SocketConnector(ClassBase):
 
     def shut_down(self):
         """
-        Sets listener anchor to false, shutting listener loop down.
+        Sets listener anchor to false, shutting loop down.
         :return: None
         """
         self.log("info", "Client listener shut down.")

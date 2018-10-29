@@ -1,6 +1,6 @@
 """
 Socket server.
-Provides low-level connection interface for Orange PI boards connection. 1 Instance of socket server is run on host
+Provides low-level connection interface for Orange PI boards. 1 Instance of socket server is run on host
 and 1 Instance of client is run on single given board.
 Server has it's own authentication system, data packets structure and uses AES encryption.
 """

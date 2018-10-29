@@ -42,6 +42,7 @@ class ClientThread(ClassBase):
             self.log("error", "Ignoring request")
         except JSONDecodeError:
             self.log("error", "Failed to process request. Raw data - {0}".format(decoded_data))
+            self.log("error", "Ignoring request")
 
     def send(self, data):
         """
