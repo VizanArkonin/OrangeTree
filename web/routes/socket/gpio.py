@@ -1,12 +1,17 @@
+from time import sleep
 from flask import request
-
 from flask_login import login_required
 from flask_socketio import emit, join_room
 
-from gpio import gpio_controller
+import config
+from board_controller.server import server_interface
+
 from web import socket_service
 
 ROOM = "gpio"
+
+# Until Home page and device selection is available, we hard-code it to a single configured client
+BOARD_ID = config.CLIENT_CONFIG["device_id"]
 
 
 @socket_service.on("join", namespace='/gpio')
@@ -31,9 +36,9 @@ def request_status(message):
     :return: None
     """
     if message["justForMe"]:
-        emit('status', gpio_controller.get_pins_status(), room=request.sid)
+        emit('status', server_interface.get_board_status(BOARD_ID), room=request.sid)
     else:
-        emit('status', gpio_controller.get_pins_status(), room=ROOM)
+        emit('status', server_interface.get_board_status(BOARD_ID), room=ROOM)
 
 
 @socket_service.on("setPinMode", namespace="/gpio")
@@ -50,14 +55,21 @@ def set_pin_mode(message):
 
     :return: None
     """
-    gpio_controller.get_pin(int(message["pinID"])).set_mode(int(message["modeID"]))
+    if server_interface.is_client_alive(BOARD_ID):
+        current_status = server_interface.get_board_status(BOARD_ID)
+        current_timestamp = current_status["timestamp"]
+        pin_id = int(message["pinID"])
+        mode = int(message["modeID"])
+        server_interface.set_pin_mode(BOARD_ID, pin_id, mode)
+        while server_interface.get_board_status(BOARD_ID)["timestamp"] == current_timestamp:
+            sleep(0.01)
 
-    emit('status', gpio_controller.get_pins_status(), room=ROOM)
+        emit('status', server_interface.get_board_status(BOARD_ID), room=ROOM)
 
 
 @socket_service.on("setOutput", namespace="/gpio")
 @login_required
-def set_pin_mode(message):
+def set_pin_output(message):
     """
     Sets the 1 or 0 for an OUTPUT-mode pin.
     :param message: Socket payload. Should have following structure:
@@ -69,14 +81,20 @@ def set_pin_mode(message):
 
     :return: None
     """
-    gpio_controller.get_pin(int(message["pinID"])).set_output(int(message["value"]))
+    if server_interface.is_client_alive(BOARD_ID):
+        current_timestamp = server_interface.get_board_status(BOARD_ID)["timestamp"]
+        pin_id = int(message["pinID"])
+        value = int(message["value"])
+        server_interface.set_pin_output(BOARD_ID, pin_id, value)
+        while server_interface.get_board_status(BOARD_ID)["timestamp"] == current_timestamp:
+            sleep(0.01)
 
-    emit('status', gpio_controller.get_pins_status(), room=ROOM)
+        emit('status', server_interface.get_board_status(BOARD_ID), room=ROOM)
 
 
 @socket_service.on("setPinLock", namespace="/gpio")
 @login_required
-def set_pin_mode(message):
+def set_pin_lock(message):
     """
     Locks/unlocks the specified pin
     :param message: Socket payload. Should have following structure:
@@ -88,9 +106,12 @@ def set_pin_mode(message):
 
     :return: None
     """
-    if message["locked"]:
-        gpio_controller.get_pin(int(message["pinID"])).lock_pin()
-    else:
-        gpio_controller.get_pin(int(message["pinID"])).unlock_pin()
+    if server_interface.is_client_alive(BOARD_ID):
+        current_timestamp = server_interface.get_board_status(BOARD_ID)["timestamp"]
+        pin_id = int(message["pinID"])
+        locked = bool(message["locked"])
+        server_interface.set_pin_lock(BOARD_ID, pin_id, locked)
+        while server_interface.get_board_status(BOARD_ID)["timestamp"] == current_timestamp:
+            sleep(0.01)
 
-    emit('status', gpio_controller.get_pins_status(), room=ROOM)
+        emit('status', server_interface.get_board_status(BOARD_ID), room=ROOM)

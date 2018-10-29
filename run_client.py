@@ -12,13 +12,9 @@ We mimic the Node-like architecture by separating parts of app into self-contain
 Initialization is performed during module import (in __init__.py files).
 """
 
-# Service imports. Used to initialize modules and their respective processes/variables. DO NOT REMOVE THEM!
-logger.info("Starting GPIO module")
-import gpio
-logger.info("Starting Database module")
-import database
-logger.info("Starting Web service")
-import web
+logger.info("Device client")
+import board_controller.client
 # End of service imports
+
 
 logger.info("Start-up complete")
