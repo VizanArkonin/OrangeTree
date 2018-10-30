@@ -40,16 +40,20 @@ class DeviceClient(SocketConnector):
         auth_packet = AUTH(self.client_id, self.device_type, self.device_key, PacketStatus.REQUESTED.value)
         self.sock.sendall(self.get_cipher().encrypt(json.dumps(auth_packet)))
         res = self.sock.recv(1024)
-        response = json.loads(self.get_cipher().decrypt(res))
-        device_id = response["payload"]["deviceID"]
-        status = response["payload"]["status"]
+        if res:
+            response = json.loads(self.get_cipher().decrypt(res))
+            device_id = response["payload"]["deviceID"]
+            status = response["payload"]["status"]
 
-        if device_id == self.client_id and status == PacketStatus.ACCEPTED.value:
-            self.log("info", "Authorization request accepted. Proceeding")
-        elif device_id == self.client_id and status == PacketStatus.DENIED.value:
-            self.log("error", "Authorization denied.")
-            for error in response["errors"]:
-                self.log("error", error)
+            if device_id == self.client_id and status == PacketStatus.ACCEPTED.value:
+                self.log("info", "Authorization request accepted. Proceeding")
+            elif device_id == self.client_id and status == PacketStatus.DENIED.value:
+                self.log("error", "Authorization denied.")
+                for error in response["errors"]:
+                    self.log("error", error)
+                self.sock.close()
+        else:
+            self.log("error", "AUTH - Empty response received. Did server close connection?")
             self.sock.close()
 
     def listen(self):

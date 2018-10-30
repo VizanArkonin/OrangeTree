@@ -102,11 +102,17 @@ class SocketServer(SocketConnector):
         :return: None
         """
         device_id = request_data["payload"]["deviceID"]
-        client_handler = ClientThread(client, address, device_id)
-        client_handler.routes = self.client_routes
-        self.clients[device_id] = client_handler
-        self._logger.info("Authorization for '{0} {1}' has passed. Client registered.".format(device_id, address))
-        client.sendall(self.get_cipher().encrypt(json.dumps(Packets.AUTH(device_id,
-                                                                         request_data["payload"]["deviceType"],
-                                                                         request_data["payload"]["key"],
-                                                                         PacketStatus.ACCEPTED.value))))
+        if not self.get_client_by_id(device_id):
+            self.log("info", "No active clients found for device with ID '{0}'. Initializing new client controller".
+                     format(device_id))
+            client_handler = ClientThread(client, address, device_id)
+            client_handler.routes = self.client_routes
+            self.clients[device_id] = client_handler
+            self._logger.info("Authorization for '{0} {1}' has passed. Client registered.".format(device_id, address))
+            client.sendall(self.get_cipher().encrypt(json.dumps(Packets.AUTH(device_id,
+                                                                             request_data["payload"]["deviceType"],
+                                                                             request_data["payload"]["key"],
+                                                                             PacketStatus.ACCEPTED.value))))
+        else:
+            self.log("error", "Active client with ID '{0}' already registered. Rejecting connection".format(device_id))
+            client.close()
