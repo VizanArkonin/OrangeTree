@@ -1,5 +1,13 @@
 //Styling main classes for all other pages.
 
+.container-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+}
+
 .main-container {
   display: flex;
   flex-direction: column;
@@ -8,7 +16,7 @@
 }
 
 .head-info {
-  color: $text-light;
-  font-size: $text-size-default-l;
+  color: $white-color;
+  font-size: $font-size-default-l;
   margin: 15px 5% 0;
 }
