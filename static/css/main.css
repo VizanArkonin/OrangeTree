@@ -1,3 +1,4 @@
+@charset "UTF-8";
 *, :before, :after {
   box-sizing: border-box; }
 
@@ -5,54 +6,54 @@
   font-size: 10px; }
 
 body, input {
-    font-family: 'Sarpanch', sans-serif;
+  font-family: 'Sarpanch', sans-serif;
 }
 
 body {
-    height: 100%;
+  height: 100%;
   display: flex;
-    /* fallback for old browsers */
-    background: #d2a065;
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(135deg, #584b5d, #72555a, #d2a065, #9c8679);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(135deg, #584b5d, #72555a, #d2a065, #9c8679);
+  /* fallback for old browsers */
+  background: #d2a065;
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(135deg, #584b5d, #72555a, #d2a065, #9c8679);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(135deg, #584b5d, #72555a, #d2a065, #9c8679);
 }
 
 a {
   text-decoration: none; }
 
 input:-webkit-autofill {
-    -webkit-text-fill-color: rgba(255, 255, 255, 0.6);
-    -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset;
-    transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.6);
+  -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 input:-webkit-autofill:focus {
-    -webkit-text-fill-color: white;
-    -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset;
-    transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 .login-form-container {
-    background: rgba(0, 0, 0, 0.4);
-    display: flex;
-    flex-direction: column;
-    width: 350px;
-    margin: 10px;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  margin: 10px;
 }
 
 .login-header {
-    background: rgba(0, 0, 0, 0.4);
-    color: white;
-    font-size: 5rem;
-    width: 100%;
-    padding: 25px 15px;
-    text-align: center;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  font-size: 5rem;
+  width: 100%;
+  padding: 25px 15px;
+  text-align: center;
 }
 
 .login-form {
-    padding: 20px;
+  padding: 20px;
 }
 
 .login-form .input-container, .login-form .input-focus-within {
@@ -62,49 +63,44 @@ input:-webkit-autofill:focus {
     margin: 20px 0;
     height: 50px;
     font-size: 1.5rem;
-    color: white;
+  color: white;
 }
 
 .login-form .input-container input[type=text], .login-form .input-container input[type=password], .login-form .input-focus-within input[type=text], .login-form .input-focus-within input[type=password] {
-    background: rgba(0, 0, 0, 0.4);
-    caret-color: white;
-    padding: 5px 0;
-    height: 100%;
-    width: 100%;
-    border: 0;
+  background: rgba(0, 0, 0, 0.4);
+  caret-color: white;
+  padding: 5px 0;
+  height: 100%;
+  width: 100%;
+  border: 0;
 }
 
 .login-form .input-container input[type=text]:valid, .login-form .input-container input[type=password]:valid, .login-form .input-focus-within input[type=text]:valid, .login-form .input-focus-within input[type=password]:valid {
-    color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .login-form .input-container input[type=text]:focus, .login-form .input-container input[type=password]:focus, .login-form .input-focus-within input[type=text]:focus, .login-form .input-focus-within input[type=password]:focus {
-    color: white;
+  color: white;
 }
 
 .login-form .input-container input[type=submit], .login-form .input-focus-within input[type=submit] {
-    background: #dea640;
-    color: white;
-    height: 100%;
-    width: 100%;
-    text-align: center;
-    border: 0;
-    -webkit-transition-duration: 0.3s;
-    /* Safari */
-    transition-duration: 0.3s;
+  background: #dea640;
+  color: white;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  border: 0;
+  -webkit-transition-duration: 0.3s;
+  /* Safari */
+  transition-duration: 0.3s;
 }
 
 .login-form .input-container input[type=submit]:hover, .login-form .input-focus-within input[type=submit]:hover {
-    background: #f1a213;
+  background: #f1a213;
 }
 
 .login-form .input-container input[type=submit]:active, .login-form .input-focus-within input[type=submit]:active {
-    background: #64c1bb;
-}
-
-.login-form .input-container input[type=checkbox], .login-form .input-focus-within input[type=checkbox] {
-    margin: 0 5px;
-    border-radius: 0;
+  background: #64c1bb;
 }
 
 .login-form .icon-form {
@@ -114,26 +110,73 @@ input:-webkit-autofill:focus {
     justify-content: center;
     align-items: center;
     height: 100%;
-    min-width: 50px;
+  min-width: 50px;
 }
 
 .login-form .icon-form i {
-    opacity: 0.6;
+  opacity: 0.6;
 }
 
 .input-focus-within:focus-within {
-    color: white;
-    -webkit-box-shadow: 0px 0px 5px 2px #dea640 !important;
-    -moz-box-shadow: 0px 0px 5px 2px #dea640 !important;
-    box-shadow: 0px 0px 5px 2px #dea640 !important;
+  color: white;
+  -webkit-box-shadow: 0px 0px 5px 2px #dea640 !important;
+  -moz-box-shadow: 0px 0px 5px 2px #dea640 !important;
+  box-shadow: 0px 0px 5px 2px #dea640 !important;
+}
+.input-focus-within:focus-within i {
+  opacity: 1;
 }
 
-.input-focus-within:focus-within i {
-    opacity: 1;
+.login-error-messages {
+  color: #f64949 !important;
+  font-size: 1.3rem;
+  height: 1.5rem;
+  text-align: center;
+}
+
+.checkbox-container {
+  color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.checkbox-container .checkbox {
+  background: rgba(255, 255, 255, 0.6);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  height: 15px;
+  width: 15px;
+  margin-right: 10px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.checkbox-container .checkbox:hover {
+  background: white;
+}
+
+.checkbox-container .checkbox:checked {
+  background: #dea640;
+}
+
+.checkbox-container .checkbox:checked::before {
+  font-size: 1.3rem;
+  color: white;
+  content: '✔';
+  text-align: center;
+  height: 15px;
+  width: 15px;
+  display: inline-block;
+  position: relative;
+  bottom: 4px;
 }
 
 .aside {
-    background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   min-height: 100vh;
   overflow-y: hidden;
@@ -162,10 +205,10 @@ input:-webkit-autofill:focus {
     .aside .aside-nav .aside-hover {
       opacity: 0.7; }
       .aside .aside-nav .aside-hover:hover {
-          background: rgba(0, 0, 0, 0.3);
+        background: rgba(0, 0, 0, 0.3);
         opacity: 1; }
       .aside .aside-nav .aside-hover:active {
-          background: #f1a213;
+        background: #dea640;
         opacity: 1; }
 
 .main-navigation {
@@ -175,16 +218,16 @@ input:-webkit-autofill:focus {
   width: 80%; }
 
 .nav {
-    /* fallback for old browsers */
-    background: #352d38;
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(135deg, #352d38, #413136, #584137, #73563a);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(135deg, #352d38, #413136, #584137, #73563a);
+  /* fallback for old browsers */
+  background: #352d38;
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(135deg, #352d38, #413136, #584137, #73563a);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(135deg, #352d38, #413136, #584137, #73563a);
   display: flex;
   align-items: center;
   position: fixed;
-    height: 50px;
+  height: 50px;
   width: 80%; }
   .nav .nav-content {
     height: 50px; }
@@ -221,33 +264,33 @@ input:-webkit-autofill:focus {
   text-align: right; }
 
 #logo {
-    background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 #logo span {
     width: 100%;
     text-align: center;
-    font-size: 1.8rem;
+  font-size: 1.8rem;
 }
 
 .container-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
 }
 
 .main-container {
   display: flex;
-    flex-direction: column;
+  flex-direction: column;
   height: 100%;
   margin-top: 50px; }
 
 .head-info {
-    color: white;
-    font-size: 1.8rem;
-    margin: 15px 5% 0;
+  color: white;
+  font-size: 1.8rem;
+  margin: 15px 5% 0;
 }
 
 .flex-container {
@@ -255,72 +298,72 @@ input:-webkit-autofill:focus {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-    margin: 15px 0;
+  margin: 15px 0;
 }
   .flex-container .pin-container {
-      background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.8);
     display: flex;
     justify-content: center;
     align-items: center;
     flex-basis: 40%;
     min-height: 3vh;
-      margin: 5px 5%;
+    margin: 5px 5%;
     font-size: 1.3rem; }
 
 .icon-gpio i {
   color: #c8c8c8;
   flex: 1 1 10%;
-    text-align: center;
+  text-align: center;
 }
 
 .text-gpio span {
   flex: 1 0 50%;
-    text-align: center;
+  text-align: center;
 }
 
 .btn-gpio {
   color: white;
   min-height: 3vh;
   flex: 0 0 15%;
-    border: 0;
+  border: 0;
 }
 
 .btn-off {
-    background: #ff5d5d;
+  background: #ff5d5d;
   -webkit-transition-duration: 0.3s;
   /* Safari */
-    transition-duration: 0.3s;
+  transition-duration: 0.3s;
 }
 
 .btn-off:hover {
-    background: #f64949;
+  background: #f64949;
 }
 
 .btn-on {
-    background: #64c1bb;
+  background: #64c1bb;
   -webkit-transition-duration: 0.3s;
   /* Safari */
-    transition-duration: 0.3s;
+  transition-duration: 0.3s;
 }
 
 .btn-on:hover {
-    background: #56a39e;
+  background: #56a39e;
 }
 
 .pin-power {
-    background: #dea640 !important;
+  background: #dea640 !important;
   color: white; }
 
 .pin-gnd {
-    background: rgba(0, 0, 0, 0.4) !important;
+  background: rgba(0, 0, 0, 0.4) !important;
   color: white; }
 
 .fa-lock:before, .fa-lock-open:before {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .fa-lock {
-    color: #ff5d5d !important;
+  color: #ff5d5d !important;
 }
 
 /*# sourceMappingURL=main.css.map */

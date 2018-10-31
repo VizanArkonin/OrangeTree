@@ -35,6 +35,13 @@
             <span><i class="fas fa-user-circle"></i></span>
         </div>
         <form class="login-form" action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
+            <div class="login-error-messages">
+                {% include "security/_messages.html" %}
+                {{ login_user_form.hidden_tag() }}
+                {{ render_field_with_errors(login_user_form.email) }}
+                {{ render_field_with_errors(login_user_form.password) }}
+                {{ render_field_with_errors(login_user_form.remember) }}
+            </div>
             <div class="input-container input-focus-within">
                 <span class="icon-form"><i class="fas fa-envelope"></i></span>
                 <input id="email" name="email" required type="text" value="" autofocus placeholder="Enter email">
@@ -47,15 +54,10 @@
                 <input id="submit" name="submit" type="submit" value="Login">
             </div>
             <div class="input-container">
-                <input id="remember" name="remember" type="checkbox" value="y">
-                <span>Remember me</span>
-            </div>
-            <div class="login-error-messages">
-                {% include "security/_messages.html" %}
-                {{ login_user_form.hidden_tag() }}
-                {{ render_field_with_errors(login_user_form.email) }}
-                {{ render_field_with_errors(login_user_form.password) }}
-                {{ render_field_with_errors(login_user_form.remember) }}
+                <div class="checkbox-container">
+                    <input class="checkbox" id="remember" name="remember" type="checkbox" value="y">
+                    <label for="checkbox">Remember me</label>
+                </div>
             </div>
         </form>
     </div>

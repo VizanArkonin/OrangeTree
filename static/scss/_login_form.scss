@@ -10,7 +10,7 @@
 
 .login-header {
   background: $container-bg-color;
-  color: $text-light;
+  color: $white-color;
   font-size: 5rem;
   width: 100%;
   padding: 25px 15px;
@@ -26,24 +26,24 @@
     margin: 20px 0;
     height: 50px;
     font-size: $font-size-default-n;
-    color: $text-light;
+    color: $white-color;
     & input[type=text], input[type=password] {
       background: $container-bg-color;
-      caret-color: $text-light;
+      caret-color: $white-color;
       padding: 5px 0;
       height: 100%;
       width: 100%;
       border: 0;
       &:valid {
-        color: $text-gray;
+        color: $gray-color;
       }
       &:focus {
-        color: $text-light;
+        color: $white-color;
       }
     }
     & input[type=submit] {
       background: $btn-default-color;
-      color: $text-light;
+      color: $white-color;
       height: 100%;
       width: 100%;
       text-align: center;
@@ -56,18 +56,14 @@
         background: $btn-on-color;
       }
     }
-    & input[type=checkbox] {
-      margin: 0 5px;
-      border-radius: 0;
-    }
   }
   .icon-form {
-      color: $text-light;
-      background: $container-bg-color;
+    color: $white-color;
+    background: $container-bg-color;
     display: flex;
     justify-content: center;
     align-items: center;
-      height: 100%;
+    height: 100%;
     min-width: 50px;
     & i {
       opacity: 0.6;
@@ -77,10 +73,17 @@
 
 .input-focus-within {
   &:focus-within {
-    color: $text-light;
+    color: $white-color;
     @include input-box-shadow;
   }
   &:focus-within i {
     opacity: 1;
   }
+}
+
+.login-error-messages {
+  color: $danger-color;
+  font-size: $font-size-default-s;
+  height: 1.5rem;
+  text-align: center;
 }

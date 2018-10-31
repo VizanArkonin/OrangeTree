@@ -23,13 +23,13 @@ a {
 }
 
 input:-webkit-autofill {
-  -webkit-text-fill-color: $text-gray;
+  -webkit-text-fill-color: $gray-color;
   -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0.0) inset;
   transition: background-color 5000s ease-in-out 0s;
 }
 
 input:-webkit-autofill:focus {
-  -webkit-text-fill-color: $text-light;
+  -webkit-text-fill-color: $white-color;
   -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0.0) inset;
   transition: background-color 5000s ease-in-out 0s;
 }

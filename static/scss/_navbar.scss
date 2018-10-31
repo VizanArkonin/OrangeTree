@@ -31,7 +31,7 @@
     }
     .aside-element {
       & i, span {
-        color: $text-light;
+        color: $white-color;
         font-size: $font-size-default-n;
       }
     }
@@ -42,7 +42,7 @@
         opacity: 1;
       }
       &:active {
-        background: $btn-default-color-hover;
+        background: $btn-default-color;
         opacity: 1;
       }
     }
@@ -95,7 +95,7 @@
 
 .nav-element {
   & i, span {
-    color: $text-light;
+    color: $white-color;
     font-size: $font-size-default-l;
   }
   & a {

@@ -1,8 +1,6 @@
 // Variables for the section with navigation
 $aside-bg-color: rgba(0, 0, 0, 0.4);
 $aside-bg-color-hover: rgba(0, 0, 0, 0.3);
-$text-light: rgb(255, 255, 255);
-$text-gray: rgba(255, 255, 255, 0.6);
 
 // Variables for buttons and links
 $btn-default-color: rgba(222, 166, 64, 1);
@@ -35,6 +33,11 @@ $nav-gr-color-four: rgba(115, 86, 58, 1);
 
 //Color container styles
 $container-bg-color: rgba(0, 0, 0, 0.4);
+
+//General color scheme
+$white-color: rgb(255, 255, 255);
+$gray-color: rgba(255, 255, 255, 0.6);
+$danger-color: rgba(246, 73, 73, 1) !important;
 
 //Font sizes for the default page:
 //- Small (s);
