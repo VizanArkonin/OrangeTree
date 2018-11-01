@@ -38,10 +38,24 @@ class ClassBase(object):
         else:
             self._logger.warning(text)
 
-    def get_cipher(self, key=config.BOARD_SERVICE_CONFIG["crypto_key"],
-                   initialization_vector=config.BOARD_SERVICE_CONFIG["crypto_iv"]):
+    def get_cipher(self):
         """
-        Returns new AES cipher object, used to encrypt and decrypt given strings.
+        Creates and returns an instance of AESCipher class - wrapper for AES encryption processing.
+        :return: AESCipher class instance
+        """
+        return AESCipher()
+
+
+class AESCipher:
+    """
+    Operational wrapper for cipher - helps to wrap encrypt/decrypt calls with string data.
+    """
+    ENCODING = 'utf-8'
+
+    def __init__(self, key=config.BOARD_SERVICE_CONFIG["crypto_key"],
+                 initialization_vector=config.BOARD_SERVICE_CONFIG["crypto_iv"]):
+        """
+        Creates new AES cipher object, used to encrypt and decrypt given strings.
 
         :param key: String - Cipher Key. For current mode (CFB), it must be 16, 24 or 32 bytes (string characters) long
         (respectively for AES-128, AES-192 or AES-256)
@@ -49,4 +63,22 @@ class ClassBase(object):
         For current mode (CFB), it MUST be 16 bytes (string characters) long.
         :return: AES Cipher instance
         """
-        return AES.new(key, AES.MODE_CFB, initialization_vector)
+        self.cipher = AES.new(key.encode(), AES.MODE_CFB, initialization_vector.encode())
+
+    def encrypt(self, payload):
+        """
+        Encrypts the payload and returns resulted byte array
+
+        :param payload: String payload
+        :return: Encoded byte array
+        """
+        return self.cipher.encrypt(bytes(payload, encoding=self.ENCODING))
+
+    def decrypt(self, payload):
+        """
+        Decrypts byte array into string.
+
+        :param payload: Byte array payload
+        :return: String
+        """
+        return self.cipher.decrypt(payload).decode(self.ENCODING)

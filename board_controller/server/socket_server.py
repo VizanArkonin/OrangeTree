@@ -19,6 +19,7 @@ class SocketServer(SocketConnector):
     Serves as main gateway for incoming client transmissions, validating if they're allowed and generating respective
     client representation objects.
     """
+
     def __init__(self, host, port):
         super().__init__(host, port)
         self.clients = {}

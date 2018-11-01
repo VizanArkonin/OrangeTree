@@ -1,13 +1,14 @@
 from setuptools import setup, find_packages
 
 requires = [
+    "eventlet",
     "Flask",
     "Flask-Security",
     "SQLAlchemy",
     "Flask-SocketIO",
     "SQLAlchemy",
     "bcrypt",
-    "pycrypto"
+    "pycryptodome"
 ]
 
 setup(
