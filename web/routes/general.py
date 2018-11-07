@@ -37,3 +37,15 @@ def monitor():
     return render_template("general/gpio.html",
                            socket_url=WEB_SERVICE_CONFIG["host"],
                            socket_port=WEB_SERVICE_CONFIG["socket_port"])
+
+
+@web_service.route("/index", methods=["GET"])
+@login_required
+@roles_accepted("admin")
+@roles_accepted("user")
+def index():
+    """
+    Maps monitor path to a static index file
+    :return: Rendered template
+    """
+    return render_template("general/index.html")
