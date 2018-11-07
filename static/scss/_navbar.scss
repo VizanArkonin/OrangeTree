@@ -14,12 +14,12 @@
       flex-wrap: nowrap;
       flex-direction: column;
       & li {
-        min-height: 50px;
+        height: 50px;
       }
       & a {
         display: flex;
         align-items: center;
-        min-height: 50px;
+        height: 50px;
       }
       & img {
         height: 16px;
@@ -51,7 +51,6 @@
 
 .main-navigation {
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
   width: 80%;
 }
