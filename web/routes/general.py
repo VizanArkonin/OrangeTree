@@ -15,6 +15,7 @@ from web import web_service
 def on_user_logged_in(sender, user):
     """
     This function is fired after user have been successfully logged in.
+
     :param sender: Sender instance (Flask)
     :param user: User instance
     :return: None

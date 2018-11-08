@@ -6,7 +6,7 @@ Core configuration file
 DATABASE_CONFIG = {
     "connection_string": "sqlite:///database.db?check_same_thread=False",
     "autocommit": False,
-    "autoflush": False
+    "autoflush": True
 }
 
 # Flask (web-service) section

@@ -117,3 +117,29 @@ class SocketServer(SocketConnector):
         else:
             self.log("error", "Active client with ID '{0}' already registered. Rejecting connection".format(device_id))
             client.close()
+
+    def get_device_by_id(self, id):
+        """
+        Returns a DevicesList instance for device with given table ID (Or None, if this device is not in the list)
+
+        :param id: Row ID
+        :return: DevicesList instance (or None)
+        """
+        return next((device for device in self.allowed_devices if device.id == id), None)
+
+    def get_device_by_device_id(self, device_id):
+        """
+        Returns a DevicesList instance for device with given device ID (or None, if this device is not in the list)
+
+        :param device_id: Device ID
+        :return: DevicesList instance (or None)
+        """
+        return next((device for device in self.allowed_devices if device.device_id == device_id), None)
+
+    def update_allowed_devices(self):
+        """
+        Updates the list of allowed devices
+
+        :return: None
+        """
+        self.allowed_devices = DevicesList.query.all()
