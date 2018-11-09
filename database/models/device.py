@@ -18,21 +18,23 @@ class DevicesList(Base):
         Serializes non-sensual information about the device (i.e. excluding access key)
         :return: Dict with data
         """
-        return {"id": self.id,
-                "device_id": self.device_id,
-                "device_type": self.device_type
-                }
+        return {
+            "id": self.id,
+            "device_id": self.device_id,
+            "device_type": self.device_type
+            }
 
     def serialize_all(self):
         """
         Serializes all variables, providing full information about device.
         :return: Dict with data
         """
-        return {"id": self.id,
-                "device_id": self.device_id,
-                "device_type": self.device_type,
-                "device_access_key": self.device_access_key
-                }
+        return {
+            "id": self.id,
+            "device_id": self.device_id,
+            "device_type": self.device_type,
+            "device_access_key": self.device_access_key
+            }
 
 
 class DeviceTypes(Base):
