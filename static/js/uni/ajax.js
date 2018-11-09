@@ -13,11 +13,11 @@ const RequestMethod = {
  * Serializes provided object to JSON, sends it by given URL (relative to current domain)
  * and processes the response (if callback function is provided)
  *
- * @param url               - URL, relative to current domain
- * @param payload           - Object to serialize and pass
- * @param method            - Request method. Can be "GET" or "POST"
- * @param callback          - Callback function
- * @param failure_processor  - Function that will process the errors, should they occur
+ * @param url                   - URL, relative to current domain
+ * @param payload               - Object to serialize and pass
+ * @param method                - Request method. Can be "GET" or "POST"
+ * @param callback              - Callback function
+ * @param failure_processor     - Function that will process the errors, should they occur
  */
 function sendJSONRequest(url, payload, method = RequestMethod.GET,
                         callback = function(data) {}, failure_processor = function(jqXHR, statusText, errorThrown) {}) {
