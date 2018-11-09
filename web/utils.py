@@ -4,7 +4,7 @@ Web service utility functions and decorators
 import json
 from enum import Enum
 
-from flask import Response
+from flask import Response, request
 
 
 class MimeType(Enum):
@@ -47,3 +47,32 @@ def get_response(content, mimetype=MimeType.DEFAULT_MIMETYPE.value, status=Respo
 
     return Response(payload, mimetype=mimetype, status=status)
 
+
+def process_rest_request(function):
+    """
+    Decorator, used to cut down the amount of code for try-catch and general conditional branches.
+    Used in REST API routes to assert the JSON response status and properly process possible exceptions.
+
+    :return: Response object - from either target function OR from wrapper itself (in case of errors/exceptions).
+    """
+
+    def wrap_function(*args, **kwargs):
+        try:
+            payload = None
+            if request.json:
+                payload = request.json
+                return function(*args, **kwargs)
+            else:
+                payload["errors"] = ["No json content received"]
+                return get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                    status=ResponseStatus.NO_CONTENT.value)
+        except Exception as exception:
+            if payload:
+                payload["errors"] = [exception.args]
+                return get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                    status=ResponseStatus.INTERNAL_SERVER_ERROR.value)
+            else:
+                return get_response({"errors": [exception.args]}, mimetype=MimeType.JSON_MIMETYPE.value,
+                                    status=ResponseStatus.BAD_REQUEST.value)
+
+    return wrap_function

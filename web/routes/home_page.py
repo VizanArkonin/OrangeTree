@@ -13,7 +13,7 @@ from database.models.device import DevicesList
 from database.models.user import User
 from web import web_service, utils, user_datastore
 from board_controller.server import __server as server
-from web.utils import ResponseStatus, MimeType
+from web.utils import ResponseStatus, MimeType, process_rest_request
 
 
 @web_service.route("/home/getDevicesList", methods=["GET"])
@@ -54,6 +54,7 @@ def get_device_details(device_id):
         mimetype=MimeType.JSON_MIMETYPE.value)
 
 
+@process_rest_request   # Make sure this decorator goes before routing to prevent namespace_overwrite errors
 @web_service.route("/home/device.svc", methods=["POST"])
 @login_required
 @roles_accepted("admin")
@@ -72,41 +73,27 @@ def create_new_device():
 
     :return: JSON formatted response - request dict with additional List field named "errors".
     """
-    try:
-        payload = None
-        if request.json:
-            payload = request.json
-            payload["errors"] = []
-            device_id = payload["deviceData"]["device_id"]
-            if not server.get_device_by_device_id(device_id):
-                device = DevicesList()
-                device.device_id = device_id
-                device.device_type = payload["deviceData"]["device_type"]
-                device.device_access_key = payload["deviceData"]["device_access_key"]
-                db_session.add(device)
-                db_session.commit()
+    payload = request.json
+    payload["errors"] = []
+    device_id = payload["deviceData"]["device_id"]
+    if not server.get_device_by_device_id(device_id):
+        device = DevicesList()
+        device.device_id = device_id
+        device.device_type = payload["deviceData"]["device_type"]
+        device.device_access_key = payload["deviceData"]["device_access_key"]
+        db_session.add(device)
+        db_session.commit()
 
-                server.update_allowed_devices()
-                return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                          status=ResponseStatus.CREATED.value)
-            else:
-                payload["errors"] = ["Device with this ID already exists"]
-                return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                          status=ResponseStatus.CONFLICT.value)
-        else:
-            payload["errors"] = ["No json content received"]
-            return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                      status=ResponseStatus.NO_CONTENT.value)
-    except Exception as exception:
-        if payload:
-            payload["errors"] = [exception.args]
-            return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                      status=ResponseStatus.INTERNAL_SERVER_ERROR.value)
-        else:
-            return utils.get_response({"errors": [exception.args]}, mimetype=MimeType.JSON_MIMETYPE.value,
-                                      status=ResponseStatus.BAD_REQUEST.value)
+        server.update_allowed_devices()
+        return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                  status=ResponseStatus.CREATED.value)
+    else:
+        payload["errors"] = ["Device with this ID already exists"]
+        return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                  status=ResponseStatus.CONFLICT.value)
 
 
+@process_rest_request   # Make sure this decorator goes before routing to prevent namespace_overwrite errors
 @web_service.route("/home/device.svc", methods=["PUT"])
 @login_required
 @roles_accepted("admin")
@@ -126,39 +113,25 @@ def update_device_details():
 
     :return: JSON formatted response - request dict with additional List field named "errors".
     """
-    try:
-        payload = None
-        if request.json:
-            payload = request.json
-            payload["errors"] = []
-            device = DevicesList.query.get(int(payload["deviceData"]["id"]))
-            if device:
-                device.device_id = payload["deviceData"]["device_id"]
-                device.device_type = payload["deviceData"]["device_type"]
-                device.device_access_key = payload["deviceData"]["device_access_key"]
-                db_session.commit()
+    payload = request.json
+    payload["errors"] = []
+    device = DevicesList.query.get(int(payload["deviceData"]["id"]))
+    if device:
+        device.device_id = payload["deviceData"]["device_id"]
+        device.device_type = payload["deviceData"]["device_type"]
+        device.device_access_key = payload["deviceData"]["device_access_key"]
+        db_session.commit()
 
-                server.update_allowed_devices()
-                return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                          status=ResponseStatus.OK.value)
-            else:
-                payload["errors"].append("Device with specified ID doesn't exist")
-                return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                          status=ResponseStatus.CONFLICT.value)
-        else:
-            payload["errors"] = ["No json content received"]
-            return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                      status=ResponseStatus.NO_CONTENT.value)
-    except Exception as exception:
-        if payload:
-            payload["errors"] = [exception.args]
-            return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                      status=ResponseStatus.INTERNAL_SERVER_ERROR.value)
-        else:
-            return utils.get_response({"errors": [exception.args]}, mimetype=MimeType.JSON_MIMETYPE.value,
-                                      status=ResponseStatus.BAD_REQUEST.value)
+        server.update_allowed_devices()
+        return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                  status=ResponseStatus.OK.value)
+    else:
+        payload["errors"].append("Device with specified ID doesn't exist")
+        return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                  status=ResponseStatus.CONFLICT.value)
 
 
+@process_rest_request   # Make sure this decorator goes before routing to prevent namespace_overwrite errors
 @web_service.route("/home/device.svc", methods=["DELETE"])
 @login_required
 @roles_accepted("admin")
@@ -177,35 +150,20 @@ def delete_device():
 
     :return: JSON formatted response - request dict with additional List field named "errors".
     """
-    try:
-        payload = None
-        if request.json:
-            payload = request.json
-            payload["errors"] = []
-            device_id = payload["deviceData"]["device_id"]
-            if server.get_device_by_device_id(device_id):
-                DevicesList.query.filter(DevicesList.device_id == device_id).delete()
-                db_session.commit()
+    payload = request.json
+    payload["errors"] = []
+    device_id = payload["deviceData"]["device_id"]
+    if server.get_device_by_device_id(device_id):
+        DevicesList.query.filter(DevicesList.device_id == device_id).delete()
+        db_session.commit()
 
-                server.update_allowed_devices()
-                return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                          status=ResponseStatus.OK.value)
-            else:
-                payload["errors"] = ["Device with this ID doesn't exist."]
-                return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                          status=ResponseStatus.NOT_FOUND.value)
-        else:
-            payload["errors"] = ["No json content received"]
-            return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                      status=ResponseStatus.NO_CONTENT.value)
-    except Exception as exception:
-        if payload:
-            payload["errors"] = [exception.args]
-            return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                      status=ResponseStatus.INTERNAL_SERVER_ERROR.value)
-        else:
-            return utils.get_response({"errors": [exception.args]}, mimetype=MimeType.JSON_MIMETYPE.value,
-                                      status=ResponseStatus.BAD_REQUEST.value)
+        server.update_allowed_devices()
+        return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                  status=ResponseStatus.OK.value)
+    else:
+        payload["errors"] = ["Device with this ID doesn't exist."]
+        return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                  status=ResponseStatus.NOT_FOUND.value)
 
 
 @web_service.route("/home/getUsersList", methods=["GET"])
@@ -237,6 +195,7 @@ def get_user_details(user_id):
         mimetype=MimeType.JSON_MIMETYPE.value)
 
 
+@process_rest_request   # Make sure this decorator goes before routing to prevent namespace_overwrite errors
 @web_service.route("/home/user.svc", methods=["POST"])
 @login_required
 @roles_accepted("admin")
@@ -261,48 +220,34 @@ def create_user():
 
     :return: JSON formatted response - request dict with additional List field named "errors".
     """
-    try:
-        payload = None
-        if request.json:
-            payload = request.json
-            payload["errors"] = []
-            user_email = payload["userData"]["email"]
-            user = User.query.filter(User.email == user_email).first()
-            if not user:
-                roles_to_add = []
-                for role_requested in payload["userData"]["roles"]:
-                    role_name = role_requested["role_name"]
-                    db_role_instance = user_datastore.find_role(role_name)
-                    if db_role_instance:
-                        roles_to_add.append(role_name)
-                user = user_datastore.create_user(email=user_email,
-                                                  password=hash_password(payload["userData"]["password"]),
-                                                  roles=roles_to_add)
-                user.first_name = payload["userData"]["first_name"]
-                user.last_name = payload["userData"]["last_name"]
-                user.active = bool(payload["userData"]["active"])
-                db_session.commit()
+    payload = request.json
+    payload["errors"] = []
+    user_email = payload["userData"]["email"]
+    user = User.query.filter(User.email == user_email).first()
+    if not user:
+        roles_to_add = []
+        for role_requested in payload["userData"]["roles"]:
+            role_name = role_requested["role_name"]
+            db_role_instance = user_datastore.find_role(role_name)
+            if db_role_instance:
+                roles_to_add.append(role_name)
+        user = user_datastore.create_user(email=user_email,
+                                          password=hash_password(payload["userData"]["password"]),
+                                          roles=roles_to_add)
+        user.first_name = payload["userData"]["first_name"]
+        user.last_name = payload["userData"]["last_name"]
+        user.active = bool(payload["userData"]["active"])
+        db_session.commit()
 
-                return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                          status=ResponseStatus.CREATED.value)
-            else:
-                payload["errors"] = ["User with this email already exists"]
-                return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                          status=ResponseStatus.CONFLICT.value)
-        else:
-            payload["errors"] = ["No json content received"]
-            return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                      status=ResponseStatus.NO_CONTENT.value)
-    except Exception as exception:
-        if payload:
-            payload["errors"] = [exception.args]
-            return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                      status=ResponseStatus.INTERNAL_SERVER_ERROR.value)
-        else:
-            return utils.get_response({"errors": [exception.args]}, mimetype=MimeType.JSON_MIMETYPE.value,
-                                      status=ResponseStatus.BAD_REQUEST.value)
+        return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                  status=ResponseStatus.CREATED.value)
+    else:
+        payload["errors"] = ["User with this email already exists"]
+        return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                  status=ResponseStatus.CONFLICT.value)
 
 
+@process_rest_request   # Make sure this decorator goes before routing to prevent namespace_overwrite errors
 @web_service.route("/home/user.svc", methods=["PUT"])
 @login_required
 @roles_accepted("admin")
@@ -328,53 +273,39 @@ def update_user():
 
     :return: JSON formatted response - request dict with additional List field named "errors".
     """
-    try:
-        payload = None
-        if request.json:
-            payload = request.json
-            payload["errors"] = []
-            user = User.query.get(int(payload["userData"]["id"]))
-            if user:
-                requested_roles = [role["role_name"] for role in payload["userData"]["roles"]]
-                existing_roles = [role.name for role in user.roles]
-                if not requested_roles == existing_roles:
-                    for existing_role in existing_roles:
-                        user_datastore.remove_role_from_user(user.email, existing_role)
+    payload = request.json
+    payload["errors"] = []
+    user = User.query.get(int(payload["userData"]["id"]))
+    if user:
+        requested_roles = [role["role_name"] for role in payload["userData"]["roles"]]
+        existing_roles = [role.name for role in user.roles]
+        if not requested_roles == existing_roles:
+            for existing_role in existing_roles:
+                user_datastore.remove_role_from_user(user.email, existing_role)
 
-                    for requested_role in requested_roles:
-                        user_datastore.add_role_to_user(user.email, requested_role)
+            for requested_role in requested_roles:
+                user_datastore.add_role_to_user(user.email, requested_role)
 
-                requested_password = payload["userData"]["password"]
-                if requested_password:
-                    user.password = hash_password(requested_password)
+        requested_password = payload["userData"]["password"]
+        if requested_password:
+            user.password = hash_password(requested_password)
 
-                user.email = payload["userData"]["email"]
-                user.first_name = payload["userData"]["first_name"]
-                user.last_name = payload["userData"]["last_name"]
-                user.active = bool(payload["userData"]["active"])
+        user.email = payload["userData"]["email"]
+        user.first_name = payload["userData"]["first_name"]
+        user.last_name = payload["userData"]["last_name"]
+        user.active = bool(payload["userData"]["active"])
 
-                db_session.commit()
+        db_session.commit()
 
-                return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                          status=ResponseStatus.OK.value)
-            else:
-                payload["errors"] = ["User with this email doesn't exist"]
-                return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                          status=ResponseStatus.CONFLICT.value)
-        else:
-            payload["errors"] = ["No json content received"]
-            return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                      status=ResponseStatus.NO_CONTENT.value)
-    except Exception as exception:
-        if payload:
-            payload["errors"] = [exception.args]
-            return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                      status=ResponseStatus.INTERNAL_SERVER_ERROR.value)
-        else:
-            return utils.get_response({"errors": [exception.args]}, mimetype=MimeType.JSON_MIMETYPE.value,
-                                      status=ResponseStatus.BAD_REQUEST.value)
+        return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                  status=ResponseStatus.OK.value)
+    else:
+        payload["errors"] = ["User with this email doesn't exist"]
+        return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                  status=ResponseStatus.CONFLICT.value)
 
 
+@process_rest_request   # Make sure this decorator goes before routing to prevent namespace_overwrite errors
 @web_service.route("/home/user.svc", methods=["DELETE"])
 @login_required
 @roles_accepted("admin")
@@ -393,33 +324,18 @@ def delete_user():
 
     :return: JSON formatted response - request dict with additional List field named "errors".
     """
-    try:
-        payload = None
-        if request.json:
-            payload = request.json
-            payload["errors"] = []
-            user_email = payload["userData"]["email"]
-            user = User.query.filter(User.email == user_email).first()
-            if user:
-                user_datastore.delete_user(user)
+    payload = request.json
+    payload["errors"] = []
+    user_email = payload["userData"]["email"]
+    user = User.query.filter(User.email == user_email).first()
+    if user:
+        user_datastore.delete_user(user)
 
-                db_session.commit()
+        db_session.commit()
 
-                return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                          status=ResponseStatus.OK.value)
-            else:
-                payload["errors"] = ["User with this email doesn't exist"]
-                return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                          status=ResponseStatus.CONFLICT.value)
-        else:
-            payload["errors"] = ["No json content received"]
-            return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                      status=ResponseStatus.NO_CONTENT.value)
-    except Exception as exception:
-        if payload:
-            payload["errors"] = [exception.args]
-            return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                      status=ResponseStatus.INTERNAL_SERVER_ERROR.value)
-        else:
-            return utils.get_response({"errors": [exception.args]}, mimetype=MimeType.JSON_MIMETYPE.value,
-                                      status=ResponseStatus.BAD_REQUEST.value)
+        return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                  status=ResponseStatus.OK.value)
+    else:
+        payload["errors"] = ["User with this email doesn't exist"]
+        return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                  status=ResponseStatus.CONFLICT.value)
