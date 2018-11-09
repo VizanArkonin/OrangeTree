@@ -11,6 +11,7 @@ from database import db_session
 from database.models.device import DevicesList
 from web import web_service, utils
 from board_controller.server import __server as server
+from web.utils import ResponseStatus, MimeType
 
 
 @web_service.route("/home/getDevicesList", methods=["GET"])
@@ -22,9 +23,17 @@ def getDevicesList():
 
     :return: JSON formatted response
     """
-    return utils.get_response(
-        json.dumps({"devices": [item.serialize_general_data() for item in server.allowed_devices]}),
-        "text/json")
+    payload = {"devices": []}
+    for device in server.allowed_devices:
+        device_data = device.serialize_general_data()
+        if server.get_client_by_id(device.device_id):
+            device_data["online"] = True
+        else:
+            device_data["online"] = False
+
+        payload["devices"].append(device_data)
+
+    return utils.get_response(json.dumps(payload), mimetype=MimeType.JSON_MIMETYPE.value)
 
 
 @web_service.route("/home/getDeviceDetails/<int:device_id>", methods=["GET"])
@@ -40,53 +49,10 @@ def getDeviceDetails(device_id):
     device = server.get_device_by_id(device_id)
     return utils.get_response(
         json.dumps({"deviceData": device.serialize_all() if device else {}}),
-        "text/json")
+        mimetype=MimeType.JSON_MIMETYPE.value)
 
 
-@web_service.route("/home/setDeviceDetails", methods=["POST"])
-@login_required
-@roles_accepted("user", "admin")
-def updateDeviceDetails():
-    """
-    Updates the device definition with provided set of data.
-    Request payload should have following format:
-
-    {"deviceData":
-        {
-        "id": ID,
-        "device_id": "Device ID",
-        "device_type": Device Type ID,
-        "device_access_key": "Access Key"
-        }
-    }
-
-    :return: JSON formatted response - request dict with additional List field named "errors".
-    """
-    try:
-        payload = None
-        if request.json:
-            payload = request.json
-            device = DevicesList.query.get(int(payload["deviceData"]["id"]))
-            device.device_id = payload["deviceData"]["device_id"]
-            device.device_type = payload["deviceData"]["device_type"]
-            device.device_access_key = payload["deviceData"]["device_access_key"]
-            db_session.commit()
-
-            server.update_allowed_devices()
-            payload["errors"] = []
-            return utils.get_response(payload, "text/json")
-        else:
-            payload["errors"] = ["No json content received"]
-            return utils.get_response(payload, "text/json")
-    except Exception as exception:
-        if payload:
-            payload["errors"] = [exception.args]
-            return utils.get_response(payload, "text/json")
-        else:
-            return utils.get_response({"errors": [exception.args]}, "text/json")
-
-
-@web_service.route("/home/createDevice", methods=["POST"])
+@web_service.route("/home/device.svc", methods=["POST"])
 @login_required
 @roles_accepted("user", "admin")
 def createNewDevice():
@@ -119,22 +85,74 @@ def createNewDevice():
 
                 server.update_allowed_devices()
                 payload["errors"] = []
-                return utils.get_response(payload, "text/json")
+                return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                          status=ResponseStatus.CREATED.value)
             else:
                 payload["errors"] = ["Device with this ID already exists"]
-                return utils.get_response(payload, "text/json")
+                return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                          status=ResponseStatus.CONFLICT.value)
         else:
             payload["errors"] = ["No json content received"]
-            return utils.get_response(payload, "text/json")
+            return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                      status=ResponseStatus.NO_CONTENT.value)
     except Exception as exception:
         if payload:
             payload["errors"] = [exception.args]
-            return utils.get_response(payload, "text/json")
+            return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                      status=ResponseStatus.INTERNAL_SERVER_ERROR.value)
         else:
-            return utils.get_response({"errors": [exception.args]}, "text/json")
+            return utils.get_response({"errors": [exception.args]}, mimetype=MimeType.JSON_MIMETYPE.value,
+                                      status=ResponseStatus.BAD_REQUEST.value)
 
 
-@web_service.route("/home/deleteDevice", methods=["POST"])
+@web_service.route("/home/device.svc", methods=["PUT"])
+@login_required
+@roles_accepted("user", "admin")
+def updateDeviceDetails():
+    """
+    Updates the device definition with provided set of data.
+    Request payload should have following format:
+
+    {"deviceData":
+        {
+        "id": ID,
+        "device_id": "Device ID",
+        "device_type": Device Type ID,
+        "device_access_key": "Access Key"
+        }
+    }
+
+    :return: JSON formatted response - request dict with additional List field named "errors".
+    """
+    try:
+        payload = None
+        if request.json:
+            payload = request.json
+            device = DevicesList.query.get(int(payload["deviceData"]["id"]))
+            device.device_id = payload["deviceData"]["device_id"]
+            device.device_type = payload["deviceData"]["device_type"]
+            device.device_access_key = payload["deviceData"]["device_access_key"]
+            db_session.commit()
+
+            server.update_allowed_devices()
+            payload["errors"] = []
+            return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                      status=ResponseStatus.OK.value)
+        else:
+            payload["errors"] = ["No json content received"]
+            return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                      status=ResponseStatus.NO_CONTENT.value)
+    except Exception as exception:
+        if payload:
+            payload["errors"] = [exception.args]
+            return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                      status=ResponseStatus.INTERNAL_SERVER_ERROR.value)
+        else:
+            return utils.get_response({"errors": [exception.args]}, mimetype=MimeType.JSON_MIMETYPE.value,
+                                      status=ResponseStatus.BAD_REQUEST.value)
+
+
+@web_service.route("/home/device.svc", methods=["DELETE"])
 @login_required
 @roles_accepted("user", "admin")
 def deleteDevice():
@@ -163,16 +181,21 @@ def deleteDevice():
 
                 server.update_allowed_devices()
                 payload["errors"] = []
-                return utils.get_response(payload, "text/json")
+                return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                          status=ResponseStatus.OK.value)
             else:
                 payload["errors"] = ["Device with this ID doesn't exist."]
-                return utils.get_response(payload, "text/json")
+                return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                          status=ResponseStatus.NOT_FOUND.value)
         else:
             payload["errors"] = ["No json content received"]
-            return utils.get_response(payload, "text/json")
+            return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                      status=ResponseStatus.NO_CONTENT.value)
     except Exception as exception:
         if payload:
             payload["errors"] = [exception.args]
-            return utils.get_response(payload, "text/json")
+            return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
+                                      status=ResponseStatus.INTERNAL_SERVER_ERROR.value)
         else:
-            return utils.get_response({"errors": [exception.args]}, "text/json")
+            return utils.get_response({"errors": [exception.args]}, mimetype=MimeType.JSON_MIMETYPE.value,
+                                      status=ResponseStatus.BAD_REQUEST.value)
