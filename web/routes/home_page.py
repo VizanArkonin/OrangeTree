@@ -300,7 +300,7 @@ def update_user():
         return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
                                   status=ResponseStatus.OK.value)
     else:
-        payload["errors"] = ["User with this email doesn't exist"]
+        payload["errors"] = ["User with this ID doesn't exist"]
         return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
                                   status=ResponseStatus.CONFLICT.value)
 
