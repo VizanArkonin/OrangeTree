@@ -37,7 +37,7 @@ function sendJSONRequest(url, payload, method = RequestMethod.GET,
 
 /**
  * Debug callback for sendJSONRequest function. Prints response and analyzes it for having
- * @param data
+ * @param data  -   JSON object
  */
 function debug_callback(data) {
     console.log(data);
@@ -53,9 +53,9 @@ function debug_callback(data) {
 
 /**
  * Standard debug error processor, used in sendJSONRequest function.
- * @param jxXHR
- * @param statusText
- * @param errorThrown
+ * @param jxXHR         - jxXHR context
+ * @param statusText    - Status string
+ * @param errorThrown   - Error
  */
 function process_failures(jxXHR, statusText, errorThrown) {
     console.log(statusText);
