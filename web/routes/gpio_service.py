@@ -8,6 +8,7 @@ from flask_security import login_required, roles_required, roles_accepted
 import config
 from board_controller.server import server_interface
 from web import web_service, utils
+from web.utils import MimeType
 
 # Until Home page and device selection is available, we hard-code it to a single configured client
 BOARD_ID = config.CLIENT_CONFIG["device_id"]
@@ -24,7 +25,7 @@ def get_all_pins_status():
 
     return utils.get_response(
         json.dumps(server_interface.get_board_status(BOARD_ID)),
-        "text/json")
+        mimetype=MimeType.JSON_MIMETYPE.value)
 
 
 @web_service.route("/gpio/status/<int:pin_id>", methods=["GET"])
@@ -39,5 +40,5 @@ def get_pin_status(pin_id):
     """
     return utils.get_response(
         json.dumps(gpio_controller.get_pin_status(pin_id)),
-        "text/json")
+        mimetype=MimeType.JSON_MIMETYPE.value)
     """

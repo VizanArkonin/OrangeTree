@@ -34,3 +34,11 @@ def get_formatter():
     :return: Format String
     """
     return "%(asctime)s; %(levelname)s; %(message)s"
+
+
+def get_time_formatter():
+    """
+    Datetime-to-string conversion format provider
+    :return: Format String
+    """
+    return "%Y-%m-%d %H:%M:%S"
