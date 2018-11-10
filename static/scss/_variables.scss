@@ -31,18 +31,24 @@ $nav-gr-color-two: rgba(65, 49, 54, 1);
 $nav-gr-color-three: rgba(88, 65, 55, 1);
 $nav-gr-color-four: rgba(115, 86, 58, 1);
 
-//Color container styles
-$container-bg-color: rgba(0, 0, 0, 0.4);
-
 //General color scheme
-$white-color: rgb(255, 255, 255);
-$gray-color: rgba(255, 255, 255, 0.6);
 $danger-color: rgba(246, 73, 73, 1) !important;
+$white-color: rgb(255, 255, 255);
+$white-color-900: rgba(255, 255, 255, 0.9);
+$white-color-600: rgba(255, 255, 255, 0.6);
+$white-color-400: rgba(255, 255, 255, 0.4);
+$dark-color: rgba(0, 0, 0, 1);
+$dark-color-700: rgba(0, 0, 0, 0.7);
+$dark-color-400: rgba(0, 0, 0, 0.4);
 
-//Font sizes for the default page:
-//- Small (s);
-//- Normal (n);
-//- Large (l)
+
+
+
+//* Font sizes for the default page:
+//* Small (s);
+//* Normal (n);
+//* Large (l)
+
 $font-size-default-s: 1.3rem;
 $font-size-default-n: 1.5rem;
 $font-size-default-l: 1.8rem;

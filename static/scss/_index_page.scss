@@ -1,0 +1,112 @@
+//Styles for index page
+
+.table-main-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 5px 5%;
+  font-size: $font-size-default-n;
+}
+
+.tab-header {
+  display: flex;
+  width: 100%;
+  .tab-link {
+    background: $dark-color-400;
+    color: $white-color;
+    border: 0;
+    height: 50px;
+    width: 50%;
+  }
+}
+
+.tab-content {
+  background: $dark-color-400;
+  height: 480px;
+  width: 100%;
+  padding: 15px;
+  .table-container {
+    height: 100%;
+    width: 100%;
+    & th,td {
+      text-align: center;
+      vertical-align: middle;
+    }
+    & td {
+      pointer-events: auto;
+      cursor: pointer;
+    }
+    & tr {
+      background: $white-color-900;
+    }
+    & tr:nth-child(odd) {
+      background: $white-color-600;
+    }
+    & tr:first-child {
+      background: $dark-color-700;
+      color: $white-color;
+    }
+  }
+}
+
+.tab-footer {
+  background: $dark-color-700;
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  width: 100%;
+  .tab-footer-left {
+    display: flex;
+    height: 100%;
+    width: 60%;
+    & button {
+      background: $btn-default-color;
+      color: $white-color;
+      margin: 5px 0 5px 5px;
+      border: 0;
+      width: 100%;
+      @include transition-duration;
+      &:hover {
+        background: $btn-default-color-hover;
+      }
+      &:active {
+        background: $btn-on-color;
+      }
+    }
+  }
+  .tab-footer-right {
+    display: flex;
+    width: 15%;
+    height: 100%;
+    & button {
+      background: $btn-default-color;
+      color: $white-color;
+      margin: 5px 5px 5px 0;
+      border: 0;
+      width: 100%;
+      @include transition-duration;
+      &:hover {
+        background: $btn-default-color-hover;
+      }
+      &:active {
+        background: $btn-on-color;
+      }
+    }
+    & span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $white-color;
+      margin: 5px 5px 5px 0;
+      width: 100%;
+    }
+  }
+}
+
+.users {
+  //display: none;
+}
+
+.devices {
+  display: none;
+}

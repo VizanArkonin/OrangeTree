@@ -1,13 +1,13 @@
 //Styles for common buttons, checkboxes, radio buttons. In addition to links, and specific components.
 
 .checkbox-container {
-  color: $gray-color;
+  color: $white-color-600;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
   .checkbox {
-    background: $gray-color;
+    background: $white-color-600;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;

@@ -1,7 +1,7 @@
 //Styles for the login form page
 
 .login-form-container {
-  background: $container-bg-color;
+  background: $dark-color-400;
   display: flex;
   flex-direction: column;
   width: 350px;
@@ -9,7 +9,7 @@
 }
 
 .login-header {
-  background: $container-bg-color;
+  background: $dark-color-400;
   color: $white-color;
   font-size: 5rem;
   width: 100%;
@@ -28,14 +28,14 @@
     font-size: $font-size-default-n;
     color: $white-color;
     & input[type=text], input[type=password] {
-      background: $container-bg-color;
+      background: $dark-color-400;
       caret-color: $white-color;
       padding: 5px 0;
       height: 100%;
       width: 100%;
       border: 0;
       &:valid {
-        color: $gray-color;
+        color: $white-color-600;
       }
       &:focus {
         color: $white-color;
@@ -59,7 +59,7 @@
   }
   .icon-form {
     color: $white-color;
-    background: $container-bg-color;
+    background: $dark-color-400;
     display: flex;
     justify-content: center;
     align-items: center;

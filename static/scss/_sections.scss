@@ -15,6 +15,14 @@
   margin-top: 50px;
 }
 
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0;
+}
+
 .head-info {
   color: $white-color;
   font-size: $font-size-default-l;

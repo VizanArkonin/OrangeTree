@@ -1,21 +1,14 @@
 //Main styles for the page "Pin configuration"
 
-.flex-container {
+.pin-container {
+  background: $pin-bg-color;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin: 15px 0;
-  .pin-container {
-    background: $pin-bg-color;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 2.2rem;
-    flex-basis: 40%;
-    margin: 5px 5%;
-    font-size: $font-size-default-s;
-  }
+  height: 2.2rem;
+  flex-basis: 40%;
+  margin: 5px 5%;
+  font-size: $font-size-default-s;
 }
 
 .icon-gpio i {
