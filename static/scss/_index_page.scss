@@ -12,7 +12,6 @@
   display: flex;
   width: 100%;
   .tab-link {
-    background: $dark-color-400;
     color: $white-color;
     border: 0;
     height: 50px;
@@ -103,10 +102,15 @@
   }
 }
 
+//Classes to support java script functionality
 .users {
-  //display: none;
+  display: none;
 }
 
-.devices {
-  display: none;
+.tab-link-devices {
+  background: $dark-color-400;
+}
+
+.tab-link-users {
+  background: $dark-color-700;
 }

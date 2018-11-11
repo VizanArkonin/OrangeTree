@@ -323,7 +323,6 @@ input:-webkit-autofill:focus {
   display: flex;
   width: 100%; }
   .tab-header .tab-link {
-    background: rgba(0, 0, 0, 0.4);
     color: white;
     border: 0;
     height: 50px;
@@ -399,7 +398,13 @@ input:-webkit-autofill:focus {
       margin: 5px 5px 5px 0;
       width: 100%; }
 
-.devices {
+.users {
   display: none; }
+
+.tab-link-devices {
+  background: rgba(0, 0, 0, 0.4); }
+
+.tab-link-users {
+  background: rgba(0, 0, 0, 0.7); }
 
 /*# sourceMappingURL=main.css.map */
