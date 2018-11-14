@@ -1,6 +1,7 @@
 //Compiling all scss files into a common main.css file
 @import "_variables";
 @import "_mixins";
+@import "_media";
 @import "_utilities";
 @import "_global";
 @import "_login_form";

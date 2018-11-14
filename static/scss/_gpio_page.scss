@@ -1,7 +1,7 @@
 //Main styles for the page "Pin configuration"
 
 .pin-container {
-  background: $pin-bg-color;
+  background: $white-color-900;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,7 +12,7 @@
 }
 
 .icon-gpio i {
-  color: $gpio-icon-color;
+  color: $dark-color-300;
   flex: 1 1 10%;
   text-align: center;
 }
@@ -46,12 +46,12 @@
 }
 
 .pin-power {
-  background: $power-color;
+  background: $btn-default-color;
   color: $white-color;
 }
 
 .pin-gnd {
-  background: $ground-color;
+  background: $dark-color-400;
   color: $white-color;
 }
 

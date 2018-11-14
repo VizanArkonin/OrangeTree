@@ -1,7 +1,7 @@
 //Styling the navigation bar and sidebar
 
 .aside {
-  background-color: $aside-bg-color;
+  background-color: $dark-color-400;
   display: flex;
   min-height: 100vh;
   overflow-y: hidden;
@@ -38,7 +38,7 @@
     .aside-hover {
       opacity: 0.7;
       &:hover {
-        background: $aside-bg-color-hover;
+        background: $dark-color-300;
         opacity: 1;
       }
       &:active {
@@ -110,7 +110,7 @@
 }
 
 #logo {
-  background-color: $aside-bg-color;
+  background-color: $dark-color-400;
   & span {
     width: 100%;
     text-align: center;
