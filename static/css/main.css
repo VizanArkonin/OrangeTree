@@ -1,59 +1,417 @@
-/*
-Error: File to import not found or unreadable: _media.
-        on line 4 of main.scss
+@charset "UTF-8";
+*, :before, :after {
+  box-sizing: border-box; }
 
-1: //Compiling all scss files into a common main.css file
-2: @import "_variables";
-3: @import "_mixins";
-4: @import "_media";
-5: @import "_utilities";
-6: @import "_global";
-7: @import "_login_form";
-8: @import "_buttons";
-9: @import "_navbar";
+:root {
+  font-size: 10px; }
 
-Backtrace:
-main.scss:4
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/tree/import_node.rb:67:in `rescue in import'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/tree/import_node.rb:44:in `import'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/tree/import_node.rb:28:in `imported_file'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/tree/import_node.rb:37:in `css_import?'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:310:in `visit_import'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/tree/visitors/base.rb:36:in `visit'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/stack.rb:79:in `block in with_base'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/stack.rb:135:in `with_frame'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/stack.rb:79:in `with_base'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:158:in `visit'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/tree/visitors/base.rb:52:in `map'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/tree/visitors/base.rb:52:in `visit_children'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/tree/visitors/base.rb:36:in `block in visit'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/tree/visitors/base.rb:36:in `visit'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:157:in `visit'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:10:in `visit'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/tree/root_node.rb:36:in `css_tree'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/engine.rb:389:in `_render_with_sourcemap'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/engine.rb:307:in `render_with_sourcemap'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/plugin/compiler.rb:462:in `update_stylesheet'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/plugin/compiler.rb:209:in `each'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/plugin.rb:82:in `update_stylesheets'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/exec/sass_scss.rb:338:in `watch_or_update'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/exec/sass_scss.rb:51:in `process_result'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/exec/base.rb:50:in `parse'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/lib/sass/exec/base.rb:18:in `parse!'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.7/bin/scss:13:in `<top (required)>'
-C:/Ruby24-x64/bin/scss:23:in `load'
-C:/Ruby24-x64/bin/scss:23:in `<main>'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: File to import not found or unreadable: _media.\A         on line 4 of main.scss\A \A 1: //Compiling all scss files into a common main.css file\A 2: @import \"_variables\";\A 3: @import \"_mixins\";\A 4: @import \"_media\";\A 5: @import \"_utilities\";\A 6: @import \"_global\";\A 7: @import \"_login_form\";\A 8: @import \"_buttons\";\A 9: @import \"_navbar\";"; }
+body, input, button {
+  font-family: 'Sarpanch', sans-serif; }
+
+body {
+  height: 100%;
+  display: flex;
+  /* fallback for old browsers */
+  background: #d2a065;
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(135deg, #584b5d, #72555a, #d2a065, #9c8679);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(135deg, #584b5d, #72555a, #d2a065, #9c8679); }
+
+a {
+  text-decoration: none; }
+
+input:-webkit-autofill {
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.6);
+  -webkit-box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0) inset;
+  transition: background-color 5000s ease-in-out 0s; }
+
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0) inset;
+  transition: background-color 5000s ease-in-out 0s; }
+
+.login-form-container {
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  margin: 10px; }
+
+.login-header {
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  font-size: 5rem;
+  width: 100%;
+  padding: 25px 15px;
+  text-align: center; }
+
+.login-form {
+  padding: 20px; }
+  .login-form .input-container, .login-form .input-focus-within {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    height: 50px;
+    font-size: 1.5rem;
+    color: white; }
+    .login-form .input-container input[type=text], .login-form .input-container input[type=password], .login-form .input-focus-within input[type=text], .login-form .input-focus-within input[type=password] {
+      background: rgba(0, 0, 0, 0.4);
+      caret-color: white;
+      padding: 5px 0;
+      height: 100%;
+      width: 100%;
+      border: 0; }
+      .login-form .input-container input[type=text]:valid, .login-form .input-container input[type=password]:valid, .login-form .input-focus-within input[type=text]:valid, .login-form .input-focus-within input[type=password]:valid {
+        color: rgba(255, 255, 255, 0.6); }
+      .login-form .input-container input[type=text]:focus, .login-form .input-container input[type=password]:focus, .login-form .input-focus-within input[type=text]:focus, .login-form .input-focus-within input[type=password]:focus {
+        color: white; }
+    .login-form .input-container input[type=submit], .login-form .input-focus-within input[type=submit] {
+      background: #dea640;
+      color: white;
+      height: 100%;
+      width: 100%;
+      text-align: center;
+      border: 0;
+      -webkit-transition-duration: 0.3s;
+      /* Safari */
+      transition-duration: 0.3s; }
+      .login-form .input-container input[type=submit]:hover, .login-form .input-focus-within input[type=submit]:hover {
+        background: #f1a213; }
+      .login-form .input-container input[type=submit]:active, .login-form .input-focus-within input[type=submit]:active {
+        background: #64c1bb; }
+  .login-form .icon-form {
+    color: white;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    min-width: 50px; }
+    .login-form .icon-form i {
+      opacity: 0.6; }
+
+.input-focus-within:focus-within {
+  color: white;
+  -webkit-box-shadow: 0px 0px 5px 2px #dea640;
+  -moz-box-shadow: 0px 0px 5px 2px #dea640;
+  box-shadow: 0px 0px 5px 2px #dea640; }
+.input-focus-within:focus-within i {
+  opacity: 1; }
+
+.login-error-messages {
+  color: #f64949 !important;
+  font-size: 1.3rem;
+  height: 1.5rem;
+  text-align: center; }
+
+.checkbox-container {
+  color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; }
+  .checkbox-container .checkbox {
+    background: rgba(255, 255, 255, 0.6);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    height: 15px;
+    width: 15px;
+    margin-right: 10px;
+    cursor: pointer;
+    z-index: 1; }
+    .checkbox-container .checkbox:hover {
+      background: white; }
+    .checkbox-container .checkbox:checked {
+      background: #dea640; }
+    .checkbox-container .checkbox:checked::before {
+      font-size: 1.3rem;
+      color: white;
+      content: '✔';
+      text-align: center;
+      height: 15px;
+      width: 15px;
+      display: inline-block;
+      position: relative;
+      bottom: 4px; }
+
+.aside {
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  min-height: 100vh;
+  overflow-y: hidden; }
+  .aside .aside-nav {
+    position: fixed; }
+    .aside .aside-nav .aside-nav-box {
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: column; }
+      .aside .aside-nav .aside-nav-box li {
+        height: 50px; }
+      .aside .aside-nav .aside-nav-box a {
+        display: flex;
+        align-items: center;
+        height: 50px; }
+      .aside .aside-nav .aside-nav-box img {
+        height: 16px;
+        padding: 0 15px; }
+      .aside .aside-nav .aside-nav-box i {
+        padding: 0 15px; }
+    .aside .aside-nav .aside-element i, .aside .aside-nav .aside-element span {
+      color: white;
+      font-size: 1.5rem; }
+    .aside .aside-nav .aside-hover {
+      opacity: 0.7; }
+      .aside .aside-nav .aside-hover:hover {
+        background: rgba(0, 0, 0, 0.3);
+        opacity: 1; }
+      .aside .aside-nav .aside-hover:active {
+        background: #dea640;
+        opacity: 1; }
+
+.main-section {
+  display: flex;
+  flex-direction: column; }
+
+.nav {
+  /* fallback for old browsers */
+  background: #352d38;
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(135deg, #352d38, #413136, #584137, #73563a);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(135deg, #352d38, #413136, #584137, #73563a);
+  display: flex;
+  align-items: center;
+  position: fixed;
+  height: 50px; }
+  .nav .nav-content {
+    height: 50px; }
+  .nav .nav-right {
+    flex-grow: 10; }
+    .nav .nav-right li {
+      padding-right: 20px; }
+    .nav .nav-right span {
+      padding-left: 10px; }
+  .nav .nav-left {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-start;
+    align-items: center; }
+    .nav .nav-left li {
+      padding-left: 15px; }
+
+.nav-box {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%; }
+
+.nav-element i, .nav-element span {
+  color: white;
+  font-size: 1.8rem; }
+.nav-element a {
+  display: block;
+  min-height: 100%; }
+
+#temp {
+  display: inline-block;
+  min-width: 80px;
+  text-align: right; }
+
+#logo {
+  background-color: rgba(0, 0, 0, 0.4); }
+  #logo span {
+    width: 100%;
+    text-align: center;
+    font-size: 1.8rem; }
+
+#toggle-bars {
+  cursor: pointer; }
+
+.aside-responsive-on {
+  width: 20%; }
+
+.aside-responsive-off {
+  width: 5%; }
+  .aside-responsive-off .aside-element span {
+    display: none; }
+
+.content-responsive-on {
+  width: 80%; }
+
+.content-responsive-off {
+  width: 95%; }
+
+.container-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%; }
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-top: 50px; }
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0; }
+
+.head-info {
+  color: white;
+  font-size: 1.8rem;
+  margin: 15px 5% 0; }
+
+.pin-container {
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.2rem;
+  flex-basis: 40%;
+  margin: 5px 5%;
+  font-size: 1.3rem; }
+
+.icon-gpio i {
+  color: rgba(0, 0, 0, 0.3);
+  flex: 1 1 10%;
+  text-align: center; }
+
+.text-gpio span {
+  flex: 1 1 50%;
+  text-align: center; }
+
+.btn-gpio {
+  color: white;
+  height: 2.2rem;
+  flex: 0 0 15%;
+  border: 0; }
+
+.btn-off {
+  background: #ff5d5d;
+  -webkit-transition-duration: 0.3s;
+  /* Safari */
+  transition-duration: 0.3s; }
+  .btn-off:hover {
+    background: #f64949; }
+
+.btn-on {
+  background: #64c1bb;
+  -webkit-transition-duration: 0.3s;
+  /* Safari */
+  transition-duration: 0.3s; }
+  .btn-on:hover {
+    background: #56a39e; }
+
+.pin-power {
+  background: #dea640;
+  color: white; }
+
+.pin-gnd {
+  background: rgba(0, 0, 0, 0.4);
+  color: white; }
+
+.fa-lock:before, .fa-lock-open:before {
+  cursor: pointer; }
+
+.fa-lock {
+  color: #ff5d5d !important; }
+
+.table-main-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 5px 5%;
+  font-size: 1.5rem; }
+
+.tab-header {
+  display: flex;
+  width: 100%; }
+  .tab-header .tab-link {
+    color: white;
+    border: 0;
+    height: 50px;
+    width: 50%; }
+
+.tab-content {
+  background: rgba(0, 0, 0, 0.4);
+  height: 480px;
+  width: 100%;
+  padding: 15px; }
+  .tab-content .table-container {
+    height: 100%;
+    width: 100%; }
+    .tab-content .table-container th, .tab-content .table-container td {
+      text-align: center;
+      vertical-align: middle; }
+    .tab-content .table-container td {
+      pointer-events: auto;
+      cursor: pointer; }
+    .tab-content .table-container tr {
+      background: rgba(255, 255, 255, 0.9); }
+    .tab-content .table-container tr:nth-child(odd) {
+      background: rgba(255, 255, 255, 0.6); }
+    .tab-content .table-container tr:first-child {
+      background: rgba(0, 0, 0, 0.7);
+      color: white; }
+
+.tab-footer {
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  width: 100%; }
+  .tab-footer .tab-footer-left {
+    display: flex;
+    height: 100%;
+    width: 60%; }
+    .tab-footer .tab-footer-left button {
+      background: #dea640;
+      color: white;
+      margin: 5px 0 5px 5px;
+      border: 0;
+      width: 100%; }
+      .tab-footer .tab-footer-left button:hover {
+        background: #f1a213; }
+      .tab-footer .tab-footer-left button:active {
+        background: #64c1bb; }
+  .tab-footer .tab-footer-right {
+    display: flex;
+    width: 15%;
+    height: 100%; }
+    .tab-footer .tab-footer-right button {
+      background: #dea640;
+      color: white;
+      margin: 5px 5px 5px 0;
+      border: 0;
+      width: 100%; }
+      .tab-footer .tab-footer-right button:hover {
+        background: #f1a213; }
+      .tab-footer .tab-footer-right button:active {
+        background: #64c1bb; }
+    .tab-footer .tab-footer-right span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      margin: 5px 5px 5px 0;
+      width: 100%; }
+
+.users {
+  display: none; }
+
+.tab-link-devices {
+  background: rgba(0, 0, 0, 0.4); }
+
+.tab-link-users {
+  background: rgba(0, 0, 0, 0.7); }
+
+/*# sourceMappingURL=main.css.map */

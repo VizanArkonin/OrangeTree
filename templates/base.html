@@ -23,14 +23,15 @@
 
     <!-- JS -->
     <script src="js/jquery/jquery.js"></script>
+    <script src="js/main/responsive.js"></script>
 
     {% endblock %}
 </head>
 
 <body>
     <!--Sidebar navigation-->
-    <aside class="aside">
-        <div class="aside-nav">
+    <aside id="aside" class="aside aside-responsive aside-responsive-on" >
+        <div class="aside-nav aside-responsive aside-responsive-on">
             <ul class="aside-nav-box aside-element">
                 <li id="logo">
                     <a href="#">
@@ -72,12 +73,14 @@
     </aside>
 
     <!--Main container with main content and top navigation bar-->
-    <div class="main-navigation">
+    <div class="main-section content-responsive content-responsive-on">
         <!--Navigation bar on top-->
-        <nav class="nav">
+        <nav class="nav content-responsive content-responsive-on">
             <div class="nav-content nav-left nav-element">
                 <ul>
-                    <li><a href="#"><i class="fas fa-bars"></i></a></li>
+                    <li>
+                        <i id="toggle-bars" class="fas fa-bars"></i>
+                    </li>
                 </ul>
             </div>
 
@@ -107,7 +110,7 @@
         </nav>
 
         <!--Main content section-->
-        <main class="main-container">
+        <main class="main-content">
             {% block content %}{% endblock %}
         </main>
 
