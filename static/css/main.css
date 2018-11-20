@@ -231,6 +231,9 @@ input:-webkit-autofill:focus {
 #toggle-bars {
   cursor: pointer; }
 
+#logo-responsive {
+  display: none; }
+
 .aside-responsive-on {
   width: 20%; }
 
@@ -238,6 +241,12 @@ input:-webkit-autofill:focus {
   width: 5%; }
   .aside-responsive-off .aside-element span {
     display: none; }
+  .aside-responsive-off .aside-element a {
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+  .aside-responsive-off #logo-responsive {
+    display: block; }
 
 .content-responsive-on {
   width: 80%; }

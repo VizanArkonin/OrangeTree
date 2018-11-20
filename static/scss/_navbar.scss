@@ -119,6 +119,11 @@
 }
 
 //Auxiliary classes. To manage adaptability
+
+#logo-responsive {
+  display: none;
+}
+
 .aside-responsive-on {
   width: $aside-responsive-on;
 }
@@ -127,6 +132,14 @@
   width: $aside-responsive-off;
   .aside-element span {
     display: none;
+  }
+  .aside-element a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #logo-responsive {
+    display: block;
   }
 }
 
