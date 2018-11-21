@@ -5,7 +5,6 @@ const BAR = "#toggle-bars";
 /**
 * Auxiliary script for adaptive layout
 **/
-
 $(function() {
     if (localStorage.getItem("bar") === "true") {
         // Do display stuff here

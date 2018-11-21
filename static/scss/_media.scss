@@ -1,1 +1,25 @@
 //Mixins to simplify working with media queries
+//For max-width 480px
+@mixin media-breakpoint-sm {
+  @media screen and (max-width: 480px) {
+    @content;
+  }
+}
+//For max-width 768px
+@mixin media-breakpoint-md {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+//For max-width 1024px
+@mixin media-breakpoint-lg {
+  @media screen and (max-width: 1024px) {
+    @content;
+  }
+}
+//For max-width 1440px
+@mixin media-breakpoint-xl {
+  @media screen and (max-width: 1440px) {
+
+  }
+}
