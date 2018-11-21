@@ -3,9 +3,11 @@
 {% block head %}
 {{ super() }}
 <script src="js/socket/socket.io.min.js"></script>
-<script src="js/gpio/main.js"></script>
+<script type="text/babel" src="js/gpio/main.js"></script>
 <script>
     let gpioSocket;
+    let pins_raw = '{{ pins_list|safe }}';
+    let pins = JSON.parse(pins_raw);
 
     /**
      * Here we initiate Socket client and define 2 main routes we will be using.
@@ -347,5 +349,6 @@
         <input type="hidden" class="status-switch-input" value="">
         <input type="hidden" class="lock-input" value="">
     </div>
+<div id="root"></div>
 </div>
 {% endblock %}

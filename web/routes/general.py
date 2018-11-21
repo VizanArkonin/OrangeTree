@@ -1,6 +1,7 @@
 """
 General routing library
 """
+import json
 
 from flask import render_template
 from flask_login import user_logged_in
@@ -9,6 +10,7 @@ from datetime import datetime
 
 from config import WEB_SERVICE_CONFIG
 from web import web_service
+from gpio import boards
 
 
 @user_logged_in.connect_via(web_service)
@@ -36,5 +38,6 @@ def monitor():
     :return: Rendered template
     """
     return render_template("general/gpio.html",
+                           pins_list=json.dumps(boards.ORANGE_PI_LITE),
                            socket_url=WEB_SERVICE_CONFIG["host"],
                            socket_port=WEB_SERVICE_CONFIG["socket_port"])

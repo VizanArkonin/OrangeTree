@@ -3,6 +3,7 @@ from datetime import datetime
 
 from gpio.utils import wiringpi_is_used
 from gpio.pin import Pin
+from gpio.boards import *
 from utils.class_base import ClassBase
 from utils.general import get_formatter
 
@@ -26,22 +27,25 @@ class GpioController(ClassBase):
     """
     Main GPIO board control center.
     Serves as programatical representation of GPIO board, providing access to it's pins and allowing monitoring.
-    Note - this class is intended to be a singleton (to prevent data/flow collisions).
+    NOTE - this class is intended to be a singleton (to prevent data/flow collisions).
     """
     # Since this class is intended to be a singleton, we instantiate static dict for pins
     _PINS = {}
 
-    def __init__(self):
+    def __init__(self, device_type_id):
         super().__init__()
         self.log("info", "Initializing GPIO Controller")
         if wiringpi_is_used():
             import wiringpi
             wiringpi.wiringPiSetup()
-        # Since there is a gap between 17 and 20 pins (they do not exist), we use 2 separate for loops for creation
-        for pin in range(0, 17):
-            self._PINS[pin] = Pin(pin, OUTPUT)
-        for pin in range(21, 32):
-            self._PINS[pin] = Pin(pin, OUTPUT)
+        self.load_pins(device_type_id)
+
+    def load_pins(self, device_type_id):
+        if device_type_id == 1:
+            for pin in ORANGE_PI_LITE["pins"]:
+                if pin["type"] == "wPi":
+                    pin_wpi = pin["wPi"]
+                    self._PINS[pin_wpi] = Pin(pin_wpi, OUTPUT)
 
     def get_pin(self, pinNo):
         return self._PINS[pinNo]
