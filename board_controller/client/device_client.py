@@ -6,7 +6,7 @@ from gpio import gpio_controller
 from board_controller.common.packets.packet_status import PacketStatus
 from board_controller.common.socket_connector import SocketConnector
 from board_controller.common.packets.general import *
-from board_controller.common.packets.gpio import GET_PIN_CONFIGURATION, GET_STATUS
+from board_controller.common.packets.gpio import GET_PIN_CONFIGURATION
 
 
 class DeviceClient(SocketConnector):
