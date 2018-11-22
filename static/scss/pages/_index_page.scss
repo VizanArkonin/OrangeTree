@@ -1,0 +1,141 @@
+//Styles for index page
+
+.table-main-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0.5rem 5%;
+  font-size: $font-size-default-n;
+}
+
+.tab-header {
+  display: flex;
+  width: 100%;
+}
+
+.tab-link {
+  color: $white-color;
+  border: 0;
+  height: $height-base-element-default;
+  width: 50%;
+}
+
+.tab-content {
+  background: $dark-color-400;
+  height: 48rem;
+  width: 100%;
+  padding: 1.5rem;
+}
+
+.table-container {
+  height: 100%;
+  width: 100%;
+  & th,td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  & td {
+    pointer-events: auto;
+    cursor: pointer;
+  }
+  & tr {
+    background: $white-color-900;
+  }
+  & tr:nth-child(odd) {
+    background: $white-color-600;
+  }
+  & tr:first-child {
+    background: $dark-color-700;
+    color: $white-color;
+  }
+}
+
+
+.tab-footer {
+  background: $dark-color-700;
+  display: flex;
+  justify-content: space-between;
+  height: $height-base-element-default;
+  width: 100%;
+}
+
+.tab-footer-left {
+  display: flex;
+  height: 100%;
+  width: 60%;
+  & button {
+    background: $btn-default-color;
+    color: $white-color;
+    margin: 0.5rem 0 0.5rem 0.5rem;
+    border: 0;
+    width: 100%;
+    &:hover {
+      background: $btn-default-color-hover;
+    }
+    &:active {
+      background: $btn-on-color;
+    }
+  }
+}
+
+.tab-footer-right {
+  display: flex;
+  width: 15%;
+  height: 100%;
+  & button {
+    background: $btn-default-color;
+    color: $white-color;
+    margin: 0.5rem 0.5rem 0.5rem 0;
+    border: 0;
+    width: 100%;
+    &:hover {
+      background: $btn-default-color-hover;
+    }
+    &:active {
+      background: $btn-on-color;
+    }
+  }
+  & span {
+    color: $white-color;
+    margin: 0.5rem 0.5rem 0.5rem 0;
+    width: 100%;
+  }
+}
+
+//Classes to support java script functionality
+.users {
+  display: none;
+}
+
+.tab-link-devices {
+  background: $dark-color-400;
+}
+
+.tab-link-users {
+  background: $dark-color-700;
+}
+
+// Media queries
+@include media-breakpoint-xl {
+  .table-main-container {
+    font-size: $font-size-xl-n;
+  }
+}
+
+@include media-breakpoint-lg {
+  .table-main-container {
+    font-size: $font-size-lg-n;
+  }
+}
+
+@include media-breakpoint-md {
+  .table-main-container {
+    font-size: $font-size-md-n;
+  }
+}
+
+@include media-breakpoint-sm {
+  .table-main-container {
+    font-size: $font-size-sm-n;
+  }
+}

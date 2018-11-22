@@ -7,7 +7,7 @@
   align-items: center;
   height: 2.2rem;
   flex-basis: 40%;
-  margin: 5px 5%;
+  margin: 0.5rem 5%;
   font-size: $font-size-default-s;
 }
 
@@ -63,4 +63,29 @@
 
 .fa-lock {
   color: $btn-off-color !important;
+}
+
+// Media queries
+@include media-breakpoint-xl {
+  .pin-container {
+    font-size: $font-size-xl-s;
+  }
+}
+
+@include media-breakpoint-lg {
+  .pin-container {
+    font-size: $font-size-lg-s;
+  }
+}
+
+@include media-breakpoint-md {
+  .pin-container {
+    font-size: $font-size-md-s;
+  }
+}
+
+@include media-breakpoint-sm {
+  .pin-container {
+    font-size: $font-size-sm-s;
+  }
 }

@@ -1,0 +1,56 @@
+//Styling main classes for all other pages.
+
+//Base flex container responsible for centering elements
+.flex-container-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  margin-top: $height-base-element-default;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+.head-info {
+  color: $white-color;
+  font-size: $font-size-default-l;
+  margin: 1.5rem 5% 0;
+}
+
+// Media queries
+@include media-breakpoint-xl {
+  .head-info {
+    font-size: $font-size-xl-l;
+  }
+}
+
+@include media-breakpoint-lg {
+  .head-info {
+    font-size: $font-size-lg-l;
+  }
+}
+
+@include media-breakpoint-md {
+  .head-info {
+    font-size: $font-size-md-l;
+  }
+}
+
+@include media-breakpoint-sm {
+  .head-info {
+    font-size: $font-size-sm-l;
+  }
+}
+
