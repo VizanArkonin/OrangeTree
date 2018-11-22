@@ -6,6 +6,18 @@ from board_controller.client import client as Client
 from board_controller.common.packets.gpio import *
 
 
+@Client.route(packet_name="GetGPIOBoardPinConfig")
+def pin_config(client, data):
+    """
+    GPIO board config processor - receives the config from server and stores it in client instance.
+
+    :param client: DeviceClient instance
+    :param data: Serialized and encrypted data byte array
+    :return: None
+    """
+    gpio_controller.set_pin_config(data["payload"]["configuration"])
+
+
 @Client.route(packet_name="GetGPIOBoardStatus")
 def status(client, data):
     """

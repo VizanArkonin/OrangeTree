@@ -13,6 +13,8 @@ Initialization is performed during module import (in __init__.py files).
 """
 
 # Service imports. Used to initialize modules and their respective processes/variables. DO NOT REMOVE THEM!
+logger.info("Starting GPIO adapter")
+import gpio
 logger.info("Starting Device client")
 import board_controller.client
 # End of service imports
