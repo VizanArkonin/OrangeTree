@@ -3,6 +3,25 @@ Socket server - GPIO board calls routing library.
 """
 from board_controller.common.utils import generic_response_validator
 from board_controller.server import __server as server
+from database.models.device import DevicesList
+
+
+@server.route(packet_name="GetGPIOBoardPinConfig")
+def pin_config(client, data):
+    """
+    GPIO Config processor
+
+    :param client: ClientThread instance
+    :param data: Decrypted and deserialized packet dict
+    :return: None
+    """
+    device_id = data["payload"]["deviceId"]
+
+    if device_id:
+        device = DevicesList.query.filter(DevicesList.device_id == device_id).first()
+        data["payload"]["configuration"] = device.serialize_config()
+
+        client.send(data)
 
 
 @server.route(packet_name="GetGPIOBoardStatus")

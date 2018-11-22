@@ -11,13 +11,14 @@ class ClientThread(ClassBase):
     Inner thread listens to incoming messages and routes them to respective processor functions.
     """
 
-    def __init__(self, client, address, device_id):
+    def __init__(self, client, address, device_id, pin_config):
         super().__init__()
         self.client = client
         self.routes = {}
         self.address = address
         self.client_id = device_id
         self.client_gpio_status = {}
+        self.client_pin_config = pin_config
         self.listener_thread = Thread(target=self._listen_to_client)
         self.listener_thread.setDaemon(True)
         self.listener_thread.start()
