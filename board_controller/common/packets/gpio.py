@@ -6,6 +6,26 @@ NOTE: All method names are in upper case for reading clarity
 """
 
 
+def GET_PIN_CONFIGURATION(device_id, config_data=[], errors=[]):
+    """
+    Packet for GPIO board pin configuration request. Payload contains the dict with pins list and their params.
+
+    :param device_id: Device ID.
+    :param errors: Error strings list
+    :return: Packet dict
+    """
+    return {
+        "call": "GetGPIOBoardPinConfig",
+        "payload":
+            {
+                "deviceId": device_id,
+                "configuration": config_data
+            },
+        "errors":
+            errors
+    }
+
+
 def GET_STATUS(status={}, errors=[]):
     """
     Packet for GPIO board status request. Payload contains the dict with status on all pins.

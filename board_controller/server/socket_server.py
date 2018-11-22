@@ -1,12 +1,14 @@
 import json
 import logging
 import socket
+from datetime import datetime
 from json import JSONDecodeError
 
 from board_controller.common.packets.packet_status import PacketStatus
 from board_controller.common.socket_connector import SocketConnector
 from board_controller.common.packets import general as Packets
 from board_controller.server.client_thread import ClientThread
+from database import db_session
 from database.models.device import DevicesList
 from utils.general import get_formatter
 
@@ -90,7 +92,7 @@ class SocketServer(SocketConnector):
         """
         return any(device for device in self.allowed_devices if
                    device.device_id == data["payload"]["deviceID"] and
-                   device.device_type == int(data["payload"]["deviceType"]) and
+                   device.device_type_id == int(data["payload"]["deviceType"]) and
                    device.device_access_key == data["payload"]["key"])
 
     def _accept_and_add_client(self, client, address, request_data):
@@ -106,7 +108,8 @@ class SocketServer(SocketConnector):
         if not self.get_client_by_id(device_id):
             self.log("info", "No active clients found for device with ID '{0}'. Initializing new client controller".
                      format(device_id))
-            client_handler = ClientThread(client, address, device_id)
+            device = DevicesList.query.filter(DevicesList.device_id == device_id).first()
+            client_handler = ClientThread(client, address, device_id, device.serialize_config())
             client_handler.routes = self.client_routes
             self.clients[device_id] = client_handler
             self._logger.info("Authorization for '{0} {1}' has passed. Client registered.".format(device_id, address))
@@ -114,6 +117,11 @@ class SocketServer(SocketConnector):
                                                                              request_data["payload"]["deviceType"],
                                                                              request_data["payload"]["key"],
                                                                              PacketStatus.ACCEPTED.value))))
+
+            device.last_address = "{0}:{1}".format(address[0], address[1])
+            device.last_connected_at = datetime.now()
+
+            db_session.commit()
         else:
             self.log("error", "Active client with ID '{0}' already registered. Rejecting connection".format(device_id))
             client.close()

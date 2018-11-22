@@ -16,6 +16,21 @@ class SocketInterface(ClassBase):
         super().__init__()
         self._server = server_instance
 
+    def get_device_pin_config(self, board_id):
+        """
+        Returns a dict with pin configuration for given board
+        :param board_id: Board ID
+        :return: Pin configuration dict (or None, if client is not connected/disconnected)
+        """
+        client = self._server.get_client_by_id(board_id)
+        if client:
+            if client.is_alive():
+                return client.client_pin_config
+            else:
+                return None
+        else:
+            return None
+
     def is_client_alive(self, board_id):
         """
         Checks if given client is present and alive.

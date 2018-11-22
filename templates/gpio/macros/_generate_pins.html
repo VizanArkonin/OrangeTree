@@ -1,0 +1,32 @@
+{% macro render_pins(pin_config) %}
+    {% if pin_config %}
+        {% for pin in pin_config %}
+            {% if pin.type == "ground" %}
+                <div class="pin-container pin-gnd">
+                    <span>Ground</span>
+                </div>
+            {% elif pin.type == "3.3_power" %}
+                <div class="pin-container pin-power">
+                    <span>+3.3V Power</span>
+                </div>
+            {% elif pin.type == "5_power" %}
+                <div class="pin-container pin-power">
+                    <span>+5V Power</span>
+                </div>
+            {% elif pin.type == "wPi" %}
+                <div class="pin-container icon-gpio text-gpio" data-pinId="{{ pin.wPi }}">
+                    <i class="icon-info fas fa-info-circle" data-toggle="tooltip" title="{{ pin.meta }}"></i>
+                    <span>wPi {{ pin.wPi }}</span>
+                    <i class="fas fa-lock-open lock-icon"></i>
+                    <button class="btn-gpio mode-switch btn-off">OUT</button>
+                    <button class="btn-gpio status-switch btn-off">OFF</button>
+                    <input type="hidden" class="mode-switch-input" value="">
+                    <input type="hidden" class="status-switch-input" value="">
+                    <input type="hidden" class="lock-input" value="">
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <h1>Device is not connected at the moment</h1>
+    {% endif %}
+{% endmacro %}

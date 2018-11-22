@@ -2,9 +2,11 @@ import errno
 import json
 from time import sleep
 
+from gpio import gpio_controller
 from board_controller.common.packets.packet_status import PacketStatus
 from board_controller.common.socket_connector import SocketConnector
 from board_controller.common.packets.general import *
+from board_controller.common.packets.gpio import GET_PIN_CONFIGURATION, GET_STATUS
 
 
 class DeviceClient(SocketConnector):
@@ -18,6 +20,7 @@ class DeviceClient(SocketConnector):
         self.device_key = device_key
         self.connect()
         self.authenticate()
+        self.request_pin_configuration()
 
     def connect(self):
         """
@@ -115,3 +118,14 @@ class DeviceClient(SocketConnector):
         self.create_socket()
         self.connect()
         self.authenticate()
+        self.request_pin_configuration()
+
+    def request_pin_configuration(self):
+        """
+        Resets and requests pin configuration from the server
+        :return: None
+        """
+        self.log("info", "Resetting pin configuration and requesting new one from the server")
+        gpio_controller.reload_pins(reset_pins=True)
+
+        self.send(GET_PIN_CONFIGURATION(self.client_id))

@@ -79,7 +79,7 @@ def create_new_device():
     if not server.get_device_by_device_id(device_id):
         device = DevicesList()
         device.device_id = device_id
-        device.device_type = payload["deviceData"]["device_type"]
+        device.device_type_id = payload["deviceData"]["device_type"]
         device.device_access_key = payload["deviceData"]["device_access_key"]
         db_session.add(device)
         db_session.commit()
@@ -118,7 +118,7 @@ def update_device_details():
     device = DevicesList.query.get(int(payload["deviceData"]["id"]))
     if device:
         device.device_id = payload["deviceData"]["device_id"]
-        device.device_type = payload["deviceData"]["device_type"]
+        device.device_type_id = payload["deviceData"]["device_type"]
         device.device_access_key = payload["deviceData"]["device_access_key"]
         db_session.commit()
 

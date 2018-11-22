@@ -1,9 +1,10 @@
 import logging
 from datetime import datetime
+from threading import Thread
+from time import sleep
 
 from gpio.utils import wiringpi_is_used
 from gpio.pin import Pin
-from gpio.boards import *
 from utils.class_base import ClassBase
 from utils.general import get_formatter
 
@@ -32,20 +33,58 @@ class GpioController(ClassBase):
     # Since this class is intended to be a singleton, we instantiate static dict for pins
     _PINS = {}
 
-    def __init__(self, device_type_id):
+    def __init__(self):
         super().__init__()
         self.log("info", "Initializing GPIO Controller")
         if wiringpi_is_used():
             import wiringpi
             wiringpi.wiringPiSetup()
-        self.load_pins(device_type_id)
+        self._pins_config = None
+        Thread(target=self.load_pins).start()
 
-    def load_pins(self, device_type_id):
-        if device_type_id == 1:
-            for pin in ORANGE_PI_LITE["pins"]:
-                if pin["type"] == "wPi":
-                    pin_wpi = pin["wPi"]
-                    self._PINS[pin_wpi] = Pin(pin_wpi, OUTPUT)
+    def set_pin_config(self, config):
+        """
+        Setter for pins config. Used from socket client controller as interface method -
+        direct approach causes circular dependency
+        :param config: Config dict
+        :return: None
+        """
+        self._pins_config = config
+
+    def load_pins(self):
+        """
+        Reads the pins config and initializes respective wPi pins.
+        NOTE: We run waiter in threaded mode to prevent process locks.
+        :return: None
+        """
+        self.log("info", "Waiting for pin configuration")
+        while not self._pins_config:
+            sleep(1)
+
+        self.log("info", "Pin configuration received. Initializing pin controllers")
+        for pin in self._pins_config["pins"]:
+            if pin["type"] == "wPi":
+                pin_wpi = pin["wPi"]
+                self._PINS[pin_wpi] = Pin(pin_wpi, OUTPUT)
+
+    def reload_pins(self, reset_pins=False):
+        """
+        Resets the state of all currently initialized pins, retrieves fresh config and re-initializes pin controllers.
+
+        :param reset_pins: Pin config variable reset trigger
+        :return: None
+        """
+        # First, we reset existing pins to OUTPUT-OFF state
+        for key, value in self._PINS.items():
+            value.unlock_pin()
+            value.set_mode(OUTPUT)
+            value.set_output(0)
+
+        # Then, we re-initialize pins storage and config, retrieve the new data and re-initialize pins
+        if reset_pins:
+            self._pins_config = None
+        self._PINS = {}
+        Thread(target=self.load_pins).start()
 
     def get_pin(self, pinNo):
         return self._PINS[pinNo]
