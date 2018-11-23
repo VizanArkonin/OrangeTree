@@ -29,7 +29,7 @@
 
 {% from "security/_macros.html" import render_field_with_errors, render_field %}
 
-<div class="container-center">
+<div class="login-platform flex-container-center">
     <div class="login-form-container">
         <div class="login-header">
             <span><i class="fas fa-user-circle"></i></span>
@@ -42,19 +42,19 @@
                 {{ render_field_with_errors(login_user_form.password) }}
                 {{ render_field_with_errors(login_user_form.remember) }}
             </div>
-            <div class="input-container input-focus-within">
-                <span class="icon-form"><i class="fas fa-envelope"></i></span>
+            <div class="input-container input-focus-within flex-container-center">
+                <span class="icon-form flex-container-center"><i class="fas fa-envelope"></i></span>
                 <input id="email" name="email" required type="text" value="" autofocus placeholder="Enter email">
             </div>
-            <div class="input-container input-focus-within">
-                <span class="icon-form"><i class="fas fa-key"></i></span>
+            <div class="input-container input-focus-within flex-container-center">
+                <span class="icon-form flex-container-center"><i class="fas fa-key"></i></span>
                 <input id="password" name="password" required type="password" value="" placeholder="Enter password">
             </div>
-            <div class="input-container">
+            <div class="input-container flex-container-center">
                 <input id="submit" name="submit" type="submit" value="Login">
             </div>
-            <div class="input-container">
-                <div class="checkbox-container">
+            <div class="input-container flex-container-center">
+                <div class="checkbox-container flex-container-center">
                     <input class="checkbox" id="remember" name="remember" type="checkbox" value="y">
                     <label for="checkbox">Remember me</label>
                 </div>

@@ -1,25 +1,15 @@
 //Main styles for the page "Pin configuration"
 
-.flex-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  margin: 15px 0;
-  .pin-container {
-    background: $pin-bg-color;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 2.2rem;
-    flex-basis: 40%;
-    margin: 5px 5%;
-    font-size: $font-size-default-s;
-  }
+.pin-container {
+  background: $white-color-900;
+  flex-basis: 40%;
+  height: 2.2rem;
+  margin: 0.5rem 5%;
+  font-size: $font-size-default-s;
 }
 
 .icon-gpio i {
-  color: $gpio-icon-color;
+  color: $dark-color-300;
   flex: 1 1 10%;
   text-align: center;
 }
@@ -53,12 +43,12 @@
 }
 
 .pin-power {
-  background: $power-color;
+  background: $btn-default-color;
   color: $white-color;
 }
 
 .pin-gnd {
-  background: $ground-color;
+  background: $dark-color-400;
   color: $white-color;
 }
 
@@ -70,4 +60,29 @@
 
 .fa-lock {
   color: $btn-off-color !important;
+}
+
+// Media queries
+@include media-breakpoint-xl {
+  .pin-container {
+    font-size: $font-size-xl-s;
+  }
+}
+
+@include media-breakpoint-lg {
+  .pin-container {
+    font-size: $font-size-lg-s;
+  }
+}
+
+@include media-breakpoint-md {
+  .pin-container {
+    font-size: $font-size-md-s;
+  }
+}
+
+@include media-breakpoint-sm {
+  .pin-container {
+    font-size: $font-size-sm-s;
+  }
 }

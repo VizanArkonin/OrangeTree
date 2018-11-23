@@ -41,3 +41,14 @@ def monitor(device_id):
                            pins_config=server_interface.get_device_pin_config(device_id),
                            socket_url=WEB_SERVICE_CONFIG["host"],
                            socket_port=WEB_SERVICE_CONFIG["socket_port"])
+
+
+@web_service.route("/index", methods=["GET"])
+@login_required
+@roles_accepted("user", "admin")
+def index():
+    """
+    Maps monitor path to a static index file
+    :return: Rendered template
+    """
+    return render_template("general/index.html")

@@ -1,0 +1,249 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<script src="/js/index/tab_headers.js"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="page-title">
+        <span>Home page</span>
+    </div>
+
+    <div class="content-container flex-container-center">
+        <div class="table-main-container">
+            <div class="tab-header">
+                <button class="tab-link tab-link-devices">Devices</button>
+                <button class="tab-link tab-link-users">Users</button>
+            </div>
+            <div class="tab-content devices">
+                <table class="table-container">
+                    <tr>
+                        <th>Deviсe ID</th>
+                        <th>Deviсe Type</th>
+                        <th>Last Address</th>
+                        <th>Last online time</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td>01.0001</td>
+                        <td>Orange Pi Lite</td>
+                        <td>127.0.0.1</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Online</td>
+                    </tr>
+                    <tr>
+                        <td>01.0002</td>
+                        <td>Orange Pi Lite</td>
+                        <td>127.0.0.1</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Offline</td>
+                    </tr>
+                    <tr>
+                        <td>01.0003</td>
+                        <td>Orange Pi Lite</td>
+                        <td>127.0.0.1</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Offline</td>
+                    </tr>
+                    <tr>
+                        <td>01.0004</td>
+                        <td>Orange Pi Lite</td>
+                        <td>127.0.0.1</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Offline</td>
+                    </tr>
+                    <tr>
+                        <td>01.0005</td>
+                        <td>Orange Pi Lite</td>
+                        <td>127.0.0.1</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Online</td>
+                    </tr>
+                    <tr>
+                        <td>01.0006</td>
+                        <td>Orange Pi Lite</td>
+                        <td>127.0.0.1</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Offline</td>
+                    </tr>
+                    <tr>
+                        <td>01.0007</td>
+                        <td>Orange Pi Lite</td>
+                        <td>127.0.0.1</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Offline</td>
+                    </tr>
+                    <tr>
+                        <td>01.0008</td>
+                        <td>Orange Pi Lite</td>
+                        <td>127.0.0.1</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Offline</td>
+                    </tr>
+                    <tr>
+                        <td>01.0009</td>
+                        <td>Orange Pi Lite</td>
+                        <td>127.0.0.1</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Offline</td>
+                    </tr>
+                    <tr>
+                        <td>01.00010</td>
+                        <td>Orange Pi Lite</td>
+                        <td>127.0.0.1</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Offline</td>
+                    </tr>
+                    <tr>
+                        <td>01.00011</td>
+                        <td>Orange Pi Lite</td>
+                        <td>127.0.0.1</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Offline</td>
+                    </tr>
+                    <tr>
+                        <td>01.00012</td>
+                        <td>Orange Pi Lite</td>
+                        <td>127.0.0.1</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Online</td>
+                    </tr>
+                    <tr>
+                        <td>01.00013</td>
+                        <td>Orange Pi Lite</td>
+                        <td>127.0.0.1</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Online</td>
+                    </tr>
+                    <tr>
+                        <td>01.00014</td>
+                        <td>Orange Pi Lite</td>
+                        <td>127.0.0.1</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Offline</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="tab-content users">
+                <table class="table-container">
+                    <tr>
+                        <th>User name</th>
+                        <th>User email</th>
+                        <th>Last login</th>
+                        <th>Enabled</th>
+                    </tr>
+                    <tr>
+                        <td>Anonimus</td>
+                        <td>some@mail.com</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Anonimus</td>
+                        <td>some@mail.com</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Anonimus</td>
+                        <td>some@mail.com</td>
+                        <td>10-11-18 06:30</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>Anonimus</td>
+                        <td>some@mail.com</td>
+                        <td>10-11-18 06:30</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>Anonimus</td>
+                        <td>some@mail.com</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Anonimus</td>
+                        <td>some@mail.com</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Anonimus</td>
+                        <td>some@mail.com</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Anonimus</td>
+                        <td>some@mail.com</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Anonimus</td>
+                        <td>some@mail.com</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Anonimus</td>
+                        <td>some@mail.com</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Anonimus</td>
+                        <td>some@mail.com</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Anonimus</td>
+                        <td>some@mail.com</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Anonimus</td>
+                        <td>some@mail.com</td>
+                        <td>10-11-18 06:30</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>Anonimus</td>
+                        <td>some@mail.com</td>
+                        <td>10-11-18 06:30</td>
+                        <td>Yes</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="tab-footer devices">
+                <div class="tab-footer-left">
+                    <button>Add</button>
+                    <button>Edit</button>
+                    <button>Debug</button>
+                </div>
+                <div class="tab-footer-right">
+                    <button><i class="fas fa-arrow-left"></i></button>
+                    <span class="flex-container-center">1</span>
+                    <button><i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="tab-footer users">
+                <div class="tab-footer-left">
+                    <button>Add</button>
+                    <button>Edit</button>
+                </div>
+                <div class="tab-footer-right">
+                    <button><i class="fas fa-arrow-left"></i></button>
+                    <span class="flex-container-center">1</span>
+                    <button><i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

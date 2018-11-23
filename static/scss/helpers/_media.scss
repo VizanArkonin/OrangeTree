@@ -1,0 +1,26 @@
+//Mixins to simplify working with media queries
+
+//For max-width 1339px
+@mixin media-breakpoint-xl {
+  @media screen and (max-width: 1339px) {
+    @content;
+  }
+}
+//For max-width 1023px
+@mixin media-breakpoint-lg {
+  @media screen and (max-width: 1023px) {
+    @content;
+  }
+}
+//For max-width 767px
+@mixin media-breakpoint-md {
+  @media screen and (max-width: 767px) {
+    @content;
+  }
+}
+//For max-width 479px
+@mixin media-breakpoint-sm {
+  @media screen and (max-width: 479px) {
+    @content;
+  }
+}

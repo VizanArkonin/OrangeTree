@@ -1,0 +1,36 @@
+//Styles for common buttons, checkboxes, radio buttons. In addition to links, and specific components.
+
+.checkbox-container {
+  color: $white-color-600;
+  height: 100%;
+}
+
+.checkbox {
+  background: $white-color-600;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  height: 1.5rem;
+  width: 1.5rem;
+  margin-right: 1rem;
+  cursor: pointer;
+  z-index: 1;
+  &:hover {
+    background: $white-color;
+  }
+  &:checked {
+    background: $btn-default-color;
+  }
+  &:checked::before {
+    font-size: $font-size-default-s;
+    color: $white-color;
+    content: '✔';
+    text-align: center;
+    height: 1.5rem;
+    width: 1.5rem;
+    display: inline-block;
+    position: relative;
+    bottom: 0.4rem;
+  }
+}
