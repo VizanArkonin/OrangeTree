@@ -148,85 +148,74 @@ input:-webkit-autofill:focus {
     position: relative;
     bottom: 0.4rem; }
 
-.aside {
+.sidebar-container {
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   min-height: 100vh;
   overflow-y: hidden; }
 
-.aside-nav {
-  position: fixed; }
-
-.aside-nav-box {
+.sidebar-navigation {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column; }
-  .aside-nav-box li {
+  .sidebar-navigation li {
     height: 5rem; }
-  .aside-nav-box a {
+  .sidebar-navigation a {
     display: flex;
     align-items: center;
     height: 5rem; }
-  .aside-nav-box i {
+  .sidebar-navigation i {
     padding: 0 1.5rem; }
 
-.aside-element i, .aside-element span {
+.sidebar-element i, .sidebar-element span {
   color: white;
   font-size: 1.5rem; }
 
-.aside-hover {
+.sidebar-link-hover {
   opacity: 0.7; }
-  .aside-hover:hover {
+  .sidebar-link-hover:hover {
     background: rgba(0, 0, 0, 0.3);
     opacity: 1; }
-  .aside-hover:active {
+  .sidebar-link-hover:active {
     background: #dea640;
     opacity: 1; }
 
-.main-section {
-  display: flex;
-  flex-direction: column; }
-
-.nav {
+.navigation-container {
   /* fallback for old browsers */
   background: #352d38;
   /* Chrome 10-25, Safari 5.1-6 */
   background: -webkit-linear-gradient(135deg, #352d38, #413136, #584137, #73563a);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background: linear-gradient(135deg, #352d38, #413136, #584137, #73563a);
-  display: flex;
-  align-items: center;
-  position: fixed;
   height: 5rem; }
 
-.nav-content {
-  height: 5rem; }
-
-.nav-right {
+.navigation-right {
+  height: 5rem;
   flex-grow: 10; }
-  .nav-right li {
+  .navigation-right li {
     padding-right: 20px; }
-  .nav-right span {
+  .navigation-right span {
     padding-left: 10px; }
 
-.nav-left {
+.navigation-left {
+  height: 5rem;
   display: flex;
-  flex-grow: 1;
   justify-content: flex-start;
-  align-items: center; }
-  .nav-left li {
+  align-items: center;
+  flex-grow: 1; }
+  .navigation-left li {
     padding-left: 15px; }
 
-.nav-box {
+.navigation-left-position-element {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   height: 100%; }
 
-.nav-element i, .nav-element span {
+.navigation-element i, .navigation-element span {
   color: white;
   font-size: 1.8rem; }
-.nav-element a {
+.navigation-element a {
   display: block;
   min-height: 100%; }
 
@@ -243,18 +232,18 @@ input:-webkit-autofill:focus {
 #logo-responsive {
   display: none; }
 
-.aside-responsive-on {
+.sidebar-responsive-on {
   width: 20%; }
 
-.aside-responsive-off {
+.sidebar-responsive-off {
   width: 5%; }
-  .aside-responsive-off .aside-element span {
+  .sidebar-responsive-off .sidebar-element span {
     display: none; }
-  .aside-responsive-off .aside-element a {
+  .sidebar-responsive-off .sidebar-element a {
     display: flex;
     align-items: center;
     justify-content: center; }
-  .aside-responsive-off #logo-responsive {
+  .sidebar-responsive-off #logo-responsive {
     display: block; }
 
 .content-responsive-on {
@@ -268,6 +257,10 @@ input:-webkit-autofill:focus {
   align-items: center;
   justify-content: center; }
 
+.main-section {
+  display: flex;
+  flex-direction: column; }
+
 .main-content {
   display: flex;
   flex-direction: column;
@@ -275,37 +268,34 @@ input:-webkit-autofill:focus {
   width: 100%;
   margin-top: 5rem; }
 
-.flex-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  margin: 1.5rem 0; }
-
-.head-info {
+.page-title {
   color: white;
   font-size: 1.8rem;
   margin: 1.5rem 5% 0; }
 
+.content-container {
+  flex-wrap: wrap;
+  margin: 1.5rem 0; }
+
+.position-fixed {
+  position: fixed; }
+
 @media screen and (max-width: 1339px) {
-  .head-info {
+  .page-title {
     font-size: 1.8rem; } }
 @media screen and (max-width: 1023px) {
-  .head-info {
+  .page-title {
     font-size: 1.8rem; } }
 @media screen and (max-width: 767px) {
-  .head-info {
+  .page-title {
     font-size: 1.8rem; } }
 @media screen and (max-width: 479px) {
-  .head-info {
+  .page-title {
     font-size: 1.8rem; } }
 .pin-container {
   background: rgba(255, 255, 255, 0.9);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 2.2rem;
   flex-basis: 40%;
+  height: 2.2rem;
   margin: 0.5rem 5%;
   font-size: 1.3rem; }
 

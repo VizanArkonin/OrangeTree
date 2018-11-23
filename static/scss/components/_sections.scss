@@ -7,6 +7,13 @@
   justify-content: center;
 }
 
+//Auxiliary section for main content
+.main-section {
+  display: flex;
+  flex-direction: column;
+}
+
+//Container with the main content of the page
 .main-content {
   display: flex;
   flex-direction: column;
@@ -15,41 +22,42 @@
   margin-top: $height-base-element-default;
 }
 
-.flex-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  margin: 1.5rem 0;
-}
-
-.head-info {
+.page-title {
   color: $white-color;
   font-size: $font-size-default-l;
   margin: 1.5rem 5% 0;
 }
 
+.content-container {
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+}
+
+.position-fixed {
+  position: fixed;
+}
+
 // Media queries
 @include media-breakpoint-xl {
-  .head-info {
+  .page-title {
     font-size: $font-size-xl-l;
   }
 }
 
 @include media-breakpoint-lg {
-  .head-info {
+  .page-title {
     font-size: $font-size-lg-l;
   }
 }
 
 @include media-breakpoint-md {
-  .head-info {
+  .page-title {
     font-size: $font-size-md-l;
   }
 }
 
 @include media-breakpoint-sm {
-  .head-info {
+  .page-title {
     font-size: $font-size-sm-l;
   }
 }

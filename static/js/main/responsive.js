@@ -1,5 +1,5 @@
 "use strict";
-const ASIDE = ".aside-responsive";
+const SIDEBAR = ".sidebar-responsive";
 const CONTENT = ".content-responsive";
 const BAR = "#toggle-bars";
 /**
@@ -28,10 +28,10 @@ $(document).ready(function () {
 });
 
 function showBar () {
-    $(ASIDE).removeClass("aside-responsive-off").addClass("aside-responsive-on");
+    $(SIDEBAR).removeClass("sidebar-responsive-off").addClass("sidebar-responsive-on");
     $(CONTENT).removeClass("content-responsive-off").addClass("content-responsive-on");
 }
 function hideBar () {
-    $(ASIDE).removeClass("aside-responsive-on").addClass("aside-responsive-off");
+    $(SIDEBAR).removeClass("sidebar-responsive-on").addClass("sidebar-responsive-off");
     $(CONTENT).removeClass("content-responsive-on").addClass("content-responsive-off");
 }

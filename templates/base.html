@@ -23,7 +23,7 @@
 
     <!-- JS -->
     <script src="/js/jquery/jquery.js"></script>
-    <script src="js/main/responsive.js"></script>
+    <script src="/js/main/responsive.js"></script>
     <script src="/js/uni/ajax.js"></script>
     <script src="/js/uni/babel.min.js"></script>
     <script crossorigin src="/js/uni/react.production.min.js"></script>
@@ -34,54 +34,54 @@
 
 <body>
     <!--Sidebar navigation-->
-    <aside id="aside" class="aside aside-responsive aside-responsive-on" >
-        <div class="aside-nav aside-responsive aside-responsive-on">
-            <ul class="aside-nav-box aside-element">
+    <div class="sidebar-container sidebar-responsive sidebar-responsive-on" >
+        <nav class="position-fixed sidebar-responsive sidebar-responsive-on">
+            <ul class="sidebar-navigation sidebar-element">
                 <li id="logo">
                     <a href="#">
                     <span>Orange Pi Admin</span>
                     <span id="logo-responsive">OPiA</span>
                     </a>
                 </li>
-                <li class="aside-hover">
+                <li class="sidebar-link-hover">
                     <a href="/index">
                     <i class="fas fa-home"></i>
                     <span>Home page</span>
                     </a>
                 </li>
-                <li class="aside-hover">
-                    <a href="/monitor">
+                <li class="sidebar-link-hover">
+                    <a href="/monitor/<string:device_id>"> {#DEV_LITE#}
                     <i class="fas fa-microchip"></i>
                     <span>System configuration</span>
                     </a>
                 </li>
-                <li class="aside-hover">
+                <li class="sidebar-link-hover">
                     <a href="#">
                     <i class="fas fa-chart-area"></i>
                     <span>System monitor</span>
                     </a>
                 </li>
-                <li class="aside-hover">
+                <li class="sidebar-link-hover">
                     <a href="#">
                     <i class="fas fa-brain"></i>
                     <span>Training module</span>
                     </a>
                 </li>
-                <li class="aside-hover">
+                <li class="sidebar-link-hover">
                     <a href="#">
                     <i class="fas fa-book"></i>
                     <span>General information</span>
                     </a>
                 </li>
             </ul>
-        </div>
-    </aside>
+        </nav>
+    </div>
 
     <!--Main container with main content and top navigation bar-->
     <div class="main-section content-responsive content-responsive-on">
         <!--Navigation bar on top-->
-        <nav class="nav content-responsive content-responsive-on">
-            <div class="nav-content nav-left nav-element">
+        <nav class="navigation-container flex-container-center position-fixed content-responsive content-responsive-on">
+            <div class="navigation-left navigation-element">
                 <ul>
                     <li>
                         <i id="toggle-bars" class="fas fa-bars"></i>
@@ -89,8 +89,8 @@
                 </ul>
             </div>
 
-            <div class="nav-content nav-right">
-                <ul class="nav-box nav-element">
+            <div class="navigation-right">
+                <ul class="navigation-left-position-element navigation-element">
                     <li>
                         <a href="#">
                         <i class="fas fa-user-circle"></i>
@@ -118,7 +118,6 @@
         <main class="main-content">
             {% block content %}{% endblock %}
         </main>
-
     </div>
 
 </body>

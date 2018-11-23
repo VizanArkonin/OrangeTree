@@ -37,7 +37,7 @@ def monitor(device_id):
     :param device_id: Device ID
     :return: Rendered template
     """
-    return render_template("gpio/monitor.html",
+    return render_template("/gpio/monitor.html",
                            pins_config=server_interface.get_device_pin_config(device_id),
                            socket_url=WEB_SERVICE_CONFIG["host"],
                            socket_port=WEB_SERVICE_CONFIG["socket_port"])
@@ -45,11 +45,10 @@ def monitor(device_id):
 
 @web_service.route("/index", methods=["GET"])
 @login_required
-@roles_accepted("admin")
-@roles_accepted("user")
+@roles_accepted("user", "admin")
 def index():
     """
     Maps monitor path to a static index file
     :return: Rendered template
     """
-    return render_template("general/index.html")
+    return render_template("/general/index.html")

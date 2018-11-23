@@ -1,17 +1,13 @@
 //Styling the navigation bar and sidebar
 
-.aside {
+.sidebar-container {
   background-color: $dark-color-400;
   display: flex;
   min-height: 100vh;
   overflow-y: hidden;
 }
 
-.aside-nav {
-  position: fixed;
-}
-
-.aside-nav-box {
+.sidebar-navigation {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
@@ -28,14 +24,14 @@
   }
 }
 
-.aside-element {
+.sidebar-element {
   & i, span {
     color: $white-color;
     font-size: $font-size-default-n;
   }
 }
 
-.aside-hover {
+.sidebar-link-hover {
   opacity: 0.7;
   &:hover {
     background: $dark-color-300;
@@ -47,24 +43,13 @@
   }
 }
 
-.main-section {
-  display: flex;
-  flex-direction: column;
-}
-
-.nav {
-  @include nav-gradient-default;
-  display: flex;
-  align-items: center;
-  position: fixed;
+.navigation-container {
+  @include navigation-gradient-default;
   height:$height-base-element-default;
 }
 
-.nav-content {
+.navigation-right {
   height: $height-base-element-default;
-}
-
-.nav-right {
   flex-grow: 10;
   & li {
     padding-right: 20px;
@@ -74,24 +59,25 @@
   }
 }
 
-.nav-left {
+.navigation-left {
+  height: $height-base-element-default;
   display: flex;
-  flex-grow: 1;
   justify-content: flex-start;
   align-items: center;
+  flex-grow: 1;
   & li {
     padding-left: 15px;
   }
 }
 
-.nav-box {
+.navigation-left-position-element {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   height: 100%;
 }
 
-.nav-element {
+.navigation-element {
   & i, span {
     color: $white-color;
     font-size: $font-size-default-l;
@@ -120,16 +106,16 @@
   display: none;
 }
 
-.aside-responsive-on {
+.sidebar-responsive-on {
   width: $aside-responsive-on-default;
 }
 
-.aside-responsive-off {
+.sidebar-responsive-off {
   width: $aside-responsive-off-default;
-  .aside-element span {
+  .sidebar-element span {
     display: none;
   }
-  .aside-element a {
+  .sidebar-element a {
     display: flex;
     align-items: center;
     justify-content: center;

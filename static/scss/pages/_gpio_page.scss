@@ -2,11 +2,8 @@
 
 .pin-container {
   background: $white-color-900;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 2.2rem;
   flex-basis: 40%;
+  height: 2.2rem;
   margin: 0.5rem 5%;
   font-size: $font-size-default-s;
 }
