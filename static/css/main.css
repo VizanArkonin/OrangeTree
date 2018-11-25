@@ -383,6 +383,7 @@ input:-webkit-autofill:focus {
   height: 100%;
   width: 100%; }
   .table-container th, .table-container td {
+    height: 3rem;
     text-align: center;
     vertical-align: middle; }
   .table-container td {
