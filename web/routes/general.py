@@ -2,13 +2,11 @@
 General routing library
 """
 
-from flask import render_template
+from flask import render_template, redirect, url_for
 from flask_login import user_logged_in
 from flask_security import login_required, roles_required, roles_accepted
 from datetime import datetime
 
-from board_controller.server import server_interface
-from config import WEB_SERVICE_CONFIG
 from web import web_service
 
 
@@ -28,19 +26,15 @@ def on_user_logged_in(sender, user):
         user.login_count = 1
 
 
-@web_service.route("/monitor/<string:device_id>", methods=["GET"])
-@login_required
-@roles_accepted("admin")
-def monitor(device_id):
+@web_service.errorhandler(404)
+def not_found(e):
     """
-    Maps monitor path to a static index file
-    :param device_id: Device ID
+    Default error handler for 404 NOT-FOUND HTTP code
+
+    :param e: Error
     :return: Rendered template
     """
-    return render_template("gpio/monitor.html",
-                           pins_config=server_interface.get_device_pin_config(device_id),
-                           socket_url=WEB_SERVICE_CONFIG["host"],
-                           socket_port=WEB_SERVICE_CONFIG["socket_port"])
+    return render_template("service/404.html"), 404
 
 
 @web_service.route("/index", methods=["GET"])
@@ -52,3 +46,12 @@ def index():
     :return: Rendered template
     """
     return render_template("general/index.html")
+
+
+@web_service.route("/", methods=["GET"])
+def empty_index_redirect():
+    """
+    Redirect route for simply forward-slash address, which should refer to index
+    :return: Redirect instance
+    """
+    return redirect(url_for("index"))
