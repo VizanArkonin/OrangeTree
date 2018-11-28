@@ -11,12 +11,7 @@ body, input, button {
 body {
   height: 100%;
   display: flex;
-  /* fallback for old browsers */
-  background: #d2a065;
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(135deg, #584b5d, #72555a, #d2a065, #9c8679);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(135deg, #584b5d, #72555a, #d2a065, #9c8679); }
+  background: #4b4b4b; }
 
 a {
   text-decoration: none; }
@@ -24,16 +19,12 @@ a {
 input:-webkit-autofill {
   -webkit-text-fill-color: rgba(255, 255, 255, 0.6);
   -webkit-box-shadow: 0 0 0 100rem rgba(0, 0, 0, 0) inset;
-  transition: background-color 5000s ease-in-out 0s; }
+  transition: background-color 10000000s ease-in-out 0s; }
 
 input:-webkit-autofill:focus {
   -webkit-text-fill-color: white;
   -webkit-box-shadow: 0 0 0 100rem rgba(0, 0, 0, 0) inset;
-  transition: background-color 5000s ease-in-out 0s; }
-
-.login-platform {
-  height: 100vh;
-  width: 100%; }
+  transition: background-color 10000000s ease-in-out 0s; }
 
 .login-form-container {
   background: rgba(0, 0, 0, 0.4);
@@ -70,7 +61,7 @@ input:-webkit-autofill:focus {
     .input-container input[type=text]:focus, .input-container input[type=password]:focus, .input-focus-within input[type=text]:focus, .input-focus-within input[type=password]:focus {
       color: white; }
   .input-container input[type=submit], .input-focus-within input[type=submit] {
-    background: #dea640;
+    background: #e57a46;
     color: white;
     height: 100%;
     width: 100%;
@@ -80,7 +71,7 @@ input:-webkit-autofill:focus {
     /* Safari */
     transition-duration: 0.3s; }
     .input-container input[type=submit]:hover, .input-focus-within input[type=submit]:hover {
-      background: #f1a213; }
+      background: #df6327; }
     .input-container input[type=submit]:active, .input-focus-within input[type=submit]:active {
       background: #64c1bb; }
 
@@ -94,9 +85,9 @@ input:-webkit-autofill:focus {
 
 .input-focus-within:focus-within {
   color: white;
-  -webkit-box-shadow: 0px 0px 0.5rem 0.2rem #dea640;
-  -moz-box-shadow: 0px 0px 0.5rem 0.2rem #dea640;
-  box-shadow: 0px 0px 0.5rem 0.2rem #dea640; }
+  -webkit-box-shadow: 0px 0px 0.5rem 0.2rem #e57a46;
+  -moz-box-shadow: 0px 0px 0.5rem 0.2rem #e57a46;
+  box-shadow: 0px 0px 0.5rem 0.2rem #e57a46; }
 .input-focus-within:focus-within i {
   opacity: 1; }
 
@@ -118,6 +109,28 @@ input:-webkit-autofill:focus {
 @media screen and (max-width: 479px) {
   .input-container, .input-focus-within {
     font-size: 1.5rem; } }
+.page-404-container {
+  color: white;
+  font-size: 1.5rem; }
+  .page-404-container img {
+    max-width: 100%;
+    height: auto; }
+
+.text-404-container {
+  text-align: center; }
+
+@media screen and (max-width: 1339px) {
+  .page-404-container {
+    font-size: 1.5rem; } }
+@media screen and (max-width: 1023px) {
+  .page-404-container {
+    font-size: 1.5rem; } }
+@media screen and (max-width: 767px) {
+  .page-404-container {
+    font-size: 1.5rem; } }
+@media screen and (max-width: 479px) {
+  .page-404-container {
+    font-size: 1.5rem; } }
 .checkbox-container {
   color: rgba(255, 255, 255, 0.6);
   height: 100%; }
@@ -136,7 +149,7 @@ input:-webkit-autofill:focus {
   .checkbox:hover {
     background: white; }
   .checkbox:checked {
-    background: #dea640; }
+    background: #e57a46; }
   .checkbox:checked::before {
     font-size: 1.3rem;
     color: white;
@@ -177,16 +190,11 @@ input:-webkit-autofill:focus {
     background: rgba(0, 0, 0, 0.3);
     opacity: 1; }
   .sidebar-link-hover:active {
-    background: #dea640;
+    background: #e57a46;
     opacity: 1; }
 
 .navigation-container {
-  /* fallback for old browsers */
-  background: #352d38;
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(135deg, #352d38, #413136, #584137, #73563a);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(135deg, #352d38, #413136, #584137, #73563a);
+  background: #2d2d2d;
   height: 5rem; }
 
 .navigation-right {
@@ -280,6 +288,10 @@ input:-webkit-autofill:focus {
 .position-fixed {
   position: fixed; }
 
+.full-size-display {
+  height: 100vh;
+  width: 100%; }
+
 @media screen and (max-width: 1339px) {
   .page-title {
     font-size: 1.8rem; } }
@@ -331,7 +343,7 @@ input:-webkit-autofill:focus {
     background: #56a39e; }
 
 .pin-power {
-  background: #dea640;
+  background: #e57a46;
   color: white; }
 
 .pin-gnd {
@@ -409,13 +421,13 @@ input:-webkit-autofill:focus {
   height: 100%;
   width: 60%; }
   .tab-footer-left button {
-    background: #dea640;
+    background: #e57a46;
     color: white;
     margin: 0.5rem 0 0.5rem 0.5rem;
     border: 0;
     width: 100%; }
     .tab-footer-left button:hover {
-      background: #f1a213; }
+      background: #df6327; }
     .tab-footer-left button:active {
       background: #64c1bb; }
 
@@ -424,13 +436,13 @@ input:-webkit-autofill:focus {
   width: 15%;
   height: 100%; }
   .tab-footer-right button {
-    background: #dea640;
+    background: #e57a46;
     color: white;
     margin: 0.5rem 0.5rem 0.5rem 0;
     border: 0;
     width: 100%; }
     .tab-footer-right button:hover {
-      background: #f1a213; }
+      background: #df6327; }
     .tab-footer-right button:active {
       background: #64c1bb; }
   .tab-footer-right span {

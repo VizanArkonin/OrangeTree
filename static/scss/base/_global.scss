@@ -15,7 +15,7 @@ body, input, button {
 body {
   height: 100%;
   display: flex;
-  @include bg-gradient-default;
+  background: $bg-default-color;
 }
 
 a {
@@ -25,11 +25,11 @@ a {
 input:-webkit-autofill {
   -webkit-text-fill-color: $white-color-600;
   -webkit-box-shadow: 0 0 0 100rem rgba(0, 0, 0, 0.0) inset;
-  transition: background-color 5000s ease-in-out 0s;
+  transition: background-color 10000000s ease-in-out 0s;
 }
 
 input:-webkit-autofill:focus {
   -webkit-text-fill-color: $white-color;
   -webkit-box-shadow: 0 0 0 100rem rgba(0, 0, 0, 0.0) inset;
-  transition: background-color 5000s ease-in-out 0s;
+  transition: background-color 10000000s ease-in-out 0s;
 }

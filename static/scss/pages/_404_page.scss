@@ -1,0 +1,38 @@
+//Styles for the page "404 Not found"
+.page-404-container {
+  color: $white-color;
+  font-size: $font-size-default-n;
+  & img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.text-404-container {
+  text-align: center;
+}
+
+// Media queries
+@include media-breakpoint-xl {
+  .page-404-container {
+    font-size: $font-size-xl-n;
+  }
+}
+
+@include media-breakpoint-lg {
+  .page-404-container {
+    font-size: $font-size-lg-n;
+  }
+}
+
+@include media-breakpoint-md {
+  .page-404-container {
+    font-size: $font-size-md-n;
+  }
+}
+
+@include media-breakpoint-sm {
+  .page-404-container {
+    font-size: $font-size-sm-n;
+  }
+}

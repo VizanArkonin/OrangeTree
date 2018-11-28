@@ -37,6 +37,11 @@
   position: fixed;
 }
 
+.full-size-display {
+  height: 100vh;
+  width: 100%;
+}
+
 // Media queries
 @include media-breakpoint-xl {
   .page-title {
@@ -61,4 +66,3 @@
     font-size: $font-size-sm-l;
   }
 }
-
