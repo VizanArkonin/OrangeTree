@@ -44,7 +44,7 @@
 }
 
 .navigation-container {
-  @include navigation-gradient-default;
+  background: $nav-default-color;
   height:$height-base-element-default;
 }
 

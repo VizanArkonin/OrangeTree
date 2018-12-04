@@ -1,5 +1,7 @@
 // General color scheme
 $danger-color: rgba(246, 73, 73, 1) !important;
+$bg-default-color: rgba(75, 75, 75, 1);
+$nav-default-color: rgba(45, 45, 45, 1);
 $white-color: rgb(255, 255, 255);
 $white-color-900: rgba(255, 255, 255, 0.9);
 $white-color-600: rgba(255, 255, 255, 0.6);
@@ -11,27 +13,12 @@ $dark-color-400: rgba(0, 0, 0, 0.4);
 $dark-color-300: rgba(0, 0, 0, 0.3);
 
 // Variables for buttons and links
-$btn-default-color: rgba(222, 166, 64, 1);
-$btn-default-color-hover: rgba(241, 162, 19, 1);
+$btn-default-color: rgba(229, 122, 70, 1);
+$btn-default-color-hover: rgba(223, 99, 39, 1);
 $btn-on-color: rgba(100, 193, 187, 1);
 $btn-on-color-hover: rgba(86, 163, 158, 1);
 $btn-off-color: rgba(255, 93, 93, 1);
 $btn-off-color-hover: rgba(246, 73, 73, 1);
-
-// Variables for mixins:
-// -for background
-$bg-gr-color-default: rgba(210, 160, 101, 1);
-$bg-gr-color-one: rgba(88, 75, 93, 1);
-$bg-gr-color-two: rgba(114, 85, 90, 1);
-$bg-gr-color-three: rgba(210, 160, 101, 1);
-$bg-gr-color-four: rgba(156, 134, 121, 1);
-
-// -for navigation bar
-$nav-gr-color-default: rgba(53, 45, 56, 1);
-$nav-gr-color-one: rgba(53, 45, 56, 1);
-$nav-gr-color-two: rgba(65, 49, 54, 1);
-$nav-gr-color-three: rgba(88, 65, 55, 1);
-$nav-gr-color-four: rgba(115, 86, 58, 1);
 
 // Auxiliary variables for determining height and width
 // For screens above 1440px
