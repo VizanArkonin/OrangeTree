@@ -3,36 +3,58 @@
   color: $white-color;
   font-size: $font-size-default-n;
   & img {
-    max-width: 100%;
+    padding: 1rem;
+    width: 100%;
     height: auto;
   }
 }
 
 .text-404-container {
   text-align: center;
+  width: 32rem;
+  padding: 1.5rem;
+  margin-left: 5rem;
+  & h1 {
+    padding-bottom: 1rem;
+  }
+  & h2 {
+    padding-bottom: 5rem;
+  }
 }
 
 // Media queries
-@include media-breakpoint-xl {
-  .page-404-container {
-    font-size: $font-size-xl-n;
-  }
-}
 
 @include media-breakpoint-lg {
   .page-404-container {
-    font-size: $font-size-lg-n;
-  }
-}
+    flex-direction: column;
+    & img {
+      width: 32rem;
+      height: auto;
 
-@include media-breakpoint-md {
-  .page-404-container {
-    font-size: $font-size-md-n;
+    }
+  }
+  .text-404-container {
+    margin-top: 5rem;
+    margin-left: 0;
   }
 }
 
 @include media-breakpoint-sm {
   .page-404-container {
-    font-size: $font-size-sm-n;
+    & img {
+      width: 19rem;
+    }
+  }
+  .text-404-container {
+    width: 22rem;
+    margin-top: 1rem;
+    & h1 {
+      font-size: 3rem;
+      padding-bottom: 1rem;
+    }
+    & h2 {
+      font-size: 1.8rem;
+      padding-bottom: 2rem;
+    }
   }
 }

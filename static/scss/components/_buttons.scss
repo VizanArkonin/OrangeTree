@@ -34,3 +34,25 @@
     bottom: 0.4rem;
   }
 }
+
+.button-link {
+  background: $btn-default-color;
+  color: $white-color;
+  display: inline-block;
+  font-size: 3rem;
+  line-height: 6rem;
+  height: 6rem;
+  width: 100%;
+  &:hover {
+    @include transition-duration;
+    background: $btn-default-color-hover;
+  }
+}
+
+@include media-breakpoint-sm {
+  .button-link {
+    height: 4rem;
+    line-height: 4rem;
+    font-size: $font-size-sm-l;
+  }
+}
