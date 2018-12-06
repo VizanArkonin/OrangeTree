@@ -1,0 +1,21 @@
+//Styles for modal boxes
+
+.modal {
+  background: $dark-color-300;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  overflow: auto;
+  //Especially for IE (there will be bugs without these values)
+  left: 0;
+  top: 0;
+}
+
+.modal-content {
+  background: $bg-default-color;
+  width: 35rem;
+  height: 50rem;
+  z-index: 2000;
+}
+

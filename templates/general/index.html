@@ -3,6 +3,7 @@
 {% block head %}
 {{ super() }}
 <script src="/js/index/tab_headers.js"></script>
+<script src="/js/index/modal_box_index_page.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -222,7 +223,7 @@
             </div>
             <div class="tab-footer devices">
                 <div class="tab-footer-left">
-                    <button>Add</button>
+                    <button id="modal-add-device">Add</button>
                     <button>Edit</button>
                     <button>Debug</button>
                 </div>
@@ -246,4 +247,13 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block modal_content %}
+    <!-- Create modal box for new device -->
+    <div id="modal-device" class="modal position-fixed full-size-display">
+        <div class="modal-content">
+
+        </div>
+    </div>
 {% endblock %}

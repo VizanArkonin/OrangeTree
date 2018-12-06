@@ -156,6 +156,22 @@ input:-webkit-autofill:focus {
     .text-404-container h2 {
       font-size: 1.8rem;
       padding-bottom: 2rem; } }
+.modal {
+  background: rgba(0, 0, 0, 0.3);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  overflow: auto;
+  left: 0;
+  top: 0; }
+
+.modal-content {
+  background: #4b4b4b;
+  width: 35rem;
+  height: 50rem;
+  z-index: 2000; }
+
 .checkbox-container {
   color: rgba(255, 255, 255, 0.6);
   height: 100%; }
