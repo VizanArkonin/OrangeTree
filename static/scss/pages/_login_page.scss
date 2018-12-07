@@ -51,9 +51,6 @@
     &:hover {
       background: $btn-default-color-hover;
     }
-    &:active {
-      background: $btn-on-color;
-    }
   }
 }
 
@@ -72,7 +69,7 @@
     color: $white-color;
     @include input-box-shadow;
   }
-  &:focus-within i {
+  &:focus-within i, &:focus-within span {
     opacity: 1;
   }
 }

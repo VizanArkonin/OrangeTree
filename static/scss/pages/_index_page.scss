@@ -73,9 +73,6 @@
     &:hover {
       background: $btn-default-color-hover;
     }
-    &:active {
-      background: $btn-on-color;
-    }
   }
 }
 
@@ -91,9 +88,6 @@
     width: 100%;
     &:hover {
       background: $btn-default-color-hover;
-    }
-    &:active {
-      background: $btn-on-color;
     }
   }
   & span {
