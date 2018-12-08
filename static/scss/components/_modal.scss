@@ -17,7 +17,15 @@
   width: 100%;
   max-width: 40rem;
   z-index: 1020;
-  animation-name: animate-modal;
+}
+
+.modal-animation-open {
+  animation-name: animate-modal-open;
+  animation-duration: 0.6s;
+}
+
+.modal-animation-close {
+  animation-name: animate-modal-close;
   animation-duration: 0.6s;
 }
 
@@ -70,12 +78,21 @@
   }
 }
 
-@keyframes animate-modal {
+@keyframes animate-modal-open {
   from {
     opacity: 0;
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes animate-modal-close {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 

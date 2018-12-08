@@ -168,8 +168,14 @@ input:-webkit-autofill:focus {
   background: #2d2d2d;
   width: 100%;
   max-width: 40rem;
-  z-index: 1020;
-  animation-name: animate-modal;
+  z-index: 1020; }
+
+.modal-animation-open {
+  animation-name: animate-modal-open;
+  animation-duration: 0.6s; }
+
+.modal-animation-close {
+  animation-name: animate-modal-close;
   animation-duration: 0.6s; }
 
 .modal-header {
@@ -212,11 +218,16 @@ input:-webkit-autofill:focus {
   .modal-footer button {
     margin-left: 0.5rem; }
 
-@keyframes animate-modal {
+@keyframes animate-modal-open {
   from {
     opacity: 0; }
   to {
     opacity: 1; } }
+@keyframes animate-modal-close {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0; } }
 .checkbox-container {
   color: rgba(255, 255, 255, 0.6);
   height: 100%; }
