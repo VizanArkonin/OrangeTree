@@ -55,16 +55,16 @@ input:-webkit-autofill:focus {
   margin: 2rem 0;
   height: 5rem;
   font-size: 1.5rem; }
-  .input-container input[type=text], .input-container input[type=password], .input-focus-within input[type=text], .input-focus-within input[type=password] {
+  .input-container input[type=text], .input-container input[type=password], .input-container input[type=email], .input-focus-within input[type=text], .input-focus-within input[type=password], .input-focus-within input[type=email] {
     background: rgba(0, 0, 0, 0.4);
     caret-color: white;
     padding: 0.5rem 0;
     height: 100%;
     width: 100%;
     border: 0; }
-    .input-container input[type=text]:valid, .input-container input[type=password]:valid, .input-focus-within input[type=text]:valid, .input-focus-within input[type=password]:valid {
+    .input-container input[type=text]:valid, .input-container input[type=password]:valid, .input-container input[type=email]:valid, .input-focus-within input[type=text]:valid, .input-focus-within input[type=password]:valid, .input-focus-within input[type=email]:valid {
       color: rgba(255, 255, 255, 0.6); }
-    .input-container input[type=text]:focus, .input-container input[type=password]:focus, .input-focus-within input[type=text]:focus, .input-focus-within input[type=password]:focus {
+    .input-container input[type=text]:focus, .input-container input[type=password]:focus, .input-container input[type=email]:focus, .input-focus-within input[type=text]:focus, .input-focus-within input[type=password]:focus, .input-focus-within input[type=email]:focus {
       color: white; }
   .input-container input[type=submit], .input-focus-within input[type=submit] {
     background: #e57a46;
@@ -200,7 +200,7 @@ input:-webkit-autofill:focus {
     min-width: 11rem;
     padding-left: 1rem;
     opacity: 0.6; }
-  .modal-content-block input[type=text], .modal-content-block select {
+  .modal-content-block input[type=text], .modal-content-block input[type=password], .modal-content-block input[type=email], .modal-content-block select {
     background: #1b1b1b;
     color: white;
     caret-color: white;
@@ -210,12 +210,23 @@ input:-webkit-autofill:focus {
   .modal-content-block select {
     color: rgba(255, 255, 255, 0.6); }
 
+.roles-container {
+  background: #1b1b1b;
+  color: white;
+  height: 5rem;
+  width: 100%; }
+
+.roles-container-checkbox {
+  display: flex;
+  width: 50%;
+  align-items: center; }
+
 .modal-footer {
   background: #1b1b1b;
   display: flex;
   height: 5rem;
   padding: 0.5rem; }
-  .modal-footer button {
+  .modal-footer button:nth-child(2) {
     margin-left: 0.5rem; }
 
 @keyframes animate-modal-open {
@@ -272,11 +283,6 @@ input:-webkit-autofill:focus {
     transition-duration: 0.3s;
     background: #df6327; }
 
-@media screen and (max-width: 479px) {
-  .button-link {
-    height: 4rem;
-    line-height: 4rem;
-    font-size: 1.8rem; } }
 .btn-modal {
   background: #e57a46;
   color: white;
@@ -286,6 +292,11 @@ input:-webkit-autofill:focus {
   .btn-modal:hover {
     background: #df6327; }
 
+@media screen and (max-width: 479px) {
+  .button-link {
+    height: 4rem;
+    line-height: 4rem;
+    font-size: 1.8rem; } }
 .sidebar-container {
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;

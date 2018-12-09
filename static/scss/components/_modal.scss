@@ -55,7 +55,7 @@
     padding-left: 1rem;
     opacity: 0.6;
   }
-  & input[type = text], & select {
+  & input[type = text], input[type = password], input[type = email], & select {
     background: $header-default-color;
     color: $white-color;
     caret-color: $white-color;
@@ -68,12 +68,25 @@
   }
 }
 
+.roles-container {
+    background: $header-default-color;
+    color: $white-color;
+    height: $height-base-element-default;
+    width: 100%;
+}
+
+.roles-container-checkbox {
+  display: flex;
+  width: 50%;
+  align-items: center;
+}
+
 .modal-footer {
   background: $header-default-color;
   display: flex;
   height: $height-base-element-default;
   padding: 0.5rem;
-  & button {
+  & button:nth-child(2) {
     margin-left: 0.5rem;
   }
 }
