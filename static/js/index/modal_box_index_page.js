@@ -54,9 +54,6 @@ $(document).ready(function () {
         closeModalAnimation();
         setTimeout(function () {
             $(CONTAINER_DEVICE_EDIT).css(DISPLAY_NONE);
-            // $("#device_id").val('');
-            // $("#device_key").val('');
-            // $("#device_type").val('1');
         },setTime);
     });
 

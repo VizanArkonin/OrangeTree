@@ -45,12 +45,14 @@
   & tr:nth-child(odd) {
     background: $white-color-600;
   }
+  & tr:hover {
+    background: $btn-default-color;
+  }
   & tr:first-child {
     background: $dark-color-700;
     color: $white-color;
   }
 }
-
 
 .tab-footer {
   background: $dark-color-700;
