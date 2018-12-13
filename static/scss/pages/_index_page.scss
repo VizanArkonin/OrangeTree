@@ -22,7 +22,7 @@
 
 .tab-content {
   background: $dark-color-400;
-  height: 48rem;
+  height: 100%;
   width: 100%;
   padding: 1.5rem;
 }
@@ -47,6 +47,7 @@
   }
   & tr:hover {
     background: $btn-default-color;
+    color: $white-color;
   }
   & tr:first-child {
     background: $dark-color-700;

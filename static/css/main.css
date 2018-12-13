@@ -523,7 +523,7 @@ input:-webkit-autofill:focus {
 
 .tab-content {
   background: rgba(0, 0, 0, 0.4);
-  height: 48rem;
+  height: 100%;
   width: 100%;
   padding: 1.5rem; }
 
@@ -542,7 +542,8 @@ input:-webkit-autofill:focus {
   .table-container tr:nth-child(odd) {
     background: rgba(255, 255, 255, 0.6); }
   .table-container tr:hover {
-    background: #e57a46; }
+    background: #e57a46;
+    color: white; }
   .table-container tr:first-child {
     background: rgba(0, 0, 0, 0.7);
     color: white; }

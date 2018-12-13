@@ -223,8 +223,8 @@
             </div>
             <div class="tab-footer devices">
                 <div class="tab-footer-left">
-                    <button class="modal-add-device">Add</button>
-                    <button class="modal-edit-device">Edit</button>
+                    <button class="open-modal-device" data-modal="add">Add</button>
+                    <button class="open-modal-device" data-modal="edit">Edit</button>
                     <button>Debug</button>
                 </div>
                 <div class="tab-footer-right">
@@ -235,8 +235,8 @@
             </div>
             <div class="tab-footer users">
                 <div class="tab-footer-left">
-                    <button class="modal-add-user">Add</button>
-                    <button class="modal-edit-user">Edit</button>
+                    <button class="open-modal-user" data-modal="add">Add</button>
+                    <button class="open-modal-user" data-modal="edit">Edit</button>
                 </div>
                 <div class="tab-footer-right">
                     <button><i class="fas fa-arrow-left"></i></button>
@@ -250,24 +250,24 @@
 {% endblock %}
 
 {% block modal_content %}
-    <!-- Create modal box for new device -->
-    <div class="modal position-fixed full-size-display container-device-add">
+    <!-- Create modal box for create a new device and edit device -->
+    <div id="modal_device" class="modal position-fixed full-size-display">
         <div class="modal-container">
             <div class="modal-header">
-                <span>Add new device</span>
+                <span id="modal_header_device"></span>
             </div>
             <div class="modal-content">
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Device ID</span>
-                    <input id="device_id" type="text" value="" placeholder="Enter device ID" maxlength="20" autofocus required  >
+                    <input id="modal_device_id" type="text" value="" placeholder="" maxlength="20" autofocus>
                 </div>
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Deviсe key</span>
-                    <input id="device_key" type="text" value="" placeholder="Enter device key" maxlength="40" required>
+                    <input id="modal_device_key" type="text" value="" placeholder="Enter device key" maxlength="40">
                 </div>
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Deviсe type</span>
-                    <select name="device_type" id="device_type">
+                    <select id="modal_device_type" name="device_type">
                         <option value="1">Orange Pi Lite</option>
                         <option value="">Orange Pi Zero</option>
                         <option value="">Orange Pi One</option>
@@ -279,81 +279,47 @@
             </div>
             <div class="modal-footer">
                 <button class="btn-modal">Add</button>
-                <button class="btn-modal modal-close-add-deviсe">Close</button>
+                <button class="btn-modal close-modal" data-modal="device">Close</button>
             </div>
         </div>
     </div>
 
-    <!-- Create modal box for edit device -->
-    <div class="modal position-fixed full-size-display container-device-edit">
+    <!-- Create modal box for create a new device and edit user -->
+    <div id="modal_user" class="modal position-fixed full-size-display">
         <div class="modal-container">
             <div class="modal-header">
-                <span>Edit device</span>
-            </div>
-            <div class="modal-content">
-                <div class="modal-content-block flex-container-center input-focus-within">
-                    <span>Device ID</span>
-                    <input type="text" value="" placeholder="Edit device ID" maxlength="20" autofocus required  >
-                </div>
-                <div class="modal-content-block flex-container-center input-focus-within">
-                    <span>Deviсe key</span>
-                    <input type="text" value="" placeholder="Edit device key" maxlength="40" required>
-                </div>
-                <div class="modal-content-block flex-container-center input-focus-within">
-                    <span>Deviсe type</span>
-                    <select name="device_type" id="device_type">
-                        <option value="1">Orange Pi Lite</option>
-                        <option value="">Orange Pi Zero</option>
-                        <option value="">Orange Pi One</option>
-                        <option value="">Orange Pi PC</option>
-                        <option value="">Orange Pi Plus</option>
-                        <option value="">Orange Pi 2G-IoT</option>
-                    </select>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn-modal">Edit</button>
-                <button class="btn-modal modal-close-edit-deviсe">Close</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Create modal box for add new user -->
-    <div class="modal position-fixed full-size-display container-user-add">
-        <div class="modal-container">
-            <div class="modal-header">
-                <span>Add User</span>
+                <span id="modal_header_user"></span>
             </div>
             <div class="modal-content">
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>First Name</span>
-                    <input type="text" value="" placeholder="Enter First Name" maxlength="20" autofocus required  >
+                    <input id="modal_user_first_name" type="text" value="" placeholder="" maxlength="20" autofocus>
                 </div>
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Last Name</span>
-                    <input type="text" value="" placeholder="Enter Last Name" maxlength="20" required>
+                    <input id="modal_user_last_name" type="text" value="" placeholder="" maxlength="20">
                 </div>
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Email</span>
-                    <input type="email" value="" placeholder="Enter email" maxlength="20" required>
+                    <input id="modal_user_email" type="email" value="" placeholder="" maxlength="20">
                 </div>
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Password</span>
-                    <input type="password" value="" placeholder="Enter new password" maxlength="20" required>
+                    <input  id="modal_user_password" type="password" value="" placeholder="" maxlength="20">
                 </div>
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Password</span>
-                    <input type="password" value="" placeholder="Confirm new password" maxlength="20" required>
+                    <input id="modal_user_confirm_password" type="password" value="" placeholder="" maxlength="20">
                 </div>
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Roles</span>
                     <div class="roles-container flex-container-center">
                         <div class="checkbox-container roles-container-checkbox">
-                            <input class="checkbox" id="" name="" type="checkbox" value="">
+                            <input class="checkbox" type="checkbox">
                             <label for="checkbox">User</label>
                         </div>
                         <div class="checkbox-container  roles-container-checkbox">
-                            <input class="checkbox" id="" name="" type="checkbox" value="">
+                            <input class="checkbox" type="checkbox">
                             <label for="checkbox">Admin</label>
                         </div>
                     </div>
@@ -361,55 +327,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn-modal">Add</button>
-                <button class="btn-modal modal-close-add-user">Close</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Create modal box for eidt new user -->
-    <div class="modal position-fixed full-size-display container-user-edit">
-        <div class="modal-container">
-            <div class="modal-header">
-                <span>Edit User</span>
-            </div>
-            <div class="modal-content">
-                <div class="modal-content-block flex-container-center input-focus-within">
-                    <span>First Name</span>
-                    <input type="text" value="" placeholder="Edit First Name" maxlength="20" autofocus required  >
-                </div>
-                <div class="modal-content-block flex-container-center input-focus-within">
-                    <span>Last Name</span>
-                    <input type="text" value="" placeholder="Edit Last Name" maxlength="20" required>
-                </div>
-                <div class="modal-content-block flex-container-center input-focus-within">
-                    <span>Email</span>
-                    <input type="email" name="email" value="" placeholder="Edit email" maxlength="20" required>
-                </div>
-                <div class="modal-content-block flex-container-center input-focus-within">
-                    <span>Password</span>
-                    <input type="password" value="" placeholder="Edit password" maxlength="20" required>
-                </div>
-                <div class="modal-content-block flex-container-center input-focus-within">
-                    <span>Password</span>
-                    <input type="password" value="" placeholder="Confirm  password" maxlength="20" required>
-                </div>
-                <div class="modal-content-block flex-container-center input-focus-within">
-                    <span>Roles</span>
-                    <div class="roles-container flex-container-center">
-                        <div class="checkbox-container roles-container-checkbox">
-                            <input class="checkbox" id="" name="" type="checkbox" value="">
-                            <label for="checkbox">User</label>
-                        </div>
-                        <div class="checkbox-container  roles-container-checkbox">
-                            <input class="checkbox" id="" name="" type="checkbox" value="">
-                            <label for="checkbox">Admin</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn-modal">Edit</button>
-                <button class="btn-modal modal-close-edit-user">Close</button>
+                <button class="btn-modal close-modal" data-modal="user">Close</button>
             </div>
         </div>
     </div>
