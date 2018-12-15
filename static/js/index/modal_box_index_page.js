@@ -14,7 +14,7 @@ const MODAL_USER = "#modal_user";
 $(document).ready(function () {
 
     let setTime = 500; // Set the delay time for the animation to work
-    let propsRow = 0; // A helper variable to track the status of a row
+    let rowSelected = false; // A helper variable to track the status of a row
 
     // Animation when opening a modal window
     function openModalAnimation () {
@@ -37,7 +37,7 @@ $(document).ready(function () {
             openModalAnimation();
             $(MODAL_DEVICE).css(DISPLAY_FLEX);
         }
-        if ($(this).data("modal") === "edit" && propsRow === 1) {
+        if ($(this).data("modal") === "edit" && rowSelected) {
             $("#modal_header_device").text("Edit device");
             $("#modal_device_id").attr("placeholder","Edit device ID");
             $("#modal_device_key").attr("placeholder","Edit device key");
@@ -58,7 +58,7 @@ $(document).ready(function () {
             openModalAnimation();
             $(MODAL_USER).css(DISPLAY_FLEX);
         }
-        if ($(this).data("modal") === "edit" && propsRow === 1) {
+        if ($(this).data("modal") === "edit" && rowSelected) {
             $("#modal_header_user").text("Edit user");
             $("#modal_user_first_name").attr("placeholder","Edit First Name");
             $("#modal_user_last_name").attr("placeholder","Edit Last Name");
@@ -99,7 +99,7 @@ $(document).ready(function () {
         $(this).addClass("row-active");
         $('[data-modal="edit"]').addClass("btn-active");
         $('[data-modal="debug"]').addClass("btn-active");
-        propsRow = 1;
+        rowSelected = true;
     });
 
     // Function to reset row status
@@ -109,7 +109,7 @@ $(document).ready(function () {
             $('[data-modal="debug"]').removeClass("btn-active");
             $('[data-modal="edit"]').removeClass("btn-active");
             $(TABLE_ROW).removeClass("row-active");
-            propsRow = 0;
+            rowSelected = false;
         }
     });
 });
