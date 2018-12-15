@@ -46,13 +46,18 @@
     background: $white-color-600;
   }
   & tr:hover {
-    background: $btn-default-color;
+    background: $dark-color-300;
     color: $white-color;
   }
   & tr:first-child {
     background: $dark-color-700;
     color: $white-color;
   }
+}
+
+.row-active {
+  background: $btn-default-color !important;
+  color: $white-color;
 }
 
 .tab-footer {
@@ -68,14 +73,12 @@
   height: 100%;
   width: 60%;
   & button {
-    background: $btn-default-color;
+    cursor: default;
+    background: $btn-default-color-disable;
     color: $white-color;
     margin: 0.5rem 0 0.5rem 0.5rem;
     border: 0;
     width: 100%;
-    &:hover {
-      background: $btn-default-color-hover;
-    }
   }
 }
 
@@ -84,19 +87,25 @@
   width: 15%;
   height: 100%;
   & button {
-    background: $btn-default-color;
+    cursor: default;
+    background: $btn-default-color-disable;
     color: $white-color;
     margin: 0.5rem 0.5rem 0.5rem 0;
     border: 0;
     width: 100%;
-    &:hover {
-      background: $btn-default-color-hover;
-    }
   }
   & span {
     color: $white-color;
     margin: 0.5rem 0.5rem 0.5rem 0;
     width: 100%;
+  }
+}
+
+.btn-active {
+  background: $btn-default-color !important;
+  cursor: pointer !important;
+  &:hover {
+    background: $btn-default-color-hover !important;
   }
 }
 
