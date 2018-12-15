@@ -561,31 +561,28 @@ input:-webkit-autofill:focus {
 
 .tab-footer-left {
   display: flex;
-  height: 100%;
+  justify-content: flex-end;
   width: 60%; }
-  .tab-footer-left button {
-    cursor: default;
-    background: #c0896d;
-    color: white;
-    margin: 0.5rem 0 0.5rem 0.5rem;
-    border: 0;
-    width: 100%; }
 
 .tab-footer-right {
   display: flex;
-  width: 15%;
-  height: 100%; }
-  .tab-footer-right button {
-    cursor: default;
-    background: #c0896d;
-    color: white;
-    margin: 0.5rem 0.5rem 0.5rem 0;
-    border: 0;
-    width: 100%; }
-  .tab-footer-right span {
-    color: white;
-    margin: 0.5rem 0.5rem 0.5rem 0;
-    width: 100%; }
+  justify-content: flex-start; }
+
+.btn-table {
+  background: #c0896d;
+  color: white;
+  width: 100%;
+  cursor: default;
+  margin: 0.5rem 0 0.5rem 0.5rem;
+  border: 0; }
+
+.btn-table-arrow {
+  color: white;
+  border: 0;
+  margin: 0.5rem 0.5rem 0.5rem 0;
+  width: 4rem; }
+  .btn-table-arrow span {
+    cursor: default; }
 
 .btn-active {
   background: #e57a46 !important;
