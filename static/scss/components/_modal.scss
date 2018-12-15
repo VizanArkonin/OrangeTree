@@ -1,0 +1,111 @@
+//Styles for modal boxes
+
+.modal {
+  background: $white-color-300;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1010;
+  overflow: auto;
+  //Especially for IE (there will be bugs without these values)
+  left: 0;
+  top: 0;
+}
+
+.modal-container {
+  background: $nav-default-color;
+  width: 100%;
+  max-width: 40rem;
+  z-index: 1020;
+}
+
+.modal-animation-open {
+  animation-name: animate-modal-open;
+  animation-duration: 0.6s;
+}
+
+.modal-animation-close {
+  animation-name: animate-modal-close;
+  animation-duration: 0.6s;
+}
+
+.modal-header {
+  background: $header-default-color;
+  width: 100%;
+  text-align: center;
+  padding: 2rem 0;
+  & span {
+    color: $white-color;
+    font-size: $font-size-default-l;
+  }
+}
+
+.modal-content {
+  color: $white-color;
+  font-size: $font-size-default-n;
+  padding: 2rem;
+  width: 100%;
+}
+
+.modal-content-block {
+  background: $header-default-color;
+  margin: 1.5rem 0;
+  & span {
+    min-width: 11rem;
+    padding-left: 1rem;
+    opacity: 0.6;
+  }
+  & input[type = text], input[type = password], input[type = email], & select {
+    background: $header-default-color;
+    color: $white-color;
+    caret-color: $white-color;
+    border: none;
+    height: $height-base-element-default;
+    width: 100%;
+  }
+  & select {
+    color: $white-color-600;
+  }
+}
+
+.roles-container {
+    background: $header-default-color;
+    color: $white-color;
+    height: $height-base-element-default;
+    width: 100%;
+}
+
+.roles-container-checkbox {
+  display: flex;
+  width: 50%;
+  align-items: center;
+}
+
+.modal-footer {
+  background: $header-default-color;
+  display: flex;
+  height: $height-base-element-default;
+  padding: 0.5rem;
+  & button:nth-child(2) {
+    margin-left: 0.5rem;
+  }
+}
+
+@keyframes animate-modal-open {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes animate-modal-close {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+

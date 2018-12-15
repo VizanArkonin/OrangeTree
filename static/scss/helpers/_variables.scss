@@ -2,18 +2,23 @@
 $danger-color: rgba(246, 73, 73, 1) !important;
 $bg-default-color: rgba(75, 75, 75, 1);
 $nav-default-color: rgba(45, 45, 45, 1);
+$header-default-color: rgba(27, 27, 27, 1);
 $white-color: rgb(255, 255, 255);
 $white-color-900: rgba(255, 255, 255, 0.9);
+$white-color-700: rgba(255, 255, 255, 0.7);
 $white-color-600: rgba(255, 255, 255, 0.6);
 $white-color-400: rgba(255, 255, 255, 0.4);
+$white-color-300: rgba(255, 255, 255, 0.3);
 $dark-color: rgba(0, 0, 0, 1);
 $dark-color-800: rgba(0, 0, 0, 0.8);
 $dark-color-700: rgba(0, 0, 0, 0.7);
+$dark-color-600: rgba(0, 0, 0, 0.6);
 $dark-color-400: rgba(0, 0, 0, 0.4);
 $dark-color-300: rgba(0, 0, 0, 0.3);
 
 // Variables for buttons and links
 $btn-default-color: rgba(229, 122, 70, 1);
+$btn-default-color-disable: rgba(192, 137, 109, 1);
 $btn-default-color-hover: rgba(223, 99, 39, 1);
 $btn-on-color: rgba(100, 193, 187, 1);
 $btn-on-color-hover: rgba(86, 163, 158, 1);

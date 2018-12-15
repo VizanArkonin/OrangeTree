@@ -10,4 +10,3 @@ let randomImage = ["Fry", "Bender", "Nibbler", "Roberto", "Zoidberg"];
 $(document).ready(function() {
     $(IMG_ID_404).attr("src", IMG_404_DIRECTORY + randomImage [Math.floor(Math.random() * 5)] + PNG);
 });
-

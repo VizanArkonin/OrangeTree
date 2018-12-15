@@ -49,6 +49,17 @@
   }
 }
 
+.btn-modal {
+  background: $btn-default-color;
+  color: $white-color;
+  border: none;
+  font-size: $font-size-default-n;
+  width: 100%;
+  &:hover {
+    background: $btn-default-color-hover;
+  }
+}
+
 @include media-breakpoint-sm {
   .button-link {
     height: 4rem;

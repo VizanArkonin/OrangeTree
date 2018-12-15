@@ -22,7 +22,7 @@
 
 .tab-content {
   background: $dark-color-400;
-  height: 48rem;
+  height: 100%;
   width: 100%;
   padding: 1.5rem;
 }
@@ -45,12 +45,20 @@
   & tr:nth-child(odd) {
     background: $white-color-600;
   }
+  & tr:hover {
+    background: $dark-color-300;
+    color: $white-color;
+  }
   & tr:first-child {
     background: $dark-color-700;
     color: $white-color;
   }
 }
 
+.row-active {
+  background: $btn-default-color !important;
+  color: $white-color;
+}
 
 .tab-footer {
   background: $dark-color-700;
@@ -62,44 +70,39 @@
 
 .tab-footer-left {
   display: flex;
-  height: 100%;
+  justify-content: flex-end;
   width: 60%;
-  & button {
-    background: $btn-default-color;
-    color: $white-color;
-    margin: 0.5rem 0 0.5rem 0.5rem;
-    border: 0;
-    width: 100%;
-    &:hover {
-      background: $btn-default-color-hover;
-    }
-    &:active {
-      background: $btn-on-color;
-    }
-  }
 }
 
 .tab-footer-right {
   display: flex;
-  width: 15%;
-  height: 100%;
-  & button {
-    background: $btn-default-color;
-    color: $white-color;
-    margin: 0.5rem 0.5rem 0.5rem 0;
-    border: 0;
-    width: 100%;
-    &:hover {
-      background: $btn-default-color-hover;
-    }
-    &:active {
-      background: $btn-on-color;
-    }
-  }
+  justify-content: flex-start;
+}
+
+.btn-table {
+  background: $btn-default-color-disable;
+  color: $white-color;
+  width: 100%;
+  cursor: default;
+  margin: 0.5rem 0 0.5rem 0.5rem;
+  border: 0;
+}
+
+.btn-table-arrow {
+  color: $white-color;
+  border: 0;
+  margin: 0.5rem 0.5rem 0.5rem 0;
+  width: 4rem;
   & span {
-    color: $white-color;
-    margin: 0.5rem 0.5rem 0.5rem 0;
-    width: 100%;
+    cursor: default;
+  }
+}
+
+.btn-active {
+  background: $btn-default-color !important;
+  cursor: pointer !important;
+  &:hover {
+    background: $btn-default-color-hover !important;
   }
 }
 
