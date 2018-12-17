@@ -1,7 +1,6 @@
 import logging
-from time import sleep
 
-from utils.general import get_formatter
+from common.general import get_formatter
 
 logging.basicConfig(format=get_formatter())
 logger = logging.getLogger("main")
@@ -15,11 +14,11 @@ Initialization is performed during module import (in __init__.py files).
 
 # Service imports. Used to initialize modules and their respective processes/variables. DO NOT REMOVE THEM!
 logger.info("Starting Database module")
-import database
+import server.database
 logger.info("Starting Web service")
-import web
+import server.web
 logger.info("Starting Device server")
-import board_controller.server
+import server.socket_server
 # End of service imports
 
 logger.info("Start-up complete")
