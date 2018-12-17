@@ -1,6 +1,6 @@
 import logging
 
-from utils.general import get_formatter
+from common.general import get_formatter
 
 logging.basicConfig(format=get_formatter())
 logger = logging.getLogger("main")
@@ -14,9 +14,9 @@ Initialization is performed during module import (in __init__.py files).
 
 # Service imports. Used to initialize modules and their respective processes/variables. DO NOT REMOVE THEM!
 logger.info("Starting GPIO adapter")
-import gpio
+import client.gpio
 logger.info("Starting Device client")
-import board_controller.client
+import client.socket_connector
 # End of service imports
 
 logger.info("Start-up complete")
