@@ -1,0 +1,12 @@
+//Collection of all mixin
+
+@mixin input-box-shadow {
+  -webkit-box-shadow: 0px 0px 0.5rem 0.2rem $btn-default-color;
+  -moz-box-shadow: 0px 0px 0.5rem 0.2rem $btn-default-color;
+  box-shadow: 0px 0px 0.5rem 0.2rem $btn-default-color;
+}
+
+@mixin transition-duration {
+  -webkit-transition-duration: 0.3s; /* Safari */
+  transition-duration: 0.3s;
+}

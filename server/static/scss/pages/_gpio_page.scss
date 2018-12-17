@@ -1,0 +1,88 @@
+//Main styles for the page "Pin configuration"
+
+.pin-container {
+  background: $white-color-900;
+  flex-basis: 40%;
+  height: 2.2rem;
+  margin: 0.5rem 5%;
+  font-size: $font-size-default-s;
+}
+
+.icon-gpio i {
+  color: $dark-color-300;
+  flex: 1 1 10%;
+  text-align: center;
+}
+
+.text-gpio span {
+  flex: 1 1 50%;
+  text-align: center;
+}
+
+.btn-gpio {
+  color: $white-color;
+  height: 2.2rem;
+  flex: 0 0 15%;
+  border: 0;
+}
+
+.btn-off {
+  background: $btn-off-color;
+  @include transition-duration;
+  &:hover {
+    background: $btn-off-color-hover;
+  }
+}
+
+.btn-on {
+  background: $btn-on-color;
+  @include transition-duration;
+  &:hover {
+    background: $btn-on-color-hover;
+  }
+}
+
+.pin-power {
+  background: $btn-default-color;
+  color: $white-color;
+}
+
+.pin-gnd {
+  background: $dark-color-400;
+  color: $white-color;
+}
+
+.fa-lock, .fa-lock-open {
+  &:before {
+    cursor: pointer;
+  }
+}
+
+.fa-lock {
+  color: $btn-off-color !important;
+}
+
+// Media queries
+@include media-breakpoint-xl {
+  .pin-container {
+    font-size: $font-size-xl-s;
+  }
+}
+
+@include media-breakpoint-lg {
+  .pin-container {
+    font-size: $font-size-lg-s;
+  }
+}
+
+@include media-breakpoint-md {
+  .pin-container {
+    font-size: $font-size-md-s;
+  }
+}
+
+@include media-breakpoint-sm {
+  .pin-container {
+    font-size: $font-size-sm-s;
+  }
+}

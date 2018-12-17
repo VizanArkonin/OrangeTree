@@ -1,0 +1,60 @@
+//Styles for the page "404 Not found"
+.page-404-container {
+  color: $white-color;
+  font-size: $font-size-default-n;
+  & img {
+    padding: 1rem;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.text-404-container {
+  text-align: center;
+  width: 32rem;
+  padding: 1.5rem;
+  margin-left: 5rem;
+  & h1 {
+    padding-bottom: 1rem;
+  }
+  & h2 {
+    padding-bottom: 5rem;
+  }
+}
+
+// Media queries
+
+@include media-breakpoint-lg {
+  .page-404-container {
+    flex-direction: column;
+    & img {
+      width: 32rem;
+      height: auto;
+
+    }
+  }
+  .text-404-container {
+    margin-top: 5rem;
+    margin-left: 0;
+  }
+}
+
+@include media-breakpoint-sm {
+  .page-404-container {
+    & img {
+      width: 19rem;
+    }
+  }
+  .text-404-container {
+    width: 22rem;
+    margin-top: 1rem;
+    & h1 {
+      font-size: 3rem;
+      padding-bottom: 1rem;
+    }
+    & h2 {
+      font-size: 1.8rem;
+      padding-bottom: 2rem;
+    }
+  }
+}

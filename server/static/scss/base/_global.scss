@@ -1,0 +1,43 @@
+//General page styles
+
+*, :before, :after {
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 10px;
+}
+
+body, input, button, select {
+  font-family: 'Sarpanch', sans-serif;
+}
+
+body {
+  height: 100%;
+  display: flex;
+  background: $bg-default-color;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 5rem;
+}
+
+h2 {
+  font-size: 3.8rem;
+}
+
+input:-webkit-autofill {
+  -webkit-text-fill-color: $white-color-600;
+  -webkit-box-shadow: 0 0 0 100rem rgba(0, 0, 0, 0.0) inset;
+  transition: background-color 10000000s ease-in-out 0s;
+}
+
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: $white-color;
+  -webkit-box-shadow: 0 0 0 100rem rgba(0, 0, 0, 0.0) inset;
+  transition: background-color 10000000s ease-in-out 0s;
+}

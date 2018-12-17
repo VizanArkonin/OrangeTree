@@ -1,0 +1,13 @@
+//Compiling all scss files into a common main.css file
+@import "helpers/_media";
+@import "helpers/_variables";
+@import "helpers/_mixins";
+@import "base/_global";
+@import "pages/_login_page";
+@import "pages/_404_page";
+@import "components/_modal";
+@import "components/_buttons";
+@import "components/_navbar";
+@import "components/_sections";
+@import "pages/_gpio_page";
+@import "pages/_index_page";
