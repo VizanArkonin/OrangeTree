@@ -4,7 +4,7 @@ Core configuration file - Server side
 
 # DB section
 DATABASE_CONFIG = {
-    "connection_string": "sqlite:///database.db?check_same_thread=False",
+    "connection_string": "sqlite:///server/database.db?check_same_thread=False",
     "autocommit": False,
     "autoflush": True
 }
