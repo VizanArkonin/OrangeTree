@@ -1,9 +1,10 @@
 import logging
+from datetime import datetime
 
 from Crypto.Cipher import AES
 
 import client.config as config
-from common.general import get_formatter
+from common.general import get_formatter, get_time_formatter
 
 logging.basicConfig(format=get_formatter())
 
@@ -44,6 +45,13 @@ class ClassBase(object):
         :return: AESCipher class instance
         """
         return AESCipher()
+
+    def get_current_datetime_string(self):
+        """
+        Returns a current datetime stamp, formatted in readable string
+        :return: Timestamp string
+        """
+        return datetime.now().strftime(get_time_formatter())
 
 
 class AESCipher:

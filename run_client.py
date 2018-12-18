@@ -17,6 +17,8 @@ logger.info("Starting GPIO adapter")
 import client.gpio
 logger.info("Starting Device client")
 import client.socket_connector
+logger.info("Starting Device controller module")
+import client.board_controller
 # End of service imports
 
 logger.info("Start-up complete")

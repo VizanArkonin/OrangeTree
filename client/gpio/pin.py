@@ -4,13 +4,13 @@ from threading import Thread
 from time import sleep
 import logging
 
-from client.gpio.utils import wiringpi_is_used
+from client.gpio.utils import live_mode_is_on
 from common.general import get_formatter
 from common.class_base import ClassBase
 
 logging.basicConfig(format=get_formatter())
 
-if wiringpi_is_used():
+if live_mode_is_on():
     import wiringpi
 
 
@@ -40,7 +40,7 @@ class Pin(ClassBase):
         super().log("info", "Initializing {0} GPIO Pin controller with {1} mode".format(pin, mode))
         self._pin = pin
         self._mode = mode
-        if wiringpi_is_used():
+        if live_mode_is_on():
             wiringpi.pinMode(pin, mode)
             self._state = wiringpi.digitalRead(pin)
         else:
@@ -96,7 +96,7 @@ class Pin(ClassBase):
         """
         if not self._locked:
             self._mode = mode
-            if wiringpi_is_used():
+            if live_mode_is_on():
                 wiringpi.pinMode(self._pin, mode)
             if mode == 0:
                 self.__start_input_monitor()
@@ -121,7 +121,7 @@ class Pin(ClassBase):
             if self._mode == 1:
                 self.log("info", "Setting output to {0}".format(state))
 
-                if wiringpi_is_used():
+                if live_mode_is_on():
                     wiringpi.digitalWrite(self._pin, state)
                 self._state = state
             else:
@@ -177,7 +177,7 @@ class Pin(ClassBase):
             new_state = 0
 
         while self._mode == 0:
-            if wiringpi_is_used():
+            if live_mode_is_on():
                 new_state = wiringpi.digitalRead(self._pin)
 
             if self._state != new_state:

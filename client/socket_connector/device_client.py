@@ -107,7 +107,10 @@ class DeviceClient(SocketConnector):
         :param data: Data packet dict
         :return: None
         """
-        self.sock.sendall(self.get_cipher().encrypt(json.dumps(data)))
+        try:
+            self.sock.sendall(self.get_cipher().encrypt(json.dumps(data)))
+        except BrokenPipeError:
+            self.log("error", "[BrokenPipeError] Attempted to send a message through a closed client.")
 
     def reconnect(self):
         """
