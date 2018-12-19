@@ -18,7 +18,6 @@ class SystemMonitor(ClassBase):
         self.cpu_load_percentage = 0
         self.total_ram = 0
         self.ram_used = 0
-        self.client_start_time = self.get_current_datetime_string()
 
     def run(self):
         """
@@ -77,7 +76,6 @@ class SystemMonitor(ClassBase):
             "cpuLoadPercentage": self.cpu_load_percentage,
             "totalRam": self.total_ram,
             "ramUsed": self.ram_used,
-            "clientStartTime": self.client_start_time
         }
 
     def __get_altered_value(self, initial_value, low_border, high_border, step):

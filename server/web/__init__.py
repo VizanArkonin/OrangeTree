@@ -8,13 +8,15 @@ from threading import Thread
 
 from flask import Flask
 from flask_security import Security, SQLAlchemySessionUserDatastore
+from flask_security.utils import hash_password
 from flask_socketio import SocketIO
 
 from server.config import WEB_SERVICE_CONFIG
 
 # First, we initialize Flask application itself, injecting SQLAlchemy binding to provide user data for Flask-Security
 from server.database import db_session
-from server.database.models.user import User, Role
+from server.database.models.user.user import User
+from server.database.models.user.role import Role
 
 web_service = Flask(__name__, static_url_path=WEB_SERVICE_CONFIG["static_url_path"],
                     static_folder=WEB_SERVICE_CONFIG["static_files_path"],
@@ -32,6 +34,18 @@ security = Security(web_service, user_datastore)
 
 # Then we import modules with routes
 import server.web.routes
+
+# Since we cannot properly create after_create hook for user model (it's bound to context-based Flask-Security module),
+# we validate if there are any users existing. If not - we create default one by creating before_first call hook.
+# TODO: Rework it to use static-file stored parameters (i.e. JSON data provider)
+if len(User.query.all()) == 0:
+    @web_service.before_first_request
+    def create_default_user():
+        user = user_datastore.create_user(email="some@mail.com",
+                                          password=hash_password("password"),
+                                          roles=["admin", "user"])
+        db_session.commit()
+
 
 """
 Once done, we run the web service. We run it threaded, to prevent process lock on main level.

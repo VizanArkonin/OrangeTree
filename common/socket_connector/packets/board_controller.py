@@ -14,8 +14,7 @@ def DEVICE_STATUS(device_id, device_status, errors=[]):
         "cpuTemperature": Int,
         "cpuLoadPercentage": Int,
         "totalRam": Int,
-        "ramUsed": Int,
-        "clientStartTime": String (formatted datetime)
+        "ramUsed": Int
     }
 
     :param device_id: Device ID. Refers to device_id column in devices_list table.

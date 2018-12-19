@@ -9,8 +9,8 @@ from flask_security import roles_accepted
 from flask_security.utils import hash_password
 
 from server.database import db_session
-from server.database.models.device import DevicesList
-from server.database.models.user import User
+from server.database.models.device.devices_list import DevicesList
+from server.database.models.user.user import User
 from server.web import web_service, user_datastore
 from server.web import utils
 from server.socket_server import __server as server

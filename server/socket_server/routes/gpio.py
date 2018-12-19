@@ -3,7 +3,7 @@ Socket server - GPIO board calls routing library.
 """
 from common.socket_connector.utils import generic_response_validator
 from server.socket_server import __server as server
-from server.database.models.device import DevicesList
+from server.database.models.device.devices_list import DevicesList
 
 
 @server.route(packet_name="GetGPIOBoardPinConfig")

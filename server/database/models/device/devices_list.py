@@ -1,7 +1,8 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, String, DateTime, event
 from sqlalchemy.orm import relationship
+from client.config import CLIENT_CONFIG
 
-from server.database import Base
+from server.database import Base, db_session
 from common.general import get_time_formatter
 
 
@@ -19,6 +20,8 @@ class DevicesList(Base):
 
     device_type = relationship("DeviceTypes", backref="devices_list")
     device_config = relationship("DeviceTypePinConfig", backref="devices_list")
+
+    device_system_readings = relationship("DeviceSystemMonitorReadings", backref="devices_list")
 
     def serialize_general_data(self):
         """
@@ -63,33 +66,14 @@ class DevicesList(Base):
         return {"pins": config_list}
 
 
-class DeviceTypes(Base):
-    """
-    Defines the device types
-    """
-    __tablename__ = 'device_types'
-    device_type_id = Column(Integer(), ForeignKey("devices_list.device_type_id"), primary_key=True)
-    type_name = Column(String(40))
+"""
+Initiation/migrations section.
+TODO: Rework initiation functions to use static data (i.e. JSON data providers)
+"""
 
 
-class DevicePinTypes(Base):
-    """
-    Defines the pin types
-    """
-    __tablename__ = "device_pin_types"
-    pin_type_id = Column(Integer(), ForeignKey("device_type_pin_config.pin_type_id"), primary_key=True)
-    type_name = Column(String(40))
-
-
-class DeviceTypePinConfig(Base):
-    """
-    Container for GPIO Pin configurations for each device type.
-    """
-    __tablename__ = "device_type_pin_config"
-    id = Column(Integer(), primary_key=True)
-    device_type_id = Column(Integer(), ForeignKey("devices_list.device_type_id"))
-    pin_number = Column(Integer())
-    pin_wpi = Column(Integer())
-    pin_type_id = Column(Integer())
-    pin_type = relationship("DevicePinTypes")
-    pin_meta = Column(String(40))
+@event.listens_for(DevicesList.__table__, "after_create")
+def populate_default_device_types(*args, **kwargs):
+    db_session.add(DevicesList(device_id=CLIENT_CONFIG["device_id"], device_type_id=CLIENT_CONFIG["device_type"],
+                               device_access_key=CLIENT_CONFIG["device_key"]))
+    db_session.commit()

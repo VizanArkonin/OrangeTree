@@ -9,7 +9,7 @@ from common.socket_connector.socket_connector import SocketConnector
 from common.socket_connector.packets import general as Packets
 from server.socket_server.client_thread import ClientThread
 from server.database import db_session
-from server.database.models.device import DevicesList
+from server.database.models.device.devices_list import DevicesList
 from common.general import get_formatter
 
 logging.basicConfig(format=get_formatter())
