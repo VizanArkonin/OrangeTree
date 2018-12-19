@@ -10,6 +10,7 @@ from flask_security.utils import hash_password
 
 from server.database import db_session
 from server.database.models.device.devices_list import DevicesList
+from server.database.models.device.device_monitor_readings import DeviceSystemMonitorReadings
 from server.database.models.user.user import User
 from server.web import web_service, user_datastore
 from server.web import utils
@@ -155,7 +156,11 @@ def delete_device():
     payload["errors"] = []
     device_id = payload["deviceData"]["device_id"]
     if server.get_device_by_device_id(device_id):
-        DevicesList.query.filter(DevicesList.device_id == device_id).delete()
+        device = DevicesList.query.filter(DevicesList.device_id == device_id)
+        # Since system monitor logs are detached from Device model - we delete it first, separately
+        DeviceSystemMonitorReadings.query.filter(DeviceSystemMonitorReadings.device_id == device.first().id).delete()
+        # Once done - we delete device with it's included dependencies
+        device.delete()
         db_session.commit()
 
         server.update_allowed_devices()

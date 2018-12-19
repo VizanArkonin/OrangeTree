@@ -45,7 +45,7 @@ class DeviceClient(SocketConnector):
         res = self.sock.recv(1024)
         if res:
             response = json.loads(self.get_cipher().decrypt(res))
-            device_id = response["payload"]["deviceID"]
+            device_id = response["payload"]["deviceId"]
             status = response["payload"]["status"]
 
             if device_id == self.client_id and status == PacketStatus.ACCEPTED.value:

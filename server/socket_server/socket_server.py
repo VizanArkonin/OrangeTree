@@ -47,7 +47,7 @@ class SocketServer(SocketConnector):
                         if self._device_is_allowed(deserialized_data):
                             self._accept_and_add_client(client, address, deserialized_data)
                         else:
-                            device_id = deserialized_data["payload"]["deviceID"]
+                            device_id = deserialized_data["payload"]["deviceId"]
                             response_packet = Packets.AUTH(device_id,
                                                            deserialized_data["payload"]["deviceType"],
                                                            deserialized_data["payload"]["key"],
@@ -56,7 +56,7 @@ class SocketServer(SocketConnector):
                             client.sendall(self.get_cipher().encrypt(json.dumps(response_packet)))
                             client.close()
                             self.log("warning", "Client '{0} {1}' is not allowed. Rejecting auth and closing client".
-                                     format(deserialized_data["payload"]["deviceID"], address))
+                                     format(deserialized_data["payload"]["deviceId"], address))
                     else:
                         self.log("warning", "Invalid authorization packet received from {0}. Disconnecting".
                                  format(address))
@@ -91,7 +91,7 @@ class SocketServer(SocketConnector):
         :return: Boolean
         """
         return any(device for device in self.allowed_devices if
-                   device.device_id == data["payload"]["deviceID"] and
+                   device.device_id == data["payload"]["deviceId"] and
                    device.device_type_id == int(data["payload"]["deviceType"]) and
                    device.device_access_key == data["payload"]["key"])
 
@@ -104,7 +104,7 @@ class SocketServer(SocketConnector):
         :param request_data: Decrypted and deserialized request packet.
         :return: None
         """
-        device_id = request_data["payload"]["deviceID"]
+        device_id = request_data["payload"]["deviceId"]
         if not self.get_client_by_id(device_id):
             self.log("info", "No active clients found for device with ID '{0}'. Initializing new client controller".
                      format(device_id))

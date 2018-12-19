@@ -21,8 +21,6 @@ class DevicesList(Base):
     device_type = relationship("DeviceTypes", backref="devices_list")
     device_config = relationship("DeviceTypePinConfig", backref="devices_list")
 
-    device_system_readings = relationship("DeviceSystemMonitorReadings", backref="devices_list")
-
     def serialize_general_data(self):
         """
         Serializes non-sensual information about the device (i.e. excluding access key)

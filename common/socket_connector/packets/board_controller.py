@@ -26,7 +26,7 @@ def DEVICE_STATUS(device_id, device_status, errors=[]):
         "call": "DeviceStatus",
         "payload":
             {
-                "deviceID": device_id,
+                "deviceId": device_id,
                 "deviceStatus": device_status
             },
         "errors":
