@@ -13,9 +13,7 @@ Initialization is performed during module import (in __init__.py files).
 """
 
 # Service imports. Used to initialize modules and their respective processes/variables. DO NOT REMOVE THEM!
-logger.info("Starting Database module")
-import server.database
-logger.info("Starting Web service")
+logger.info("Starting Web and Database service")
 import server.web
 logger.info("Starting Device server")
 import server.socket_server

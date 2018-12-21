@@ -6,15 +6,15 @@ from flask_security import UserMixin
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy import Boolean, DateTime, Column, Integer, String
 
-from server.database import Base
+from server.web import db as database
 from common.general import get_time_formatter
 
 
-class User(Base, UserMixin):
+class Users(database.Model, UserMixin):
     """
     User representation object
     """
-    __tablename__ = 'user'
+    __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
     email = Column(String(255), unique=True)
     first_name = Column(String(40))
@@ -24,7 +24,7 @@ class User(Base, UserMixin):
     login_count = Column(Integer)
     active = Column(Boolean())
     confirmed_at = Column(DateTime())
-    roles = relationship('Role', secondary='user_roles',
+    roles = relationship('Roles', secondary='user_roles',
                          backref=backref('users', lazy='dynamic'))
 
     def serialize_general_data(self):
