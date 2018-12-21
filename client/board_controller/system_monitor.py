@@ -6,6 +6,7 @@ from client.socket_connector import socket_client
 from client.config import CLIENT_CONFIG
 from client.gpio.utils import live_mode_is_on
 from random import randint, getrandbits
+import psutil
 
 
 class SystemMonitor(ClassBase):
@@ -18,6 +19,7 @@ class SystemMonitor(ClassBase):
         self.cpu_load_percentage = 0
         self.total_ram = 0
         self.ram_used = 0
+        self.used_ram_percentage = 0
 
     def run(self):
         """
@@ -42,8 +44,20 @@ class SystemMonitor(ClassBase):
         :return: None
         """
         if live_mode_is_on():
-            # TODO: Pick armbian data provider and create data processor.
-            pass
+            try:
+                # Orange PI devices running armbian have the temperature available from "iio_hwmon" kernel library.
+                self.cpu_temperature = psutil.sensors_temperatures()["iio_hwmon"][0].current
+            except KeyError:
+                # If that key is not present - we assume that temp sensors are not available.
+                self.cpu_temperature = 0
+
+            self.cpu_load_percentage = psutil.cpu_percent(interval=5)
+
+            memory_readings = psutil.virtual_memory()
+            self.total_ram = round(memory_readings.total / 1000)
+            self.ram_used = round(memory_readings.used / 1000)
+            self.used_ram_percentage = memory_readings.percent
+
         else:
             # If we're in demo mode, we simulate the board by invoking pseudo-random values generation.
             # To provide values consistency, we check if it is 0, and if not - we increment/decrement the previous value
@@ -57,6 +71,8 @@ class SystemMonitor(ClassBase):
             self.ram_used = randint(56000, 92000) \
                 if self.ram_used == 0 \
                 else self.__get_altered_value(self.ram_used, 56000, 92000, randint(64, 4068))
+
+        self.used_ram_percentage = round((self.ram_used / (self.total_ram / 100)), 2)
 
     def send_status(self):
         """
@@ -76,6 +92,7 @@ class SystemMonitor(ClassBase):
             "cpuLoadPercentage": self.cpu_load_percentage,
             "totalRam": self.total_ram,
             "ramUsed": self.ram_used,
+            "usedRamPercentage": self.used_ram_percentage
         }
 
     def __get_altered_value(self, initial_value, low_border, high_border, step):

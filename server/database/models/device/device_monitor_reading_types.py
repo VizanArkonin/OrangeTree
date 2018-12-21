@@ -27,4 +27,5 @@ def populate_default_reading_types(*args, **kwargs):
     database.session.add(DeviceSystemMonitorReadingTypes(id=2, reading_type_name="CPU Load, %"))
     database.session.add(DeviceSystemMonitorReadingTypes(id=3, reading_type_name="Total RAM, kB"))
     database.session.add(DeviceSystemMonitorReadingTypes(id=4, reading_type_name="Ram used, kB"))
+    database.session.add(DeviceSystemMonitorReadingTypes(id=5, reading_type_name="Ram used, %"))
     database.session.commit()

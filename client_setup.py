@@ -1,7 +1,8 @@
 from setuptools import setup, find_packages
 
 requires = [
-    "pycryptodome"
+    "pycryptodome",
+    "psutil"
 ]
 
 setup(

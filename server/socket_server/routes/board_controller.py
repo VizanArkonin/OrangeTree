@@ -35,4 +35,7 @@ def device_status(client, data):
             database.session.add(DeviceSystemMonitorReadings(device_id=device_db_id, reading_id=4,
                                                              value=data["payload"]["deviceStatus"]["ramUsed"],
                                                              reported_at=timestamp))
+            database.session.add(DeviceSystemMonitorReadings(device_id=device_db_id, reading_id=5,
+                                                             value=data["payload"]["deviceStatus"]["usedRamPercentage"],
+                                                             reported_at=timestamp))
             database.session.commit()
