@@ -4,9 +4,10 @@ requires = [
     "eventlet",
     "Flask",
     "Flask-Security",
-    "SQLAlchemy",
+    "Flask-SQLAlchemy",
     "Flask-SocketIO",
     "SQLAlchemy",
+    "mysql-connector",
     "bcrypt",
     "pycryptodome"
 ]

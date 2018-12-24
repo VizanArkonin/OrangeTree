@@ -45,7 +45,7 @@ class DeviceClient(SocketConnector):
         res = self.sock.recv(1024)
         if res:
             response = json.loads(self.get_cipher().decrypt(res))
-            device_id = response["payload"]["deviceID"]
+            device_id = response["payload"]["deviceId"]
             status = response["payload"]["status"]
 
             if device_id == self.client_id and status == PacketStatus.ACCEPTED.value:
@@ -107,7 +107,10 @@ class DeviceClient(SocketConnector):
         :param data: Data packet dict
         :return: None
         """
-        self.sock.sendall(self.get_cipher().encrypt(json.dumps(data)))
+        try:
+            self.sock.sendall(self.get_cipher().encrypt(json.dumps(data)))
+        except BrokenPipeError:
+            self.log("error", "[BrokenPipeError] Attempted to send a message through a closed client.")
 
     def reconnect(self):
         """

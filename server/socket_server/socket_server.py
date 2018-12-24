@@ -8,8 +8,8 @@ from common.socket_connector.packets.packet_status import PacketStatus
 from common.socket_connector.socket_connector import SocketConnector
 from common.socket_connector.packets import general as Packets
 from server.socket_server.client_thread import ClientThread
-from server.database import db_session
-from server.database.models.device import DevicesList
+from server.web import db as database
+from server.database.models.device.devices import Devices
 from common.general import get_formatter
 
 logging.basicConfig(format=get_formatter())
@@ -27,7 +27,7 @@ class SocketServer(SocketConnector):
         self.clients = {}
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.sock.bind((self.host, self.port))
-        self.allowed_devices = DevicesList.query.all()
+        self.allowed_devices = Devices.query.all()
 
     def listen(self):
         """
@@ -47,7 +47,7 @@ class SocketServer(SocketConnector):
                         if self._device_is_allowed(deserialized_data):
                             self._accept_and_add_client(client, address, deserialized_data)
                         else:
-                            device_id = deserialized_data["payload"]["deviceID"]
+                            device_id = deserialized_data["payload"]["deviceId"]
                             response_packet = Packets.AUTH(device_id,
                                                            deserialized_data["payload"]["deviceType"],
                                                            deserialized_data["payload"]["key"],
@@ -56,7 +56,7 @@ class SocketServer(SocketConnector):
                             client.sendall(self.get_cipher().encrypt(json.dumps(response_packet)))
                             client.close()
                             self.log("warning", "Client '{0} {1}' is not allowed. Rejecting auth and closing client".
-                                     format(deserialized_data["payload"]["deviceID"], address))
+                                     format(deserialized_data["payload"]["deviceId"], address))
                     else:
                         self.log("warning", "Invalid authorization packet received from {0}. Disconnecting".
                                  format(address))
@@ -91,7 +91,7 @@ class SocketServer(SocketConnector):
         :return: Boolean
         """
         return any(device for device in self.allowed_devices if
-                   device.device_id == data["payload"]["deviceID"] and
+                   device.device_id == data["payload"]["deviceId"] and
                    device.device_type_id == int(data["payload"]["deviceType"]) and
                    device.device_access_key == data["payload"]["key"])
 
@@ -104,11 +104,11 @@ class SocketServer(SocketConnector):
         :param request_data: Decrypted and deserialized request packet.
         :return: None
         """
-        device_id = request_data["payload"]["deviceID"]
+        device_id = request_data["payload"]["deviceId"]
         if not self.get_client_by_id(device_id):
             self.log("info", "No active clients found for device with ID '{0}'. Initializing new client controller".
                      format(device_id))
-            device = DevicesList.query.filter(DevicesList.device_id == device_id).first()
+            device = Devices.query.filter(Devices.device_id == device_id).first()
             client_handler = ClientThread(client, address, device_id, device.serialize_config())
             client_handler.routes = self.client_routes
             self.clients[device_id] = client_handler
@@ -121,7 +121,7 @@ class SocketServer(SocketConnector):
             device.last_address = "{0}:{1}".format(address[0], address[1])
             device.last_connected_at = datetime.now()
 
-            db_session.commit()
+            database.session.commit()
         else:
             self.log("error", "Active client with ID '{0}' already registered. Rejecting connection".format(device_id))
             client.close()
@@ -150,4 +150,4 @@ class SocketServer(SocketConnector):
 
         :return: None
         """
-        self.allowed_devices = DevicesList.query.all()
+        self.allowed_devices = Devices.query.all()

@@ -8,9 +8,10 @@ from flask_login import login_required
 from flask_security import roles_accepted
 from flask_security.utils import hash_password
 
-from server.database import db_session
-from server.database.models.device import DevicesList
-from server.database.models.user import User
+from server.web import db as database
+from server.database.models.device.devices import Devices
+from server.database.models.device.device_monitor_readings import DeviceSystemMonitorReadings
+from server.database.models.user.users import Users
 from server.web import web_service, user_datastore
 from server.web import utils
 from server.socket_server import __server as server
@@ -78,12 +79,12 @@ def create_new_device():
     payload["errors"] = []
     device_id = payload["deviceData"]["device_id"]
     if not server.get_device_by_device_id(device_id):
-        device = DevicesList()
+        device = Devices()
         device.device_id = device_id
         device.device_type_id = payload["deviceData"]["device_type"]
         device.device_access_key = payload["deviceData"]["device_access_key"]
-        db_session.add(device)
-        db_session.commit()
+        database.session.add(device)
+        database.session.commit()
 
         server.update_allowed_devices()
         return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
@@ -116,12 +117,12 @@ def update_device_details():
     """
     payload = request.json
     payload["errors"] = []
-    device = DevicesList.query.get(int(payload["deviceData"]["id"]))
+    device = Devices.query.get(int(payload["deviceData"]["id"]))
     if device:
         device.device_id = payload["deviceData"]["device_id"]
         device.device_type_id = payload["deviceData"]["device_type"]
         device.device_access_key = payload["deviceData"]["device_access_key"]
-        db_session.commit()
+        database.session.commit()
 
         server.update_allowed_devices()
         return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
@@ -155,8 +156,12 @@ def delete_device():
     payload["errors"] = []
     device_id = payload["deviceData"]["device_id"]
     if server.get_device_by_device_id(device_id):
-        DevicesList.query.filter(DevicesList.device_id == device_id).delete()
-        db_session.commit()
+        device = Devices.query.filter(Devices.device_id == device_id)
+        # Since system monitor logs are detached from Device model - we delete it first, separately
+        DeviceSystemMonitorReadings.query.filter(DeviceSystemMonitorReadings.device_id == device.first().id).delete()
+        # Once done - we delete device with it's included dependencies
+        device.delete()
+        database.session.commit()
 
         server.update_allowed_devices()
         return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
@@ -176,7 +181,7 @@ def get_users_list():
     :return: :return: JSON formatted response
     """
     return utils.get_response(
-        json.dumps({"devices": [user.serialize_general_data() for user in User.query.all()]}),
+        json.dumps({"devices": [user.serialize_general_data() for user in Users.query.all()]}),
         mimetype=MimeType.JSON_MIMETYPE.value)
 
 
@@ -190,7 +195,7 @@ def get_user_details(user_id):
     :param user_id: User ID
     :return: JSON formatted response
     """
-    user = User.query.get(user_id)
+    user = Users.query.get(user_id)
     return utils.get_response(
         json.dumps({"userData": user.serialize_all() if user else {}}),
         mimetype=MimeType.JSON_MIMETYPE.value)
@@ -224,7 +229,7 @@ def create_user():
     payload = request.json
     payload["errors"] = []
     user_email = payload["userData"]["email"]
-    user = User.query.filter(User.email == user_email).first()
+    user = Users.query.filter(Users.email == user_email).first()
     if not user:
         roles_to_add = []
         for role_requested in payload["userData"]["roles"]:
@@ -238,7 +243,7 @@ def create_user():
         user.first_name = payload["userData"]["first_name"]
         user.last_name = payload["userData"]["last_name"]
         user.active = bool(payload["userData"]["active"])
-        db_session.commit()
+        database.session.commit()
 
         return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
                                   status=ResponseStatus.CREATED.value)
@@ -276,7 +281,7 @@ def update_user():
     """
     payload = request.json
     payload["errors"] = []
-    user = User.query.get(int(payload["userData"]["id"]))
+    user = Users.query.get(int(payload["userData"]["id"]))
     if user:
         requested_roles = [role["role_name"] for role in payload["userData"]["roles"]]
         existing_roles = [role.name for role in user.roles]
@@ -296,7 +301,7 @@ def update_user():
         user.last_name = payload["userData"]["last_name"]
         user.active = bool(payload["userData"]["active"])
 
-        db_session.commit()
+        database.session.commit()
 
         return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
                                   status=ResponseStatus.OK.value)
@@ -328,11 +333,11 @@ def delete_user():
     payload = request.json
     payload["errors"] = []
     user_email = payload["userData"]["email"]
-    user = User.query.filter(User.email == user_email).first()
+    user = Users.query.filter(Users.email == user_email).first()
     if user:
         user_datastore.delete_user(user)
 
-        db_session.commit()
+        database.session.commit()
 
         return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
                                   status=ResponseStatus.OK.value)

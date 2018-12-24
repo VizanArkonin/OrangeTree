@@ -4,7 +4,9 @@ Core configuration file - Server side
 
 # DB section
 DATABASE_CONFIG = {
-    "connection_string": "sqlite:///server/database.db?check_same_thread=False",
+    # Connection string pattern - {connection_type}://{user}:{password}@{host}:{port}/{database name}
+    # SQLite3 connection string - "sqlite:///../database/database.db?check_same_thread=False"
+    "connection_string": "mysql+mysqlconnector://root:@127.0.0.1:3306/hephaestus",
     "autocommit": False,
     "autoflush": True
 }

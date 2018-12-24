@@ -3,7 +3,7 @@ from datetime import datetime
 from threading import Thread
 from time import sleep
 
-from client.gpio.utils import wiringpi_is_used
+from client.gpio.utils import live_mode_is_on
 from client.gpio.pin import Pin
 from common.class_base import ClassBase
 from common.general import get_formatter
@@ -36,11 +36,10 @@ class GpioController(ClassBase):
     def __init__(self):
         super().__init__()
         self.log("info", "Initializing GPIO Controller")
-        if wiringpi_is_used():
+        if live_mode_is_on():
             import wiringpi
             wiringpi.wiringPiSetup()
         self._pins_config = None
-        Thread(target=self.load_pins).start()
 
     def set_pin_config(self, config):
         """

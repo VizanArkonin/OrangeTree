@@ -3,7 +3,7 @@ Socket server - GPIO board calls routing library.
 """
 from common.socket_connector.utils import generic_response_validator
 from server.socket_server import __server as server
-from server.database.models.device import DevicesList
+from server.database.models.device.devices import Devices
 
 
 @server.route(packet_name="GetGPIOBoardPinConfig")
@@ -18,7 +18,7 @@ def pin_config(client, data):
     device_id = data["payload"]["deviceId"]
 
     if device_id:
-        device = DevicesList.query.filter(DevicesList.device_id == device_id).first()
+        device = Devices.query.filter(Devices.device_id == device_id).first()
         data["payload"]["configuration"] = device.serialize_config()
 
         client.send(data)

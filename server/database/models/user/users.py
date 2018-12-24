@@ -1,63 +1,20 @@
 """
-Database models definitions library.
-We use SQLAlchemy as primary ORM, adding in elements of Flask-Security features.
+User table model and migration/creation events container
 """
 
-from flask_security import UserMixin, RoleMixin
+from flask_security import UserMixin
 from sqlalchemy.orm import relationship, backref
-from sqlalchemy import Boolean, DateTime, Column, Integer, String, ForeignKey
+from sqlalchemy import Boolean, DateTime, Column, Integer, String
 
-from server.database import Base
+from server.web import db as database
 from common.general import get_time_formatter
 
 
-class UserRoles(Base):
-    """
-    Maps roles from Role table to a given user
-    """
-    __tablename__ = 'user_roles'
-    id = Column(Integer(), primary_key=True)
-    user_id = Column('user_id', Integer(), ForeignKey('user.id'))
-    role_id = Column('role_id', Integer(), ForeignKey('role.id'))
-
-    def serialize(self):
-        """
-        Serializes given object into dict
-        :return: Dict with data
-        """
-        return {
-            "id": self.id,
-            "user_id": self.user_id,
-            "role_id": self.role_id
-        }
-
-
-class Role(Base, RoleMixin):
-    """
-    Defines the list of available roles
-    """
-    __tablename__ = 'role'
-    id = Column(Integer(), primary_key=True)
-    name = Column(String(80), unique=True)
-    description = Column(String(255))
-
-    def serialize(self):
-        """
-        Serializes object to dict object
-        :return: Dict with data
-        """
-        return {
-            "id": self.id,
-            "name": self.name,
-            "description": self.description
-        }
-
-
-class User(Base, UserMixin):
+class Users(database.Model, UserMixin):
     """
     User representation object
     """
-    __tablename__ = 'user'
+    __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
     email = Column(String(255), unique=True)
     first_name = Column(String(40))
@@ -67,7 +24,7 @@ class User(Base, UserMixin):
     login_count = Column(Integer)
     active = Column(Boolean())
     confirmed_at = Column(DateTime())
-    roles = relationship('Role', secondary='user_roles',
+    roles = relationship('Roles', secondary='user_roles',
                          backref=backref('users', lazy='dynamic'))
 
     def serialize_general_data(self):

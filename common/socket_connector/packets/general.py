@@ -21,7 +21,7 @@ def AUTH(device_id, device_type, key, status, errors=[]):
         "call": "Authorize",
         "payload":
             {
-                "deviceID": device_id,
+                "deviceId": device_id,
                 "deviceType": device_type,
                 "key": key,
                 "status": status
