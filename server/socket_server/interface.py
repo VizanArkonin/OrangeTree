@@ -47,6 +47,16 @@ class SocketInterface(ClassBase):
         else:
             return False
 
+    def get_device_db_id(self, board_id):
+        """
+        Checks if provided client exists in DB, and if yes - returns it's row ID.
+        NOTE: It uses allowed_devices array to prevent unnecessary DB calls.
+
+        :param board_id: Board ID
+        :return: Board ID row ID in database
+        """
+        return [device.id for device in self._server.allowed_devices if device.device_id == board_id][0]
+
     def get_board_status(self, board_id):
         """
         Requests GPIO board status from a given board. Once received, it updates client's client_gpio_status container.
