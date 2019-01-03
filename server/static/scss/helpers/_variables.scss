@@ -60,10 +60,10 @@ $font-size-lg-l: 1.8rem; // Large (l)
 $height-base-element-lg: 5rem;
 
 // For max-width 767px
-$aside-responsive-on-md: 20%;
-$aside-responsive-off-md: 5%;
-$content-responsive-on-md: 80%;
-$content-responsive-off-md: 95%;
+$aside-responsive-on-md: 100%;
+$aside-responsive-off-md: 0;
+$content-responsive-on-md: 0;
+$content-responsive-off-md: 100%;
 $font-size-md-s: 1.3rem; //- Small (s);
 $font-size-md-n: 1.5rem; //- Normal (n);
 $font-size-md-l: 1.8rem; //- Large (l)
