@@ -3,6 +3,7 @@ from json import JSONDecodeError
 from threading import Thread
 
 from common.class_base import ClassBase
+from common.socket_connector.packets.packet_base import SocketPacket
 
 
 class ClientThread(ClassBase):
@@ -32,10 +33,10 @@ class ClientThread(ClassBase):
         """
         try:
             decoded_data = self.get_cipher().decrypt(data)
-            deserialized_data = json.loads(decoded_data)
-            call_name = deserialized_data["call"]
+            request = SocketPacket().deserialize(decoded_data)
+            call_name = request.call
             if call_name in self.routes:
-                self.routes[call_name](self, deserialized_data)
+                self.routes[call_name](self, request)
             else:
                 self.log("error", "No routes for call '{0}' were found".format(call_name))
         except UnicodeDecodeError as exception:
@@ -49,10 +50,13 @@ class ClientThread(ClassBase):
         """
         Serializes, encrypts and sends given packet dict to a client.
 
-        :param data: Data packet dict
+        :param data: SocketPacket instance
         :return: None
         """
-        self.client.sendall(self.get_cipher().encrypt(json.dumps(data)))
+        try:
+            self.client.sendall(self.get_cipher().encrypt(json.dumps(data.serialize())))
+        except BrokenPipeError:
+            self.log("error", "[BrokenPipeError] Attempted to send a message through a closed client.")
 
     def is_alive(self):
         """

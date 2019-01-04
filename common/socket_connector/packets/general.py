@@ -4,9 +4,10 @@ Contains all general-use packets, used by both server and client.
 To ease data forming, all packets are stored as functions, which allows generating them on fly just by passing data in.
 NOTE: All method names are in upper case for reading clarity
 """
+from common.socket_connector.packets.packet_base import SocketPacket
 
 
-def AUTH(device_id, device_type, key, status, errors=[]):
+def AUTH(device_id="", device_type="", key="", status="", errors=[]):
     """
     Core authorization packet.
 
@@ -15,20 +16,16 @@ def AUTH(device_id, device_type, key, status, errors=[]):
     :param key: Device key. Refers to key column in devices_list_table
     :param status: Response status. Can be "requested", "accepted" or "denied" (see PacketStatus enum for reference)
     :param errors: Error strings list.
-    :return: Packet dict
+    :return: SocketPacket instance.
     """
-    return {
-        "call": "Authorize",
-        "payload":
-            {
+    payload = {
                 "deviceId": device_id,
                 "deviceType": device_type,
                 "key": key,
                 "status": status
-            },
-        "errors":
-            errors
-    }
+              }
+
+    return SocketPacket("Authorize", payload, errors)
 
 
 
