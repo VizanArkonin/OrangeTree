@@ -30,7 +30,7 @@
 
 <body>
     <!--Sidebar navigation-->
-    <div class="sidebar-container sidebar-responsive sidebar-responsive-on" >
+    <div class="sidebar-container sidebar-responsive sidebar-responsive-on mobile-display-none">
         <nav class="position-fixed sidebar-responsive sidebar-responsive-on">
             <ul class="sidebar-navigation sidebar-element">
                 <li id="logo">
@@ -39,25 +39,25 @@
                     <span id="logo-responsive">OPiA</span>
                     </a>
                 </li>
-                <li class="sidebar-link-hover">
+                <li class="navigation-link-hover">
                     <a href="/index">
                     <i class="fas fa-home"></i>
                     <span>Home page</span>
                     </a>
                 </li>
-                <li class="sidebar-link-hover">
+                <li class="navigation-link-hover">
                     <a href="#">
                     <i class="fas fa-chart-area"></i>
                     <span>System monitor</span>
                     </a>
                 </li>
-                <li class="sidebar-link-hover">
+                <li class="navigation-link-hover">
                     <a href="#">
                     <i class="fas fa-microchip"></i>
                     <span>System configuration</span>
                     </a>
                 </li>
-                <li class="sidebar-link-hover">
+                <li class="navigation-link-hover">
                     <a href="#">
                     <i class="fas fa-cog"></i>
                     <span>User settings</span>
@@ -73,8 +73,11 @@
         <nav class="navigation-container flex-container-center position-fixed content-responsive content-responsive-on">
             <div class="navigation-left navigation-element">
                 <ul>
-                    <li>
-                        <i id="toggle-bars" class="fas fa-bars"></i>
+                    <li class="mobile-display-none">
+                        <i id="desktop-toggle-bars" class="fas fa-bars"></i>
+                    </li>
+                    <li class="desktop-display-none">
+                        <i id="mobile-toggle-bars" class="fas fa-bars"></i>
                     </li>
                 </ul>
             </div>
@@ -94,11 +97,47 @@
                     <li>
                         <a href="#"><i class="fas fa-exclamation-triangle"></i></a>
                     </li>
-                    <li>
+                    <li class="mobile-display-none">
                         <a href="#"><i class="fas fa-power-off"></i></a>
                     </li>
                 </ul>
             </div>
+        </nav>
+
+        <!--Mobile navigation-->
+        <nav class="mobile-menu-container position-fixed desktop-display-none">
+            <ul class="navigation-element">
+                <li class="navigation-link-hover">
+                    <a href="/index">
+                        <i class="fas fa-home"></i>
+                        <span>Home page</span>
+                    </a>
+                </li>
+                <li class="navigation-link-hover">
+                    <a href="#">
+                        <i class="fas fa-chart-area"></i>
+                        <span>System monitor</span>
+                    </a>
+                </li>
+                <li class="navigation-link-hover">
+                    <a href="#">
+                        <i class="fas fa-microchip"></i>
+                        <span>System configuration</span>
+                    </a>
+                </li>
+                <li class="navigation-link-hover">
+                    <a href="#">
+                        <i class="fas fa-cog"></i>
+                        <span>User settings</span>
+                    </a>
+                </li>
+                <li class="navigation-link-hover">
+                    <a href="#">
+                        <i class="fas fa-power-off"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
         </nav>
 
         <!--Main content section-->

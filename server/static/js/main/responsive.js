@@ -1,7 +1,7 @@
 "use strict";
 const SIDEBAR = ".sidebar-responsive";
 const CONTENT = ".content-responsive";
-const BAR = "#toggle-bars";
+const BAR = "#desktop-toggle-bars";
 /**
 * Auxiliary script for adaptive layout
 **/

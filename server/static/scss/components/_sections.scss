@@ -42,27 +42,19 @@
   width: 100%;
 }
 
-// Media queries
-@include media-breakpoint-xl {
-  .page-title {
-    font-size: $font-size-xl-l;
-  }
+.desktop-display-none {
+  display: none;
 }
 
-@include media-breakpoint-lg {
+//For max-width 767px
+@include media-breakpoint-md {
   .page-title {
     font-size: $font-size-lg-l;
   }
-}
-
-@include media-breakpoint-md {
-  .page-title {
-    font-size: $font-size-md-l;
+  .mobile-display-none {
+    display: none;
   }
-}
-
-@include media-breakpoint-sm {
-  .page-title {
-    font-size: $font-size-sm-l;
+  .desktop-display-none {
+    display: flex;
   }
 }
