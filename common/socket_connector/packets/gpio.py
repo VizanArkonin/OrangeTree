@@ -4,6 +4,7 @@ Contains all packets, used to control GPIO board, called by both server and clie
 To ease data forming, all packets are stored as functions, which allows generating them on fly just by passing data in.
 NOTE: All method names are in upper case for reading clarity
 """
+from common.socket_connector.packets.packet_base import SocketPacket
 
 
 def GET_PIN_CONFIGURATION(device_id, config_data=[], errors=[]):
@@ -12,18 +13,14 @@ def GET_PIN_CONFIGURATION(device_id, config_data=[], errors=[]):
 
     :param device_id: Device ID.
     :param errors: Error strings list
-    :return: Packet dict
+    :return: SocketPacket instance.
     """
-    return {
-        "call": "GetGPIOBoardPinConfig",
-        "payload":
-            {
+    payload = {
                 "deviceId": device_id,
                 "configuration": config_data
-            },
-        "errors":
-            errors
-    }
+              }
+
+    return SocketPacket("GetGPIOBoardPinConfig", payload, errors)
 
 
 def GET_STATUS(status={}, errors=[]):
@@ -33,17 +30,13 @@ def GET_STATUS(status={}, errors=[]):
     :param status: Dict with pins status. Server sends it as empty dict, client response pulls data from
     GPIO controller's get_pins_status() method.
     :param errors: Error strings list.
-    :return: Packet dict.
+    :return: SocketPacket instance.
     """
-    return {
-        "call": "GetGPIOBoardStatus",
-        "payload":
-            {
+    payload = {
                 "status": status
-            },
-        "errors":
-            errors
-    }
+              }
+
+    return SocketPacket("GetGPIOBoardStatus", payload, errors)
 
 
 def SET_PIN_MODE(pin_id, mode_id, status, errors=[]):
@@ -54,19 +47,15 @@ def SET_PIN_MODE(pin_id, mode_id, status, errors=[]):
     :param mode_id: Mode ID. See GPIO Controller class for reference.
     :param status: Request status. Can be "requested", "success" or "failed" (see PacketStatus enum for reference)
     :param errors: Error strings list.
-    :return: Packet dict.
+    :return: SocketPacket instance.
     """
-    return {
-        "call": "SetGPIOPinMode",
-        "payload":
-            {
+    payload = {
                 "pinID": int(pin_id),
                 "pinMode": int(mode_id),
                 "status": status
-            },
-        "errors":
-            errors
-    }
+              }
+
+    return SocketPacket("SetGPIOPinMode", payload, errors)
 
 
 def SET_PIN_OUTPUT(pin_id, value, status, errors=[]):
@@ -79,17 +68,13 @@ def SET_PIN_OUTPUT(pin_id, value, status, errors=[]):
     :param errors: Error strings list.
     :return: Packet dict.
     """
-    return {
-        "call": "SetGPIOPinOutput",
-        "payload":
-            {
+    payload = {
                 "pinID": int(pin_id),
                 "outputValue": int(value),
                 "status": status
-            },
-        "errors":
-            errors
-    }
+              }
+
+    return SocketPacket("SetGPIOPinOutput", payload, errors)
 
 
 def SET_PIN_LOCK(pin_id, value, status, errors=[]):
@@ -102,14 +87,9 @@ def SET_PIN_LOCK(pin_id, value, status, errors=[]):
     :param errors: Error strings list.
     :return: Packet dict.
     """
-    return {
-        "call": "SetGPIOPinLock",
-        "payload":
-            {
+    payload = {
                 "pinID": int(pin_id),
                 "locked": bool(value),
                 "status": status
-            },
-        "errors":
-            errors
-    }
+              }
+    return SocketPacket("SetGPIOPinLock", payload, errors)

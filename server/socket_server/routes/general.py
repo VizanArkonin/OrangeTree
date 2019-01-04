@@ -11,7 +11,7 @@ def echo(client, data):
     Basic Echo-test route. Used to validate client connectivity without triggering any system changes.
 
     :param client: ClientThread instance
-    :param data: Decrypted and deserialized packet dict.
+    :param data: SocketPacket instance with decrypted and deserialized data
     :return: None
     """
     response = data

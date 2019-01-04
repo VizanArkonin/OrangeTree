@@ -41,12 +41,12 @@ class DeviceClient(SocketConnector):
         :return:
         """
         auth_packet = AUTH(self.client_id, self.device_type, self.device_key, PacketStatus.REQUESTED.value)
-        self.sock.sendall(self.get_cipher().encrypt(json.dumps(auth_packet)))
+        self.sock.sendall(self.get_cipher().encrypt(json.dumps(auth_packet.serialize())))
         res = self.sock.recv(1024)
         if res:
-            response = json.loads(self.get_cipher().decrypt(res))
-            device_id = response["payload"]["deviceId"]
-            status = response["payload"]["status"]
+            response = SocketPacket().deserialize(self.get_cipher().decrypt(res))
+            device_id = response.payload.deviceId
+            status = response.payload.status
 
             if device_id == self.client_id and status == PacketStatus.ACCEPTED.value:
                 self.log("info", "Authorization request accepted. Proceeding")
@@ -90,10 +90,10 @@ class DeviceClient(SocketConnector):
         """
         try:
             decoded_data = self.get_cipher().decrypt(data)
-            deserialized_data = json.loads(decoded_data)
-            call_name = deserialized_data["call"]
+            request = SocketPacket().deserialize(decoded_data)
+            call_name = request.call
             if call_name in self.client_routes:
-                self.client_routes[call_name](self, deserialized_data)
+                self.client_routes[call_name](self, request)
             else:
                 self.log("error", "No routes for call '{0}' were found".format(call_name))
         except UnicodeDecodeError as error:
@@ -108,7 +108,7 @@ class DeviceClient(SocketConnector):
         :return: None
         """
         try:
-            self.sock.sendall(self.get_cipher().encrypt(json.dumps(data)))
+            self.sock.sendall(self.get_cipher().encrypt(json.dumps(data.serialize())))
         except BrokenPipeError:
             self.log("error", "[BrokenPipeError] Attempted to send a message through a closed client.")
 

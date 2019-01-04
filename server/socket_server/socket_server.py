@@ -4,6 +4,8 @@ import socket
 from datetime import datetime
 from json import JSONDecodeError
 
+from common.socket_connector.packets.general import AUTH
+from common.socket_connector.packets.packet_base import SocketPacket
 from common.socket_connector.packets.packet_status import PacketStatus
 from common.socket_connector.socket_connector import SocketConnector
 from common.socket_connector.packets import general as Packets
@@ -42,21 +44,21 @@ class SocketServer(SocketConnector):
             if data:
                 try:
                     decoded_data = self.get_cipher().decrypt(data)
-                    deserialized_data = json.loads(decoded_data)
-                    if deserialized_data["call"] == "Authorize":
-                        if self._device_is_allowed(deserialized_data):
-                            self._accept_and_add_client(client, address, deserialized_data)
+                    request = SocketPacket().deserialize(decoded_data)
+                    if request.call == AUTH().call:
+                        if self._device_is_allowed(request):
+                            self._accept_and_add_client(client, address, request)
                         else:
-                            device_id = deserialized_data["payload"]["deviceId"]
+                            device_id = request.payload.deviceId
                             response_packet = Packets.AUTH(device_id,
-                                                           deserialized_data["payload"]["deviceType"],
-                                                           deserialized_data["payload"]["key"],
+                                                           request.payload.deviceType,
+                                                           request.payload.key,
                                                            PacketStatus.DENIED.value,
                                                            ["Device is not allowed in the system"])
                             client.sendall(self.get_cipher().encrypt(json.dumps(response_packet)))
                             client.close()
                             self.log("warning", "Client '{0} {1}' is not allowed. Rejecting auth and closing client".
-                                     format(deserialized_data["payload"]["deviceId"], address))
+                                     format(request.payload.deviceId, address))
                     else:
                         self.log("warning", "Invalid authorization packet received from {0}. Disconnecting".
                                  format(address))
@@ -87,13 +89,13 @@ class SocketServer(SocketConnector):
         """
         Goes through list of allowed devices and validates if requested device is in it.
 
-        :param data: Decrypted and deserialized request packet.
+        :param data: SocketPacket instance with decrypted and deserialized data
         :return: Boolean
         """
         return any(device for device in self.allowed_devices if
-                   device.device_id == data["payload"]["deviceId"] and
-                   device.device_type_id == int(data["payload"]["deviceType"]) and
-                   device.device_access_key == data["payload"]["key"])
+                   device.device_id == data.payload.deviceId and
+                   device.device_type_id == int(data.payload.deviceType) and
+                   device.device_access_key == data.payload.key)
 
     def _accept_and_add_client(self, client, address, request_data):
         """
@@ -101,10 +103,10 @@ class SocketServer(SocketConnector):
 
         :param client: Socket client instance
         :param address: Socket address tuple
-        :param request_data: Decrypted and deserialized request packet.
+        :param request_data: SocketPacket instance with decrypted and deserialized data.
         :return: None
         """
-        device_id = request_data["payload"]["deviceId"]
+        device_id = request_data.payload.deviceId
         if not self.get_client_by_id(device_id):
             self.log("info", "No active clients found for device with ID '{0}'. Initializing new client controller".
                      format(device_id))
@@ -113,10 +115,10 @@ class SocketServer(SocketConnector):
             client_handler.routes = self.client_routes
             self.clients[device_id] = client_handler
             self._logger.info("Authorization for '{0} {1}' has passed. Client registered.".format(device_id, address))
-            client.sendall(self.get_cipher().encrypt(json.dumps(Packets.AUTH(device_id,
-                                                                             request_data["payload"]["deviceType"],
-                                                                             request_data["payload"]["key"],
-                                                                             PacketStatus.ACCEPTED.value))))
+            client_handler.send(Packets.AUTH(device_id,
+                                             request_data.payload.deviceType,
+                                             request_data.payload.key,
+                                             PacketStatus.ACCEPTED.value))
 
             device.last_address = "{0}:{1}".format(address[0], address[1])
             device.last_connected_at = datetime.now()

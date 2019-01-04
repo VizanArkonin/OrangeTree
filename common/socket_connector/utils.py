@@ -9,12 +9,12 @@ def generic_response_validator(client, data, route_name):
     Generic response validator, defines standard response success validation logic.
 
     :param client: Client instance
-    :param data: Data dict
+    :param data: SocketPacket instance with decrypted and deserialized data
     :param route_name: Route name
     :return: None
     """
-    status = data["payload"]["status"]
-    errors = data["errors"]
+    status = data.payload.status
+    errors = data.errors
     if status == PacketStatus.SUCCESS.value:
         return
     elif status == PacketStatus.FAILED.value:
