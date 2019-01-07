@@ -92,13 +92,13 @@
 .mobile-menu-container {
   background: $nav-default-color;
   height: 100%;
-  width: 100%;
+  width: 0;
   z-index: 1010;
   overflow-x: hidden;
   margin-top: $height-base-element-default;
   top: 0;
   left: 0;
-  transition: 0.5s;
+  transition: 0.4s;
   & ul {
     width: 100%;
   }
@@ -113,6 +113,9 @@
   & i {
     padding: 0 1.5rem;
   }
+  & span {
+    visibility: hidden;
+  }
 }
 
 #logo {
@@ -124,7 +127,7 @@
   }
 }
 
-#desktop-toggle-bars, #mobile-toggle-bars {
+#desktop-toggle-bar, #mobile-toggle-bar {
   cursor: pointer;
 }
 

@@ -358,13 +358,13 @@ input:-webkit-autofill:focus {
 .mobile-menu-container {
   background: #2d2d2d;
   height: 100%;
-  width: 100%;
+  width: 0;
   z-index: 1010;
   overflow-x: hidden;
   margin-top: 5rem;
   top: 0;
   left: 0;
-  transition: 0.5s; }
+  transition: 0.4s; }
   .mobile-menu-container ul {
     width: 100%; }
   .mobile-menu-container li {
@@ -375,6 +375,8 @@ input:-webkit-autofill:focus {
     height: 5rem; }
   .mobile-menu-container i {
     padding: 0 1.5rem; }
+  .mobile-menu-container span {
+    visibility: hidden; }
 
 #logo {
   background-color: rgba(0, 0, 0, 0.4); }
@@ -383,7 +385,7 @@ input:-webkit-autofill:focus {
     text-align: center;
     font-size: 1.8rem; }
 
-#desktop-toggle-bars, #mobile-toggle-bars {
+#desktop-toggle-bar, #mobile-toggle-bar {
   cursor: pointer; }
 
 #logo-responsive {
