@@ -1,9 +1,10 @@
 from time import sleep
 
 from common.class_base import ClassBase
+from common.logger import LogLevel
 from common.socket_connector.packets.board_controller import DEVICE_STATUS
 from client.socket_connector import socket_client
-from client.config import CLIENT_CONFIG
+from client.config import CLIENT_CONFIG, GENERAL
 from client.gpio.utils import live_mode_is_on
 from random import randint, getrandbits
 import psutil
@@ -14,7 +15,7 @@ class SystemMonitor(ClassBase):
     Thread service, used to monitor device state and periodically send the status message to server.
     """
     def __init__(self):
-        super().__init__()
+        super().__init__(logger_name=__class__.__name__, logging_level=GENERAL["logging_level"])
         self.cpu_temperature = 0
         self.cpu_load_percentage = 0
         self.total_ram = 0
@@ -31,10 +32,10 @@ class SystemMonitor(ClassBase):
                 self.update_values()
                 self.send_status()
             except KeyboardInterrupt:
-                self.log("info", "Caught Interrupt signal. Stopping system monitor thread")
+                self.log(LogLevel.INFO, "Caught Interrupt signal. Stopping system monitor thread")
                 return
             except Exception as exception:
-                self.log("error", "Caught exception - {0}".format(exception))
+                self.log(LogLevel.ERROR, "Caught exception - {0}".format(exception))
             finally:
                 sleep(CLIENT_CONFIG["status_update_tick_in_seconds"])
 

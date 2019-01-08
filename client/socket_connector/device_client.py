@@ -2,7 +2,9 @@ import errno
 import json
 from time import sleep
 
+from client.config import GENERAL
 from client.gpio import gpio_controller
+from common.logger import LogLevel
 from common.socket_connector.packets.packet_status import PacketStatus
 from common.socket_connector.socket_connector import SocketConnector
 from common.socket_connector.packets.general import *
@@ -14,7 +16,7 @@ class DeviceClient(SocketConnector):
     Main client workhorse, serves as socket interface to operate incoming and outcoming transmission
     """
     def __init__(self, host, port, device_id, device_type, device_key):
-        super().__init__(host, port)
+        super().__init__(host, port, logger_name=__class__.__name__, logging_level=GENERAL["logging_level"])
         self.client_id = device_id
         self.device_type = device_type
         self.device_key = device_key
@@ -28,10 +30,10 @@ class DeviceClient(SocketConnector):
         :return: None
         """
         try:
-            self.log("info", "Socket client - Connecting to {0}:{1}".format(self.host, self.port))
+            self.log(LogLevel.INFO, "Socket client - Connecting to {0}:{1}".format(self.host, self.port))
             self.sock.connect((self.host, self.port))
         except ConnectionRefusedError:
-            self.log("error", "Could not connect to '{0}:{1}'. Retrying in 2 seconds".format(self.host, self.port))
+            self.log(LogLevel.ERROR, "Could not connect to '{0}:{1}'. Retrying in 2 seconds".format(self.host, self.port))
             sleep(2)
             self.connect()
 
@@ -49,14 +51,14 @@ class DeviceClient(SocketConnector):
             status = response.payload.status
 
             if device_id == self.client_id and status == PacketStatus.ACCEPTED.value:
-                self.log("info", "Authorization request accepted. Proceeding")
+                self.log(LogLevel.INFO, "Authorization request accepted. Proceeding")
             elif device_id == self.client_id and status == PacketStatus.DENIED.value:
-                self.log("error", "Authorization denied.")
+                self.log(LogLevel.ERROR, "Authorization denied.")
                 for error in response["errors"]:
-                    self.log("error", error)
+                    self.log(LogLevel.ERROR, error)
                 self.sock.close()
         else:
-            self.log("error", "AUTH - Empty response received. Did server close connection?")
+            self.log(LogLevel.ERROR, "AUTH - Empty response received. Did server close connection?")
             self.sock.close()
 
     def listen(self):
@@ -70,15 +72,15 @@ class DeviceClient(SocketConnector):
                 if data:
                     self.process_request(data)
                 else:
-                    self.log("warning", "Lost connection to server. Trying to re-connect")
+                    self.log(LogLevel.WARNING, "Lost connection to server. Trying to re-connect")
                     self.reconnect()
             except OSError as error:
                 # This exception handler covers the case when server shuts down with client being connected.
                 if error.errno == errno.ECONNRESET:
-                    self.log("warning", "Server closed the connection (CONN_RESET). Trying to re-connect")
+                    self.log(LogLevel.WARNING, "Server closed the connection (CONN_RESET). Trying to re-connect")
                     self.reconnect()
                 elif error.errno == errno.EBADF:
-                    self.log("critical", "Connection was forcibly closed. Shutting down")
+                    self.log(LogLevel.CRITICAL, "Connection was forcibly closed. Shutting down")
                     break
 
     def process_request(self, data):
@@ -95,10 +97,10 @@ class DeviceClient(SocketConnector):
             if call_name in self.client_routes:
                 self.client_routes[call_name](self, request)
             else:
-                self.log("error", "No routes for call '{0}' were found".format(call_name))
+                self.log(LogLevel.ERROR, "No routes for call '{0}' were found".format(call_name))
         except UnicodeDecodeError as error:
-            self.log("error", "Processing error - {0}".format(error))
-            self.log("error", "Decoded data - {0}".format(decoded_data))
+            self.log(LogLevel.ERROR, "Processing error - {0}".format(error))
+            self.log(LogLevel.ERROR, "Decoded data - {0}".format(decoded_data))
 
     def send(self, data):
         """
@@ -110,7 +112,7 @@ class DeviceClient(SocketConnector):
         try:
             self.sock.sendall(self.get_cipher().encrypt(json.dumps(data.serialize())))
         except BrokenPipeError:
-            self.log("error", "[BrokenPipeError] Attempted to send a message through a closed client.")
+            self.log(LogLevel.ERROR, "[BrokenPipeError] Attempted to send a message through a closed client.")
 
     def reconnect(self):
         """
@@ -128,7 +130,7 @@ class DeviceClient(SocketConnector):
         Resets and requests pin configuration from the server
         :return: None
         """
-        self.log("info", "Resetting pin configuration and requesting new one from the server")
+        self.log(LogLevel.INFO, "Resetting pin configuration and requesting new one from the server")
         gpio_controller.reload_pins(reset_pins=True)
 
         self.send(GET_PIN_CONFIGURATION(self.client_id))

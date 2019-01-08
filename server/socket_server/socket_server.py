@@ -1,20 +1,18 @@
 import json
-import logging
 import socket
 from datetime import datetime
 from json import JSONDecodeError
 
+from common.logger import LogLevel
 from common.socket_connector.packets.general import AUTH
 from common.socket_connector.packets.packet_base import SocketPacket
 from common.socket_connector.packets.packet_status import PacketStatus
 from common.socket_connector.socket_connector import SocketConnector
 from common.socket_connector.packets import general as Packets
+from server.config import GENERAL
 from server.socket_server.client_thread import ClientThread
 from server.web import db as database
 from server.database.models.device.devices import Devices
-from common.general import get_formatter
-
-logging.basicConfig(format=get_formatter())
 
 
 class SocketServer(SocketConnector):
@@ -25,7 +23,7 @@ class SocketServer(SocketConnector):
     """
 
     def __init__(self, host, port):
-        super().__init__(host, port)
+        super().__init__(host, port, logger_name=__class__.__name__, logging_level=GENERAL["logging_level"])
         self.clients = {}
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.sock.bind((self.host, self.port))
@@ -39,7 +37,8 @@ class SocketServer(SocketConnector):
         self.sock.listen()
         while self.active:
             client, address = self.sock.accept()
-            self._logger.info("Accepted new connection from '{0}'. Waiting for authorization packet".format(address))
+            self.log(LogLevel.INFO, "Accepted new connection from '{0}'. Waiting for authorization packet".
+                     format(address))
             data = client.recv(1024)
             if data:
                 try:
@@ -57,14 +56,15 @@ class SocketServer(SocketConnector):
                                                            ["Device is not allowed in the system"])
                             client.sendall(self.get_cipher().encrypt(json.dumps(response_packet)))
                             client.close()
-                            self.log("warning", "Client '{0} {1}' is not allowed. Rejecting auth and closing client".
-                                     format(request.payload.deviceId, address))
+                            self.log(LogLevel.WARNING,
+                                     "Client '{0} {1}' is not allowed. Rejecting auth and closing client"
+                                     .format(request.payload.deviceId, address))
                     else:
-                        self.log("warning", "Invalid authorization packet received from {0}. Disconnecting".
+                        self.log(LogLevel.WARNING, "Invalid authorization packet received from {0}. Disconnecting".
                                  format(address))
                         client.close()
                 except JSONDecodeError:
-                    self.log("warning", "Couldn't deserialize request. Format is incorrect. Message was - {0}".
+                    self.log(LogLevel.WARNING, "Couldn't deserialize request. Format is incorrect. Message was - {0}".
                              format(decoded_data))
                     client.close()
 
@@ -79,10 +79,10 @@ class SocketServer(SocketConnector):
             if client.is_alive():
                 return client
             else:
-                self.log("error", "Client with ID '{0}' got disconnected.".format(client_id))
+                self.log(LogLevel.ERROR, "Client with ID '{0}' got disconnected.".format(client_id))
                 return None
         except KeyError:
-            self.log("error", "Client with ID '{0}' is not connected yet.".format(client_id))
+            self.log(LogLevel.ERROR, "Client with ID '{0}' is not connected yet.".format(client_id))
             return None
 
     def _device_is_allowed(self, data):
@@ -108,13 +108,15 @@ class SocketServer(SocketConnector):
         """
         device_id = request_data.payload.deviceId
         if not self.get_client_by_id(device_id):
-            self.log("info", "No active clients found for device with ID '{0}'. Initializing new client controller".
+            self.log(LogLevel.INFO,
+                     "No active clients found for device with ID '{0}'. Initializing new client controller".
                      format(device_id))
             device = Devices.query.filter(Devices.device_id == device_id).first()
             client_handler = ClientThread(client, address, device_id, device.serialize_config())
             client_handler.routes = self.client_routes
             self.clients[device_id] = client_handler
-            self._logger.info("Authorization for '{0} {1}' has passed. Client registered.".format(device_id, address))
+            self.log(LogLevel.INFO, "Authorization for '{0} {1}' has passed. Client registered.".
+                     format(device_id, address))
             client_handler.send(Packets.AUTH(device_id,
                                              request_data.payload.deviceType,
                                              request_data.payload.key,
@@ -125,7 +127,8 @@ class SocketServer(SocketConnector):
 
             database.session.commit()
         else:
-            self.log("error", "Active client with ID '{0}' already registered. Rejecting connection".format(device_id))
+            self.log(LogLevel.ERROR, "Active client with ID '{0}' already registered. Rejecting connection".
+                     format(device_id))
             client.close()
 
     def get_device_by_id(self, id):

@@ -1,6 +1,12 @@
 """
 Core configuration file - Server side
 """
+from common.logger import LogLevel
+
+# General section
+GENERAL = {
+    "logging_level": LogLevel.DEBUG
+}
 
 # DB section
 DATABASE_CONFIG = {

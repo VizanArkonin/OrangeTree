@@ -1,12 +1,10 @@
-import logging
 from datetime import datetime
 
 from Crypto.Cipher import AES
 
 import client.config as config
-from common.general import get_formatter, get_time_formatter
-
-logging.basicConfig(format=get_formatter())
+from common.general import get_time_formatter
+from common.logger import Logger
 
 
 class ClassBase(object):
@@ -14,30 +12,18 @@ class ClassBase(object):
     This class serves as inheritance base for every other class that will require universal features, like logger,
     decryptor and such.
     """
-    def __init__(self):
-        self._logger = logging.getLogger(__class__.__name__)
-        self._logger.setLevel(logging.DEBUG)
+    def __init__(self, logger_name, logging_level):
+        self._logger = Logger(logger_name, logging_level)
 
     def log(self, level, text):
         """
-        Main logger workhorse - used to simplify access to Pin's logger
+        A simple bridge-method, used to pass values to instance's logger.
+
         :param level: String - level of log message
         :param text: String - message itself
         :return: None
         """
-        lvl = str(level).lower()
-        if lvl == "info":
-            self._logger.info(text)
-        elif lvl == "warning":
-            self._logger.warning(text)
-        elif lvl == "debug":
-            self._logger.debug(text)
-        elif lvl == "error":
-            self._logger.error(text)
-        elif lvl == "critical":
-            self._logger.critical(text)
-        else:
-            self._logger.warning(text)
+        self._logger.log(level, text)
 
     def get_cipher(self):
         """

@@ -1,14 +1,15 @@
 import socket
 
 from common.class_base import ClassBase
+from common.logger import LogLevel
 
 
 class SocketConnector(ClassBase):
     """
     Starter template for socket-based classes. Creates and implements core variables.
     """
-    def __init__(self, host, port):
-        super().__init__()
+    def __init__(self, host, port, logger_name, logging_level):
+        super().__init__(logger_name=logger_name, logging_level=logging_level)
         self.host = host
         self.port = port
         self.client_routes = {}
@@ -37,7 +38,7 @@ class SocketConnector(ClassBase):
         Sets listener anchor to false, shutting loop down.
         :return: None
         """
-        self.log("info", "Client listener shut down.")
+        self.log(LogLevel.INFO, "Client listener shut down.")
         self.active = False
 
     def _add_route(self, packet_name, function):
@@ -49,7 +50,7 @@ class SocketConnector(ClassBase):
         :return: None
         """
         if packet_name in self.client_routes:
-            self.log("warning", "Attempt to re-assign route '{0}' blocked".format(packet_name))
+            self.log(LogLevel.WARNING, "Attempt to re-assign route '{0}' blocked".format(packet_name))
         else:
             self.client_routes[packet_name] = function
 

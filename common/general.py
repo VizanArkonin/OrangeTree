@@ -28,14 +28,6 @@ def import_all_modules_from(relative_path_from_main):
                         importlib.import_module(root.replace("\\", ".") + "." + module)
 
 
-def get_formatter():
-    """
-    Logger format provider
-    :return: Format String
-    """
-    return "%(asctime)s; %(levelname)s; %(message)s"
-
-
 def get_time_formatter():
     """
     Datetime-to-string conversion format provider
