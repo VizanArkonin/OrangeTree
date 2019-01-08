@@ -41,7 +41,7 @@
   height: 100vh;
   width: 100%;
 }
-
+//Helper class display of desktop page elements
 .desktop-display-none {
   display: none;
 }
@@ -51,6 +51,7 @@
   .page-title {
     font-size: $font-size-lg-l;
   }
+  //Helper class display of mobile page elements
   .mobile-display-none {
     display: none;
   }

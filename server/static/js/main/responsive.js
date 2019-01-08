@@ -1,58 +1,52 @@
 "use strict";
-const SIDEBAR = ".sidebar-responsive";
-const CONTENT = ".content-responsive";
+const SIDEBAR_RESPONSIVE_OPEN = ".sidebar-responsive";
+const CONTENT_RESPONSIVE_OPEN = ".content-responsive";
 const DESKTOP_TOGGLE_BAR = "#desktop-toggle-bar";
 const MOBILE_TOGGLE_BAR = "#mobile-toggle-bar";
-let propertiesBar = false;
+const MOBILE_MENU_CONTAINER = ".mobile-menu-container";
+const TEXT_VISIBILITY_DESKTOP = ".text-visibility-desktop";
+const TEXT_VISIBILITY_MOBILE = ".text-visibility-mobile";
+
+let BarIsOpenedMobile = false;
+let BarIsOpenedDesktop = false;
+
 /**
 * Auxiliary script for adaptive layout
 **/
-$(function() {
-    if (typeof (localStorage.getItem("bar")) === undefined) {
-        localStorage.setItem("bar", "true");
-    }
-    if (localStorage.getItem("bar") === "true") {
-        // Do display stuff here
-        showBar();
-    } else {
-        // Do hide stuff here
-        hideBar();
-    }
-});
-
 $(document).ready(function () {
+
+    // Actions when pressing the button of the navigation menu (for the desktop version)
     $(DESKTOP_TOGGLE_BAR).click(function () {
-        if (localStorage.getItem("bar") === "true") {
-            hideBar();
-            localStorage.setItem("bar", "false");
+        if (BarIsOpenedDesktop === false) {
+            $(SIDEBAR_RESPONSIVE_OPEN).removeClass("sidebar-responsive-off").addClass("sidebar-responsive-on");
+            $(CONTENT_RESPONSIVE_OPEN).removeClass("content-responsive-off").addClass("content-responsive-on");
+            $(TEXT_VISIBILITY_DESKTOP).css("visibility","hidden");
+            setTimeout(function () {
+                $(TEXT_VISIBILITY_DESKTOP).css("visibility","visible");
+            }, 200);
+            BarIsOpenedDesktop = true;
         } else {
-            showBar();
-            localStorage.setItem("bar", "true");
+            $(TEXT_VISIBILITY_DESKTOP).css("visibility","hidden");
+            $(SIDEBAR_RESPONSIVE_OPEN).removeClass("sidebar-responsive-on").addClass("sidebar-responsive-off");
+            $(CONTENT_RESPONSIVE_OPEN).removeClass("content-responsive-on").addClass("content-responsive-off");
+            BarIsOpenedDesktop = false;
         }
     });
 
+    // Actions when pressing the button of the navigation menu (for the mobile version)
     $(MOBILE_TOGGLE_BAR).click(function () {
-        if (propertiesBar === false) {
-            $(".mobile-menu-container").css("width","100%");
+        if (BarIsOpenedMobile === false) {
+            $(MOBILE_MENU_CONTAINER).css("width","100%");
             setTimeout(function () {
-                $(".mobile-menu-container span").css("visibility","visible");
+                $(TEXT_VISIBILITY_MOBILE).css("visibility","visible");
             }, 200);
-            propertiesBar = true;
+            BarIsOpenedMobile = true;
         } else {
-            $(".mobile-menu-container").css("width","0");
+            $(MOBILE_MENU_CONTAINER).css("width","0");
             setTimeout(function () {
-                $(".mobile-menu-container span").css("visibility","hidden");
-            }, 100);
-            propertiesBar = false;
+                $(TEXT_VISIBILITY_MOBILE).css("visibility","hidden");
+            }, 50);
+            BarIsOpenedMobile = false;
         }
     });
 });
-
-function showBar () {
-    $(SIDEBAR).removeClass("sidebar-responsive-off").addClass("sidebar-responsive-on");
-    $(CONTENT).removeClass("content-responsive-off").addClass("content-responsive-on");
-}
-function hideBar () {
-    $(SIDEBAR).removeClass("sidebar-responsive-on").addClass("sidebar-responsive-off");
-    $(CONTENT).removeClass("content-responsive-on").addClass("content-responsive-off");
-}

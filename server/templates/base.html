@@ -10,7 +10,7 @@
     <title>Orange Pi Lite Web Interface</title>
 
     <!--Logo-->
-    <link href="/img/logo.png" rel="shortcut icon" type="image/x-icon"/>
+    <link href="/img/logo.png" rel="shortcut icon" type="/image/x-icon"/>
     <link rel="apple-touch-icon" href="/img/logo.png">
 
     <!-- CSS -->
@@ -29,38 +29,38 @@
 </head>
 
 <body>
-    <!--Sidebar navigation-->
-    <div class="sidebar-container sidebar-responsive sidebar-responsive-on mobile-display-none">
-        <nav class="position-fixed sidebar-responsive sidebar-responsive-on">
+    <!--Desktop navigation-->
+    <div class="sidebar-container sidebar-responsive sidebar-responsive-off mobile-display-none">
+        <nav class="position-fixed sidebar-responsive sidebar-responsive-off">
             <ul class="sidebar-navigation sidebar-element">
                 <li id="logo">
                     <a href="#">
-                    <span>Orange Pi Admin</span>
+                    <span class="text-visibility-desktop">Orange Pi Admin</span>
                     <span id="logo-responsive">OPiA</span>
                     </a>
                 </li>
                 <li class="navigation-link-hover">
                     <a href="/index">
                     <i class="fas fa-home"></i>
-                    <span>Home page</span>
+                    <span class="text-visibility-desktop">Home page</span>
                     </a>
                 </li>
                 <li class="navigation-link-hover">
-                    <a href="#">
+                    <a href="/monitor/DEV_LITE">
                     <i class="fas fa-chart-area"></i>
-                    <span>System monitor</span>
+                    <span class="text-visibility-desktop">System monitor</span>
                     </a>
                 </li>
                 <li class="navigation-link-hover">
                     <a href="#">
                     <i class="fas fa-microchip"></i>
-                    <span>System configuration</span>
+                    <span class="text-visibility-desktop">System configuration</span>
                     </a>
                 </li>
                 <li class="navigation-link-hover">
                     <a href="#">
                     <i class="fas fa-cog"></i>
-                    <span>User settings</span>
+                    <span class="text-visibility-desktop">User settings</span>
                     </a>
                 </li>
             </ul>
@@ -68,9 +68,9 @@
     </div>
 
     <!--Main container with main content and top navigation bar-->
-    <div class="main-section content-responsive content-responsive-on">
+    <div class="main-section content-responsive content-responsive-off">
         <!--Navigation bar on top-->
-        <nav class="navigation-container flex-container-center position-fixed content-responsive content-responsive-on">
+        <nav class="navigation-container flex-container-center position-fixed content-responsive content-responsive-off">
             <div class="navigation-left navigation-element">
                 <ul>
                     <li class="mobile-display-none">
@@ -105,36 +105,36 @@
         </nav>
 
         <!--Mobile navigation-->
-        <nav class="mobile-menu-container position-fixed">
+        <nav class="mobile-menu-container position-fixed desktop-display-none">
             <ul class="navigation-element">
                 <li class="navigation-link-hover">
                     <a href="/index">
                         <i class="fas fa-home"></i>
-                        <span>Home page</span>
+                        <span class="text-visibility-mobile">Home page</span>
                     </a>
                 </li>
                 <li class="navigation-link-hover">
-                    <a href="#">
+                    <a href="/monitor/DEV_LITE">
                         <i class="fas fa-chart-area"></i>
-                        <span>System monitor</span>
+                        <span class="text-visibility-mobile">System monitor</span>
                     </a>
                 </li>
                 <li class="navigation-link-hover">
                     <a href="#">
                         <i class="fas fa-microchip"></i>
-                        <span>System configuration</span>
+                        <span class="text-visibility-mobile">System configuration</span>
                     </a>
                 </li>
                 <li class="navigation-link-hover">
                     <a href="#">
                         <i class="fas fa-cog"></i>
-                        <span>User settings</span>
+                        <span class="text-visibility-mobile">User settings</span>
                     </a>
                 </li>
                 <li class="navigation-link-hover">
                     <a href="#">
                         <i class="fas fa-power-off"></i>
-                        <span>Logout</span>
+                        <span class="text-visibility-mobile">Logout</span>
                     </a>
                 </li>
             </ul>

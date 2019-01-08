@@ -98,7 +98,7 @@
   margin-top: $height-base-element-default;
   top: 0;
   left: 0;
-  transition: 0.4s;
+  transition: $navigation-transition;
   & ul {
     width: 100%;
   }
@@ -138,9 +138,11 @@
 
 .sidebar-responsive-on {
   width: 20%;
+  transition: $navigation-transition;
 }
 
 .sidebar-responsive-off {
+  transition: $navigation-transition;
   width: 5%;
   .sidebar-element span {
     display: none;
@@ -157,9 +159,11 @@
 
 .content-responsive-on {
   width: 80%;
+  transition: $navigation-transition;
 }
 
 .content-responsive-off {
+  transition: $navigation-transition;
   width: 95%;
 }
 
@@ -178,6 +182,18 @@
     & span {
       font-size: $font-size-lg-l;
     }
+  }
+  .sidebar-responsive-on {
+    width: 30%;
+  }
+  .sidebar-responsive-off {
+    width: 5%;
+  }
+  .content-responsive-on {
+    width: 70%;
+  }
+  .content-responsive-off {
+    width: 95%;
   }
 }
 
