@@ -2,6 +2,13 @@
 Core configuration file - Client side
 """
 
+# General section
+from common.logger import LogLevel
+
+GENERAL = {
+    "logging_level": LogLevel.DEBUG
+}
+
 # Board socket service section
 BOARD_SERVICE_CONFIG = {
     "host": "127.0.0.1",

@@ -1,6 +1,7 @@
 """
 Utility functions and variables
 """
+from common.logger import LogLevel
 from common.socket_connector.packets.packet_status import PacketStatus
 
 
@@ -19,9 +20,9 @@ def generic_response_validator(client, data, route_name):
         return
     elif status == PacketStatus.FAILED.value:
         if errors:
-            client.log("error", "{0} Client - {1} route processing errors:".format(client.client_id, route_name))
+            client.log(LogLevel.ERROR, "{0} Client - {1} route processing errors:".format(client.client_id, route_name))
             for error in errors:
-                client.log("error", error)
+                client.log(LogLevel.ERROR, error)
             return
     else:
-        client.log("error", "{0} Client - Unknown status response: {0}".format(status))
+        client.log(LogLevel.ERROR, "{0} Client - Unknown status response: {0}".format(status))

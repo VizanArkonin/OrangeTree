@@ -1,14 +1,12 @@
-import logging
 from datetime import datetime
 from threading import Thread
 from time import sleep
 
+from client.config import GENERAL
 from client.gpio.utils import live_mode_is_on
 from client.gpio.pin import Pin
 from common.class_base import ClassBase
-from common.general import get_formatter
-
-logging.basicConfig(format=get_formatter())
+from common.logger import LogLevel
 
 # Copied from wiringpi root
 # Pin modes
@@ -34,8 +32,8 @@ class GpioController(ClassBase):
     _PINS = {}
 
     def __init__(self):
-        super().__init__()
-        self.log("info", "Initializing GPIO Controller")
+        super().__init__(logger_name=__class__.__name__, logging_level=GENERAL["logging_level"])
+        self.log(LogLevel.INFO, "Initializing GPIO Controller")
         if live_mode_is_on():
             import wiringpi
             wiringpi.wiringPiSetup()
@@ -56,11 +54,11 @@ class GpioController(ClassBase):
         NOTE: We run waiter in threaded mode to prevent process locks.
         :return: None
         """
-        self.log("info", "Waiting for pin configuration")
+        self.log(LogLevel.INFO, "Waiting for pin configuration")
         while not self._pins_config:
             sleep(1)
 
-        self.log("info", "Pin configuration received. Initializing pin controllers")
+        self.log(LogLevel.INFO, "Pin configuration received. Initializing pin controllers")
         for pin in self._pins_config["pins"]:
             if pin["type"] == "wPi":
                 pin_wpi = pin["wPi"]

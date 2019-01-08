@@ -3,6 +3,7 @@ from time import sleep
 from common.socket_connector.packets.packet_status import PacketStatus
 from common.class_base import ClassBase
 import common.socket_connector.packets.gpio as GpioPacket
+from server.config import GENERAL
 
 
 class SocketInterface(ClassBase):
@@ -13,7 +14,7 @@ class SocketInterface(ClassBase):
         """
         :param server_instance: Instance of SocketServer
         """
-        super().__init__()
+        super().__init__(logger_name=__class__.__name__, logging_level=GENERAL["logging_level"])
         self._server = server_instance
 
     def get_device_pin_config(self, board_id):
