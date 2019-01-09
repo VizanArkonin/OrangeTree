@@ -18,7 +18,6 @@ $(document).ready(function () {
     // Actions when pressing the button of the navigation menu (for the desktop version)
     $(DESKTOP_TOGGLE_BAR).click(function () {
         if (BarIsOpenedDesktop === false) {
-            toggleBar();
             $(SIDEBAR_RESPONSIVE_OPEN).removeClass("sidebar-responsive-off").addClass("sidebar-responsive-on");
             $(CONTENT_RESPONSIVE_OPEN).removeClass("content-responsive-off").addClass("content-responsive-on");
             $(TEXT_VISIBILITY_DESKTOP).css("visibility","hidden");
@@ -27,7 +26,6 @@ $(document).ready(function () {
             }, 200);
             BarIsOpenedDesktop = true;
         } else {
-            toggleBar();
             $(TEXT_VISIBILITY_DESKTOP).css("visibility","hidden");
             $(SIDEBAR_RESPONSIVE_OPEN).removeClass("sidebar-responsive-on").addClass("sidebar-responsive-off");
             $(CONTENT_RESPONSIVE_OPEN).removeClass("content-responsive-on").addClass("content-responsive-off");
@@ -38,14 +36,12 @@ $(document).ready(function () {
     // Actions when pressing the button of the navigation menu (for the mobile version)
     $(MOBILE_TOGGLE_BAR).click(function () {
         if (BarIsOpenedMobile === false) {
-            toggleBar();
             $(MOBILE_MENU_CONTAINER).css("width","100%");
             setTimeout(function () {
                 $(TEXT_VISIBILITY_MOBILE).css("visibility","visible");
             }, 200);
             BarIsOpenedMobile = true;
         } else {
-            toggleBar();
             $(MOBILE_MENU_CONTAINER).css("width","0");
             setTimeout(function () {
                 $(TEXT_VISIBILITY_MOBILE).css("visibility","hidden");
@@ -54,7 +50,7 @@ $(document).ready(function () {
         }
     });
 
-    function toggleBar () {
-        $(".toggle-bar").toggleClass("toggle-bar-opened");
-    }
+    $(".toggle-bar").on("click",function () {
+        $(this).toggleClass("toggle-bar-opened");
+    });
 });

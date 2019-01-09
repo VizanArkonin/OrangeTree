@@ -295,7 +295,7 @@ input:-webkit-autofill:focus {
     background: white;
     display: block;
     transform: rotate(0deg);
-    transition: .4s ease all;
+    transition: .3s ease all;
     height: 2px;
     width: 25px;
     margin-bottom: 4px; }
