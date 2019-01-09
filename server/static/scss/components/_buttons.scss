@@ -60,6 +60,41 @@
   }
 }
 
+.toggle-bar {
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  & :focus {
+    outline-width: 0;
+  }
+  & [class *='bar-'] {
+    background: $white-color;
+    display: block;
+    transform: rotate(0deg);
+    transition: .4s ease all;
+    height: 2px;
+    width: 25px;
+    margin-bottom: 4px;
+  }
+}
+
+.toggle-bar-opened {
+  .toggle-bar-top {
+    background: $btn-default-color;
+    transform: rotate(45deg);
+    transform-origin: 15% 15%;
+  }
+  .toggle-bar-middle {
+    opacity: 0;
+  }
+  .toggle-bar-bottom {
+    background: $btn-default-color;
+    transform: rotate(-45deg);
+    transform-origin: 15% 95%;
+  }
+}
+
 @include media-breakpoint-sm {
   .button-link {
     height: 4rem;

@@ -284,6 +284,33 @@ input:-webkit-autofill:focus {
   .btn-modal:hover {
     background: #df6327; }
 
+.toggle-bar {
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column; }
+  .toggle-bar :focus {
+    outline-width: 0; }
+  .toggle-bar [class*='bar-'] {
+    background: white;
+    display: block;
+    transform: rotate(0deg);
+    transition: .4s ease all;
+    height: 2px;
+    width: 25px;
+    margin-bottom: 4px; }
+
+.toggle-bar-opened .toggle-bar-top {
+  background: #e57a46;
+  transform: rotate(45deg);
+  transform-origin: 15% 15%; }
+.toggle-bar-opened .toggle-bar-middle {
+  opacity: 0; }
+.toggle-bar-opened .toggle-bar-bottom {
+  background: #e57a46;
+  transform: rotate(-45deg);
+  transform-origin: 15% 95%; }
+
 @media screen and (max-width: 479px) {
   .button-link {
     height: 4rem;
@@ -384,9 +411,6 @@ input:-webkit-autofill:focus {
     width: 100%;
     text-align: center;
     font-size: 1.8rem; }
-
-#desktop-toggle-bar, #mobile-toggle-bar {
-  cursor: pointer; }
 
 #logo-responsive {
   display: none; }

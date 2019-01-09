@@ -31,6 +31,8 @@ class Devices(database.Model):
             "device_type": self.device_type_id,
             "last_address": self.last_address,
             "last_connected_at": self.last_connected_at.strftime(get_time_formatter())
+                                 if self.last_connected_at
+                                 else None
         }
 
     def serialize_all(self):
