@@ -80,7 +80,7 @@
 }
 
 .btn-table {
-  background: $btn-default-color-disable;
+  background: $btn-default-color-disabled;
   color: $white-color;
   width: 100%;
   cursor: default;
@@ -119,27 +119,9 @@
   background: $dark-color-700;
 }
 
-// Media queries
-@include media-breakpoint-xl {
-  .table-main-container {
-    font-size: $font-size-xl-n;
-  }
-}
-
+//For max-width 1023px
 @include media-breakpoint-lg {
   .table-main-container {
     font-size: $font-size-lg-n;
-  }
-}
-
-@include media-breakpoint-md {
-  .table-main-container {
-    font-size: $font-size-md-n;
-  }
-}
-
-@include media-breakpoint-sm {
-  .table-main-container {
-    font-size: $font-size-sm-n;
   }
 }

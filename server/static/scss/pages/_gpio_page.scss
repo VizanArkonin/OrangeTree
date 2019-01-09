@@ -62,27 +62,9 @@
   color: $btn-off-color !important;
 }
 
-// Media queries
-@include media-breakpoint-xl {
-  .pin-container {
-    font-size: $font-size-xl-s;
-  }
-}
-
+//For max-width 1023px
 @include media-breakpoint-lg {
   .pin-container {
     font-size: $font-size-lg-s;
-  }
-}
-
-@include media-breakpoint-md {
-  .pin-container {
-    font-size: $font-size-md-s;
-  }
-}
-
-@include media-breakpoint-sm {
-  .pin-container {
-    font-size: $font-size-sm-s;
   }
 }

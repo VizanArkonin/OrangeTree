@@ -18,65 +18,22 @@ $dark-color-300: rgba(0, 0, 0, 0.3);
 
 // Variables for buttons and links
 $btn-default-color: rgba(229, 122, 70, 1);
-$btn-default-color-disable: rgba(192, 137, 109, 1);
+$btn-default-color-disabled: rgba(192, 137, 109, 1);
 $btn-default-color-hover: rgba(223, 99, 39, 1);
 $btn-on-color: rgba(100, 193, 187, 1);
 $btn-on-color-hover: rgba(86, 163, 158, 1);
 $btn-off-color: rgba(255, 93, 93, 1);
 $btn-off-color-hover: rgba(246, 73, 73, 1);
 
-// Auxiliary variables for determining height and width
-// For screens above 1440px
-$aside-responsive-on-default: 20%;
-$aside-responsive-off-default: 5%;
-$content-responsive-on-default: 80%;
-$content-responsive-off-default: 95%;
 $font-size-default-s: 1.3rem; // Small (s);
 $font-size-default-n: 1.5rem; // Normal (n);
 $font-size-default-l: 1.8rem; // Large (l)
 // Base variables for other variables
 $height-base-element-default: 5rem;
 
-// For max-width 1339px
-$aside-responsive-on-xl: 20%;
-$aside-responsive-off-xl: 5%;
-$content-responsive-on-xl: 80%;
-$content-responsive-off-xl: 95%;
-$font-size-xl-s: 1.3rem; // Small (s);
-$font-size-xl-n: 1.5rem; // Normal (n);
-$font-size-xl-l: 1.8rem; // Large (l)
-// Base variables for other variables
-$height-base-element-xl: 5rem;
-
 // For max-width 1023px
-$aside-responsive-on-lg: 20%;
-$aside-responsive-off-lg: 5%;
-$content-responsive-on-lg: 80%;
-$content-responsive-off-lg: 95%;
-$font-size-lg-s: 1.3rem; // Small (s);
-$font-size-lg-n: 1.5rem; // Normal (n);
-$font-size-lg-l: 1.8rem; // Large (l)
-// Base variables for other variables
-$height-base-element-lg: 5rem;
+$font-size-lg-s: 1.2rem; // Small (s);
+$font-size-lg-n: 1.3rem; // Normal (n);
+$font-size-lg-l: 1.5rem; // Large (l)
 
-// For max-width 767px
-$aside-responsive-on-md: 20%;
-$aside-responsive-off-md: 5%;
-$content-responsive-on-md: 80%;
-$content-responsive-off-md: 95%;
-$font-size-md-s: 1.3rem; //- Small (s);
-$font-size-md-n: 1.5rem; //- Normal (n);
-$font-size-md-l: 1.8rem; //- Large (l)
-// Base variables for other variables
-$height-base-element-md: 5rem;
-
-// For max-width 479x
-$aside-responsive-on-sm: 20%;
-$aside-responsive-off-sm: 5%;
-$content-responsive-on-sm: 80%;
-$content-responsive-off-sm: 95%;
-$font-size-sm-s: 1.3rem; //- Small (s);
-$font-size-sm-n: 1.5rem; //- Normal (n);
-$font-size-sm-l: 1.8rem; //- Large (l)
-// Base variables for other variables
-$height-base-element-sm: 5rem;
+$navigation-transition: 0.4s;

@@ -1,7 +1,7 @@
 //Styling the navigation bar and sidebar
 
 .sidebar-container {
-  background-color: $dark-color-400;
+  background-color: $nav-default-color;
   display: flex;
   min-height: 100vh;
   overflow-y: hidden;
@@ -25,13 +25,13 @@
 }
 
 .sidebar-element {
-  & i, span {
+  & i, & span {
     color: $white-color;
     font-size: $font-size-default-n;
   }
 }
 
-.sidebar-link-hover {
+.navigation-link-hover {
   opacity: 0.7;
   &:hover {
     background: $dark-color-300;
@@ -43,6 +43,7 @@
   }
 }
 
+ //Styles for the top navigation bar
 .navigation-container {
   background: $nav-default-color;
   height:$height-base-element-default;
@@ -52,10 +53,10 @@
   height: $height-base-element-default;
   flex-grow: 10;
   & li {
-    padding-right: 20px;
+    padding-right: 2rem;
   }
   & span {
-    padding-left: 10px;
+    padding-left: 1rem;
   }
 }
 
@@ -66,7 +67,7 @@
   align-items: center;
   flex-grow: 1;
   & li {
-    padding-left: 15px;
+    padding-left: 1.5rem;
   }
 }
 
@@ -78,13 +79,42 @@
 }
 
 .navigation-element {
-  & i, span {
+  & i, & span {
     color: $white-color;
     font-size: $font-size-default-l;
   }
   & a {
     display: block;
     min-height: 100%;
+  }
+}
+//Mobile navigation
+.mobile-menu-container {
+  background: $nav-default-color;
+  height: 100%;
+  width: 0;
+  z-index: 1010;
+  overflow-x: hidden;
+  margin-top: $height-base-element-default;
+  top: 0;
+  left: 0;
+  transition: $navigation-transition;
+  & ul {
+    width: 100%;
+  }
+  & li {
+    height: $height-base-element-default;
+  }
+  & a {
+    display: flex;
+    align-items: center;
+    height: $height-base-element-default;
+  }
+  & i {
+    padding: 0 1.5rem;
+  }
+  & span {
+    visibility: hidden;
   }
 }
 
@@ -97,7 +127,7 @@
   }
 }
 
-#toggle-bars {
+#desktop-toggle-bar, #mobile-toggle-bar {
   cursor: pointer;
 }
 
@@ -107,11 +137,13 @@
 }
 
 .sidebar-responsive-on {
-  width: $aside-responsive-on-default;
+  width: 20%;
+  transition: $navigation-transition;
 }
 
 .sidebar-responsive-off {
-  width: $aside-responsive-off-default;
+  transition: $navigation-transition;
+  width: 5%;
   .sidebar-element span {
     display: none;
   }
@@ -126,9 +158,59 @@
 }
 
 .content-responsive-on {
-  width: $content-responsive-on-default;
+  width: 80%;
+  transition: $navigation-transition;
 }
 
 .content-responsive-off {
-  width: $content-responsive-off-default;
+  transition: $navigation-transition;
+  width: 95%;
+}
+
+@include media-breakpoint-lg {
+  .sidebar-element {
+    & i, & span {
+      font-size: $font-size-lg-n;
+    }
+  }
+  .navigation-element {
+    & i, & span {
+      font-size: $font-size-lg-l;
+    }
+  }
+  #logo {
+    & span {
+      font-size: $font-size-lg-l;
+    }
+  }
+  .sidebar-responsive-on {
+    width: 30%;
+  }
+  .sidebar-responsive-off {
+    width: 5%;
+  }
+  .content-responsive-on {
+    width: 70%;
+  }
+  .content-responsive-off {
+    width: 95%;
+  }
+}
+
+@include media-breakpoint-md {
+  .sidebar-responsive-on {
+    width: 0;
+  }
+  .sidebar-responsive-off {
+    width: 0;
+  }
+  .content-responsive-on {
+    width: 100%;
+  }
+  .content-responsive-off {
+    width: 100%;
+  }
+  .navigation-container {
+    background: $header-default-color;
+  }
 }
