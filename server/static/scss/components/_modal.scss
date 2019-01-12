@@ -69,10 +69,10 @@
 }
 
 .roles-container {
-    background: $header-default-color;
-    color: $white-color;
-    height: $height-base-element-default;
-    width: 100%;
+  background: $header-default-color;
+  color: $white-color;
+  height: $height-base-element-default;
+  width: 100%;
 }
 
 .roles-container-checkbox {
@@ -122,10 +122,19 @@
       margin: 2rem 0;
     }
     .modal-footer {
+      background: inherit;
       position: absolute;
+      flex-direction: column;
       left: 0;
       bottom: 0;
+      margin: 0 0 1rem 0;
+      padding: 1rem;
       width: 100%;
+      height: 14rem;
+      & button:nth-child(2) {
+        margin-left: 0;
+        margin-top: 2rem;
+      }
     }
   }
 }
