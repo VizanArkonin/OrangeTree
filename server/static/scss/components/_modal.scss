@@ -15,7 +15,7 @@
 .modal-container {
   background: $nav-default-color;
   width: 100%;
-  max-width: 40rem;
+  max-width: 47rem;
   z-index: 1020;
 }
 
@@ -109,3 +109,23 @@
   }
 }
 
+@include media-breakpoint-sm {
+  .modal-container {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    .modal-content {
+      padding: 0 1rem;
+    }
+    .modal-content-block {
+      margin: 2rem 0;
+    }
+    .modal-footer {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+    }
+  }
+}

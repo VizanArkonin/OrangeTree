@@ -159,7 +159,7 @@ input:-webkit-autofill:focus {
 .modal-container {
   background: #2d2d2d;
   width: 100%;
-  max-width: 40rem;
+  max-width: 47rem;
   z-index: 1020; }
 
 .modal-animation-open {
@@ -231,6 +231,21 @@ input:-webkit-autofill:focus {
     opacity: 1; }
   to {
     opacity: 0; } }
+@media screen and (max-width: 479px) {
+  .modal-container {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%; }
+    .modal-container .modal-content {
+      padding: 0 1rem; }
+    .modal-container .modal-content-block {
+      margin: 2rem 0; }
+    .modal-container .modal-footer {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%; } }
 .checkbox-container {
   color: rgba(255, 255, 255, 0.6);
   height: 100%; }
