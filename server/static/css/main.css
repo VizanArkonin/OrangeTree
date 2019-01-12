@@ -223,8 +223,6 @@ input:-webkit-autofill:focus {
   display: flex;
   height: 5rem;
   padding: 0.5rem; }
-  .modal-footer button:nth-child(2) {
-    margin-left: 0.5rem; }
 
 @keyframes animate-modal-open {
   from {
@@ -254,10 +252,7 @@ input:-webkit-autofill:focus {
       bottom: 0;
       padding: 1rem;
       width: 100%;
-      height: 14rem; }
-      .modal-container .modal-footer button:nth-child(2) {
-        margin-left: 0;
-        margin-top: 2rem; } }
+      height: 14rem; } }
 .checkbox-container {
   color: rgba(255, 255, 255, 0.6);
   height: 100%; }
@@ -305,11 +300,16 @@ input:-webkit-autofill:focus {
 .btn-modal {
   background: #e57a46;
   color: white;
+  display: block;
   border: none;
   font-size: 1.5rem;
   width: 100%; }
   .btn-modal:hover {
     background: #df6327; }
+
+[id*='btn_modal'] {
+  display: none;
+  margin-right: 0.5rem; }
 
 .toggle-bar {
   background: transparent;
@@ -345,7 +345,11 @@ input:-webkit-autofill:focus {
     font-size: 1.8rem; }
 
   .btn-modal {
-    height: 100%; } }
+    height: 100%; }
+
+  [id*='btn_modal'] {
+    margin-left: 0;
+    margin-bottom: 2rem; } }
 .sidebar-container {
   background-color: #2d2d2d;
   display: flex;

@@ -52,12 +52,18 @@
 .btn-modal {
   background: $btn-default-color;
   color: $white-color;
+  display: block;
   border: none;
   font-size: $font-size-default-n;
   width: 100%;
   &:hover {
     background: $btn-default-color-hover;
   }
+}
+
+[id *='btn_modal'] {
+  display: none;
+  margin-right: 0.5rem;
 }
 
 .toggle-bar {
@@ -103,5 +109,9 @@
   }
   .btn-modal {
     height: 100%;
+  }
+  [id *='btn_modal'] {
+    margin-left: 0;
+    margin-bottom: 2rem;
   }
 }

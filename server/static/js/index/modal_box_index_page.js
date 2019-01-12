@@ -11,6 +11,8 @@ const MODAL = ".modal";
 const MODAL_DEVICE = "#modal_device";
 const MODAL_USER = "#modal_user";
 
+const DISPLAY_BLOCK = {"display":"block"};
+
 $(document).ready(function () {
 
     let setTime = 500; // Set the delay time for the animation to work
@@ -35,6 +37,7 @@ $(document).ready(function () {
             $("#modal_device_key").attr("placeholder","Enter device key");
             $("#modal_device_type").val("1");
             openModalAnimation();
+            $('#btn_modal_device_add').css(DISPLAY_BLOCK);
             $(MODAL_DEVICE).css(DISPLAY_FLEX);
         }
         if ($(this).data("modal") === "edit" && rowSelected) {
@@ -42,6 +45,7 @@ $(document).ready(function () {
             $("#modal_device_id").attr("placeholder","Edit device ID");
             $("#modal_device_key").attr("placeholder","Edit device key");
             openModalAnimation();
+            $('#btn_modal_devise_edit').css(DISPLAY_BLOCK);
             $(MODAL_DEVICE).css(DISPLAY_FLEX);
         }
     });
@@ -56,6 +60,7 @@ $(document).ready(function () {
             $("#modal_user_password").attr("placeholder","Enter password");
             $("#modal_user_confirm_password").attr("placeholder","Confirm password");
             openModalAnimation();
+            $('#btn_modal_user_add').css(DISPLAY_BLOCK);
             $(MODAL_USER).css(DISPLAY_FLEX);
         }
         if ($(this).data("modal") === "edit" && rowSelected) {
@@ -66,6 +71,7 @@ $(document).ready(function () {
             $("#modal_user_password").attr("placeholder","Edit password");
             $("#modal_user_confirm_password").attr("placeholder","Confirm password");
             openModalAnimation();
+            $('#btn_modal_user_edit').css(DISPLAY_BLOCK);
             $(MODAL_USER).css(DISPLAY_FLEX);
         }
     });
@@ -91,6 +97,7 @@ $(document).ready(function () {
                $("#modal_user_confirm_password").val("");
            }, setTime);
        }
+       $('[id *= btn_modal]').css(DISPLAY_NONE);
     });
 
     // Function to select a row
