@@ -97,9 +97,9 @@
 
 @include media-breakpoint-sm {
   .button-link {
-    height: 4rem;
-    line-height: 4rem;
-    font-size: $font-size-default-n;
+    height: $height-base-element-default;
+    line-height: $height-base-element-default;
+    font-size: $font-size-default-l;
   }
   .btn-modal {
     height: 100%;

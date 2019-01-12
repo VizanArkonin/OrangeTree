@@ -10,7 +10,7 @@
 
 .text-404-container {
   text-align: center;
-  width: 32rem;
+  width: 42rem;
   padding: 1.5rem;
   margin-left: 5rem;
   & h1 {
@@ -34,6 +34,7 @@
     }
   }
   .text-404-container {
+    width: 47rem;
     margin-top: 5rem;
     margin-left: 0;
     & h1 {
@@ -52,15 +53,16 @@
     }
   }
   .text-404-container {
-    width: 22rem;
+    width: 100%;
+    padding: 0 1rem;
     margin-top: 1rem;
     & h1 {
       font-size: 3rem;
-      padding-bottom: 1rem;
+      padding-bottom: 1.5rem;
     }
     & h2 {
       font-size: 1.8rem;
-      padding-bottom: 2rem;
+      padding-bottom: 4rem;
     }
   }
 }
