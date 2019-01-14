@@ -181,7 +181,7 @@ def get_users_list():
     :return: :return: JSON formatted response
     """
     return utils.get_response(
-        json.dumps({"devices": [user.serialize_general_data() for user in Users.query.all()]}),
+        json.dumps({"users": [user.serialize_general_data() for user in Users.query.all()]}),
         mimetype=MimeType.JSON_MIMETYPE.value)
 
 

@@ -111,6 +111,14 @@
   display: none;
 }
 
+.online {
+  color: $btn-on-color-hover;
+}
+
+.offline {
+  color: $danger-color;
+}
+
 .tab-link-devices {
   background: $dark-color-400;
 }

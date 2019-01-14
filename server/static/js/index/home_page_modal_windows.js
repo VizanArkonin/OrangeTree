@@ -17,6 +17,7 @@ $(document).ready(function () {
 
     let setTime = 500; // Set the delay time for the animation to work
     let rowSelected = false; // A helper variable to track the status of a row
+    let activeRow;
 
     // Animation when opening a modal window
     function openModalAnimation () {
@@ -102,8 +103,9 @@ $(document).ready(function () {
 
     // Function to select a row
     $(TABLE_ROW).click(function () {
+        activeRow = $(this);
         $(TABLE_ROW).removeClass("row-active");
-        $(this).addClass("row-active");
+        activeRow.addClass("row-active");
         $('[data-modal="edit"]').addClass("btn-active");
         $('[data-modal="debug"]').addClass("btn-active");
         rowSelected = true;
@@ -119,4 +121,13 @@ $(document).ready(function () {
             rowSelected = false;
         }
     });
+    //
+    // // Function for filling in input forms (device editing)
+    // function fillingFormDevice () {
+    //
+    // }
+    // // Function for filling in input forms (users editing)
+    // function fillingFormUsers () {
+    //
+    // }
 });

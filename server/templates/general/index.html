@@ -2,8 +2,9 @@
 
 {% block head %}
 {{ super() }}
-<script src="/js/index/tab_headers.js"></script>
-<script src="/js/index/modal_box_index_page.js"></script>
+<script src="/js/index/home_page_table_tab.js"></script>
+<script src="/js/index/home_page_modal_windows.js"></script>
+<script src="/js/index/home_page_processing.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -19,7 +20,7 @@
                 <button class="tab-link tab-link-users">Users</button>
             </div>
             <div class="tab-content devices">
-                <table class="table-container">
+                <table id="table_device" class="table-container">
                     <tr>
                         <th>Deviсe ID</th>
                         <th>Deviсe Type</th>
@@ -28,107 +29,24 @@
                         <th>Status</th>
                     </tr>
                     <tr class="table-row">
-                        <td>01.0001</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Online</td>
+                        <input data-device-id type="hidden" value="">
+                        <td data-device-type-id>01.0001</td>
+                        <td data-device-type>Orange Pi Lite</td>
+                        <td data-device-last-address>127.0.0.1</td>
+                        <td data-device-last-online>10-11-18 06:30</td>
+                        <td data-device-status class="online">Online</td>
                     </tr>
                     <tr class="table-row">
-                        <td>01.0002</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Offline</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.0003</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Offline</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.0004</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Offline</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.0005</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Online</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.0006</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Offline</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.0007</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Offline</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.0008</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Offline</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.0009</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Offline</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.00010</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Offline</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.00011</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Offline</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.00012</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Online</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.00013</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Online</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.00014</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Offline</td>
+                        <td data-device-type-id>01.0002</td>
+                        <td data-device-type>Orange Pi Lite</td>
+                        <td data-device-last-address>127.0.0.1</td>
+                        <td data-device-last-online>10-11-18 06:30</td>
+                        <td data-device-status class="offline">Offline</td>
                     </tr>
                 </table>
             </div>
             <div class="tab-content users">
-                <table class="table-container">
+                <table id="table_users" class="table-container">
                     <tr>
                         <th>User name</th>
                         <th>User email</th>
@@ -136,88 +54,18 @@
                         <th>Enabled</th>
                     </tr>
                     <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Yes</td>
+                        <input data-user-id type="hidden" value="">
+                        <td data-user-name>Anonimus</td>
+                        <td data-user-email>some@mail.com</td>
+                        <td data-user-last-login>10-11-18 06:30</td>
+                        <td data-user-enabled class="online">Yes</td>
                     </tr>
                     <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>No</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>No</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>No</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Yes</td>
+                        <input data-user-id type="hidden" value="">
+                        <td data-user-name>Anonimus</td>
+                        <td data-user-email>some@mail.com</td>
+                        <td data-user-last-login>10-11-18 06:30</td>
+                        <td data-user-enabled class="offline">No</td>
                     </tr>
                 </table>
             </div>

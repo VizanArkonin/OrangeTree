@@ -697,6 +697,12 @@ input:-webkit-autofill:focus {
 .users {
   display: none; }
 
+.online {
+  color: #56a39e; }
+
+.offline {
+  color: #f64949 !important; }
+
 .tab-link-devices {
   background: rgba(0, 0, 0, 0.4); }
 
