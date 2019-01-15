@@ -55,11 +55,6 @@
   }
 }
 
-.row-active {
-  background: $btn-default-color !important;
-  color: $white-color;
-}
-
 .tab-footer {
   background: $dark-color-700;
   display: flex;
@@ -111,12 +106,24 @@
   display: none;
 }
 
+
+.row-active {
+  background: $btn-default-color !important;
+  color: $white-color;
+  .offline {
+    color: $white-color;
+  }
+  .online {
+    color: $white-color;
+  }
+}
+
 .online {
-  color: $btn-on-color-hover;
+  color: $green-color;
 }
 
 .offline {
-  color: $danger-color;
+  color: $red-color;
 }
 
 .tab-link-devices {

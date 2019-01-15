@@ -99,6 +99,7 @@ $(document).ready(function () {
                $("#modal_device_id").val("");
                $("#modal_device_key").val("");
                $("#modal_device_type").val("1");
+               $('[id *= btn_modal]').css(DISPLAY_NONE);
            }, setTime);
        } else {
            closeModalAnimation();
@@ -109,9 +110,9 @@ $(document).ready(function () {
                $("#modal_user_email").val("");
                $("#modal_user_password").val("");
                $("#modal_user_confirm_password").val("");
+               $('[id *= btn_modal]').css(DISPLAY_NONE);
            }, setTime);
        }
-       $('[id *= btn_modal]').css(DISPLAY_NONE);
     });
 
     // Function to reset row status
