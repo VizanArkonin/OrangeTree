@@ -2,9 +2,9 @@
 
 {% block head %}
 {{ super() }}
+<script src="/js/index/home_page_processing.js"></script>
 <script src="/js/index/home_page_table_tab.js"></script>
 <script src="/js/index/home_page_modal_windows.js"></script>
-<script src="/js/index/home_page_processing.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -20,28 +20,13 @@
                 <button class="tab-link tab-link-users">Users</button>
             </div>
             <div class="tab-content devices">
-                <table id="table_device" class="table-container">
+                <table id="table_device" class="table-container table-device">
                     <tr>
                         <th>Deviсe ID</th>
                         <th>Deviсe Type</th>
                         <th>Last Address</th>
                         <th>Last online time</th>
                         <th>Status</th>
-                    </tr>
-                    <tr class="table-row">
-                        <input data-device-id type="hidden" value="">
-                        <td data-device-type-id>01.0001</td>
-                        <td data-device-type>Orange Pi Lite</td>
-                        <td data-device-last-address>127.0.0.1</td>
-                        <td data-device-last-online>10-11-18 06:30</td>
-                        <td data-device-status class="online">Online</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td data-device-type-id>01.0002</td>
-                        <td data-device-type>Orange Pi Lite</td>
-                        <td data-device-last-address>127.0.0.1</td>
-                        <td data-device-last-online>10-11-18 06:30</td>
-                        <td data-device-status class="offline">Offline</td>
                     </tr>
                 </table>
             </div>
@@ -52,20 +37,6 @@
                         <th>User email</th>
                         <th>Last login</th>
                         <th>Enabled</th>
-                    </tr>
-                    <tr class="table-row">
-                        <input data-user-id type="hidden" value="">
-                        <td data-user-name>Anonimus</td>
-                        <td data-user-email>some@mail.com</td>
-                        <td data-user-last-login>10-11-18 06:30</td>
-                        <td data-user-enabled class="online">Yes</td>
-                    </tr>
-                    <tr class="table-row">
-                        <input data-user-id type="hidden" value="">
-                        <td data-user-name>Anonimus</td>
-                        <td data-user-email>some@mail.com</td>
-                        <td data-user-last-login>10-11-18 06:30</td>
-                        <td data-user-enabled class="offline">No</td>
                     </tr>
                 </table>
             </div>

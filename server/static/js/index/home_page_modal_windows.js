@@ -13,11 +13,24 @@ const MODAL_USER = "#modal_user";
 
 const DISPLAY_BLOCK = {"display":"block"};
 
+let rowSelected = false; // A helper variable to track the status of a row
+let activeRow;
+
+// Function to select a row
+function rowSelection () {
+    $(TABLE_ROW).click(function () {
+        activeRow = $(this);
+        $(TABLE_ROW).removeClass("row-active");
+        activeRow.addClass("row-active");
+        $('[data-modal="edit"]').addClass("btn-active");
+        $('[data-modal="debug"]').addClass("btn-active");
+        rowSelected = true;
+    });
+}
+
 $(document).ready(function () {
 
     let setTime = 500; // Set the delay time for the animation to work
-    let rowSelected = false; // A helper variable to track the status of a row
-    let activeRow;
 
     // Animation when opening a modal window
     function openModalAnimation () {
@@ -101,16 +114,6 @@ $(document).ready(function () {
        $('[id *= btn_modal]').css(DISPLAY_NONE);
     });
 
-    // Function to select a row
-    $(TABLE_ROW).click(function () {
-        activeRow = $(this);
-        $(TABLE_ROW).removeClass("row-active");
-        activeRow.addClass("row-active");
-        $('[data-modal="edit"]').addClass("btn-active");
-        $('[data-modal="debug"]').addClass("btn-active");
-        rowSelected = true;
-    });
-
     // Function to reset row status
     $(document).mouseup(function (e) {
         let element = $(".table-main-container");
@@ -121,13 +124,4 @@ $(document).ready(function () {
             rowSelected = false;
         }
     });
-    //
-    // // Function for filling in input forms (device editing)
-    // function fillingFormDevice () {
-    //
-    // }
-    // // Function for filling in input forms (users editing)
-    // function fillingFormUsers () {
-    //
-    // }
 });
