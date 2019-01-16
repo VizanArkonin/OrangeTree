@@ -21,15 +21,15 @@
 }
 
 .tab-content {
+  display: block;
+  height: 486.4px;
   background: $dark-color-400;
-  height: 100%;
-  width: 100%;
   padding: 1.5rem;
 }
 
 .table-container {
-  height: 100%;
   width: 100%;
+  display: table;
   & th,td {
     height: 3rem;
     text-align: center;

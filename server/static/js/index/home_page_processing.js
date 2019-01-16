@@ -80,18 +80,20 @@ function removeTableUsers () {
 
 function renderTableDevices () {
     removeTableDevices();
-    sendJSONRequest("/home/getDevicesList", null, RequestMethod.GET, drawTableDevices, debug_callback, process_failures);
+    sendJSONRequest("/home/getDevicesList", null, RequestMethod.GET, beforeLoadTableDevice, drawTableDevices, debug_callback, process_failures);
     setTimeout(function () {
         rowSelection();
-    },renderTableDelay);
+    }, renderTableDelay);
+    afterLoadTableDevice();
 }
 
 function renderTableUsers () {
     removeTableUsers();
-    sendJSONRequest("/home/getUsersList", null, RequestMethod.GET, drawTableUsers, debug_callback, process_failures);
+    sendJSONRequest("/home/getUsersList", null, RequestMethod.GET, beforeLoadTableUsers, drawTableUsers, debug_callback, process_failures);
     setTimeout(function () {
         rowSelection();
-    },renderTableDelay);
+    }, renderTableDelay);
+    afterLoadTableUsers();
 }
 
 $(document).ready(function () {

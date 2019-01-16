@@ -18,14 +18,18 @@ const RequestMethod = {
  * @param method                - Request method. Can be "GET" or "POST"
  * @param callback              - Callback function
  * @param failure_processor     - Function that will process the errors, should they occur
+ * @param beforeSend               - Function used to display the preloader during the execution of the request
  */
-function sendJSONRequest(url, payload, method = RequestMethod.GET,
+function sendJSONRequest(url, payload, method = RequestMethod.GET, beforeSend = function() {},
                         callback = function(data) {}, failure_processor = function(jqXHR, statusText, errorThrown) {}) {
     $.ajax({
         type: method,
         url: url,
         contentType: "application/json",
         data: JSON.stringify(payload),
+        beforeSend: function () {
+            beforeSend();
+        },
         success: function(data) {
             callback(data);
         },

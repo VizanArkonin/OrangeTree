@@ -3,6 +3,7 @@
 {% block head %}
 {{ super() }}
 <script src="/js/index/home_page_processing.js"></script>
+<script src="/js/index/home_page_preloader.js"></script>
 <script src="/js/index/home_page_table_tab.js"></script>
 <script src="/js/index/home_page_modal_windows.js"></script>
 {% endblock %}
@@ -20,9 +21,12 @@
                 <button class="tab-link tab-link-users">Users</button>
             </div>
             <div class="tab-content devices">
+                <div id="table_device_preloader" class="preloader-container">
+                    <div class="preloader"></div>
+                </div>
                 <table id="table_device" class="table-container table-device">
                     <tr>
-                        <th>Deviсe ID</th>
+                        <th>Device ID</th>
                         <th>Deviсe Type</th>
                         <th>Last Address</th>
                         <th>Last online time</th>
@@ -31,6 +35,9 @@
                 </table>
             </div>
             <div class="tab-content users">
+                <div id="table_users_preloader" class="preloader-container">
+                    <div class="preloader"></div>
+                </div>
                 <table id="table_users" class="table-container">
                     <tr>
                         <th>User name</th>
