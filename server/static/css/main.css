@@ -3,7 +3,7 @@
   display: none;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  z-index: 1;
   width: 100%;
   height: 100%; }
 
@@ -508,13 +508,13 @@ input:-webkit-autofill:focus {
     width: 30%; }
 
   .sidebar-responsive-off {
-    width: 5%; }
+    width: 8%; }
 
   .content-responsive-on {
     width: 70%; }
 
   .content-responsive-off {
-    width: 95%; } }
+    width: 92%; } }
 @media screen and (max-width: 767px) {
   .sidebar-responsive-on {
     width: 0; }
@@ -650,7 +650,8 @@ input:-webkit-autofill:focus {
   display: block;
   height: 486.4px;
   background: rgba(0, 0, 0, 0.4);
-  padding: 1.5rem; }
+  padding: 1.5rem;
+  overflow-y: auto; }
 
 .table-container {
   width: 100%;

@@ -7,6 +7,7 @@ from flask import request
 from flask_login import login_required
 from flask_security import roles_accepted
 from flask_security.utils import hash_password
+from server.database.models.user.roles import Roles
 
 from server.web import db as database
 from server.database.models.device.devices import Devices
@@ -121,7 +122,8 @@ def update_device_details():
     if device:
         device.device_id = payload["deviceData"]["device_id"]
         device.device_type_id = payload["deviceData"]["device_type"]
-        device.device_access_key = payload["deviceData"]["device_access_key"]
+        received_access_key = payload["deviceData"]["device_access_key"]
+        device.device_access_key = received_access_key if received_access_key else device.device_access_key
         database.session.commit()
 
         server.update_allowed_devices()
@@ -182,6 +184,19 @@ def get_users_list():
     """
     return utils.get_response(
         json.dumps({"users": [user.serialize_general_data() for user in Users.query.all()]}),
+        mimetype=MimeType.JSON_MIMETYPE.value)
+
+
+@web_service.route("/home/getUserRolesList", methods=["GET"])
+@login_required
+@roles_accepted("user", "admin")
+def get_users_roles_list():
+    """
+    Retrieves a list of all user roles
+    :return: :return: JSON formatted response
+    """
+    return utils.get_response(
+        json.dumps({"userRoles": [role.serialize() for role in Roles.query.all()]}),
         mimetype=MimeType.JSON_MIMETYPE.value)
 
 

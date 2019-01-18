@@ -6,6 +6,21 @@
 <script src="/js/index/home_page_preloader.js"></script>
 <script src="/js/index/home_page_table_tab.js"></script>
 <script src="/js/index/home_page_modal_windows.js"></script>
+<script>
+    let user_roles;
+
+    $(document).ready(function() {
+        function setUserRoles(data) {
+            user_roles = data.userRoles;
+            for (let index = 0; index < user_roles.length; index++) {
+                console.log(user_roles[index]);
+            }
+        }
+
+        sendJSONRequest("/home/getUserRolesList", null, RequestMethod.GET, function() {},
+                        setUserRoles, process_failures);
+    })
+</script>
 {% endblock %}
 
 {% block content %}
@@ -83,6 +98,7 @@
                 <span id="modal_header_device"></span>
             </div>
             <div class="modal-content">
+                <input id="modal_device_id_hidden" type="hidden" value="">
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Device ID</span>
                     <input id="modal_device_id" type="text" value="" placeholder="" maxlength="20" autofocus>
@@ -93,7 +109,7 @@
                 </div>
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Deviсe type</span>
-                    <select id="modal_device_type" name="device_type">
+                    <select id="modal_device_type" name="device_type" title="">
                         <option value="1">Orange Pi Lite</option>
                         <option value="2">Orange Pi Zero</option>
                         <option value="3">Orange Pi One</option>
