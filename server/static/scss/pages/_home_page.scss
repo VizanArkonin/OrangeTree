@@ -1,6 +1,7 @@
 //Styles for index page
 
 .table-main-container {
+  background: $dark-color-400;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -23,8 +24,8 @@
 .tab-content {
   display: block;
   height: 486.4px;
-  background: $dark-color-400;
-  padding: 1.5rem;
+  margin-top: 1.5rem;
+  padding: 0 1.5rem 1.5rem 1.5rem;
   overflow-y: auto;
 }
 

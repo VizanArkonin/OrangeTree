@@ -54,8 +54,17 @@ function updateDevice (payload) {
     return payload;
 }
 
+// The function of forming a JSON object by reading the data of the modal window
+function createDevice (payload) {
+    payload.deviceData.device_id = $(MODAL_DEVICE_ID).val();
+    payload.deviceData.device_type = $(MODAL_DEVICE_TYPE).val();
+    payload.deviceData.device_access_key = $(MODAL_DEVICE_KEY).val();
+
+    return payload;
+}
+
 $(document).ready(function () {
-    let setTime = 500; // Set the delay time for the animation to work
+    let setTime = 400; // Set the delay time for the animation to work
 
     // Animation when opening a modal window
     function openModalAnimation () {
@@ -155,6 +164,14 @@ $(document).ready(function () {
         let payload = {"deviceData": {}};
         closeModalDevice();
         sendJSONRequest("/home/device.svc", updateDevice(payload), RequestMethod.PUT, beforeLoadTableDevice,
+                        renderTableDevices, debug_callback, process_failures);
+    });
+
+    // Creating an AJAX request to add a new device
+    $(BTN_MODAL_DEVICE_ADD).click(function () {
+        let payload = {"deviceData": {}};
+        closeModalDevice();
+        sendJSONRequest("/home/device.svc", createDevice(payload), RequestMethod.POST, beforeLoadTableDevice,
                         renderTableDevices, debug_callback, process_failures);
     });
 
