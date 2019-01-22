@@ -2,25 +2,10 @@
 
 {% block head %}
 {{ super() }}
-<script src="/js/index/home_page_processing.js"></script>
-<script src="/js/index/home_page_preloader.js"></script>
-<script src="/js/index/home_page_table_tab.js"></script>
-<script src="/js/index/home_page_modal_windows.js"></script>
-<script>
-    let user_roles;
-
-    $(document).ready(function() {
-        function setUserRoles(data) {
-            user_roles = data.userRoles;
-            for (let index = 0; index < user_roles.length; index++) {
-                console.log(user_roles[index]);
-            }
-        }
-
-        sendJSONRequest("/home/getUserRolesList", null, RequestMethod.GET, function() {},
-                        setUserRoles, process_failures);
-    })
-</script>
+    <script src="/js/index/home_page_processing.js"></script>
+    <script src="/js/index/home_page_preloader.js"></script>
+    <script src="/js/index/home_page_table_tab.js"></script>
+    <script src="/js/index/home_page_modal_windows.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -134,6 +119,7 @@
                 <span id="modal_header_user"></span>
             </div>
             <div class="modal-content">
+                <input id="modal_user_id_hidden" type="hidden" value="">
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>First Name</span>
                     <input id="modal_user_first_name" type="text" value="" placeholder="" maxlength="20" autofocus>
@@ -144,25 +130,25 @@
                 </div>
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Email</span>
-                    <input id="modal_user_email" type="email" value="" placeholder="" maxlength="20">
+                    <input id="modal_user_email" type="email" value="" placeholder="" maxlength="20" autocomplete="off">
                 </div>
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Password</span>
-                    <input  id="modal_user_password" type="password" value="" placeholder="" maxlength="20">
+                    <input  id="modal_user_password" type="password" value="" placeholder="" maxlength="20" autocomplete="new-password">
                 </div>
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Password</span>
-                    <input id="modal_user_confirm_password" type="password" value="" placeholder="" maxlength="20">
+                    <input id="modal_user_confirm_password" type="password" value="" placeholder="" maxlength="20" autocomplete="off">
                 </div>
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Roles</span>
                     <div class="roles-container flex-container-center">
                         <div class="checkbox-container roles-container-checkbox">
-                            <input class="checkbox" type="checkbox">
+                            <input class="checkbox modal-user-checkbox" type="checkbox" value="user">
                             <label for="checkbox">User</label>
                         </div>
                         <div class="checkbox-container  roles-container-checkbox">
-                            <input class="checkbox" type="checkbox">
+                            <input class="checkbox modal-user-checkbox" type="checkbox" value="admin">
                             <label for="checkbox">Admin</label>
                         </div>
                     </div>

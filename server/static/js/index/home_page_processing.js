@@ -1,12 +1,13 @@
 "use strict";
 const TABLE_USERS = '#table_users';
 const TABLE_DEVICES = '#table_device';
+const USER_ROLES_CONTAINER =  '.user-roles-container';
 let renderTableDelay = 200;
 
 // Callback function, called on success, for reading device data
 function drawTableDevices (data) {
-    for (let i = 0; i < data.devices.length; i++) {
-        drawRowDevice(data.devices[i]);
+    for (let index = 0; index < data.devices.length; index++) {
+        drawRowDevice(data.devices[index]);
     }
 }
 
@@ -42,8 +43,8 @@ function drawRowDevice (rowDataDevice) {
 
 // Callback function, called on success, for reading users data
 function drawTableUsers (data) {
-    for (let i = 0; i < data.users.length ; i++) {
-        drawRowUsers(data.users[i]);
+    for (let index = 0; index < data.users.length ; index++) {
+        drawRowUsers(data.users[index]);
     }
 }
 
@@ -55,15 +56,25 @@ function drawRowUsers(rowDataUsers) {
     userEnabled = userEnabled === true ? "Yes" : "No";
 
     $(TABLE_USERS).append($row);
-    $row.append($("<input data-user-id type=\"hidden\">").val(rowDataUsers.id));
-    $row.append($("<td data-user-name>" + rowDataUsers.first_name + " " + rowDataUsers.last_name + "</td>"));
+    $row.append($("<input data-user-id type='hidden'>").val(rowDataUsers.id));
+    $row.append($("<td data-user-name data-first-name data-last-name>" +
+                "" + rowDataUsers.first_name + " " + rowDataUsers.last_name + "</td>"));
+    $row.children('[data-user-name]').attr('data-first-name', rowDataUsers.first_name);
+    $row.children('[data-user-name]').attr('data-last-name', rowDataUsers.last_name);
     $row.append($("<td data-user-email>" + rowDataUsers.email + "</td>"));
     $row.append($("<td data-user-last-login>" + rowDataUsers.last_login_at + "</td>"));
-
+    
     if (userEnabled === "Yes") {
         $row.append($("<td data-user-enabled class='online'>" + userEnabled + "</td>"));
     } else {
         $row.append($("<td data-user-enabled class='offline'>" + userEnabled + "</td>"));
+    }
+
+    $row.append($("<td><div class='user-roles-container'></div></td>"));
+
+    for (let i = 0; i < rowDataUsers.roles.length; i++) {
+        console.log(rowDataUsers.roles.length);
+        $(USER_ROLES_CONTAINER).append($("<input data-user-role type='hidden'>").val(rowDataUsers.roles[i].name));
     }
 }
 

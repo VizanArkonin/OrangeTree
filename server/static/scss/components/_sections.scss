@@ -46,6 +46,12 @@
   display: none;
 }
 
+.user-roles-container {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
 //For max-width 767px
 @include media-breakpoint-md {
   .page-title {

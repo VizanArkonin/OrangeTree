@@ -522,16 +522,10 @@ input:-webkit-autofill:focus {
   .content-responsive-off {
     width: 92%; } }
 @media screen and (max-width: 767px) {
-  .sidebar-responsive-on {
+  .sidebar-responsive-on, .sidebar-responsive-off {
     width: 0; }
 
-  .sidebar-responsive-off {
-    width: 0; }
-
-  .content-responsive-on {
-    width: 100%; }
-
-  .content-responsive-off {
+  .content-responsive-on, .content-responsive-off {
     width: 100%; }
 
   .navigation-container {
@@ -570,6 +564,11 @@ input:-webkit-autofill:focus {
 
 .desktop-display-none {
   display: none; }
+
+.user-roles-container {
+  height: 0;
+  width: 0;
+  visibility: hidden; }
 
 @media screen and (max-width: 767px) {
   .page-title {
@@ -656,8 +655,8 @@ input:-webkit-autofill:focus {
 .tab-content {
   display: block;
   height: 486.4px;
-  margin-top: 1.5rem;
-  padding: 0 1.5rem 1.5rem 1.5rem;
+  margin: 1.5rem 0;
+  padding: 0 1.5rem;
   overflow-y: auto; }
 
 .table-container {

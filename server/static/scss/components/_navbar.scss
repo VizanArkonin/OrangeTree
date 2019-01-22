@@ -194,16 +194,10 @@
 }
 
 @include media-breakpoint-md {
-  .sidebar-responsive-on {
+  .sidebar-responsive-on, .sidebar-responsive-off {
     width: 0;
   }
-  .sidebar-responsive-off {
-    width: 0;
-  }
-  .content-responsive-on {
-    width: 100%;
-  }
-  .content-responsive-off {
+  .content-responsive-on, .content-responsive-off {
     width: 100%;
   }
   .navigation-container {
