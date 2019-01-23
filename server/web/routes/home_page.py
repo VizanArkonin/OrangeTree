@@ -314,7 +314,7 @@ def update_user():
         user.email = payload["userData"]["email"]
         user.first_name = payload["userData"]["first_name"]
         user.last_name = payload["userData"]["last_name"]
-        user.active = bool(payload["userData"]["active"])
+        # user.active = bool(payload["userData"]["active"])
 
         database.session.commit()
 

@@ -1,7 +1,6 @@
 "use strict";
 const TABLE_USERS = '#table_users';
 const TABLE_DEVICES = '#table_device';
-const USER_ROLES_CONTAINER =  '.user-roles-container';
 let renderTableDelay = 200;
 
 // Callback function, called on success, for reading device data
@@ -73,8 +72,7 @@ function drawRowUsers(rowDataUsers) {
     $row.append($("<td><div class='user-roles-container'></div></td>"));
 
     for (let i = 0; i < rowDataUsers.roles.length; i++) {
-        console.log(rowDataUsers.roles.length);
-        $(USER_ROLES_CONTAINER).append($("<input data-user-role type='hidden'>").val(rowDataUsers.roles[i].name));
+        $row.children('td:last-child').children('.user-roles-container').append($("<input data-user-role type='hidden'>").val(rowDataUsers.roles[i].name));
     }
 }
 

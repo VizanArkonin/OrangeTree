@@ -26,6 +26,7 @@ const MODAL_USER_LAST_NAME = "#modal_user_last_name";
 const MODAL_USER_EMAIL = "#modal_user_email";
 const MODAL_USER_PASSWORD = "#modal_user_password";
 const MODAL_USER_CONFIRM_PASSWORD = "#modal_user_confirm_password";
+const MODAL_USER_CHECKBOX = '.modal-user-checkbox';
 
 const DISPLAY_BLOCK = {"display":"block"};
 // A helper variable to track the status of a row
@@ -83,55 +84,44 @@ function settingModalValuesUser () {
     let $userFirstName = row.children('[data-user-name]').attr('data-first-name');
     let $userLastName = row.children('[data-user-name]').attr('data-last-name');
     let $userEmail = row.children('[data-user-email]').text();
-    // // TODO: Create containers for user roles (div-wrapped hidden inputs) and extract them into array
-    // let userRolesList = [];
+    let $hiddenContainer = row.children('td:last-child').children('.user-roles-container').children('input');
+    let userRolesList = [];
 
     $(MODAL_USER_ID_HIDDEN).val($deviceIdHidden);
     $(MODAL_USER_FIRST_NAME).val($userFirstName);
     $(MODAL_USER_LAST_NAME).val($userLastName);
     $(MODAL_USER_EMAIL).val($userEmail);
 
-    // for (let roleIndex = 0; roleIndex < user_roles.userRoles.length; roleIndex++) {
-    //     let checkbox = $(".modal-user-checkbox")[roleIndex];
-    //     /*
-    //     Loop for user roles
-    //     TODO: Store user roles in some list of elements and extract it in following loop
-    //     */
-    //     for (let userRoleIndex = 0; userRoleIndex < userRolesList.length; userRoleIndex++) {
-    //         let userRole = userRolesList[userRoleIndex];
-    //         if (checkbox.val() === userRole) {
-    //             checkbox.prop("checked", true);
-    //         }
-    //     }
-    // }
+    $hiddenContainer.each(function () {
+        userRolesList.push($(this).val());
+    });
 
-
-    // if (user_roles[index].name === "user") {
-    //     $(MODAL_USER_CHECKBOX_USER).prop('checked', true);
-    // }
-    // if (user_roles[index].name === "admin") {
-    //     $(MODAL_USER_CHECKBOX_ADMIN).prop('checked', true);
-    // }
+    $hiddenContainer.each(function () {
+        for (let userRoleIndex = 0; userRoleIndex < userRolesList.length; userRoleIndex++) {
+            let userRole = userRolesList[userRoleIndex];
+            $(MODAL_USER_CHECKBOX).each(function () {
+                if ($(this).val() === userRole) {
+                    $(this).prop("checked", true);
+                }
+            });
+        }
+    });
 }
 
 // The function of forming a JSON object by reading the data of the modal window
 function updateUser (payload) {
-    let $counterChecked = $('.modal-user-checkbox:checkbox:checked').length;
-    console.log($counterChecked);
 
     payload.userData.id = $(MODAL_USER_ID_HIDDEN).val();
     payload.userData.email = $(MODAL_USER_EMAIL).val();
     payload.userData.first_name = $(MODAL_USER_FIRST_NAME).val();
     payload.userData.last_name = $(MODAL_USER_LAST_NAME).val();
+    payload.userData.password = $(MODAL_USER_PASSWORD).val();
 
-    // for (let index = 0; index < $counterChecked ; index++) {
-    //     if ($(MODAL_USER_CHECKBOX_USER).prop('checked') === true) {
-    //         payload.userData.roles.push("user");
-    //     }
-    //     if ($(MODAL_USER_CHECKBOX_ADMIN).prop('checked') === true) {
-    //         payload.userData.roles.push("admin");
-    //     }
-    // }
+    $(MODAL_USER_CHECKBOX).each(function () {
+       if ($(this).prop('checked') === true) {
+           payload.userData.roles.push({"role_name": $(this).val()});
+       }
+    });
 
     return payload;
 }
@@ -221,8 +211,9 @@ $(document).ready(function () {
            $(MODAL_USER_EMAIL).val("");
            $(MODAL_USER_PASSWORD).val("");
            $(MODAL_USER_CONFIRM_PASSWORD).val("");
-           // $(MODAL_USER_CHECKBOX_ADMIN).prop('checked', false);
-           // $(MODAL_USER_CHECKBOX_USER).prop('checked', false);
+           $(MODAL_USER_CHECKBOX).each(function () {
+               $(this).prop('checked', false);
+           });
            $('[id *= btn_modal]').css(DISPLAY_NONE);
         }, setTime);
     }
