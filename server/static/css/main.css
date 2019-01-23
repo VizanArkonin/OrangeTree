@@ -244,7 +244,7 @@ input:-webkit-autofill:focus {
   .modal-content-block select {
     color: rgba(255, 255, 255, 0.6); }
 
-.roles-container {
+.modal-container-checkbox {
   background: #1b1b1b;
   color: white;
   height: 5rem;
@@ -253,6 +253,11 @@ input:-webkit-autofill:focus {
 .roles-container-checkbox {
   display: flex;
   width: 50%;
+  align-items: center; }
+
+.active-container-checkbox {
+  display: flex;
+  width: 100%;
   align-items: center; }
 
 .modal-footer {

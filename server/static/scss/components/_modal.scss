@@ -58,7 +58,7 @@
   }
 }
 
-.roles-container {
+.modal-container-checkbox {
   background: $header-default-color;
   color: $white-color;
   height: $height-base-element-default;
@@ -68,6 +68,12 @@
 .roles-container-checkbox {
   display: flex;
   width: 50%;
+  align-items: center;
+}
+
+.active-container-checkbox {
+  display: flex;
+  width: 100%;
   align-items: center;
 }
 

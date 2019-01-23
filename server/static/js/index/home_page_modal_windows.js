@@ -84,6 +84,7 @@ function settingModalValuesUser () {
     let $userFirstName = row.children('[data-user-name]').attr('data-first-name');
     let $userLastName = row.children('[data-user-name]').attr('data-last-name');
     let $userEmail = row.children('[data-user-email]').text();
+    let $userActive = row.children('[data-user-enabled]').attr('data-user-enabled');
     let $hiddenContainer = row.children('td:last-child').children('.user-roles-container').children('input');
     let userRolesList = [];
 
@@ -91,6 +92,10 @@ function settingModalValuesUser () {
     $(MODAL_USER_FIRST_NAME).val($userFirstName);
     $(MODAL_USER_LAST_NAME).val($userLastName);
     $(MODAL_USER_EMAIL).val($userEmail);
+
+    if ($userActive === 'true') {
+        $('#modal_user_active').prop("checked", true);
+    }
 
     $hiddenContainer.each(function () {
         userRolesList.push($(this).val());
@@ -116,6 +121,24 @@ function updateUser (payload) {
     payload.userData.first_name = $(MODAL_USER_FIRST_NAME).val();
     payload.userData.last_name = $(MODAL_USER_LAST_NAME).val();
     payload.userData.password = $(MODAL_USER_PASSWORD).val();
+    payload.userData.active = $('#modal_user_active').prop('checked') === true;
+
+    $(MODAL_USER_CHECKBOX).each(function () {
+       if ($(this).prop('checked') === true) {
+           payload.userData.roles.push({"role_name": $(this).val()});
+       }
+    });
+
+    return payload;
+}
+
+function createUser (payload) {
+
+    payload.userData.email = $(MODAL_USER_EMAIL).val();
+    payload.userData.first_name = $(MODAL_USER_FIRST_NAME).val();
+    payload.userData.last_name = $(MODAL_USER_LAST_NAME).val();
+    payload.userData.password = $(MODAL_USER_PASSWORD).val();
+    payload.userData.active = $('#modal_user_active').prop('checked') === true;
 
     $(MODAL_USER_CHECKBOX).each(function () {
        if ($(this).prop('checked') === true) {
@@ -211,6 +234,7 @@ $(document).ready(function () {
            $(MODAL_USER_EMAIL).val("");
            $(MODAL_USER_PASSWORD).val("");
            $(MODAL_USER_CONFIRM_PASSWORD).val("");
+           $('#modal_user_active').prop("checked", false);
            $(MODAL_USER_CHECKBOX).each(function () {
                $(this).prop('checked', false);
            });
@@ -246,6 +270,13 @@ $(document).ready(function () {
         let payload = {"userData": {"roles":[]}};
         closeModalUser();
         sendJSONRequest("/home/user.svc", updateUser(payload), RequestMethod.PUT, beforeLoadTableUsers,
+                        renderTableUsers, debug_callback, process_failures);
+    });
+
+    $(BTN_MODAL_USER_ADD).click(function () {
+        let payload = {"userData": {"roles":[]}};
+        closeModalUser();
+        sendJSONRequest("/home/user.svc", createUser(payload), RequestMethod.POST, beforeLoadTableUsers,
                         renderTableUsers, debug_callback, process_failures);
     });
 

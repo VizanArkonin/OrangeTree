@@ -69,6 +69,8 @@ function drawRowUsers(rowDataUsers) {
         $row.append($("<td data-user-enabled class='offline'>" + userEnabled + "</td>"));
     }
 
+    $row.children('[data-user-enabled]').attr('data-user-enabled', rowDataUsers.active);
+
     $row.append($("<td><div class='user-roles-container'></div></td>"));
 
     for (let i = 0; i < rowDataUsers.roles.length; i++) {
