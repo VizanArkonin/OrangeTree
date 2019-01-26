@@ -6,6 +6,35 @@
     <script src="/js/index/home_page_preloader.js"></script>
     <script src="/js/index/home_page_table_tab.js"></script>
     <script src="/js/index/home_page_modal_windows.js"></script>
+    <script>
+    "use strict";
+    /**
+     * Callback function, called on success, for reading user roles data
+     * @param data      - JSON object
+     */
+    function showUserRoles (data) {
+       for (let index = 0; index < data.userRoles.length ; index++) {
+            drawCheckboxRolesModalWindow(data.userRoles[index]);
+       }
+    }
+
+    /**
+     * The function of drawing checkboxes proceeding
+     * @param indexRole     - JSON object (format data.userRoles[index])
+     */
+    function drawCheckboxRolesModalWindow (indexRole) {
+        const CHECKBOX_CONTAINER = '#modal_user_checkbox_roles';
+        let $checkbox = $("<div class='checkbox-container'>");
+
+        $(CHECKBOX_CONTAINER).append($checkbox);
+        $checkbox.append($('<input class= "checkbox modal-user-checkbox" type="checkbox">').val(indexRole.name));
+        $checkbox.append($('<label for="checkbox"></label>').text(indexRole.description));
+    }
+
+    sendJSONRequest("/home/getUserRolesList", null, RequestMethod.GET, beforeSendEmpty,
+                    showUserRoles, debug_callback, process_failures);
+
+    </script>
 {% endblock %}
 
 {% block content %}
@@ -142,25 +171,16 @@
                 </div>
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Active</span>
-                    <div class="flex-container-center modal-container-checkbox">
-                        <div class="checkbox-container active-container-checkbox">
+                    <div class="modal-checkbox-container">
+                        <div class="checkbox-container">
                             <input id="modal_user_active" class="checkbox" type="checkbox" value="">
                             <label for="checkbox">Active/Disabled</label>
                         </div>
                     </div>
                 </div>
-                <div class="modal-content-block flex-container-center input-focus-within">
+                <div class="modal-content-block-roles flex-container-center input-focus-within">
                     <span>Roles</span>
-                    <div class="modal-container-checkbox flex-container-center">
-                        <div class="checkbox-container roles-container-checkbox">
-                            <input class="checkbox modal-user-checkbox" type="checkbox" value="user">
-                            <label for="checkbox">User</label>
-                        </div>
-                        <div class="checkbox-container  roles-container-checkbox">
-                            <input class="checkbox modal-user-checkbox" type="checkbox" value="admin">
-                            <label for="checkbox">Admin</label>
-                        </div>
-                    </div>
+                    <div id="modal_user_checkbox_roles" class="modal-checkbox-container"></div>
                 </div>
             </div>
             <div class="modal-footer">

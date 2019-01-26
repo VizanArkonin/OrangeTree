@@ -2,7 +2,10 @@
 
 .checkbox-container {
   color: $white-color-600;
-  height: 100%;
+  display: flex;
+  height: $height-base-element-default;
+  width: 50%;
+  align-items: center;
 }
 
 .checkbox {

@@ -18,7 +18,7 @@ const RequestMethod = {
  * @param method                - Request method. Can be "GET" or "POST"
  * @param callback              - Callback function
  * @param failure_processor     - Function that will process the errors, should they occur
- * @param beforeSend            - Function used to display the preloader during the execution of the request
+ * @param beforeSend            - Calls given function before executing the AJAX request
  */
 function sendJSONRequest(url, payload, method = RequestMethod.GET, beforeSend = function() {},
                         callback = function(data) {}, failure_processor = function(jqXHR, statusText, errorThrown) {}) {
@@ -36,7 +36,7 @@ function sendJSONRequest(url, payload, method = RequestMethod.GET, beforeSend = 
         fail: function(jqXHR, statusText, error) {
             failure_processor(jqXHR, statusText, error);
         }
-    })
+    });
 }
 
 /**
@@ -65,4 +65,12 @@ function process_failures(jxXHR, statusText, errorThrown) {
     console.log(statusText);
     console.log(errorThrown);
     console.log(jxXHR.responseJSON);
+}
+
+/**
+ * An empty function that serves as a stub.
+ * In the case when we do not need to perform any function at the time of the request.
+ */
+function beforeSendEmpty () {
+    
 }

@@ -58,23 +58,26 @@
   }
 }
 
-.modal-container-checkbox {
+.modal-content-block-roles {
+  background: $header-default-color;
+  margin: 1.5rem 0;
+  height: 100%;
+  & span {
+    height: 100%;
+    min-width: 11rem;
+    padding-left: 1rem;
+    opacity: 0.6;
+  }
+}
+
+.modal-checkbox-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
   background: $header-default-color;
   color: $white-color;
-  height: $height-base-element-default;
   width: 100%;
-}
-
-.roles-container-checkbox {
-  display: flex;
-  width: 50%;
-  align-items: center;
-}
-
-.active-container-checkbox {
-  display: flex;
-  width: 100%;
-  align-items: center;
 }
 
 .modal-footer {

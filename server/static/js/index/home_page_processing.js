@@ -1,21 +1,27 @@
 "use strict";
 const TABLE_USERS = '#table_users';
 const TABLE_DEVICES = '#table_device';
-let renderTableDelay = 200;
+const renderTableDelay = 300;
 
-// Callback function, called on success, for reading device data
-function drawTableDevices (data) {
+/**
+ * Callback function, called on success, for reading device data
+ * @param data       - JSON object
+ */
+function drawDevicesTable (data) {
     for (let index = 0; index < data.devices.length; index++) {
-        drawRowDevice(data.devices[index]);
+        drawDeviceRow(data.devices[index]);
     }
 }
 
-// The function of drawing the rows of the table of devices
-function drawRowDevice (rowDataDevice) {
+/**
+ * The function of drawing the rows of the table of devices
+ * @param rowData       - JSON object (format - data.devices[index])
+ */
+function drawDeviceRow (rowData) {
     let $row = $('<tr class="table-row table-remove-row-device">');
-    let onlineStatus = rowDataDevice.online;
-    let deviceTypeNumber = rowDataDevice.device_type;
-    let deviceType = {
+    let onlineStatus = rowData.online;
+    let deviceTypeNumber = rowData.device_type;
+    const deviceType = {
         1: "Orange Pi Lite",
         2: "Orange Pi Zero",
         3: "Orange Pi One",
@@ -27,12 +33,12 @@ function drawRowDevice (rowDataDevice) {
     onlineStatus = onlineStatus === true ? "Online" : "Offline";
 
     $(TABLE_DEVICES).append($row);
-    $row.append($("<input data-device-id type=\"hidden\">").val(rowDataDevice.id));
-    $row.append($("<td data-device-type-id>" + rowDataDevice.device_id + "</td>"));
+    $row.append($("<input data-device-id type=\"hidden\">").val(rowData.id));
+    $row.append($("<td data-device-type-id>" + rowData.device_id + "</td>"));
     $row.append($("<td data-device-type>" + deviceType[deviceTypeNumber] + "</td>"));
-    $row.children('[data-device-type]').attr('data-device-type', rowDataDevice.device_type);
-    $row.append($("<td data-device-last-address>" + rowDataDevice.last_address + "</td>"));
-    $row.append($("<td data-device-last-online>" + rowDataDevice.last_connected_at + "</td>"));
+    $row.children('[data-device-type]').attr('data-device-type', rowData.device_type);
+    $row.append($("<td data-device-last-address>" + rowData.last_address + "</td>"));
+    $row.append($("<td data-device-last-online>" + rowData.last_connected_at + "</td>"));
     if (onlineStatus === "Online") {
         $row.append($("<td data-device-status class='online'>" + onlineStatus + "</td>"));
     } else {
@@ -40,28 +46,34 @@ function drawRowDevice (rowDataDevice) {
     }
 }
 
-// Callback function, called on success, for reading users data
-function drawTableUsers (data) {
+/**
+ * Callback function, called on success, for reading users data
+ * @param data      - JSON object
+ */
+function drawUsersTable (data) {
     for (let index = 0; index < data.users.length ; index++) {
-        drawRowUsers(data.users[index]);
+        drawUserRow(data.users[index]);
     }
 }
 
-// The function of drawing user table rows
-function drawRowUsers(rowDataUsers) {
+/**
+ * The function of drawing user table rows
+ * @param rowData      - JSON object (format - data.users[index])
+ */
+function drawUserRow(rowData) {
     let $row = $('<tr class="table-row table-remove-row-user">');
-    let userEnabled = rowDataUsers.active;
+    let userEnabled = rowData.active;
 
     userEnabled = userEnabled === true ? "Yes" : "No";
 
     $(TABLE_USERS).append($row);
-    $row.append($("<input data-user-id type='hidden'>").val(rowDataUsers.id));
+    $row.append($("<input data-user-id type='hidden'>").val(rowData.id));
     $row.append($("<td data-user-name data-first-name data-last-name>" +
-                "" + rowDataUsers.first_name + " " + rowDataUsers.last_name + "</td>"));
-    $row.children('[data-user-name]').attr('data-first-name', rowDataUsers.first_name);
-    $row.children('[data-user-name]').attr('data-last-name', rowDataUsers.last_name);
-    $row.append($("<td data-user-email>" + rowDataUsers.email + "</td>"));
-    $row.append($("<td data-user-last-login>" + rowDataUsers.last_login_at + "</td>"));
+                "" + rowData.first_name + " " + rowData.last_name + "</td>"));
+    $row.children('[data-user-name]').attr('data-first-name', rowData.first_name);
+    $row.children('[data-user-name]').attr('data-last-name', rowData.last_name);
+    $row.append($("<td data-user-email>" + rowData.email + "</td>"));
+    $row.append($("<td data-user-last-login>" + rowData.last_login_at + "</td>"));
     
     if (userEnabled === "Yes") {
         $row.append($("<td data-user-enabled class='online'>" + userEnabled + "</td>"));
@@ -69,54 +81,59 @@ function drawRowUsers(rowDataUsers) {
         $row.append($("<td data-user-enabled class='offline'>" + userEnabled + "</td>"));
     }
 
-    $row.children('[data-user-enabled]').attr('data-user-enabled', rowDataUsers.active);
+    $row.children('[data-user-enabled]').attr('data-user-enabled', rowData.active);
 
     $row.append($("<td><div class='user-roles-container'></div></td>"));
 
-    for (let i = 0; i < rowDataUsers.roles.length; i++) {
-        $row.children('td:last-child').children('.user-roles-container').append($("<input data-user-role type='hidden'>").val(rowDataUsers.roles[i].name));
+    for (let index = 0; index < rowData.roles.length; index++) {
+        $row.children('td:last-child').children('.user-roles-container').append($("<input data-user-role type='hidden'>").val(rowData.roles[index].name));
     }
 }
 
-// Cleaning the device table
-function removeTableDevices () {
+/**
+ * Cleaning the device table
+ */
+function removeDeviceTableRows () {
     $(".table-remove-row-device").remove();
 }
 
-// Clearing the user table
-function removeTableUsers () {
+/**
+ * Clearing the user table
+ */
+function removeUserTableRows () {
     $(".table-remove-row-user").remove();
 }
 
 
-function renderTableDevices () {
-    removeTableDevices();
-    sendJSONRequest("/home/getDevicesList", null, RequestMethod.GET, beforeLoadTableDevice,
-                    drawTableDevices, debug_callback, process_failures);
+function renderDevicesTable () {
+    removeDeviceTableRows();
+    sendJSONRequest("/home/getDevicesList", null, RequestMethod.GET, showLoaderInDevicesTable,
+                    drawDevicesTable, debug_callback, process_failures);
     setTimeout(function () {
-        rowSelection();
+        resetRowSelection();
     }, renderTableDelay);
-    afterLoadTableDevice();
+    hideLoaderInDevicesTable();
 }
 
-function renderTableUsers () {
-    removeTableUsers();
-    sendJSONRequest("/home/getUsersList", null, RequestMethod.GET, beforeLoadTableUsers,
-                    drawTableUsers, debug_callback, process_failures);
+function renderUsersTable () {
+    removeUserTableRows();
+    sendJSONRequest("/home/getUsersList", null, RequestMethod.GET, showLoaderInUsersTable,
+                    drawUsersTable, debug_callback, process_failures);
     setTimeout(function () {
-        rowSelection();
+        resetRowSelection();
     }, renderTableDelay);
-    afterLoadTableUsers();
+    hideLoaderInUsersTable();
 }
 
 $(document).ready(function () {
-
-    renderTableUsers();
-    renderTableDevices();
+    /**
+     * The first function call when the page loads. To update the table (users, devices)
+     */
+    renderUsersTable();
+    renderDevicesTable();
 
     setInterval(function () {
-        renderTableUsers();
-        renderTableDevices();
-    }, 60000);
-
+        renderUsersTable();
+        renderDevicesTable();
+    }, 300000);
 });

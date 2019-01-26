@@ -29,12 +29,17 @@ const MODAL_USER_CONFIRM_PASSWORD = "#modal_user_confirm_password";
 const MODAL_USER_CHECKBOX = '.modal-user-checkbox';
 
 const DISPLAY_BLOCK = {"display":"block"};
-// A helper variable to track the status of a row
+
 let rowSelected = false;
 let $activeRow;
 
-// Function to select a row
-function rowSelection () {
+
+/**
+ * Resets table row event listener, allowing it to be selected/deselected
+ * @var $activeRow        - It contains selected row
+ * @var rowSelected       - Active row indicator
+ */
+function resetRowSelection () {
     $(TABLE_ROW).click(function () {
         $activeRow = $(this);
         $(TABLE_ROW).removeClass("row-active");
@@ -45,8 +50,10 @@ function rowSelection () {
     });
 }
 
-// The function sets the values of the modal window fields in accordance with the selected line (for devices)
-function settingModalValuesDevice () {
+/**
+ * The function sets the values of the modal window fields in accordance with the selected line (for devices)
+ */
+function setDeviceModalWindowValues () {
     let row = $activeRow;
     let $deviseType = row.children('[data-device-type]').attr('data-device-type');
     let $deviceID = row.children('[data-device-type-id]').text();
@@ -57,8 +64,13 @@ function settingModalValuesDevice () {
     $(MODAL_DEVICE_TYPE).val($deviseType);
 }
 
-// The function of forming a JSON object by reading the data of the modal window
-function updateDevice (payload) {
+/**
+ * The function of forming a JSON object by reading the data of the modal window
+ * @returns {{deviceData: {}}}
+ */
+function getDevicePayload () {
+    let payload = {"deviceData": {}};
+
     payload.deviceData.id = $(MODAL_DEVICE_ID_HIDDEN).val();
     payload.deviceData.device_id = $(MODAL_DEVICE_ID).val();
     payload.deviceData.device_type = $(MODAL_DEVICE_TYPE).val();
@@ -67,18 +79,10 @@ function updateDevice (payload) {
     return payload;
 }
 
-// The function of forming a JSON object by reading the data of the modal window
-function createDevice (payload) {
-    payload.deviceData.device_id = $(MODAL_DEVICE_ID).val();
-    payload.deviceData.device_type = $(MODAL_DEVICE_TYPE).val();
-    payload.deviceData.device_access_key = $(MODAL_DEVICE_KEY).val();
-
-    return payload;
-}
-
-
-// The function sets the values of the modal window fields in accordance with the selected line (for users)
-function settingModalValuesUser () {
+/**
+ * The function sets the values of the modal window fields in accordance with the selected line (for users)
+ */
+function setUserModalWindowValues () {
     let row = $activeRow;
     let $deviceIdHidden = row.children('[data-user-id]').val();
     let $userFirstName = row.children('[data-user-name]').attr('data-first-name');
@@ -99,9 +103,6 @@ function settingModalValuesUser () {
 
     $hiddenContainer.each(function () {
         userRolesList.push($(this).val());
-    });
-
-    $hiddenContainer.each(function () {
         for (let userRoleIndex = 0; userRoleIndex < userRolesList.length; userRoleIndex++) {
             let userRole = userRolesList[userRoleIndex];
             $(MODAL_USER_CHECKBOX).each(function () {
@@ -113,8 +114,12 @@ function settingModalValuesUser () {
     });
 }
 
-// The function of forming a JSON object by reading the data of the modal window
-function updateUser (payload) {
+/**
+ * The function of forming a JSON object by reading the data of the modal window
+ * @return {{userData: {roles: Array}}}
+ */
+function getUserPayload () {
+    let payload = {"userData": {"roles":[]}};
 
     payload.userData.id = $(MODAL_USER_ID_HIDDEN).val();
     payload.userData.email = $(MODAL_USER_EMAIL).val();
@@ -132,38 +137,29 @@ function updateUser (payload) {
     return payload;
 }
 
-function createUser (payload) {
-
-    payload.userData.email = $(MODAL_USER_EMAIL).val();
-    payload.userData.first_name = $(MODAL_USER_FIRST_NAME).val();
-    payload.userData.last_name = $(MODAL_USER_LAST_NAME).val();
-    payload.userData.password = $(MODAL_USER_PASSWORD).val();
-    payload.userData.active = $('#modal_user_active').prop('checked') === true;
-
-    $(MODAL_USER_CHECKBOX).each(function () {
-       if ($(this).prop('checked') === true) {
-           payload.userData.roles.push({"role_name": $(this).val()});
-       }
-    });
-
-    return payload;
-}
-
 $(document).ready(function () {
-    let setTime = 400; // Set the delay time for the animation to work
+    // Set the delay time for the animation to work
+    const setTimeAnimation = 400;
 
-    // Animation when opening a modal window
+    /**
+     * Animation when opening a modal window
+     */
     function openModalAnimation () {
         $(MODAL).removeClass(MODAL_ANIMATION_CLOSE);
         $(MODAL).addClass(MODAL_ANIMATION_OPEN);
     }
-    // Animation when closing a modal window
+
+    /**
+     * Animation when closing a modal window
+     */
     function closeModalAnimation () {
         $(MODAL).removeClass(MODAL_ANIMATION_OPEN);
         $(MODAL).addClass(MODAL_ANIMATION_CLOSE);
     }
 
-    // Opening modal windows to add a new / edit device
+    /**
+     * Opening modal windows to add a new / edit device
+     */
     $(OPEN_MODAL_DEVICE).click(function () {
         if ($(this).data("modal") === "add") {
             $("#modal_header_device").text("Add new device");
@@ -175,7 +171,7 @@ $(document).ready(function () {
             $(MODAL_DEVICE).css(DISPLAY_FLEX);
         }
         if ($(this).data("modal") === "edit" && rowSelected) {
-            settingModalValuesDevice();
+            setDeviceModalWindowValues();
             $("#modal_header_device").text("Edit device");
             $(MODAL_DEVICE_ID).attr("placeholder","Edit device ID");
             $(MODAL_DEVICE_KEY).attr("placeholder","Edit device key");
@@ -185,7 +181,9 @@ $(document).ready(function () {
         }
     });
 
-    // Opening modal windows to add a new / edit user
+    /**
+     * Opening modal windows to add a new / edit user
+     */
     $(OPEN_MODAL_USER).click(function () {
         if ($(this).data("modal") === "add") {
             $("#modal_header_user").text("Add new user");
@@ -199,7 +197,7 @@ $(document).ready(function () {
             $(MODAL_USER).css(DISPLAY_FLEX);
         }
         if ($(this).data("modal") === "edit" && rowSelected) {
-            settingModalValuesUser();
+            setUserModalWindowValues();
             $("#modal_header_user").text("Edit user");
             $(MODAL_USER_FIRST_NAME).attr("placeholder","Edit First Name");
             $(MODAL_USER_LAST_NAME).attr("placeholder","Edit Last Name");
@@ -212,23 +210,29 @@ $(document).ready(function () {
         }
     });
 
-    // Close device modal windows. With zeroing output
-    function closeModalDevice () {
+    /**
+     * Close device modal windows. With zeroing output
+     */
+    function closeDeviceModalWindow () {
         closeModalAnimation();
         setTimeout(function () {
            $(MODAL_DEVICE).css(DISPLAY_NONE);
+           $(MODAL_DEVICE_ID_HIDDEN).val("");
            $(MODAL_DEVICE_ID).val("");
            $(MODAL_DEVICE_KEY).val("");
            $(MODAL_DEVICE_TYPE).val("1");
            $('[id *= btn_modal]').css(DISPLAY_NONE);
-        }, setTime);
+        }, setTimeAnimation);
     }
 
-    // Close user modal windows. With zeroing output
-    function closeModalUser () {
+    /**
+     * Close user modal windows. With zeroing output
+     */
+    function closeUserModalWindow () {
         closeModalAnimation();
         setTimeout(function () {
            $(MODAL_USER).css(DISPLAY_NONE);
+           $(MODAL_USER_ID_HIDDEN).val("");
            $(MODAL_USER_FIRST_NAME).val("");
            $(MODAL_USER_LAST_NAME).val("");
            $(MODAL_USER_EMAIL).val("");
@@ -239,48 +243,49 @@ $(document).ready(function () {
                $(this).prop('checked', false);
            });
            $('[id *= btn_modal]').css(DISPLAY_NONE);
-        }, setTime);
+        }, setTimeAnimation);
     }
 
+    // Close all modal windows
     $(CLOSE_MODAL).click(function () {
         if ($(this).data("modal") === "device") {
-            closeModalDevice();
+            closeDeviceModalWindow();
         } else {
-            closeModalUser();
+            closeUserModalWindow();
         }
     });
 
     // Device editing function followed by an AJAX request
     $(BTN_MODAL_DEVICE_EDIT).click(function () {
-        let payload = {"deviceData": {}};
-        closeModalDevice();
-        sendJSONRequest("/home/device.svc", updateDevice(payload), RequestMethod.PUT, beforeLoadTableDevice,
-                        renderTableDevices, debug_callback, process_failures);
+        closeDeviceModalWindow();
+        sendJSONRequest("/home/device.svc", getDevicePayload(), RequestMethod.PUT, showLoaderInDevicesTable,
+                        renderDevicesTable, debug_callback, process_failures);
     });
 
     // Creating an AJAX request to add a new device
     $(BTN_MODAL_DEVICE_ADD).click(function () {
-        let payload = {"deviceData": {}};
-        closeModalDevice();
-        sendJSONRequest("/home/device.svc", createDevice(payload), RequestMethod.POST, beforeLoadTableDevice,
-                        renderTableDevices, debug_callback, process_failures);
+        closeDeviceModalWindow();
+        sendJSONRequest("/home/device.svc", getDevicePayload(), RequestMethod.POST, showLoaderInDevicesTable,
+                        renderDevicesTable, debug_callback, process_failures);
     });
 
+    // User editing function followed by an AJAX request
     $(BTN_MODAL_USER_EDIT).click(function () {
-        let payload = {"userData": {"roles":[]}};
-        closeModalUser();
-        sendJSONRequest("/home/user.svc", updateUser(payload), RequestMethod.PUT, beforeLoadTableUsers,
-                        renderTableUsers, debug_callback, process_failures);
+        closeUserModalWindow();
+        sendJSONRequest("/home/user.svc", getUserPayload(), RequestMethod.PUT, showLoaderInUsersTable,
+                        renderUsersTable, debug_callback, process_failures);
     });
 
+    // Creating an AJAX request to add a new user
     $(BTN_MODAL_USER_ADD).click(function () {
-        let payload = {"userData": {"roles":[]}};
-        closeModalUser();
-        sendJSONRequest("/home/user.svc", createUser(payload), RequestMethod.POST, beforeLoadTableUsers,
-                        renderTableUsers, debug_callback, process_failures);
+        closeUserModalWindow();
+        sendJSONRequest("/home/user.svc", getUserPayload(), RequestMethod.POST, showLoaderInUsersTable,
+                        renderUsersTable, debug_callback, process_failures);
     });
 
-    // Function to reset row status
+    /**
+     * Function to reset row status
+     */
     $(document).mouseup(function (e) {
         let element = $(".table-main-container");
         if (!element.is(e.target) && element.has(e.target).length === 0) {
