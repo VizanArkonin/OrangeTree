@@ -2,7 +2,10 @@
 
 .checkbox-container {
   color: $white-color-600;
-  height: 100%;
+  display: flex;
+  height: $height-base-element-default;
+  width: 50%;
+  align-items: center;
 }
 
 .checkbox {
@@ -52,6 +55,7 @@
 .btn-modal {
   background: $btn-default-color;
   color: $white-color;
+  display: block;
   border: none;
   font-size: $font-size-default-n;
   width: 100%;
@@ -60,10 +64,57 @@
   }
 }
 
+[id *='btn_modal'] {
+  display: none;
+  margin-right: 0.5rem;
+}
+
+.toggle-bar {
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  & :focus {
+    outline-width: 0;
+  }
+  & [class *='bar-'] {
+    background: $white-color;
+    display: block;
+    transform: rotate(0deg);
+    transition: .3s ease all;
+    height: 2px;
+    width: 25px;
+    margin-bottom: 4px;
+  }
+}
+
+.toggle-bar-opened {
+  .toggle-bar-top {
+    background: $btn-default-color;
+    transform: rotate(45deg);
+    transform-origin: 15% 15%;
+  }
+  .toggle-bar-middle {
+    opacity: 0;
+  }
+  .toggle-bar-bottom {
+    background: $btn-default-color;
+    transform: rotate(-45deg);
+    transform-origin: 15% 95%;
+  }
+}
+
 @include media-breakpoint-sm {
   .button-link {
-    height: 4rem;
-    line-height: 4rem;
-    font-size: $font-size-default-n;
+    height: $height-base-element-default;
+    line-height: $height-base-element-default;
+    font-size: $font-size-default-l;
+  }
+  .btn-modal {
+    height: 100%;
+  }
+  [id *='btn_modal'] {
+    margin-left: 0;
+    margin-bottom: 2rem;
   }
 }

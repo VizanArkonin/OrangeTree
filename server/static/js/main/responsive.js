@@ -49,4 +49,8 @@ $(document).ready(function () {
             BarIsOpenedMobile = false;
         }
     });
+
+    $(".toggle-bar").on("click",function () {
+        $(this).toggleClass("toggle-bar-opened");
+    });
 });

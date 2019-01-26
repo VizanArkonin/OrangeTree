@@ -1,4 +1,43 @@
 @charset "UTF-8";
+.preloader-container {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  width: 100%;
+  height: 100%; }
+
+.preloader {
+  border: 5px solid black;
+  border-top: 5px solid #e57a46;
+  border-radius: 30px;
+  height: 50px;
+  width: 50px;
+  animation: spin 1s linear infinite; }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+.modal-animation-open {
+  animation-name: animate-open;
+  animation-duration: 0.6s; }
+
+.modal-animation-close {
+  animation-name: animate-close;
+  animation-duration: 0.6s; }
+
+@keyframes animate-open {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+@keyframes animate-close {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0; } }
 *, :before, :after {
   box-sizing: border-box; }
 
@@ -25,6 +64,12 @@ input:-webkit-autofill:focus {
   -webkit-text-fill-color: white;
   -webkit-box-shadow: 0 0 0 100rem rgba(0, 0, 0, 0) inset;
   transition: background-color 10000000s ease-in-out 0s; }
+
+::-webkit-scrollbar {
+  box-shadow: inset 0 0 10px 5px rgba(27, 27, 27, 0.6); }
+
+::-webkit-scrollbar-thumb {
+  background: #1b1b1b; }
 
 .login-form-container {
   background: rgba(0, 0, 0, 0.4);
@@ -96,6 +141,9 @@ input:-webkit-autofill:focus {
   text-align: center; }
 
 @media screen and (max-width: 479px) {
+  .login-form {
+    padding: 1rem; }
+
   .login-form-container {
     width: 100%;
     height: 100%;
@@ -109,7 +157,7 @@ input:-webkit-autofill:focus {
 
 .text-404-container {
   text-align: center;
-  width: 32rem;
+  width: 42rem;
   padding: 1.5rem;
   margin-left: 5rem; }
   .text-404-container h1 {
@@ -127,6 +175,7 @@ input:-webkit-autofill:focus {
       height: auto; }
 
   .text-404-container {
+    width: 47rem;
     margin-top: 5rem;
     margin-left: 0; }
     .text-404-container h1 {
@@ -138,14 +187,15 @@ input:-webkit-autofill:focus {
     width: 19rem; }
 
   .text-404-container {
-    width: 22rem;
+    width: 100%;
+    padding: 0 1rem;
     margin-top: 1rem; }
     .text-404-container h1 {
       font-size: 3rem;
-      padding-bottom: 1rem; }
+      padding-bottom: 1.5rem; }
     .text-404-container h2 {
       font-size: 1.8rem;
-      padding-bottom: 2rem; } }
+      padding-bottom: 4rem; } }
 .modal {
   background: rgba(255, 255, 255, 0.3);
   display: none;
@@ -159,16 +209,8 @@ input:-webkit-autofill:focus {
 .modal-container {
   background: #2d2d2d;
   width: 100%;
-  max-width: 40rem;
+  max-width: 47rem;
   z-index: 1020; }
-
-.modal-animation-open {
-  animation-name: animate-modal-open;
-  animation-duration: 0.6s; }
-
-.modal-animation-close {
-  animation-name: animate-modal-close;
-  animation-duration: 0.6s; }
 
 .modal-header {
   background: #1b1b1b;
@@ -202,38 +244,56 @@ input:-webkit-autofill:focus {
   .modal-content-block select {
     color: rgba(255, 255, 255, 0.6); }
 
-.roles-container {
+.modal-content-block-roles {
+  background: #1b1b1b;
+  margin: 1.5rem 0;
+  height: 100%; }
+  .modal-content-block-roles span {
+    height: 100%;
+    min-width: 11rem;
+    padding-left: 1rem;
+    opacity: 0.6; }
+
+.modal-checkbox-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
   background: #1b1b1b;
   color: white;
-  height: 5rem;
   width: 100%; }
-
-.roles-container-checkbox {
-  display: flex;
-  width: 50%;
-  align-items: center; }
 
 .modal-footer {
   background: #1b1b1b;
   display: flex;
   height: 5rem;
   padding: 0.5rem; }
-  .modal-footer button:nth-child(2) {
-    margin-left: 0.5rem; }
 
-@keyframes animate-modal-open {
-  from {
-    opacity: 0; }
-  to {
-    opacity: 1; } }
-@keyframes animate-modal-close {
-  from {
-    opacity: 1; }
-  to {
-    opacity: 0; } }
+@media screen and (max-width: 479px) {
+  .modal-container {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%; }
+    .modal-container .modal-content {
+      padding: 0 1rem; }
+    .modal-container .modal-content-block {
+      margin: 2rem 0; }
+    .modal-container .modal-footer {
+      background: inherit;
+      position: absolute;
+      flex-direction: column;
+      left: 0;
+      bottom: 0;
+      padding: 1rem;
+      width: 100%;
+      height: 14rem; } }
 .checkbox-container {
   color: rgba(255, 255, 255, 0.6);
-  height: 100%; }
+  display: flex;
+  height: 5rem;
+  width: 50%;
+  align-items: center; }
 
 .checkbox {
   background: rgba(255, 255, 255, 0.6);
@@ -278,17 +338,56 @@ input:-webkit-autofill:focus {
 .btn-modal {
   background: #e57a46;
   color: white;
+  display: block;
   border: none;
   font-size: 1.5rem;
   width: 100%; }
   .btn-modal:hover {
     background: #df6327; }
 
+[id*='btn_modal'] {
+  display: none;
+  margin-right: 0.5rem; }
+
+.toggle-bar {
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column; }
+  .toggle-bar :focus {
+    outline-width: 0; }
+  .toggle-bar [class*='bar-'] {
+    background: white;
+    display: block;
+    transform: rotate(0deg);
+    transition: .3s ease all;
+    height: 2px;
+    width: 25px;
+    margin-bottom: 4px; }
+
+.toggle-bar-opened .toggle-bar-top {
+  background: #e57a46;
+  transform: rotate(45deg);
+  transform-origin: 15% 15%; }
+.toggle-bar-opened .toggle-bar-middle {
+  opacity: 0; }
+.toggle-bar-opened .toggle-bar-bottom {
+  background: #e57a46;
+  transform: rotate(-45deg);
+  transform-origin: 15% 95%; }
+
 @media screen and (max-width: 479px) {
   .button-link {
-    height: 4rem;
-    line-height: 4rem;
-    font-size: 1.5rem; } }
+    height: 5rem;
+    line-height: 5rem;
+    font-size: 1.8rem; }
+
+  .btn-modal {
+    height: 100%; }
+
+  [id*='btn_modal'] {
+    margin-left: 0;
+    margin-bottom: 2rem; } }
 .sidebar-container {
   background-color: #2d2d2d;
   display: flex;
@@ -385,9 +484,6 @@ input:-webkit-autofill:focus {
     text-align: center;
     font-size: 1.8rem; }
 
-#desktop-toggle-bar, #mobile-toggle-bar {
-  cursor: pointer; }
-
 #logo-responsive {
   display: none; }
 
@@ -429,24 +525,18 @@ input:-webkit-autofill:focus {
     width: 30%; }
 
   .sidebar-responsive-off {
-    width: 5%; }
+    width: 8%; }
 
   .content-responsive-on {
     width: 70%; }
 
   .content-responsive-off {
-    width: 95%; } }
+    width: 92%; } }
 @media screen and (max-width: 767px) {
-  .sidebar-responsive-on {
+  .sidebar-responsive-on, .sidebar-responsive-off {
     width: 0; }
 
-  .sidebar-responsive-off {
-    width: 0; }
-
-  .content-responsive-on {
-    width: 100%; }
-
-  .content-responsive-off {
+  .content-responsive-on, .content-responsive-off {
     width: 100%; }
 
   .navigation-container {
@@ -485,6 +575,11 @@ input:-webkit-autofill:focus {
 
 .desktop-display-none {
   display: none; }
+
+.user-roles-container {
+  height: 0;
+  width: 0;
+  visibility: hidden; }
 
 @media screen and (max-width: 767px) {
   .page-title {
@@ -551,6 +646,7 @@ input:-webkit-autofill:focus {
   .pin-container {
     font-size: 1.2rem; } }
 .table-main-container {
+  background: rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -568,14 +664,15 @@ input:-webkit-autofill:focus {
   width: 50%; }
 
 .tab-content {
-  background: rgba(0, 0, 0, 0.4);
-  height: 100%;
-  width: 100%;
-  padding: 1.5rem; }
+  display: block;
+  height: 486.4px;
+  margin: 1.5rem 0;
+  padding: 0 1.5rem;
+  overflow-y: auto; }
 
 .table-container {
-  height: 100%;
-  width: 100%; }
+  width: 100%;
+  display: table; }
   .table-container th, .table-container td {
     height: 3rem;
     text-align: center;
@@ -593,10 +690,6 @@ input:-webkit-autofill:focus {
   .table-container tr:first-child {
     background: rgba(0, 0, 0, 0.7);
     color: white; }
-
-.row-active {
-  background: #e57a46 !important;
-  color: white; }
 
 .tab-footer {
   background: rgba(0, 0, 0, 0.7);
@@ -638,6 +731,20 @@ input:-webkit-autofill:focus {
 
 .users {
   display: none; }
+
+.row-active {
+  background: #e57a46 !important;
+  color: white; }
+  .row-active .offline {
+    color: white; }
+  .row-active .online {
+    color: white; }
+
+.online {
+  color: #16a085; }
+
+.offline {
+  color: #ff3838; }
 
 .tab-link-devices {
   background: rgba(0, 0, 0, 0.4); }

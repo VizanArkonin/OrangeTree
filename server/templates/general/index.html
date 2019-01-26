@@ -2,8 +2,42 @@
 
 {% block head %}
 {{ super() }}
-<script src="/js/index/tab_headers.js"></script>
-<script src="/js/index/modal_box_index_page.js"></script>
+    <script src="/js/index/home_page_processing.js"></script>
+    <script src="/js/index/home_page_preloader.js"></script>
+    <script src="/js/index/home_page_table_tab.js"></script>
+    <script src="/js/index/home_page_modal_windows.js"></script>
+    <script>
+    "use strict";
+    /**
+     * Callback function, called on success, for reading user roles data
+     * @param data      - JSON object
+     */
+    function showUserRoles (data) {
+       for (let index = 0; index < data.userRoles.length ; index++) {
+            drawCheckboxRolesModalWindow(data.userRoles[index]);
+       }
+    }
+
+    /**
+     * The function of drawing checkboxes proceeding
+     * @param indexRole     - JSON object (format data.userRoles[index])
+     */
+    function drawCheckboxRolesModalWindow (indexRole) {
+        const CHECKBOX_CONTAINER = '#modal_user_checkbox_roles';
+        let $checkbox = $("<div class='checkbox-container'>");
+
+        $(CHECKBOX_CONTAINER).append($checkbox);
+        $checkbox.append($('<input class= "checkbox modal-user-checkbox" type="checkbox">').val(indexRole.name));
+        $checkbox.append($('<label for="checkbox"></label>').text(indexRole.description));
+    }
+    
+    $(document).ready(function () {
+        sendJSONRequest("/home/getUserRolesList", null, RequestMethod.GET, beforeSendEmpty,
+                        showUserRoles, debug_callback, process_failures);
+
+    });
+
+    </script>
 {% endblock %}
 
 {% block content %}
@@ -19,205 +53,29 @@
                 <button class="tab-link tab-link-users">Users</button>
             </div>
             <div class="tab-content devices">
-                <table class="table-container">
+                <div id="table_device_preloader" class="preloader-container">
+                    <div class="preloader"></div>
+                </div>
+                <table id="table_device" class="table-container table-device">
                     <tr>
-                        <th>Deviсe ID</th>
+                        <th>Device ID</th>
                         <th>Deviсe Type</th>
                         <th>Last Address</th>
                         <th>Last online time</th>
                         <th>Status</th>
                     </tr>
-                    <tr class="table-row">
-                        <td>01.0001</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Online</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.0002</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Offline</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.0003</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Offline</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.0004</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Offline</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.0005</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Online</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.0006</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Offline</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.0007</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Offline</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.0008</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Offline</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.0009</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Offline</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.00010</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Offline</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.00011</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Offline</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.00012</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Online</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.00013</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Online</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>01.00014</td>
-                        <td>Orange Pi Lite</td>
-                        <td>127.0.0.1</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Offline</td>
-                    </tr>
                 </table>
             </div>
             <div class="tab-content users">
-                <table class="table-container">
+                <div id="table_users_preloader" class="preloader-container">
+                    <div class="preloader"></div>
+                </div>
+                <table id="table_users" class="table-container">
                     <tr>
                         <th>User name</th>
                         <th>User email</th>
                         <th>Last login</th>
                         <th>Enabled</th>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>No</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>No</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>No</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td>Anonimus</td>
-                        <td>some@mail.com</td>
-                        <td>10-11-18 06:30</td>
-                        <td>Yes</td>
                     </tr>
                 </table>
             </div>
@@ -257,6 +115,7 @@
                 <span id="modal_header_device"></span>
             </div>
             <div class="modal-content">
+                <input id="modal_device_id_hidden" type="hidden" value="">
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Device ID</span>
                     <input id="modal_device_id" type="text" value="" placeholder="" maxlength="20" autofocus>
@@ -267,18 +126,19 @@
                 </div>
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Deviсe type</span>
-                    <select id="modal_device_type" name="device_type">
+                    <select id="modal_device_type" name="device_type" title="">
                         <option value="1">Orange Pi Lite</option>
-                        <option value="">Orange Pi Zero</option>
-                        <option value="">Orange Pi One</option>
-                        <option value="">Orange Pi PC</option>
-                        <option value="">Orange Pi Plus</option>
-                        <option value="">Orange Pi 2G-IoT</option>
+                        <option value="2">Orange Pi Zero</option>
+                        <option value="3">Orange Pi One</option>
+                        <option value="4">Orange Pi PC</option>
+                        <option value="5">Orange Pi Plus</option>
+                        <option value="6">Orange Pi 2G-IoT</option>
                     </select>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn-modal">Add</button>
+                <button id="btn_modal_device_add" class="btn-modal">Add</button>
+                <button id="btn_modal_devise_edit" class="btn-modal">Submit</button>
                 <button class="btn-modal close-modal" data-modal="device">Close</button>
             </div>
         </div>
@@ -291,6 +151,7 @@
                 <span id="modal_header_user"></span>
             </div>
             <div class="modal-content">
+                <input id="modal_user_id_hidden" type="hidden" value="">
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>First Name</span>
                     <input id="modal_user_first_name" type="text" value="" placeholder="" maxlength="20" autofocus>
@@ -301,32 +162,33 @@
                 </div>
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Email</span>
-                    <input id="modal_user_email" type="email" value="" placeholder="" maxlength="20">
+                    <input id="modal_user_email" type="email" value="" placeholder="" maxlength="20" autocomplete="off">
                 </div>
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Password</span>
-                    <input  id="modal_user_password" type="password" value="" placeholder="" maxlength="20">
+                    <input  id="modal_user_password" type="password" value="" placeholder="" maxlength="20" autocomplete="new-password">
                 </div>
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Password</span>
-                    <input id="modal_user_confirm_password" type="password" value="" placeholder="" maxlength="20">
+                    <input id="modal_user_confirm_password" type="password" value="" placeholder="" maxlength="20" autocomplete="off">
                 </div>
                 <div class="modal-content-block flex-container-center input-focus-within">
-                    <span>Roles</span>
-                    <div class="roles-container flex-container-center">
-                        <div class="checkbox-container roles-container-checkbox">
-                            <input class="checkbox" type="checkbox">
-                            <label for="checkbox">User</label>
-                        </div>
-                        <div class="checkbox-container  roles-container-checkbox">
-                            <input class="checkbox" type="checkbox">
-                            <label for="checkbox">Admin</label>
+                    <span>Active</span>
+                    <div class="modal-checkbox-container">
+                        <div class="checkbox-container">
+                            <input id="modal_user_active" class="checkbox" type="checkbox" value="">
+                            <label for="checkbox">Active/Disabled</label>
                         </div>
                     </div>
                 </div>
+                <div class="modal-content-block-roles flex-container-center input-focus-within">
+                    <span>Roles</span>
+                    <div id="modal_user_checkbox_roles" class="modal-checkbox-container"></div>
+                </div>
             </div>
             <div class="modal-footer">
-                <button class="btn-modal">Add</button>
+                <button id="btn_modal_user_add" class="btn-modal">Add</button>
+                <button id="btn_modal_user_edit" class="btn-modal">Submit</button>
                 <button class="btn-modal close-modal" data-modal="user">Close</button>
             </div>
         </div>

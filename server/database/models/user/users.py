@@ -37,9 +37,10 @@ class Users(database.Model, UserMixin):
             "email": self.email,
             "first_name": self.first_name,
             "last_name": self.last_name,
-            "last_login_at": self.last_login_at.strftime(get_time_formatter()),
+            "last_login_at": self.last_login_at.strftime(get_time_formatter()) if self.last_login_at else None,
             "login_count": self.login_count,
-            "active": self.active
+            "active": self.active,
+            "roles": [role.serialize() for role in self.roles]
         }
 
     def serialize_all(self):

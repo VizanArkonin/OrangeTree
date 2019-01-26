@@ -1,6 +1,7 @@
 //Styles for index page
 
 .table-main-container {
+  background: $dark-color-400;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -21,15 +22,16 @@
 }
 
 .tab-content {
-  background: $dark-color-400;
-  height: 100%;
-  width: 100%;
-  padding: 1.5rem;
+  display: block;
+  height: 486.4px;
+  margin: 1.5rem 0;
+  padding: 0 1.5rem;
+  overflow-y: auto;
 }
 
 .table-container {
-  height: 100%;
   width: 100%;
+  display: table;
   & th,td {
     height: 3rem;
     text-align: center;
@@ -53,11 +55,6 @@
     background: $dark-color-700;
     color: $white-color;
   }
-}
-
-.row-active {
-  background: $btn-default-color !important;
-  color: $white-color;
 }
 
 .tab-footer {
@@ -109,6 +106,26 @@
 //Classes to support java script functionality
 .users {
   display: none;
+}
+
+
+.row-active {
+  background: $btn-default-color !important;
+  color: $white-color;
+  .offline {
+    color: $white-color;
+  }
+  .online {
+    color: $white-color;
+  }
+}
+
+.online {
+  color: $green-color;
+}
+
+.offline {
+  color: $red-color;
 }
 
 .tab-link-devices {

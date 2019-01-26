@@ -9,7 +9,7 @@ const BG_DARK_400 = {"background":"rgba(0, 0, 0, 0.4)"};
 const BG_DARK_700 = {"background":"rgba(0, 0, 0, 0.7)"};
 /**
  * The written script is used for auxiliary functions of the styles index page
-**/
+ */
 $(document).ready(function () {
     $(TAB_LINK_DEVICES).click(function () {
         $(USERS).css(DISPLAY_NONE);
