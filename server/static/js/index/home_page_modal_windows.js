@@ -54,10 +54,9 @@ function resetRowSelection () {
  * The function sets the values of the modal window fields in accordance with the selected line (for devices)
  */
 function setDeviceModalWindowValues () {
-    let row = $activeRow;
-    let $deviseType = row.children('[data-device-type]').attr('data-device-type');
-    let $deviceID = row.children('[data-device-type-id]').text();
-    let $deviseIdHidden = row.children('[data-device-id]').val();
+    let $deviseType = $activeRow.children('[data-device-type]').attr('data-device-type');
+    let $deviceID = $activeRow.children('[data-device-type-id]').text();
+    let $deviseIdHidden = $activeRow.children('[data-device-id]').val();
 
     $(MODAL_DEVICE_ID_HIDDEN).val($deviseIdHidden);
     $(MODAL_DEVICE_ID).val($deviceID);
@@ -66,7 +65,7 @@ function setDeviceModalWindowValues () {
 
 /**
  * The function of forming a JSON object by reading the data of the modal window
- * @returns {{deviceData: {}}}
+ * @returns         - Device data payload object
  */
 function getDevicePayload () {
     let payload = {"deviceData": {}};
@@ -83,13 +82,12 @@ function getDevicePayload () {
  * The function sets the values of the modal window fields in accordance with the selected line (for users)
  */
 function setUserModalWindowValues () {
-    let row = $activeRow;
-    let $deviceIdHidden = row.children('[data-user-id]').val();
-    let $userFirstName = row.children('[data-user-name]').attr('data-first-name');
-    let $userLastName = row.children('[data-user-name]').attr('data-last-name');
-    let $userEmail = row.children('[data-user-email]').text();
-    let $userActive = row.children('[data-user-enabled]').attr('data-user-enabled');
-    let $hiddenContainer = row.children('td:last-child').children('.user-roles-container').children('input');
+    let $deviceIdHidden = $activeRow.children('[data-user-id]').val();
+    let $userFirstName = $activeRow.children('[data-user-name]').attr('data-first-name');
+    let $userLastName = $activeRow.children('[data-user-name]').attr('data-last-name');
+    let $userEmail = $activeRow.children('[data-user-email]').text();
+    let $userActive = $activeRow.children('[data-user-enabled]').attr('data-user-enabled');
+    let $hiddenContainer = $activeRow.children('td:last-child').children('.user-roles-container').children('input');
     let userRolesList = [];
 
     $(MODAL_USER_ID_HIDDEN).val($deviceIdHidden);
@@ -116,7 +114,7 @@ function setUserModalWindowValues () {
 
 /**
  * The function of forming a JSON object by reading the data of the modal window
- * @return {{userData: {roles: Array}}}
+ * @return          - User data payload object
  */
 function getUserPayload () {
     let payload = {"userData": {"roles":[]}};

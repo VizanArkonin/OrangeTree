@@ -30,9 +30,12 @@
         $checkbox.append($('<input class= "checkbox modal-user-checkbox" type="checkbox">').val(indexRole.name));
         $checkbox.append($('<label for="checkbox"></label>').text(indexRole.description));
     }
+    
+    $(document).ready(function () {
+        sendJSONRequest("/home/getUserRolesList", null, RequestMethod.GET, beforeSendEmpty,
+                        showUserRoles, debug_callback, process_failures);
 
-    sendJSONRequest("/home/getUserRolesList", null, RequestMethod.GET, beforeSendEmpty,
-                    showUserRoles, debug_callback, process_failures);
+    });
 
     </script>
 {% endblock %}
