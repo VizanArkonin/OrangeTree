@@ -296,6 +296,16 @@ $(document).ready(function () {
                         renderUsersTable, debug_callback, process_failures);
     });
 
+    //Refresh table devises
+    $('#btn_devises_table_refresh').click(function () {
+        renderDevicesTable();
+    });
+
+    //Refresh table users
+    $('#btn_users_table_refresh').click(function () {
+       renderUsersTable();
+    });
+
     /**
      * Function to reset row status
      */
