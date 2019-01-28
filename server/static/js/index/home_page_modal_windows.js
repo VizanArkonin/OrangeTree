@@ -46,6 +46,7 @@ function resetRowSelection () {
         $activeRow.addClass("row-active");
         $('[data-modal="edit"]').addClass("btn-active");
         $('[data-modal="debug"]').addClass("btn-active");
+        $('[data-modal="delete"]').addClass("btn-active");
         rowSelected = true;
     });
 }
@@ -267,6 +268,13 @@ $(document).ready(function () {
                         renderDevicesTable, debug_callback, process_failures);
     });
 
+    //Create an AJAX request to remove a device
+    $('#btn_device_row_delete').click(function () {
+        setDeviceModalWindowValues();
+        sendJSONRequest("/home/device.svc", getDevicePayload(), RequestMethod.DELETE, showLoaderInDevicesTable,
+                        renderDevicesTable, debug_callback, process_failures);
+    });
+
     // User editing function followed by an AJAX request
     $(BTN_MODAL_USER_EDIT).click(function () {
         closeUserModalWindow();
@@ -281,6 +289,13 @@ $(document).ready(function () {
                         renderUsersTable, debug_callback, process_failures);
     });
 
+    // Create an AJAX request to remove a user
+    $('#btn_user_row_delete').click(function () {
+       setUserModalWindowValues();
+       sendJSONRequest("/home/user.svc", getUserPayload(), RequestMethod.DELETE, showLoaderInUsersTable,
+                        renderUsersTable, debug_callback, process_failures);
+    });
+
     /**
      * Function to reset row status
      */
@@ -289,6 +304,7 @@ $(document).ready(function () {
         if (!element.is(e.target) && element.has(e.target).length === 0) {
             $('[data-modal="debug"]').removeClass("btn-active");
             $('[data-modal="edit"]').removeClass("btn-active");
+            $('[data-modal="delete"]').removeClass("btn-active");
             $(TABLE_ROW).removeClass("row-active");
             rowSelected = false;
         }
