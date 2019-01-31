@@ -70,6 +70,13 @@
   }
 }
 
+.modal-content-delete {
+  flex-direction: column;
+  & span {
+    padding-bottom: 1.5rem ;
+  }
+}
+
 .modal-checkbox-container {
   display: flex;
   justify-content: flex-start;

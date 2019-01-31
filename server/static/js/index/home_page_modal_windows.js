@@ -13,13 +13,13 @@ const MODAL = ".modal";
 const MODAL_ANIMATION_OPEN = "modal-animation-open";
 const MODAL_ANIMATION_CLOSE = "modal-animation-close";
 
-const MODAL_DEVICE = "#modal_device";
+const MODAL_DEVICE = "#modal_window_device";
 const MODAL_DEVICE_ID_HIDDEN = "#modal_device_id_hidden";
 const MODAL_DEVICE_ID = "#modal_device_id";
 const MODAL_DEVICE_TYPE = "#modal_device_type";
 const MODAL_DEVICE_KEY = "#modal_device_key";
 
-const MODAL_USER = "#modal_user";
+const MODAL_USER = "#modal_window_user";
 const MODAL_USER_ID_HIDDEN = "#modal_device_id_hidden";
 const MODAL_USER_FIRST_NAME = "#modal_user_first_name";
 const MODAL_USER_LAST_NAME = "#modal_user_last_name";
@@ -157,6 +157,20 @@ $(document).ready(function () {
     }
 
     /**
+     * Function to reset row status
+     */
+    $(document).mouseup(function (e) {
+        let element = $(".table-main-container");
+        if (!element.is(e.target) && element.has(e.target).length === 0) {
+            $('[data-modal="debug"]').removeClass("btn-active");
+            $('[data-modal="edit"]').removeClass("btn-active");
+            $('[data-modal="delete"]').removeClass("btn-active");
+            $(TABLE_ROW).removeClass("row-active");
+            rowSelected = false;
+        }
+    });
+
+    /**
      * Opening modal windows to add a new / edit device
      */
     $(OPEN_MODAL_DEVICE).click(function () {
@@ -216,6 +230,7 @@ $(document).ready(function () {
         closeModalAnimation();
         setTimeout(function () {
            $(MODAL_DEVICE).css(DISPLAY_NONE);
+           $('#modal_window_device_delete').css(DISPLAY_NONE);
            $(MODAL_DEVICE_ID_HIDDEN).val("");
            $(MODAL_DEVICE_ID).val("");
            $(MODAL_DEVICE_KEY).val("");
@@ -231,6 +246,7 @@ $(document).ready(function () {
         closeModalAnimation();
         setTimeout(function () {
            $(MODAL_USER).css(DISPLAY_NONE);
+           $('#modal_window_user_delete').css(DISPLAY_NONE);
            $(MODAL_USER_ID_HIDDEN).val("");
            $(MODAL_USER_FIRST_NAME).val("");
            $(MODAL_USER_LAST_NAME).val("");
@@ -289,10 +305,35 @@ $(document).ready(function () {
                         renderUsersTable, debug_callback, process_failures);
     });
 
+    //Opening a modal window to remove a device
+    $('#btn_device_open_modal_window_delete').click(function () {
+        setDeviceModalWindowValues();
+        openModalAnimation();
+        $('#modal_device_delete_name').text($(MODAL_DEVICE_ID).val());
+        $('#btn_modal_device_delete').css(DISPLAY_BLOCK);
+        $('#modal_window_device_delete').css(DISPLAY_FLEX);
+    });
+
     // Create an AJAX request to remove a user
-    $('#btn_user_row_delete').click(function () {
-       setUserModalWindowValues();
-       sendJSONRequest("/home/user.svc", getUserPayload(), RequestMethod.DELETE, showLoaderInUsersTable,
+    $('#btn_modal_device_delete').click(function () {
+        closeDeviceModalWindow();
+        sendJSONRequest("/home/device.svc", getDevicePayload(), RequestMethod.DELETE, showLoaderInDevicesTable,
+                        renderDevicesTable, debug_callback, process_failures);
+    });
+
+    // Opening a modal window to remove a user
+    $('#btn_user_open_modal_window_delete').click(function () {
+        setUserModalWindowValues();
+        openModalAnimation();
+        $('#modal_user_delete_name').text($(MODAL_USER_FIRST_NAME).val() + " " + $(MODAL_USER_LAST_NAME).val());
+        $('#btn_modal_user_delete').css(DISPLAY_BLOCK);
+        $('#modal_window_user_delete').css(DISPLAY_FLEX);
+    });
+
+    // Create an AJAX request to remove a user
+    $('#btn_modal_user_delete').click(function () {
+        closeUserModalWindow();
+        sendJSONRequest("/home/user.svc", getUserPayload(), RequestMethod.DELETE, showLoaderInUsersTable,
                         renderUsersTable, debug_callback, process_failures);
     });
 
@@ -304,19 +345,5 @@ $(document).ready(function () {
     //Refresh table users
     $('#btn_users_table_refresh').click(function () {
        renderUsersTable();
-    });
-
-    /**
-     * Function to reset row status
-     */
-    $(document).mouseup(function (e) {
-        let element = $(".table-main-container");
-        if (!element.is(e.target) && element.has(e.target).length === 0) {
-            $('[data-modal="debug"]').removeClass("btn-active");
-            $('[data-modal="edit"]').removeClass("btn-active");
-            $('[data-modal="delete"]').removeClass("btn-active");
-            $(TABLE_ROW).removeClass("row-active");
-            rowSelected = false;
-        }
     });
 });
