@@ -41,19 +41,22 @@ def get_devices_list():
     return utils.get_response(json.dumps(payload), mimetype=MimeType.JSON_MIMETYPE.value)
 
 
-@web_service.route("/home/getDeviceDetails/<int:device_id>", methods=["GET"])
+@web_service.route("/home/validateDeviceExistence", methods=["GET"])
 @login_required
 @roles_accepted("admin")
-def get_device_details(device_id):
+def get_device_details():
     """
-    Retrieves all data for given device, packs it in JSON and returns a response
+    Validates if given device exists in the system and returns a simple JSON response, stating true or false.
+    Should provide the URL parameter of "device_id", which defines the device to validate.
 
-    :param device_id: Device ID
+    Example:
+    /home/validateDeviceExistence?device_id=DEV_LITE
+
     :return: JSON formatted response
     """
-    device = server.get_device_by_id(device_id)
+    device = server.get_device_by_device_id(request.args.get("device_id"))
     return utils.get_response(
-        json.dumps({"deviceData": device.serialize_all() if device else {}}),
+        json.dumps({"deviceExists": True if device else False}),
         mimetype=MimeType.JSON_MIMETYPE.value)
 
 
@@ -200,19 +203,22 @@ def get_users_roles_list():
         mimetype=MimeType.JSON_MIMETYPE.value)
 
 
-@web_service.route("/home/getUserDetails/<int:user_id>", methods=["GET"])
+@web_service.route("/home/validateUserExistence", methods=["GET"])
 @login_required
 @roles_accepted("admin")
-def get_user_details(user_id):
+def get_user_details():
     """
-    Retrieves all data for given user, packs it in JSON and returns a response
+    Validates if given user exists in the system and returns a simple JSON response, stating true or false.
+    Should provide URL parameter of "user_email", which will define the user to validate.
 
-    :param user_id: User ID
+    Example:
+    /home/validateUserExistence?user_email=some@mail.com
+
     :return: JSON formatted response
     """
-    user = Users.query.get(user_id)
+    user = Users.query.filter(Users.email == request.args.get("user_email")).first()
     return utils.get_response(
-        json.dumps({"userData": user.serialize_all() if user else {}}),
+        json.dumps({"userExists": True if user else False}),
         mimetype=MimeType.JSON_MIMETYPE.value)
 
 

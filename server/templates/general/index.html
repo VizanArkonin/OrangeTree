@@ -146,6 +146,9 @@
             </div>
             <div class="modal-content">
                 <input id="modal_user_id_hidden" type="hidden" value="">
+                <div class="flex-container-center">
+                    <span id="user_error_message_modal_window" class="modal-error-massage">Error message</span>
+                </div>
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>First Name</span>
                     <input id="modal_user_first_name" type="text" value="" placeholder="" maxlength="20" autofocus>
@@ -156,7 +159,8 @@
                 </div>
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Email</span>
-                    <input id="modal_user_email" type="email" value="" placeholder="" maxlength="20" autocomplete="off">
+                    <input id="modal_user_email" type="email" value="" placeholder="" maxlength="64" autocomplete="off">
+                    <input id="modal_user_email_hidden" type="hidden" value="">
                 </div>
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Password</span>

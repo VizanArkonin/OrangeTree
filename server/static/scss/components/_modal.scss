@@ -33,7 +33,7 @@
 .modal-content {
   color: $white-color;
   font-size: $font-size-default-n;
-  padding: 2rem;
+  padding: 1.5rem 2rem 2rem;
   width: 100%;
 }
 
@@ -75,6 +75,12 @@
   & span {
     padding-bottom: 1.5rem ;
   }
+}
+
+.modal-error-massage {
+  font-size: $font-size-default-s;
+  height: 1.5rem;
+  margin: 0.5rem 0;
 }
 
 .modal-checkbox-container {
