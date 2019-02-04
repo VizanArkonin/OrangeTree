@@ -112,13 +112,17 @@
             </div>
             <div class="modal-content">
                 <input id="modal_device_id_hidden" type="hidden" value="">
+                <div class="flex-container-center">
+                    <span id="device_error_message_modal_window" class="modal-error-massage">Error message</span>
+                </div>
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Device ID</span>
-                    <input id="modal_device_id" type="text" value="" placeholder="" maxlength="20" autofocus>
+                    <input id="modal_device_id" type="text" value="" placeholder="" maxlength="64" autofocus>
+                    <input id="modal_device_id_hidden_state" type="hidden" value="">
                 </div>
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Deviсe key</span>
-                    <input id="modal_device_key" type="text" value="" placeholder="Enter device key" maxlength="40">
+                    <input id="modal_device_key" type="text" value="" placeholder="Enter device key" maxlength="64">
                 </div>
                 <div class="modal-content-block flex-container-center input-focus-within">
                     <span>Deviсe type</span>
@@ -134,7 +138,7 @@
             </div>
             <div class="modal-footer">
                 <button id="btn_modal_device_add" class="button-modal-window">Add</button>
-                <button id="btn_modal_devise_edit" class="button-modal-window">Submit</button>
+                <button id="btn_modal_device_edit" class="button-modal-window">Submit</button>
                 <button class="button-modal-window button-active close-modal" data-modal="device">Close</button>
             </div>
         </div>

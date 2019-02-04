@@ -4,7 +4,7 @@ const OPEN_MODAL_USER = ".open-modal-user";
 const OPEN_MODAL_DEVICE = ".open-modal-device";
 const CLOSE_MODAL = ".close-modal";
 const TABLE_ROW = ".table-row";
-const BTN_MODAL_DEVICE_EDIT = '#btn_modal_devise_edit';
+const BTN_MODAL_DEVICE_EDIT = '#btn_modal_device_edit';
 const BTN_MODAL_DEVICE_ADD = '#btn_modal_device_add';
 const BTN_MODAL_USER_ADD = '#btn_modal_user_add';
 const BTN_MODAL_USER_EDIT = '#btn_modal_user_edit';
@@ -60,6 +60,7 @@ function setDeviceModalWindowValues () {
 
     $(MODAL_DEVICE_ID_HIDDEN).val($deviseIdHidden);
     $(MODAL_DEVICE_ID).val($deviceID);
+    $('#modal_device_id_hidden_state').val($deviceID);
     $(MODAL_DEVICE_TYPE).val($deviseType);
 }
 
@@ -150,6 +151,13 @@ $(document).ready(function () {
         emailCorrect: 'An invalid email address was entered'
     };
     let stateModalUser = {};
+    //Library of modal device window errors
+    const errorMessageModalDevices = {
+        deviceIdEmpty: 'Device ID field cannot be empty',
+        deviceIdCheck: 'This id already exists',
+        deviceKey: 'Device Key field cannot be empty'
+    };
+    let stateModalDevice = {};
 
     /**
      * Animation when opening a modal window
@@ -182,16 +190,83 @@ $(document).ready(function () {
     });
 
     /**
-     * The function checks whether the input field is correctly filled
+     * Check for duplicate device id
+     * @param data - JSON object {"deviceExists": true/false}
      */
-    function checkFieldUserFirsName () {
+    function checkDeviceDataId (data) {
+        stateModalDevice.deviceIdCheck = data.deviceExists !== true;
+    }
+    
+    function  checkFieldDeviceId () {
+        stateModalDevice.deviceIdEmpty = $(MODAL_DEVICE_ID).val() !== "";
+
+        if ($(MODAL_DEVICE_ID).val() !== $('#modal_device_id_hidden_state').val()) {
+            let URL = "/home/validateDeviceExistence?device_id=" + $(MODAL_DEVICE_ID).val();
+
+            sendJSONRequest(URL, null, RequestMethod.GET, beforeSendEmpty,
+                            checkDeviceDataId, debug_callback, process_failures);
+        } else {
+            stateModalDevice.deviceIdCheck = true;
+        }
+    }
+
+    /**
+     * This function ensures that the field is not empty
+     */
+    function checkFieldDeviceKey () {
+        stateModalDevice.deviceKey = $(MODAL_DEVICE_KEY).val() !== "";
+    }
+
+    /**
+     * The function checks the conditions for a modal device window
+     */
+    function setDeviceState () {
+        checkFieldDeviceId();
+        checkFieldDeviceKey();
+    }
+
+    /**
+     * For device
+     * The function displays errors according to the status of the component.
+     * Enables / disables the form submit button according to the state of the components.
+     */
+    function showErrorMessageDevice () {
+        let arrayCheckState = [];
+        let arrayErrorMessage = [];
+
+        for (let index in stateModalDevice) {
+            arrayCheckState.push(stateModalDevice[index]);
+        }
+
+        let checkState = arrayCheckState.every(function (state) {
+            return state !== false;
+        });
+
+        if (checkState === false) {
+            for (let index in stateModalDevice) {
+                if (stateModalDevice[index] === false) {
+                    arrayErrorMessage.push(errorMessageModalDevices[index]);
+                    $('#device_error_message_modal_window').text(arrayErrorMessage[0]).useClassErrorMessage();
+                    $('[id *=btn_modal_device]').disabledButton();
+                }
+            }
+        } else {
+            $('#device_error_message_modal_window').text('Correct').useClassSuccessMessage();
+            $('[id *=btn_modal_device]').activeButton();
+        }
+    }
+
+    /**
+     * This function ensures that the field is not empty
+     */
+    function checkFieldFirsName () {
         stateModalUser.firstName = $(MODAL_USER_FIRST_NAME).val() !== "";
     }
 
     /**
-     * The function checks whether the input field is correctly filled
+     * This function ensures that the field is not empty
      */
-    function checkFieldUserLastName () {
+    function checkFieldLastName () {
         stateModalUser.lastName = $(MODAL_USER_LAST_NAME).val() !== "";
     }
 
@@ -199,14 +274,14 @@ $(document).ready(function () {
      * Check for duplicate email address
      * @param data - JSON object {"userExists": true/false}
      */
-    function checkDataUserEmail (data) {
+    function checkUserDataEmail (data) {
         stateModalUser.emailCheck = data.userExists !== true;
     }
 
     /**
      * The function of checking the correctness of the email address of the user
      */
-    function checkFieldUserEmail () {
+    function checkFieldEmail () {
         let regExp = /^([A-Za-z0-9_\-.+])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,})$/;
 
         // Check for empty input field
@@ -220,7 +295,7 @@ $(document).ready(function () {
             let URL = "/home/validateUserExistence?user_email=" + $(MODAL_USER_EMAIL).val();
 
             sendJSONRequest(URL, null, RequestMethod.GET, beforeSendEmpty,
-                            checkDataUserEmail, debug_callback, process_failures);
+                            checkUserDataEmail, debug_callback, process_failures);
         } else {
             stateModalUser.emailCheck = true;
         }
@@ -229,7 +304,7 @@ $(document).ready(function () {
     /**
      * The function checks whether the input field is correctly filled
      */
-    function checkFieldUserPassword () {
+    function checkFieldPassword () {
         stateModalUser.password = !($(MODAL_USER_PASSWORD).val() !== $(MODAL_USER_CONFIRM_PASSWORD).val() && $(MODAL_USER_CONFIRM_PASSWORD).val() === "");
         stateModalUser.confirmPassword = $(MODAL_USER_CONFIRM_PASSWORD).val() === $(MODAL_USER_PASSWORD).val();
     }
@@ -238,10 +313,10 @@ $(document).ready(function () {
      * The function checks the conditions for a modal user window
      */
     function setUserState () {
-        checkFieldUserFirsName();
-        checkFieldUserLastName();
-        checkFieldUserEmail();
-        checkFieldUserPassword();
+        checkFieldFirsName();
+        checkFieldLastName();
+        checkFieldEmail();
+        checkFieldPassword();
     }
 
     /**
@@ -275,21 +350,35 @@ $(document).ready(function () {
         }
     }
 
+    // Field check Device Id
+    $(MODAL_DEVICE_ID).focusout(function () {
+        checkFieldDeviceId();
+        setTimeout(function () {
+            showErrorMessageDevice();
+        }, 200);
+    });
+
+    // Field check Device Key
+    $(MODAL_DEVICE_KEY).keyup(function () {
+        checkFieldDeviceKey();
+        showErrorMessageDevice();
+    });
+
     // Field check Firs Name
     $(MODAL_USER_FIRST_NAME).keyup(function () {
-        checkFieldUserFirsName();
+        checkFieldFirsName();
         showErrorMessageUser();
     });
 
     // Field check Last Name
     $(MODAL_USER_LAST_NAME).keyup(function () {
-        checkFieldUserLastName();
+        checkFieldLastName();
         showErrorMessageUser();
     });
 
     // Field check User email
     $(MODAL_USER_EMAIL).focusout(function () {
-        checkFieldUserEmail();
+        checkFieldEmail();
         setTimeout(function () {
             showErrorMessageUser();
         }, 200);
@@ -297,13 +386,13 @@ $(document).ready(function () {
 
     // Field check User password
     $(MODAL_USER_PASSWORD).keyup(function () {
-        checkFieldUserPassword();
+        checkFieldPassword();
         showErrorMessageUser();
     });
 
     // Field check Confirm password (for user)
     $(MODAL_USER_CONFIRM_PASSWORD).keyup(function () {
-        checkFieldUserPassword();
+        checkFieldPassword();
         showErrorMessageUser();
     });
 
@@ -319,6 +408,8 @@ $(document).ready(function () {
             openModalAnimation();
             $(BTN_MODAL_DEVICE_ADD).css(DISPLAY_BLOCK);
             $(MODAL_DEVICE).css(DISPLAY_FLEX);
+            setDeviceState();
+            showErrorMessageDevice();
         }
         if ($(this).data("modal") === "edit" && rowSelected) {
             setDeviceModalWindowValues();
@@ -328,6 +419,8 @@ $(document).ready(function () {
             openModalAnimation();
             $(BTN_MODAL_DEVICE_EDIT).css(DISPLAY_BLOCK);
             $(MODAL_DEVICE).css(DISPLAY_FLEX);
+            setDeviceState();
+            showErrorMessageDevice();
         }
     });
 
