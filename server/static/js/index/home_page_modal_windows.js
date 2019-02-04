@@ -43,9 +43,9 @@ function resetRowSelection () {
         $activeRow = $(this);
         $(TABLE_ROW).removeClass("row-active");
         $activeRow.addClass("row-active");
-        $('[data-modal="edit"]').addClass("btn-active");
-        $('[data-modal="debug"]').addClass("btn-active");
-        $('[data-modal="delete"]').addClass("btn-active");
+        $('[data-modal="edit"]').activeButton();
+        $('[data-modal="debug"]').activeButton();
+        $('[data-modal="delete"]').activeButton();
         rowSelected = true;
     });
 }
@@ -138,8 +138,9 @@ function getUserPayload () {
 
 $(document).ready(function () {
 
-    const setTimeAnimation = 400; // Set the delay time for the animation to work
-    let errorMessageModalUser = {
+    const setTimeAnimation = 400;
+    //Library of modal user window errors
+    const errorMessageModalUser = {
         firstName: 'First name field cannot be empty',
         lastName: 'Last name field cannot be empty',
         password: 'Confirm the password',
@@ -172,50 +173,40 @@ $(document).ready(function () {
     $(document).mouseup(function (e) {
         let element = $(".table-main-container");
         if (!element.is(e.target) && element.has(e.target).length === 0) {
-            $('[data-modal="debug"]').removeClass("btn-active");
-            $('[data-modal="edit"]').removeClass("btn-active");
-            $('[data-modal="delete"]').removeClass("btn-active");
+            $('[data-modal="debug"]').disabledButton();
+            $('[data-modal="edit"]').disabledButton();
+            $('[data-modal="delete"]').disabledButton();
             $(TABLE_ROW).removeClass("row-active");
             rowSelected = false;
         }
     });
-//**********************************************************************************************************************
+
     /**
      * The function checks whether the input field is correctly filled
      */
-    function checkInputUserFirsName () {
+    function checkFieldUserFirsName () {
         stateModalUser.firstName = $(MODAL_USER_FIRST_NAME).val() !== "";
     }
 
-    $(MODAL_USER_FIRST_NAME).keyup(function () {
-        checkInputUserFirsName();
-        showErrorMessageUser();
-    });
-
     /**
      * The function checks whether the input field is correctly filled
      */
-    function checkInputUserLastName () {
+    function checkFieldUserLastName () {
         stateModalUser.lastName = $(MODAL_USER_LAST_NAME).val() !== "";
     }
-
-    $(MODAL_USER_LAST_NAME).keyup(function () {
-        checkInputUserLastName();
-        showErrorMessageUser();
-    });
 
     /**
      * Check for duplicate email address
      * @param data - JSON object {"userExists": true/false}
      */
-    function checkUserEmail (data) {
+    function checkDataUserEmail (data) {
         stateModalUser.emailCheck = data.userExists !== true;
     }
 
     /**
      * The function of checking the correctness of the email address of the user
      */
-    function validateEmailUser () {
+    function checkFieldUserEmail () {
         let regExp = /^([A-Za-z0-9_\-.+])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,})$/;
 
         // Check for empty input field
@@ -224,50 +215,40 @@ $(document).ready(function () {
         // Check email for validity
         stateModalUser.emailCorrect = regExp.test($(MODAL_USER_EMAIL).val());
 
-
         // Execution of the request, if there are changes in the email input field
         if ($(MODAL_USER_EMAIL).val() !== $('#modal_user_email_hidden').val()) {
             let URL = "/home/validateUserExistence?user_email=" + $(MODAL_USER_EMAIL).val();
 
             sendJSONRequest(URL, null, RequestMethod.GET, beforeSendEmpty,
-                            checkUserEmail, debug_callback, process_failures);
+                            checkDataUserEmail, debug_callback, process_failures);
         } else {
             stateModalUser.emailCheck = true;
         }
     }
 
-    $(MODAL_USER_EMAIL).focusout(function () {
-        validateEmailUser();
-        setTimeout(function () {
-            showErrorMessageUser();
-        }, 200);
-    });
-
     /**
      * The function checks whether the input field is correctly filled
      */
-    function validateUserPassword () {
+    function checkFieldUserPassword () {
         stateModalUser.password = !($(MODAL_USER_PASSWORD).val() !== $(MODAL_USER_CONFIRM_PASSWORD).val() && $(MODAL_USER_CONFIRM_PASSWORD).val() === "");
         stateModalUser.confirmPassword = $(MODAL_USER_CONFIRM_PASSWORD).val() === $(MODAL_USER_PASSWORD).val();
     }
 
-    $(MODAL_USER_PASSWORD).keyup(function () {
-        validateUserPassword();
-        showErrorMessageUser();
-    });
-
-    $(MODAL_USER_CONFIRM_PASSWORD).keyup(function () {
-        validateUserPassword();
-        showErrorMessageUser();
-    });
-
+    /**
+     * The function checks the conditions for a modal user window
+     */
     function setUserState () {
-        checkInputUserFirsName();
-        checkInputUserLastName();
-        validateEmailUser();
-        validateUserPassword();
+        checkFieldUserFirsName();
+        checkFieldUserLastName();
+        checkFieldUserEmail();
+        checkFieldUserPassword();
     }
 
+    /**
+     * For user
+     * The function displays errors according to the status of the component.
+     * Enables / disables the form submit button according to the state of the components.
+     */
     function showErrorMessageUser () {
         let arrayCheckState = [];
         let arrayErrorMessage = [];
@@ -284,14 +265,48 @@ $(document).ready(function () {
             for (let index in stateModalUser) {
                 if (stateModalUser[index] === false) {
                     arrayErrorMessage.push(errorMessageModalUser[index]);
-                    $('#user_error_message_modal_window').text(arrayErrorMessage[0]);
+                    $('#user_error_message_modal_window').text(arrayErrorMessage[0]).useClassErrorMessage();
+                    $('[id *=btn_modal_user]').disabledButton();
                 }
             }
         } else {
-            $('#user_error_message_modal_window').text('Correct');
+            $('#user_error_message_modal_window').text('Correct').useClassSuccessMessage();
+            $('[id *=btn_modal_user]').activeButton();
         }
     }
-//**********************************************************************************************************************
+
+    // Field check Firs Name
+    $(MODAL_USER_FIRST_NAME).keyup(function () {
+        checkFieldUserFirsName();
+        showErrorMessageUser();
+    });
+
+    // Field check Last Name
+    $(MODAL_USER_LAST_NAME).keyup(function () {
+        checkFieldUserLastName();
+        showErrorMessageUser();
+    });
+
+    // Field check User email
+    $(MODAL_USER_EMAIL).focusout(function () {
+        checkFieldUserEmail();
+        setTimeout(function () {
+            showErrorMessageUser();
+        }, 200);
+    });
+
+    // Field check User password
+    $(MODAL_USER_PASSWORD).keyup(function () {
+        checkFieldUserPassword();
+        showErrorMessageUser();
+    });
+
+    // Field check Confirm password (for user)
+    $(MODAL_USER_CONFIRM_PASSWORD).keyup(function () {
+        checkFieldUserPassword();
+        showErrorMessageUser();
+    });
+
     /**
      * Opening modal windows to add a new / edit device
      */

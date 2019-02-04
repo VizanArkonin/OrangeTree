@@ -95,14 +95,6 @@
   }
 }
 
-.btn-active {
-  background: $btn-default-color !important;
-  cursor: pointer !important;
-  &:hover {
-    background: $btn-default-color-hover !important;
-  }
-}
-
 //Classes to support java script functionality
 .users {
   display: none;

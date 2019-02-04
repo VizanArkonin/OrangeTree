@@ -135,8 +135,6 @@ input:-webkit-autofill:focus {
   opacity: 1; }
 
 .login-error-messages {
-  color: #f64949 !important;
-  font-size: 1.3rem;
   height: 1.5rem;
   text-align: center; }
 
@@ -345,19 +343,24 @@ input:-webkit-autofill:focus {
     transition-duration: 0.3s;
     background: #df6327; }
 
-.btn-modal {
-  background: #e57a46;
+.button-modal-window {
+  background: #c0896d;
   color: white;
   display: block;
+  cursor: default;
   border: none;
   font-size: 1.5rem;
   width: 100%; }
-  .btn-modal:hover {
-    background: #df6327; }
 
 [id*='btn_modal'] {
   display: none;
   margin-right: 0.5rem; }
+
+.button-active {
+  background: #e57a46 !important;
+  cursor: pointer !important; }
+  .button-active:hover {
+    background: #df6327 !important; }
 
 .toggle-bar {
   background: transparent;
@@ -392,7 +395,7 @@ input:-webkit-autofill:focus {
     line-height: 5rem;
     font-size: 1.8rem; }
 
-  .btn-modal {
+  .button-modal-window {
     height: 100%; }
 
   [id*='btn_modal'] {
@@ -600,6 +603,14 @@ input:-webkit-autofill:focus {
 
   .desktop-display-none {
     display: flex; } }
+.error-message {
+  color: #f64949 !important;
+  font-size: 1.3rem; }
+
+.success-message {
+  color: #16a085;
+  font-size: 1.3rem; }
+
 .pin-container {
   background: rgba(255, 255, 255, 0.9);
   flex-basis: 40%;
@@ -732,12 +743,6 @@ input:-webkit-autofill:focus {
   width: 4rem; }
   .btn-table-arrow span {
     cursor: default; }
-
-.btn-active {
-  background: #e57a46 !important;
-  cursor: pointer !important; }
-  .btn-active:hover {
-    background: #df6327 !important; }
 
 .users {
   display: none; }
