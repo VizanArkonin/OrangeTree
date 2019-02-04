@@ -419,6 +419,7 @@ $(document).ready(function () {
             openModalAnimation();
             $(BTN_MODAL_DEVICE_EDIT).css(DISPLAY_BLOCK);
             $(MODAL_DEVICE).css(DISPLAY_FLEX);
+            stateModalDevice.deviceKey = true;
             checkFieldDeviceId();
             showErrorMessageDevice();
         }
