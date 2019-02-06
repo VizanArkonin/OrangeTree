@@ -352,7 +352,7 @@ input:-webkit-autofill:focus {
   font-size: 1.5rem;
   width: 100%; }
 
-[id*='btn_modal'] {
+[id*='modal_user_button'], [id*='modal_device_button'] {
   display: none;
   margin-right: 0.5rem; }
 
@@ -398,7 +398,7 @@ input:-webkit-autofill:focus {
   .button-modal-window {
     height: 100%; }
 
-  [id*='btn_modal'] {
+  [id*='modal_user_button'], [id*='modal_device_button'] {
     margin-left: 0;
     margin-bottom: 2rem; } }
 .sidebar-container {
@@ -744,7 +744,7 @@ input:-webkit-autofill:focus {
   .btn-table-arrow span {
     cursor: default; }
 
-.users {
+.table-user-window {
   display: none; }
 
 .row-active {
@@ -761,10 +761,10 @@ input:-webkit-autofill:focus {
 .offline {
   color: #ff3838; }
 
-.tab-link-devices {
+.table-device-tab {
   background: rgba(0, 0, 0, 0.4); }
 
-.tab-link-users {
+.table-user-tab {
   background: rgba(0, 0, 0, 0.7); }
 
 @media screen and (max-width: 1023px) {

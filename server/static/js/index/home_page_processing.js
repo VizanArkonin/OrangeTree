@@ -1,8 +1,5 @@
 "use strict";
-const TABLE_USERS = '#table_users';
-const TABLE_DEVICES = '#table_device';
 const renderTableDelay = 300;
-
 /**
  * Callback function, called on success, for reading device data
  * @param data       - JSON object
@@ -32,7 +29,7 @@ function drawDeviceRow (rowData) {
 
     onlineStatus = onlineStatus === true ? "Online" : "Offline";
 
-    $(TABLE_DEVICES).append($row);
+    $(table.device.content).append($row);
     $row.append($("<input data-device-id type=\"hidden\">").val(rowData.id));
     $row.append($("<td data-device-type-id>" + rowData.device_id + "</td>"));
     $row.append($("<td data-device-type>" + deviceType[deviceTypeNumber] + "</td>"));
@@ -66,7 +63,7 @@ function drawUserRow(rowData) {
 
     userEnabled = userEnabled === true ? "Yes" : "No";
 
-    $(TABLE_USERS).append($row);
+    $(table.user.content).append($row);
     $row.append($("<input data-user-id type='hidden'>").val(rowData.id));
     $row.append($("<td data-user-name data-first-name data-last-name>" +
                 "" + rowData.first_name + " " + rowData.last_name + "</td>"));

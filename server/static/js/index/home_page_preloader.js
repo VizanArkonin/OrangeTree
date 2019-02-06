@@ -1,13 +1,10 @@
 "use strict";
-const DEVICE_PRELOADER = '#table_device_preloader';
-const USERS_PRELOADER = '#table_users_preloader';
-
 /**
  * Preloader launch function (for devises)
  */
 function showLoaderInDevicesTable () {
-    $(TABLE_DEVICES).css(DISPLAY_NONE);
-    $(DEVICE_PRELOADER).css(DISPLAY_FLEX);
+    $(table.device.content).css(DISPLAY_NONE);
+    $(table.device.preloader).css(DISPLAY_FLEX);
 }
 
 /**
@@ -15,8 +12,8 @@ function showLoaderInDevicesTable () {
  */
 function hideLoaderInDevicesTable () {
     setTimeout(function () {
-        $(DEVICE_PRELOADER).css(DISPLAY_NONE);
-        $(TABLE_DEVICES).fadeIn(600);
+        $(table.device.preloader).css(DISPLAY_NONE);
+        $(table.device.content).fadeIn(600);
     }, 400);
 }
 
@@ -24,8 +21,8 @@ function hideLoaderInDevicesTable () {
  * Preloader launch function (for devises)
  */
 function showLoaderInUsersTable () {
-    $(TABLE_USERS).css(DISPLAY_NONE);
-    $(USERS_PRELOADER).css(DISPLAY_FLEX);
+    $(table.user.content).css(DISPLAY_NONE);
+    $(table.user.preloader).css(DISPLAY_FLEX);
 }
 
 /**
@@ -33,7 +30,7 @@ function showLoaderInUsersTable () {
  */
 function hideLoaderInUsersTable () {
     setTimeout(function () {
-        $(USERS_PRELOADER).css(DISPLAY_NONE);
-        $(TABLE_USERS).fadeIn(600);
+        $(table.user.preloader).css(DISPLAY_NONE);
+        $(table.user.content).fadeIn(600);
     }, 400);
 }

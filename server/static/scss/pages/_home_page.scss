@@ -96,7 +96,7 @@
 }
 
 //Classes to support java script functionality
-.users {
+.table-user-window {
   display: none;
 }
 
@@ -120,11 +120,11 @@
   color: $red-color;
 }
 
-.tab-link-devices {
+.table-device-tab {
   background: $dark-color-400;
 }
 
-.tab-link-users {
+.table-user-tab {
   background: $dark-color-700;
 }
 

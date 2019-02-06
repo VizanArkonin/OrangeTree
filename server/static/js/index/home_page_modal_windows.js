@@ -1,43 +1,14 @@
 "use strict";
-// Variables with classes for buttons
-const OPEN_MODAL_USER = ".open-modal-user";
-const OPEN_MODAL_DEVICE = ".open-modal-device";
-const CLOSE_MODAL = ".close-modal";
 const TABLE_ROW = ".table-row";
-const BTN_MODAL_DEVICE_EDIT = '#btn_modal_device_edit';
-const BTN_MODAL_DEVICE_ADD = '#btn_modal_device_add';
-const BTN_MODAL_USER_ADD = '#btn_modal_user_add';
-const BTN_MODAL_USER_EDIT = '#btn_modal_user_edit';
-//Other variables
-const MODAL = ".modal";
-const MODAL_ANIMATION_OPEN = "modal-animation-open";
-const MODAL_ANIMATION_CLOSE = "modal-animation-close";
-
-const MODAL_DEVICE = "#modal_window_device";
-const MODAL_DEVICE_ID_HIDDEN = "#modal_device_id_hidden";
-const MODAL_DEVICE_ID = "#modal_device_id";
-const MODAL_DEVICE_TYPE = "#modal_device_type";
-const MODAL_DEVICE_KEY = "#modal_device_key";
-
-const MODAL_USER = "#modal_window_user";
-const MODAL_USER_ID_HIDDEN = "#modal_device_id_hidden";
-const MODAL_USER_FIRST_NAME = "#modal_user_first_name";
-const MODAL_USER_LAST_NAME = "#modal_user_last_name";
-const MODAL_USER_EMAIL = "#modal_user_email";
-const MODAL_USER_PASSWORD = "#modal_user_password";
-const MODAL_USER_CONFIRM_PASSWORD = "#modal_user_confirm_password";
-const MODAL_USER_CHECKBOX = '.modal-user-checkbox';
-
-const DISPLAY_BLOCK = {"display":"block"};
-
-let rowSelected = false;
-let $activeRow;
 
 /**
  * Resets table row event listener, allowing it to be selected/deselected
  * @var $activeRow        - It contains selected row
  * @var rowSelected       - Active row indicator
  */
+let rowSelected = false;
+let $activeRow;
+
 function resetRowSelection () {
     $(TABLE_ROW).click(function () {
         $activeRow = $(this);
@@ -58,10 +29,10 @@ function setDeviceModalWindowValues () {
     let $deviceID = $activeRow.children('[data-device-type-id]').text();
     let $deviseIdHidden = $activeRow.children('[data-device-id]').val();
 
-    $(MODAL_DEVICE_ID_HIDDEN).val($deviseIdHidden);
-    $(MODAL_DEVICE_ID).val($deviceID);
-    $('#modal_device_id_hidden_state').val($deviceID);
-    $(MODAL_DEVICE_TYPE).val($deviseType);
+    $(modal.device.field.hidden.id).val($deviseIdHidden);
+    $(modal.device.field.id).val($deviceID);
+    $(modal.device.field.hidden.stateId).val($deviceID);
+    $(modal.device.field.type).val($deviseType);
 }
 
 /**
@@ -71,10 +42,10 @@ function setDeviceModalWindowValues () {
 function getDevicePayload () {
     let payload = {"deviceData": {}};
 
-    payload.deviceData.id = $(MODAL_DEVICE_ID_HIDDEN).val();
-    payload.deviceData.device_id = $(MODAL_DEVICE_ID).val();
-    payload.deviceData.device_type = $(MODAL_DEVICE_TYPE).val();
-    payload.deviceData.device_access_key = $(MODAL_DEVICE_KEY).val();
+    payload.deviceData.id = $(modal.device.field.hidden.id).val();
+    payload.deviceData.device_id = $(modal.device.field.id).val();
+    payload.deviceData.device_type = $(modal.device.field.type).val();
+    payload.deviceData.device_access_key = $(modal.device.field.key).val();
 
     return payload;
 }
@@ -91,21 +62,21 @@ function setUserModalWindowValues () {
     let $hiddenContainer = $activeRow.children('td:last-child').children('.user-roles-container').children('input');
     let userRolesList = [];
 
-    $(MODAL_USER_ID_HIDDEN).val($deviceIdHidden);
-    $(MODAL_USER_FIRST_NAME).val($userFirstName);
-    $(MODAL_USER_LAST_NAME).val($userLastName);
-    $(MODAL_USER_EMAIL).val($userEmail);
-    $('#modal_user_email_hidden').val($userEmail);
+    $(modal.user.field.hidden.id).val($deviceIdHidden);
+    $(modal.user.field.firstName).val($userFirstName);
+    $(modal.user.field.lastName).val($userLastName);
+    $(modal.user.field.email).val($userEmail);
+    $(modal.user.field.hidden.email).val($userEmail);
 
     if ($userActive === 'true') {
-        $('#modal_user_active').prop("checked", true);
+        $(modal.user.checkbox.active).prop("checked", true);
     }
 
     $hiddenContainer.each(function () {
         userRolesList.push($(this).val());
         for (let userRoleIndex = 0; userRoleIndex < userRolesList.length; userRoleIndex++) {
             let userRole = userRolesList[userRoleIndex];
-            $(MODAL_USER_CHECKBOX).each(function () {
+            $(modal.user.checkbox.roles).each(function () {
                 if ($(this).val() === userRole) {
                     $(this).prop("checked", true);
                 }
@@ -121,14 +92,14 @@ function setUserModalWindowValues () {
 function getUserPayload () {
     let payload = {"userData": {"roles":[]}};
 
-    payload.userData.id = $(MODAL_USER_ID_HIDDEN).val();
-    payload.userData.email = $(MODAL_USER_EMAIL).val();
-    payload.userData.first_name = $(MODAL_USER_FIRST_NAME).val();
-    payload.userData.last_name = $(MODAL_USER_LAST_NAME).val();
-    payload.userData.password = $(MODAL_USER_PASSWORD).val();
-    payload.userData.active = $('#modal_user_active').prop('checked') === true;
+    payload.userData.id = $(modal.user.field.hidden.id).val();
+    payload.userData.email = $(modal.user.field.email).val();
+    payload.userData.first_name = $(modal.user.field.firstName).val();
+    payload.userData.last_name = $(modal.user.field.lastName).val();
+    payload.userData.password = $(modal.user.field.password).val();
+    payload.userData.active = $(modal.user.checkbox.active).prop('checked') === true;
 
-    $(MODAL_USER_CHECKBOX).each(function () {
+    $(modal.user.checkbox.roles).each(function () {
        if ($(this).prop('checked') === true) {
            payload.userData.roles.push({"role_name": $(this).val()});
        }
@@ -163,16 +134,16 @@ $(document).ready(function () {
      * Animation when opening a modal window
      */
     function openModalAnimation () {
-        $(MODAL).removeClass(MODAL_ANIMATION_CLOSE);
-        $(MODAL).addClass(MODAL_ANIMATION_OPEN);
+        $(modal.window.open).removeClass(modal.animation.close);
+        $(modal.window.open).addClass(modal.animation.open);
     }
 
     /**
      * Animation when closing a modal window
      */
     function closeModalAnimation () {
-        $(MODAL).removeClass(MODAL_ANIMATION_OPEN);
-        $(MODAL).addClass(MODAL_ANIMATION_CLOSE);
+        $(modal.window.open).removeClass(modal.animation.open);
+        $(modal.window.open).addClass(modal.animation.close);
     }
 
     /**
@@ -198,10 +169,10 @@ $(document).ready(function () {
     }
     
     function  checkFieldDeviceId () {
-        stateModalDevice.deviceIdEmpty = $(MODAL_DEVICE_ID).val() !== "";
+        stateModalDevice.deviceIdEmpty = $(modal.device.field.id).val() !== "";
 
-        if ($(MODAL_DEVICE_ID).val() !== $('#modal_device_id_hidden_state').val()) {
-            let URL = "/home/validateDeviceExistence?device_id=" + $(MODAL_DEVICE_ID).val();
+        if ($(modal.device.field.id).val() !== $(modal.device.field.hidden.stateId).val()) {
+            let URL = "/home/validateDeviceExistence?device_id=" + $(modal.device.field.id).val();
 
             sendJSONRequest(URL, null, RequestMethod.GET, beforeSendEmpty,
                             checkDeviceDataId, debug_callback, process_failures);
@@ -214,7 +185,7 @@ $(document).ready(function () {
      * This function ensures that the field is not empty
      */
     function checkFieldDeviceKey () {
-        stateModalDevice.deviceKey = $(MODAL_DEVICE_KEY).val() !== "";
+        stateModalDevice.deviceKey = $(modal.device.field.key).val() !== "";
     }
 
     /**
@@ -246,13 +217,13 @@ $(document).ready(function () {
             for (let index in stateModalDevice) {
                 if (stateModalDevice[index] === false) {
                     arrayErrorMessage.push(errorMessageModalDevices[index]);
-                    $('#device_error_message_modal_window').text(arrayErrorMessage[0]).useClassErrorMessage();
-                    $('[id *=btn_modal_device]').disabledButton();
+                    $(modal.device.message.error).text(arrayErrorMessage[0]).useClassErrorMessage();
+                    $(modal.device.button.all).disabledButton();
                 }
             }
         } else {
-            $('#device_error_message_modal_window').text('Correct').useClassSuccessMessage();
-            $('[id *=btn_modal_device]').activeButton();
+            $(modal.device.message.error).text('Correct').useClassSuccessMessage();
+            $(modal.device.button.all).activeButton();
         }
     }
 
@@ -260,14 +231,14 @@ $(document).ready(function () {
      * This function ensures that the field is not empty
      */
     function checkFieldFirsName () {
-        stateModalUser.firstName = $(MODAL_USER_FIRST_NAME).val() !== "";
+        stateModalUser.firstName = $(modal.user.field.firstName).val() !== "";
     }
 
     /**
      * This function ensures that the field is not empty
      */
     function checkFieldLastName () {
-        stateModalUser.lastName = $(MODAL_USER_LAST_NAME).val() !== "";
+        stateModalUser.lastName = $(modal.user.field.lastName).val() !== "";
     }
 
     /**
@@ -285,14 +256,14 @@ $(document).ready(function () {
         let regExp = /^([A-Za-z0-9_\-.+])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,})$/;
 
         // Check for empty input field
-        stateModalUser.emailEmpty = $(MODAL_USER_EMAIL).val() !== "";
+        stateModalUser.emailEmpty = $(modal.user.field.email).val() !== "";
 
         // Check email for validity
-        stateModalUser.emailCorrect = regExp.test($(MODAL_USER_EMAIL).val());
+        stateModalUser.emailCorrect = regExp.test($(modal.user.field.email).val());
 
         // Execution of the request, if there are changes in the email input field
-        if ($(MODAL_USER_EMAIL).val() !== $('#modal_user_email_hidden').val()) {
-            let URL = "/home/validateUserExistence?user_email=" + $(MODAL_USER_EMAIL).val();
+        if ($(modal.user.field.email).val() !== $(modal.user.field.hidden.email).val()) {
+            let URL = "/home/validateUserExistence?user_email=" + $(modal.user.field.email).val();
 
             sendJSONRequest(URL, null, RequestMethod.GET, beforeSendEmpty,
                             checkUserDataEmail, debug_callback, process_failures);
@@ -305,8 +276,8 @@ $(document).ready(function () {
      * The function checks whether the input field is correctly filled
      */
     function checkFieldPassword () {
-        stateModalUser.password = !($(MODAL_USER_PASSWORD).val() !== $(MODAL_USER_CONFIRM_PASSWORD).val() && $(MODAL_USER_CONFIRM_PASSWORD).val() === "");
-        stateModalUser.confirmPassword = $(MODAL_USER_CONFIRM_PASSWORD).val() === $(MODAL_USER_PASSWORD).val();
+        stateModalUser.password = !($(modal.user.field.password).val() !== $(modal.user.field.confirmPassword).val() && $(modal.user.field.confirmPassword).val() === "");
+        stateModalUser.confirmPassword = $(modal.user.field.confirmPassword).val() === $(modal.user.field.password).val();
     }
 
     /**
@@ -340,18 +311,18 @@ $(document).ready(function () {
             for (let index in stateModalUser) {
                 if (stateModalUser[index] === false) {
                     arrayErrorMessage.push(errorMessageModalUser[index]);
-                    $('#user_error_message_modal_window').text(arrayErrorMessage[0]).useClassErrorMessage();
-                    $('[id *=btn_modal_user]').disabledButton();
+                    $(modal.user.message.error).text(arrayErrorMessage[0]).useClassErrorMessage();
+                    $(modal.user.button.all).disabledButton();
                 }
             }
         } else {
-            $('#user_error_message_modal_window').text('Correct').useClassSuccessMessage();
-            $('[id *=btn_modal_user]').activeButton();
+            $(modal.user.message.error).text('Correct').useClassSuccessMessage();
+            $(modal.user.button.all).activeButton();
         }
     }
 
     // Field check Device Id
-    $(MODAL_DEVICE_ID).focusout(function () {
+    $(modal.device.field.id).focusout(function () {
         checkFieldDeviceId();
         setTimeout(function () {
             showErrorMessageDevice();
@@ -359,25 +330,25 @@ $(document).ready(function () {
     });
 
     // Field check Device Key
-    $(MODAL_DEVICE_KEY).keyup(function () {
+    $(modal.device.field.key).keyup(function () {
         checkFieldDeviceKey();
         showErrorMessageDevice();
     });
 
     // Field check Firs Name
-    $(MODAL_USER_FIRST_NAME).keyup(function () {
+    $(modal.user.field.firstName).keyup(function () {
         checkFieldFirsName();
         showErrorMessageUser();
     });
 
     // Field check Last Name
-    $(MODAL_USER_LAST_NAME).keyup(function () {
+    $(modal.user.field.lastName).keyup(function () {
         checkFieldLastName();
         showErrorMessageUser();
     });
 
     // Field check User email
-    $(MODAL_USER_EMAIL).focusout(function () {
+    $(modal.user.field.email).focusout(function () {
         checkFieldEmail();
         setTimeout(function () {
             showErrorMessageUser();
@@ -385,13 +356,13 @@ $(document).ready(function () {
     });
 
     // Field check User password
-    $(MODAL_USER_PASSWORD).keyup(function () {
+    $(modal.user.field.password).keyup(function () {
         checkFieldPassword();
         showErrorMessageUser();
     });
 
     // Field check Confirm password (for user)
-    $(MODAL_USER_CONFIRM_PASSWORD).keyup(function () {
+    $(modal.user.field.confirmPassword).keyup(function () {
         checkFieldPassword();
         showErrorMessageUser();
     });
@@ -399,26 +370,26 @@ $(document).ready(function () {
     /**
      * Opening modal windows to add a new / edit device
      */
-    $(OPEN_MODAL_DEVICE).click(function () {
+    $(modal.device.button.open).click(function () {
         if ($(this).data("modal") === "add") {
-            $("#modal_header_device").text("Add new device");
-            $(MODAL_DEVICE_ID).attr("placeholder","Enter device ID");
-            $(MODAL_DEVICE_KEY).attr("placeholder","Enter device key");
-            $(MODAL_DEVICE_TYPE).val("1");
+            $(modal.device.header).text("Add new device");
+            $(modal.device.field.id).attr("placeholder","Enter device ID");
+            $(modal.device.field.key).attr("placeholder","Enter device key");
+            $(modal.device.field.type).val("1");
             openModalAnimation();
-            $(BTN_MODAL_DEVICE_ADD).css(DISPLAY_BLOCK);
-            $(MODAL_DEVICE).css(DISPLAY_FLEX);
+            $(modal.device.button.add).css(DISPLAY_BLOCK);
+            $(modal.device.window).css(DISPLAY_FLEX);
             setDeviceState();
             showErrorMessageDevice();
         }
         if ($(this).data("modal") === "edit" && rowSelected) {
             setDeviceModalWindowValues();
-            $("#modal_header_device").text("Edit device");
-            $(MODAL_DEVICE_ID).attr("placeholder","Edit device ID");
-            $(MODAL_DEVICE_KEY).attr("placeholder","Edit device key");
+            $(modal.device.header).text("Edit device");
+            $(modal.device.field.id).attr("placeholder","Edit device ID");
+            $(modal.device.field.key).attr("placeholder","Edit device key");
             openModalAnimation();
-            $(BTN_MODAL_DEVICE_EDIT).css(DISPLAY_BLOCK);
-            $(MODAL_DEVICE).css(DISPLAY_FLEX);
+            $(modal.device.button.edit).css(DISPLAY_BLOCK);
+            $(modal.device.window).css(DISPLAY_FLEX);
             stateModalDevice.deviceKey = true;
             checkFieldDeviceId();
             showErrorMessageDevice();
@@ -428,31 +399,31 @@ $(document).ready(function () {
     /**
      * Opening modal windows to add a new / edit user
      */
-    $(OPEN_MODAL_USER).click(function () {
+    $(modal.user.button.open).click(function () {
         if ($(this).data("modal") === "add") {
-            $("#modal_header_user").text("Add new user");
-            $(MODAL_USER_FIRST_NAME).attr("placeholder","Enter First Name");
-            $(MODAL_USER_LAST_NAME).attr("placeholder","Enter Last Name");
-            $(MODAL_USER_EMAIL).attr("placeholder","Enter email");
-            $(MODAL_USER_PASSWORD).attr("placeholder","Enter password");
-            $(MODAL_USER_CONFIRM_PASSWORD).attr("placeholder","Confirm password");
+            $(modal.user.header).text("Add new user");
+            $(modal.user.field.firstName).attr("placeholder","Enter First Name");
+            $(modal.user.field.lastName).attr("placeholder","Enter Last Name");
+            $(modal.user.field.email).attr("placeholder","Enter email");
+            $(modal.user.field.password).attr("placeholder","Enter password");
+            $(modal.user.field.confirmPassword).attr("placeholder","Confirm password");
             openModalAnimation();
-            $('#btn_modal_user_add').css(DISPLAY_BLOCK);
-            $(MODAL_USER).css(DISPLAY_FLEX);
+            $(modal.user.button.add).css(DISPLAY_BLOCK);
+            $(modal.user.window).css(DISPLAY_FLEX);
             setUserState();
             showErrorMessageUser();
         }
         if ($(this).data("modal") === "edit" && rowSelected) {
             setUserModalWindowValues();
-            $("#modal_header_user").text("Edit user");
-            $(MODAL_USER_FIRST_NAME).attr("placeholder","Edit First Name");
-            $(MODAL_USER_LAST_NAME).attr("placeholder","Edit Last Name");
-            $(MODAL_USER_EMAIL).attr("placeholder","Edit email");
-            $(MODAL_USER_PASSWORD).attr("placeholder","Edit password");
-            $(MODAL_USER_CONFIRM_PASSWORD).attr("placeholder","Confirm password");
+            $(modal.user.header).text("Edit user");
+            $(modal.user.field.firstName).attr("placeholder","Edit First Name");
+            $(modal.user.field.lastName).attr("placeholder","Edit Last Name");
+            $(modal.user.field.email).attr("placeholder","Edit email");
+            $(modal.user.field.password).attr("placeholder","Edit password");
+            $(modal.user.field.confirmPassword).attr("placeholder","Confirm password");
             openModalAnimation();
-            $('#btn_modal_user_edit').css(DISPLAY_BLOCK);
-            $(MODAL_USER).css(DISPLAY_FLEX);
+            $(modal.user.button.edit).css(DISPLAY_BLOCK);
+            $(modal.user.window).css(DISPLAY_FLEX);
             setUserState();
             showErrorMessageUser();
         }
@@ -464,13 +435,14 @@ $(document).ready(function () {
     function closeDeviceModalWindow () {
         closeModalAnimation();
         setTimeout(function () {
-           $(MODAL_DEVICE).css(DISPLAY_NONE);
-           $('#modal_window_device_delete').css(DISPLAY_NONE);
-           $(MODAL_DEVICE_ID_HIDDEN).val("");
-           $(MODAL_DEVICE_ID).val("");
-           $(MODAL_DEVICE_KEY).val("");
-           $(MODAL_DEVICE_TYPE).val("1");
-           $('[id *= btn_modal]').css(DISPLAY_NONE);
+           $(modal.device.window).css(DISPLAY_NONE);
+           $(modal.deleteDevice.window).css(DISPLAY_NONE);
+           $(modal.device.field.hidden.id).val("");
+           $(modal.device.field.id).val("");
+           $(modal.device.field.key).val("");
+           $(modal.device.field.type).val("1");
+           $(modal.user.button.all).css(DISPLAY_NONE);
+           $(modal.device.button.all).css(DISPLAY_NONE);
         }, setTimeAnimation);
     }
 
@@ -480,25 +452,26 @@ $(document).ready(function () {
     function closeUserModalWindow () {
         closeModalAnimation();
         setTimeout(function () {
-           $(MODAL_USER).css(DISPLAY_NONE);
-           $('#modal_window_user_delete').css(DISPLAY_NONE);
-           $(MODAL_USER_ID_HIDDEN).val("");
-           $(MODAL_USER_FIRST_NAME).val("");
-           $(MODAL_USER_LAST_NAME).val("");
-           $(MODAL_USER_EMAIL).val("");
-           $('#modal_user_email_hidden').val("");
-           $(MODAL_USER_PASSWORD).val("");
-           $(MODAL_USER_CONFIRM_PASSWORD).val("");
-           $('#modal_user_active').prop("checked", false);
-           $(MODAL_USER_CHECKBOX).each(function () {
+           $(modal.user.window).css(DISPLAY_NONE);
+           $(modal.deleteUser.window).css(DISPLAY_NONE);
+           $(modal.user.field.hidden.id).val("");
+           $(modal.user.field.firstName).val("");
+           $(modal.user.field.lastName).val("");
+           $(modal.user.field.email).val("");
+           $(modal.user.field.hidden.email).val("");
+           $(modal.user.field.password).val("");
+           $(modal.user.field.confirmPassword).val("");
+           $(modal.user.checkbox.active).prop("checked", false);
+           $(modal.user.checkbox.roles).each(function () {
                $(this).prop('checked', false);
            });
-           $('[id *= btn_modal]').css(DISPLAY_NONE);
+           $(modal.user.button.all).css(DISPLAY_NONE);
+           $(modal.device.button.all).css(DISPLAY_NONE);
         }, setTimeAnimation);
     }
 
     // Close all modal windows
-    $(CLOSE_MODAL).click(function () {
+    $(modal.window.close).click(function () {
         if ($(this).data("modal") === "device") {
             closeDeviceModalWindow();
         } else {
@@ -507,79 +480,72 @@ $(document).ready(function () {
     });
 
     // Device editing function followed by an AJAX request
-    $(BTN_MODAL_DEVICE_EDIT).click(function () {
+    $(modal.device.button.edit).click(function () {
         closeDeviceModalWindow();
         sendJSONRequest("/home/device.svc", getDevicePayload(), RequestMethod.PUT, showLoaderInDevicesTable,
                         renderDevicesTable, debug_callback, process_failures);
     });
 
     // Creating an AJAX request to add a new device
-    $(BTN_MODAL_DEVICE_ADD).click(function () {
+    $(modal.device.button.add).click(function () {
         closeDeviceModalWindow();
         sendJSONRequest("/home/device.svc", getDevicePayload(), RequestMethod.POST, showLoaderInDevicesTable,
                         renderDevicesTable, debug_callback, process_failures);
     });
 
-    //Create an AJAX request to remove a device
-    $('#btn_device_row_delete').click(function () {
-        setDeviceModalWindowValues();
-        sendJSONRequest("/home/device.svc", getDevicePayload(), RequestMethod.DELETE, showLoaderInDevicesTable,
-                        renderDevicesTable, debug_callback, process_failures);
-    });
-
     // User editing function followed by an AJAX request
-    $(BTN_MODAL_USER_EDIT).click(function () {
+    $(modal.user.button.edit).click(function () {
         closeUserModalWindow();
         sendJSONRequest("/home/user.svc", getUserPayload(), RequestMethod.PUT, showLoaderInUsersTable,
                         renderUsersTable, debug_callback, process_failures);
     });
 
     // Creating an AJAX request to add a new user
-    $(BTN_MODAL_USER_ADD).click(function () {
+    $(modal.user.button.add).click(function () {
         closeUserModalWindow();
         sendJSONRequest("/home/user.svc", getUserPayload(), RequestMethod.POST, showLoaderInUsersTable,
                         renderUsersTable, debug_callback, process_failures);
     });
 
     //Opening a modal window to remove a device
-    $('#btn_device_open_modal_window_delete').click(function () {
+    $(modal.deleteDevice.button.open).click(function () {
         setDeviceModalWindowValues();
         openModalAnimation();
-        $('#modal_device_delete_name').text($(MODAL_DEVICE_ID).val());
-        $('#btn_modal_device_delete').css(DISPLAY_BLOCK);
-        $('#modal_window_device_delete').css(DISPLAY_FLEX);
+        $(modal.deleteDevice.message.name).text($(modal.device.field.id).val());
+        $(modal.deleteDevice.button.del).css(DISPLAY_BLOCK);
+        $(modal.deleteDevice.window).css(DISPLAY_FLEX);
     });
 
     // Create an AJAX request to remove a user
-    $('#btn_modal_device_delete').click(function () {
+    $(modal.deleteDevice.button.del).click(function () {
         closeDeviceModalWindow();
         sendJSONRequest("/home/device.svc", getDevicePayload(), RequestMethod.DELETE, showLoaderInDevicesTable,
                         renderDevicesTable, debug_callback, process_failures);
     });
 
     // Opening a modal window to remove a user
-    $('#btn_user_open_modal_window_delete').click(function () {
+    $(modal.deleteUser.button.open).click(function () {
         setUserModalWindowValues();
         openModalAnimation();
-        $('#modal_user_delete_name').text($(MODAL_USER_FIRST_NAME).val() + " " + $(MODAL_USER_LAST_NAME).val());
-        $('#btn_modal_user_delete').css(DISPLAY_BLOCK);
-        $('#modal_window_user_delete').css(DISPLAY_FLEX);
+        $(modal.deleteUser.message.name).text($(modal.user.field.firstName).val() + " " + $(modal.user.field.lastName).val());
+        $(modal.deleteUser.button.del).css(DISPLAY_BLOCK);
+        $(modal.deleteUser.window).css(DISPLAY_FLEX);
     });
 
     // Create an AJAX request to remove a user
-    $('#btn_modal_user_delete').click(function () {
+    $(modal.deleteUser.button.del).click(function () {
         closeUserModalWindow();
         sendJSONRequest("/home/user.svc", getUserPayload(), RequestMethod.DELETE, showLoaderInUsersTable,
                         renderUsersTable, debug_callback, process_failures);
     });
 
     //Refresh table devises
-    $('#btn_devises_table_refresh').click(function () {
+    $(table.device.button.refresh).click(function () {
         renderDevicesTable();
     });
 
     //Refresh table users
-    $('#btn_users_table_refresh').click(function () {
+    $(table.user.button.refresh).click(function () {
        renderUsersTable();
     });
 });

@@ -62,7 +62,7 @@
   width: 100%;
 }
 
-[id *='btn_modal'] {
+[id *='modal_user_button'], [id *='modal_device_button'] {
   display: none;
   margin-right: 0.5rem;
 }
@@ -119,7 +119,7 @@
   .button-modal-window {
     height: 100%;
   }
-  [id *='btn_modal'] {
+  [id *='modal_user_button'], [id *='modal_device_button'] {
     margin-left: 0;
     margin-bottom: 2rem;
   }
