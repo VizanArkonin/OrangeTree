@@ -218,7 +218,8 @@ $(document).ready(function () {
                 if (stateModalDevice[index] === false) {
                     arrayErrorMessage.push(errorMessageModalDevices[index]);
                     $(modal.device.message.error).text(arrayErrorMessage[0]).useClassErrorMessage();
-                    $(modal.device.button.all).disabledButton();
+                    $(modal.device.button.edit).disabledButton();
+                    $(modal.device.button.add).disabledButton();
                 }
             }
         } else {
@@ -312,12 +313,14 @@ $(document).ready(function () {
                 if (stateModalUser[index] === false) {
                     arrayErrorMessage.push(errorMessageModalUser[index]);
                     $(modal.user.message.error).text(arrayErrorMessage[0]).useClassErrorMessage();
-                    $(modal.user.button.all).disabledButton();
+                    $(modal.user.button.edit).disabledButton();
+                    $(modal.user.button.add).disabledButton();
                 }
             }
         } else {
             $(modal.user.message.error).text('Correct').useClassSuccessMessage();
-            $(modal.user.button.all).activeButton();
+                $(modal.user.button.edit).activeButton();
+                $(modal.user.button.add).activeButton();
         }
     }
 
