@@ -117,6 +117,7 @@ $(document).ready(function () {
         lastName: 'Last name field cannot be empty',
         password: 'Confirm the password',
         confirmPassword: 'Invalid password',
+        passwordEmpty: 'Password field cannot be empty',
         emailCheck: 'This email address already exists',
         emailEmpty: 'Email address cannot be empty',
         emailCorrect: 'An invalid email address was entered'
@@ -129,6 +130,14 @@ $(document).ready(function () {
         deviceKey: 'Device Key field cannot be empty'
     };
     let stateModalDevice = {};
+    let stateModalButtonDevice = {
+        edit: false,
+        add: false
+    };
+    let stateModalButtonUser = {
+        edit: false,
+        add: false
+    };
 
     /**
      * Animation when opening a modal window
@@ -185,7 +194,9 @@ $(document).ready(function () {
      * This function ensures that the field is not empty
      */
     function checkFieldDeviceKey () {
-        stateModalDevice.deviceKey = $(modal.device.field.key).val() !== "";
+        if (stateModalButtonDevice.add === true) {
+            stateModalDevice.deviceKey = $(modal.device.field.key).val() !== "";
+        }
     }
 
     /**
@@ -277,8 +288,14 @@ $(document).ready(function () {
      * The function checks whether the input field is correctly filled
      */
     function checkFieldPassword () {
-        stateModalUser.password = !($(modal.user.field.password).val() !== $(modal.user.field.confirmPassword).val() && $(modal.user.field.confirmPassword).val() === "");
-        stateModalUser.confirmPassword = $(modal.user.field.confirmPassword).val() === $(modal.user.field.password).val();
+        if (stateModalButtonUser.add === true) {
+            stateModalUser.passwordEmpty = $(modal.user.field.password).val() !== "";
+            stateModalUser.password = !($(modal.user.field.password).val() !== $(modal.user.field.confirmPassword).val() && $(modal.user.field.confirmPassword).val() === "");
+            stateModalUser.confirmPassword = $(modal.user.field.confirmPassword).val() === $(modal.user.field.password).val();
+        }
+        if (stateModalButtonUser.edit === true) {
+            stateModalUser.password = !($(modal.user.field.password).val() !== $(modal.user.field.confirmPassword).val());
+        }
     }
 
     /**
@@ -379,6 +396,7 @@ $(document).ready(function () {
             $(modal.device.field.id).attr("placeholder","Enter device ID");
             $(modal.device.field.key).attr("placeholder","Enter device key");
             $(modal.device.field.type).val("1");
+            stateModalButtonDevice.add = true;
             openModalAnimation();
             $(modal.device.button.add).css(DISPLAY_BLOCK);
             $(modal.device.window).css(DISPLAY_FLEX);
@@ -391,10 +409,11 @@ $(document).ready(function () {
             $(modal.device.field.id).attr("placeholder","Edit device ID");
             $(modal.device.field.key).attr("placeholder","Edit device key");
             openModalAnimation();
+            stateModalButtonDevice.edit = true;
             $(modal.device.button.edit).css(DISPLAY_BLOCK);
             $(modal.device.window).css(DISPLAY_FLEX);
             stateModalDevice.deviceKey = true;
-            checkFieldDeviceId();
+            setDeviceState();
             showErrorMessageDevice();
         }
     });
@@ -411,6 +430,7 @@ $(document).ready(function () {
             $(modal.user.field.password).attr("placeholder","Enter password");
             $(modal.user.field.confirmPassword).attr("placeholder","Confirm password");
             openModalAnimation();
+            stateModalButtonUser.add = true;
             $(modal.user.button.add).css(DISPLAY_BLOCK);
             $(modal.user.window).css(DISPLAY_FLEX);
             setUserState();
@@ -425,6 +445,7 @@ $(document).ready(function () {
             $(modal.user.field.password).attr("placeholder","Edit password");
             $(modal.user.field.confirmPassword).attr("placeholder","Confirm password");
             openModalAnimation();
+            stateModalButtonUser.edit = true;
             $(modal.user.button.edit).css(DISPLAY_BLOCK);
             $(modal.user.window).css(DISPLAY_FLEX);
             setUserState();
@@ -437,6 +458,8 @@ $(document).ready(function () {
      */
     function closeDeviceModalWindow () {
         closeModalAnimation();
+        stateModalButtonDevice.add = false;
+        stateModalButtonDevice.edit = false;
         setTimeout(function () {
            $(modal.device.window).css(DISPLAY_NONE);
            $(modal.deleteDevice.window).css(DISPLAY_NONE);
@@ -454,6 +477,8 @@ $(document).ready(function () {
      */
     function closeUserModalWindow () {
         closeModalAnimation();
+        stateModalButtonUser.add = false;
+        stateModalButtonUser.edit = false;
         setTimeout(function () {
            $(modal.user.window).css(DISPLAY_NONE);
            $(modal.deleteUser.window).css(DISPLAY_NONE);
