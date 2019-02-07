@@ -52,21 +52,27 @@
   }
 }
 
-.btn-modal {
-  background: $btn-default-color;
+.button-modal-window {
+  background: $btn-default-color-disabled;
   color: $white-color;
   display: block;
+  cursor: default;
   border: none;
   font-size: $font-size-default-n;
   width: 100%;
-  &:hover {
-    background: $btn-default-color-hover;
-  }
 }
 
-[id *='btn_modal'] {
+[id *='modal_user_button'], [id *='modal_device_button'] {
   display: none;
   margin-right: 0.5rem;
+}
+
+.button-active {
+  background: $btn-default-color !important;
+  cursor: pointer !important;
+  &:hover {
+    background: $btn-default-color-hover !important;
+  }
 }
 
 .toggle-bar {
@@ -110,10 +116,10 @@
     line-height: $height-base-element-default;
     font-size: $font-size-default-l;
   }
-  .btn-modal {
+  .button-modal-window {
     height: 100%;
   }
-  [id *='btn_modal'] {
+  [id *='modal_user_button'], [id *='modal_device_button'] {
     margin-left: 0;
     margin-bottom: 2rem;
   }

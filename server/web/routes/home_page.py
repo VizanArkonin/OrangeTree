@@ -41,19 +41,22 @@ def get_devices_list():
     return utils.get_response(json.dumps(payload), mimetype=MimeType.JSON_MIMETYPE.value)
 
 
-@web_service.route("/home/getDeviceDetails/<int:device_id>", methods=["GET"])
+@web_service.route("/home/validateDeviceExistence", methods=["GET"])
 @login_required
 @roles_accepted("admin")
-def get_device_details(device_id):
+def get_device_details():
     """
-    Retrieves all data for given device, packs it in JSON and returns a response
+    Validates if given device exists in the system and returns a simple JSON response, stating true or false.
+    Should provide the URL parameter of "device_id", which defines the device to validate.
 
-    :param device_id: Device ID
+    Example:
+    /home/validateDeviceExistence?device_id=DEV_LITE
+
     :return: JSON formatted response
     """
-    device = server.get_device_by_id(device_id)
+    device = server.get_device_by_device_id(request.args.get("device_id"))
     return utils.get_response(
-        json.dumps({"deviceData": device.serialize_all() if device else {}}),
+        json.dumps({"deviceExists": True if device else False}),
         mimetype=MimeType.JSON_MIMETYPE.value)
 
 
@@ -78,7 +81,6 @@ def create_new_device():
     """
     payload = request.json
     payload["errors"] = []
-
     device_id = payload["deviceData"]["device_id"]
     device_type_id = payload["deviceData"]["device_type"]
     device_access_key = payload["deviceData"]["device_access_key"]
@@ -226,19 +228,22 @@ def get_users_roles_list():
         mimetype=MimeType.JSON_MIMETYPE.value)
 
 
-@web_service.route("/home/getUserDetails/<int:user_id>", methods=["GET"])
+@web_service.route("/home/validateUserExistence", methods=["GET"])
 @login_required
 @roles_accepted("admin")
-def get_user_details(user_id):
+def get_user_details():
     """
-    Retrieves all data for given user, packs it in JSON and returns a response
+    Validates if given user exists in the system and returns a simple JSON response, stating true or false.
+    Should provide URL parameter of "user_email", which will define the user to validate.
 
-    :param user_id: User ID
+    Example:
+    /home/validateUserExistence?user_email=some@mail.com
+
     :return: JSON formatted response
     """
-    user = Users.query.get(user_id)
+    user = Users.query.filter(Users.email == request.args.get("user_email")).first()
     return utils.get_response(
-        json.dumps({"userData": user.serialize_all() if user else {}}),
+        json.dumps({"userExists": True if user else False}),
         mimetype=MimeType.JSON_MIMETYPE.value)
 
 
@@ -269,7 +274,6 @@ def create_user():
     """
     payload = request.json
     payload["errors"] = []
-
     user_email = payload["userData"]["email"]
     user_password = payload["userData"]["password"]
     user_first_name = payload["userData"]["first_name"]
@@ -350,8 +354,8 @@ def update_user():
                 for existing_role in existing_roles:
                     user_datastore.remove_role_from_user(user.email, existing_role)
 
-                for requested_role in requested_roles:
-                    user_datastore.add_role_to_user(user.email, requested_role)
+            for requested_role in requested_roles:
+                user_datastore.add_role_to_user(user.email, requested_role)
 
             if user_password:
                 user.password = hash_password(user_password)
@@ -361,7 +365,7 @@ def update_user():
             user.last_name = user_last_name
             user.active = bool(user_active)
 
-            database.session.commit()
+        database.session.commit()
 
             return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
                                       status=ResponseStatus.OK.value)
@@ -402,7 +406,7 @@ def delete_user():
         if user:
             user_datastore.delete_user(user)
 
-            database.session.commit()
+        database.session.commit()
 
             return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
                                       status=ResponseStatus.OK.value)
