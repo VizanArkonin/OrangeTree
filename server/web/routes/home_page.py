@@ -81,17 +81,16 @@ def create_new_device():
     """
     payload = request.json
     payload["errors"] = []
-
     device_id = payload["deviceData"]["device_id"]
-    device_type = payload["deviceData"]["device_type"]
-    device_key = payload["deviceData"]["device_access_key"]
+    device_type_id = payload["deviceData"]["device_type"]
+    device_access_key = payload["deviceData"]["device_access_key"]
 
-    if device_id and device_type and device_key:
+    if device_id and device_type_id and device_access_key:
         if not server.get_device_by_device_id(device_id):
             device = Devices()
             device.device_id = device_id
-            device.device_type_id = device_type
-            device.device_access_key = device_key
+            device.device_type_id = device_type_id
+            device.device_access_key = device_access_key
             database.session.add(device)
             database.session.commit()
 
@@ -103,9 +102,9 @@ def create_new_device():
             return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
                                       status=ResponseStatus.CONFLICT.value)
     else:
-        payload["errors"] = ["Not all required fields had values"]
+        payload["errors"] = ["One or multiple required fields were empty"]
         return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                  status=ResponseStatus.BAD_REQUEST.value)
+                                  status=ResponseStatus.PRECONDITION_FAILED.value)
 
 
 @process_rest_request   # Make sure this decorator goes before routing to prevent namespace_overwrite errors
@@ -131,18 +130,17 @@ def update_device_details():
     payload = request.json
     payload["errors"] = []
 
-    device_db_id = payload["deviceData"]["id"]
+    db_id = payload["deviceData"]["id"]
     device_id = payload["deviceData"]["device_id"]
-    device_type = payload["deviceData"]["device_type"]
+    device_type_id = payload["deviceData"]["device_type"]
+    device_access_key = payload["deviceData"]["device_access_key"]
 
-    device = Devices.query.get(int(device_db_id))
-    if device_db_id and device_type:
+    if db_id and device_id and device_type_id:
+        device = Devices.query.get(int(db_id))
         if device:
             device.device_id = device_id
-            device.device_type_id = device_type
-            received_access_key = payload["deviceData"]["device_access_key"]
-            if received_access_key:
-                device.device_access_key = received_access_key
+            device.device_type_id = device_type_id
+            device.device_access_key = device_access_key if device_access_key else device.device_access_key
             database.session.commit()
 
             server.update_allowed_devices()
@@ -153,9 +151,9 @@ def update_device_details():
             return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
                                       status=ResponseStatus.CONFLICT.value)
     else:
-        payload["errors"] = ["Not all required fields had values"]
+        payload["errors"] = ["One or multiple required fields were empty"]
         return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                  status=ResponseStatus.BAD_REQUEST.value)
+                                  status=ResponseStatus.PRECONDITION_FAILED.value)
 
 
 @process_rest_request   # Make sure this decorator goes before routing to prevent namespace_overwrite errors
@@ -180,6 +178,7 @@ def delete_device():
     payload = request.json
     payload["errors"] = []
     device_id = payload["deviceData"]["device_id"]
+
     if device_id:
         if server.get_device_by_device_id(device_id):
             device = Devices.query.filter(Devices.device_id == device_id)
@@ -198,9 +197,9 @@ def delete_device():
             return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
                                       status=ResponseStatus.NOT_FOUND.value)
     else:
-        payload["errors"] = ["Not all required fields had values"]
+        payload["errors"] = ["One or multiple required fields were empty"]
         return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                  status=ResponseStatus.BAD_REQUEST.value)
+                                  status=ResponseStatus.PRECONDITION_FAILED.value)
 
 
 @web_service.route("/home/getUsersList", methods=["GET"])
@@ -275,13 +274,13 @@ def create_user():
     """
     payload = request.json
     payload["errors"] = []
-
     user_email = payload["userData"]["email"]
-    first_name = payload["userData"]["first_name"]
-    last_name = payload["userData"]["last_name"]
-    password = payload["userData"]["password"]
+    user_password = payload["userData"]["password"]
+    user_first_name = payload["userData"]["first_name"]
+    user_last_name = payload["userData"]["last_name"]
+    user_active = payload["userData"]["active"]
 
-    if user_email and first_name and last_name and password:
+    if user_email and user_password and user_first_name and user_last_name:
         user = Users.query.filter(Users.email == user_email).first()
         if not user:
             roles_to_add = []
@@ -291,11 +290,11 @@ def create_user():
                 if db_role_instance:
                     roles_to_add.append(role_name)
             user = user_datastore.create_user(email=user_email,
-                                              password=hash_password(password),
+                                              password=hash_password(user_password),
                                               roles=roles_to_add)
-            user.first_name = first_name
-            user.last_name = last_name
-            user.active = bool(payload["userData"]["active"])
+            user.first_name = user_first_name
+            user.last_name = user_last_name
+            user.active = bool(user_active)
             database.session.commit()
 
             return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
@@ -305,9 +304,9 @@ def create_user():
             return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
                                       status=ResponseStatus.CONFLICT.value)
     else:
-        payload["errors"] = ["Not all required fields had values"]
+        payload["errors"] = ["One or multiple required fields were empty"]
         return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                  status=ResponseStatus.BAD_REQUEST.value)
+                                  status=ResponseStatus.PRECONDITION_FAILED.value)
 
 
 @process_rest_request   # Make sure this decorator goes before routing to prevent namespace_overwrite errors
@@ -339,13 +338,15 @@ def update_user():
     payload = request.json
     payload["errors"] = []
 
-    db_id = payload["userData"]["id"]
-    email = payload["userData"]["email"]
-    first_name = payload["userData"]["first_name"]
-    last_name = payload["userData"]["last_name"]
+    user_id = payload["userData"]["id"]
+    user_email = payload["userData"]["email"]
+    user_password = payload["userData"]["password"]
+    user_first_name = payload["userData"]["first_name"]
+    user_last_name = payload["userData"]["last_name"]
+    user_active = payload["userData"]["active"]
 
-    if db_id and email and first_name and last_name:
-        user = Users.query.get(int(db_id))
+    if user_id and user_email and user_first_name and user_last_name:
+        user = Users.query.get(int(user_id))
         if user:
             requested_roles = [role["role_name"] for role in payload["userData"]["roles"]]
             existing_roles = [role.name for role in user.roles]
@@ -353,19 +354,18 @@ def update_user():
                 for existing_role in existing_roles:
                     user_datastore.remove_role_from_user(user.email, existing_role)
 
-                for requested_role in requested_roles:
-                    user_datastore.add_role_to_user(user.email, requested_role)
+            for requested_role in requested_roles:
+                user_datastore.add_role_to_user(user.email, requested_role)
 
-            requested_password = payload["userData"]["password"]
-            if requested_password:
-                user.password = hash_password(requested_password)
+            if user_password:
+                user.password = hash_password(user_password)
 
-            user.email = email
-            user.first_name = first_name
-            user.last_name = last_name
-            user.active = bool(payload["userData"]["active"])
+            user.email = user_email
+            user.first_name = user_first_name
+            user.last_name = user_last_name
+            user.active = bool(user_active)
 
-            database.session.commit()
+        database.session.commit()
 
             return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
                                       status=ResponseStatus.OK.value)
@@ -374,9 +374,9 @@ def update_user():
             return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
                                       status=ResponseStatus.CONFLICT.value)
     else:
-        payload["errors"] = ["Not all required fields had values"]
+        payload["errors"] = ["One or multiple required fields were empty"]
         return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                  status=ResponseStatus.BAD_REQUEST.value)
+                                  status=ResponseStatus.PRECONDITION_FAILED.value)
 
 
 @process_rest_request   # Make sure this decorator goes before routing to prevent namespace_overwrite errors
@@ -400,15 +400,13 @@ def delete_user():
     """
     payload = request.json
     payload["errors"] = []
-
     user_email = payload["userData"]["email"]
-
     if user_email:
         user = Users.query.filter(Users.email == user_email).first()
         if user:
             user_datastore.delete_user(user)
 
-            database.session.commit()
+        database.session.commit()
 
             return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
                                       status=ResponseStatus.OK.value)
@@ -417,6 +415,6 @@ def delete_user():
             return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
                                       status=ResponseStatus.CONFLICT.value)
     else:
-        payload["errors"] = ["Not all required fields had values"]
+        payload["errors"] = ["One or multiple required fields were empty"]
         return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
-                                  status=ResponseStatus.BAD_REQUEST.value)
+                                  status=ResponseStatus.PRECONDITION_FAILED.value)
