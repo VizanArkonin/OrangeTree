@@ -20,7 +20,7 @@ def AUTH(device_id="", device_type="", key="", status="", errors=[]):
     """
     payload = {
                 "deviceId": device_id,
-                "deviceKey": device_type,
+                "deviceType": device_type,
                 "key": key,
                 "status": status
               }
