@@ -84,21 +84,17 @@
                 </table>
             </div>
             <div class="tab-footer table-device-window">
-                <div class="tab-footer-left">
-                    <button class="modal-device-button-open btn-table button-active" data-modal="add">Add</button>
-                    <button class="modal-device-button-open btn-table" data-modal="edit">Edit</button>
-                    <button class="btn-table" data-modal="debug">Debug</button>
-                    <button id="modal_deleteDevice_button_open" class="btn-table" data-modal="delete">Delete</button>
-                    <button id="table_device_button_refresh" class="btn-table button-active"><i class="fas fa-sync"></i></button>
-                </div>
+                <button class="modal-device-button-open button button-active" data-modal="add">Add</button>
+                <button class="modal-device-button-open button" data-modal="edit">Edit</button>
+                <button class="button" data-modal="debug">Debug</button>
+                <button id="modal_deleteDevice_button_open" class="button" data-modal="delete">Delete</button>
+                <button id="table_device_button_refresh" class="button button-active"><i class="fas fa-sync"></i></button>
             </div>
             <div class="tab-footer table-user-window">
-                <div class="tab-footer-left">
-                    <button class="modal-user-button-open btn-table button-active" data-modal="add">Add</button>
-                    <button class="modal-user-button-open btn-table" data-modal="edit">Edit</button>
-                    <button id="modal_deleteUser_button_open" class="btn-table" data-modal="delete">Delete</button>
-                    <button id="table_user_button_refresh" class="btn-table button-active btn-table-refresh"><i class="fas fa-sync"></i></button>
-                </div>
+                <button class="modal-user-button-open button button-active" data-modal="add">Add</button>
+                <button class="modal-user-button-open button" data-modal="edit">Edit</button>
+                <button id="modal_deleteUser_button_open" class="button" data-modal="delete">Delete</button>
+                <button id="table_user_button_refresh" class="button button-active btn-table-refresh"><i class="fas fa-sync"></i></button>
             </div>
         </div>
     </div>
@@ -139,9 +135,9 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="modal_device_button_add" class="button-modal-window">Add</button>
-                <button id="modal_device_button_edit" class="button-modal-window">Submit</button>
-                <button class="button-modal-window button-active modal-window-close" data-modal="device">Close</button>
+                <button id="modal_device_button_add" class="button">Add</button>
+                <button id="modal_device_button_edit" class="button">Submit</button>
+                <button class="button button-active modal-window-close" data-modal="device">Close</button>
             </div>
         </div>
     </div>
@@ -193,9 +189,9 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="modal_user_button_add" class="button-modal-window">Add</button>
-                <button id="modal_user_button_edit" class="button-modal-window">Submit</button>
-                <button class="button-modal-window button-active modal-window-close" data-modal="user">Close</button>
+                <button id="modal_user_button_add" class="button">Add</button>
+                <button id="modal_user_button_edit" class="button">Submit</button>
+                <button class="button button-active modal-window-close" data-modal="user">Close</button>
             </div>
         </div>
     </div>
@@ -208,11 +204,11 @@
             </div>
             <div class="modal-content flex-container-center modal-content-delete">
                 <span id="modal_deleteDevice_message_name"></span>
-                <p>Delete this device?</p>
+                <p class="offline">Delete this device?</p>
             </div>
             <div class="modal-footer">
-                <button id="modal_device_button_delete" class="button-modal-window button-active">Yes</button>
-                <button class="button-modal-window button-active modal-window-close" data-modal="device">No</button>
+                <button id="modal_device_button_delete" class="button button-active">Yes</button>
+                <button class="button button-active modal-window-close" data-modal="device">No</button>
             </div>
         </div>
     </div>
@@ -225,11 +221,11 @@
             </div>
             <div class="modal-content flex-container-center modal-content-delete">
                 <span id="modal_deleteUser_message_name"></span>
-                <p>Delete this user?</p>
+                <p class="offline">Delete this user?</p>
             </div>
             <div class="modal-footer">
-                <button id="modal_user_button_delete" class="button-modal-window button-active">Yes</button>
-                <button class="button-modal-window button-active modal-window-close" data-modal="user">No</button>
+                <button id="modal_user_button_delete" class="button button-active">Yes</button>
+                <button class="button button-active modal-window-close" data-modal="user">No</button>
             </div>
         </div>
     </div>

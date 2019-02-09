@@ -23,8 +23,8 @@
 }
 
 .page-title {
-  color: $white-color;
-  font-size: $font-size-default-l;
+  color: $color-text;
+  font-size: $font-size-middle;
   margin: 1.5rem 5% 0;
 }
 
@@ -55,7 +55,7 @@
 //For max-width 767px
 @include media-breakpoint-md {
   .page-title {
-    font-size: $font-size-lg-l;
+    font-size: $font-size-large-mobile;
   }
   //Helper class display of mobile page elements
   .mobile-display-none {

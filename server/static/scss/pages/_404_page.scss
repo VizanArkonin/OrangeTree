@@ -1,6 +1,6 @@
 //Styles for the page "404 Not found"
-.page-404-container {
-  color: $white-color;
+.page-not-found-container {
+  color: $color-text;
   & img {
     padding: 1rem;
     width: 100%;
@@ -8,61 +8,85 @@
   }
 }
 
-.text-404-container {
+.page-not-found-content {
   text-align: center;
   width: 42rem;
   padding: 1.5rem;
   margin-left: 5rem;
   & h1 {
-    font-size: 5rem;
+    font-size: 6rem;
     padding-bottom: 1rem;
   }
   & h2 {
-    font-size: 3.8rem;
+    font-size: 3rem;
     padding-bottom: 5rem;
+  }
+}
+
+.page-not-found-link {
+  background: $button-default;
+  color: $color-text-dark;
+  border-radius: 0.5rem;
+  display: inline-block;
+  font-size: 3rem;
+  line-height: 8rem;
+  height: 8rem;
+  width: 100%;
+  &:hover {
+    @include transition-duration;
+    background: $button-default-hover;
   }
 }
 
 // Media queries
 
 @include media-breakpoint-lg {
-  .page-404-container {
+  .page-not-found-container {
     flex-direction: column;
     & img {
       width: 28rem;
       height: auto;
     }
   }
-  .text-404-container {
+  .page-not-found-content {
     width: 47rem;
     margin-top: 5rem;
     margin-left: 0;
     & h1 {
-      font-size: 4rem;
+      font-size: 5rem;
     }
     & h2 {
-    font-size: 2.8rem;
+    font-size: 2.5rem;
     }
+  }
+  .page-not-found-link {
+    font-size: 2.5rem;
   }
 }
 
 @include media-breakpoint-sm {
-  .page-404-container {
+
+  .page-not-found-container {
     & img {
       width: 19rem;
     }
   }
-  .text-404-container {
+  .page-not-found-content {
     width: 100%;
     padding: 0 1rem;
     margin-top: 1rem;
     & h1 {
-      font-size: 3rem;
+      font-size: 4rem;
       padding-bottom: 1.5rem;
     }
     & h2 {
-      font-size: 1.8rem;
+      font-size: 2rem;
       padding-bottom: 4rem;
     }
+  }
+  .page-not-found-link {
+    font-size: 2rem;
+    height: $height-base-element-default;
+    line-height: $height-base-element-default;
   }
 }

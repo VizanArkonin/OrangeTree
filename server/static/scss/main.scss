@@ -1,6 +1,6 @@
 //Compiling all scss files into a common main.css file
-@import "helpers/_media";
 @import "helpers/_variables";
+@import "helpers/_media";
 @import "helpers/_mixins";
 @import "helpers/_preloader";
 @import "helpers/_animation";
@@ -9,6 +9,9 @@
 @import "pages/_404_page";
 @import "components/_modal";
 @import "components/_buttons";
+@import "components/_toggle_bar";
+@import "components/_checkbox";
+@import "components/_status";
 @import "components/_navbar";
 @import "components/_sections";
 @import "components/_message";

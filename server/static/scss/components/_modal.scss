@@ -1,7 +1,7 @@
 //Styles for modal boxes
 
 .modal {
-  background: $white-color-300;
+  background: $color-white-300;
   display: none;
   justify-content: center;
   align-items: center;
@@ -13,55 +13,55 @@
 }
 
 .modal-container {
-  background: $nav-default-color;
+  background: $color-navigation;
+  border-radius: 0.5rem;
   width: 100%;
   max-width: 47rem;
   z-index: 1020;
 }
 
 .modal-header {
-  background: $header-default-color;
   width: 100%;
   text-align: center;
   padding: 2rem 0;
   & span {
-    color: $white-color;
-    font-size: $font-size-default-l;
+    color: $color-text;
+    font-size: $font-size-large;
   }
 }
 
 .modal-content {
-  color: $white-color;
-  font-size: $font-size-default-n;
-  padding: 1.5rem 2rem 2rem;
+  color: $color-text;
+  font-size: $font-size-middle;
+  padding: 0 2rem 2rem;
   width: 100%;
 }
 
 .modal-content-block {
-  background: $header-default-color;
+  background: $color-header;
   margin: 1.5rem 0;
+  border-radius: 0.4rem;
   & span {
     min-width: 11rem;
     padding-left: 1rem;
     opacity: 0.6;
   }
   & input[type = text], input[type = password], input[type = email], & select {
-    background: $header-default-color;
-    color: $white-color;
-    caret-color: $white-color;
+    background: $color-header;
+    color: $color-white-600;
+    caret-color: $color-white-600;
     border: none;
+    border-radius: 0.4rem;
     height: $height-base-element-default;
     width: 100%;
-  }
-  & select {
-    color: $white-color-600;
   }
 }
 
 .modal-content-block-roles {
-  background: $header-default-color;
+  background: $color-header;
   margin: 1.5rem 0;
   height: 100%;
+  border-radius: 0.4rem;
   & span {
     height: 100%;
     min-width: 11rem;
@@ -78,23 +78,22 @@
 }
 
 .modal-error-massage {
-  font-size: $font-size-default-s;
   height: 1.5rem;
   margin: 0.5rem 0;
 }
 
 .modal-checkbox-container {
+  background: $color-header;
+  color: $color-text;
+  border-radius: 0 0.4rem 0.4rem 0;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
-  background: $header-default-color;
-  color: $white-color;
   width: 100%;
 }
 
 .modal-footer {
-  background: $header-default-color;
   display: flex;
   height: $height-base-element-default;
   padding: 0.5rem;
@@ -102,10 +101,10 @@
 
 @include media-breakpoint-sm {
   .modal-container {
-    display: block;
-    position: relative;
     width: 100%;
     height: 100%;
+    overflow: auto;
+    border-radius: 0;
     .modal-content {
       padding: 0 1rem;
     }
@@ -114,10 +113,7 @@
     }
     .modal-footer {
       background: inherit;
-      position: absolute;
       flex-direction: column;
-      left: 0;
-      bottom: 0;
       padding: 1rem;
       width: 100%;
       height: 14rem;

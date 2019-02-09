@@ -365,7 +365,7 @@ def update_user():
             user.last_name = user_last_name
             user.active = bool(user_active)
 
-        database.session.commit()
+            database.session.commit()
 
             return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
                                       status=ResponseStatus.OK.value)
@@ -406,7 +406,7 @@ def delete_user():
         if user:
             user_datastore.delete_user(user)
 
-        database.session.commit()
+            database.session.commit()
 
             return utils.get_response(payload, mimetype=MimeType.JSON_MIMETYPE.value,
                                       status=ResponseStatus.OK.value)

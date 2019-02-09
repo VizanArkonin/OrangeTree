@@ -1,9 +1,15 @@
 .error-message {
-  color: $danger-color;
-  font-size: $font-size-default-s;
+  color: $color-danger;
+  font-size: $font-size-small;
 }
 
 .success-message {
-  color: $green-color;
-  font-size: $font-size-default-s;
+  color: $button-default;
+  font-size: $font-size-small;
+}
+
+@include media-breakpoint-md {
+  .error-message, .success-message {
+    font-size: $font-size-small-mobile;
+  }
 }

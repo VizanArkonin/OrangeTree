@@ -1,21 +1,22 @@
 //Styles for index page
 
 .table-main-container {
-  background: $dark-color-400;
+  background: $color-navigation;
+  border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin: 0.5rem 5%;
-  font-size: $font-size-default-n;
+  margin: 0 5%;
 }
 
 .tab-header {
   display: flex;
   width: 100%;
+  font-size: $font-size-middle;
 }
 
 .tab-link {
-  color: $white-color;
+  color: $color-text;
   border: 0;
   height: $height-base-element-default;
   width: 50%;
@@ -26,6 +27,7 @@
   height: 486.4px;
   margin: 1.5rem 0;
   padding: 0 1.5rem;
+  font-size: $font-size-small;
   overflow-y: auto;
 }
 
@@ -42,57 +44,51 @@
     cursor: pointer;
   }
   & tr {
-    background: $white-color-900;
+    background: $color-table-tr;
   }
   & tr:nth-child(odd) {
-    background: $white-color-600;
+    background: $color-table-tr-odd;
   }
   & tr:hover {
-    background: $dark-color-300;
-    color: $white-color;
+    background: $color-table-tr-hover;
+    color: $color-text;
   }
   & tr:first-child {
-    background: $dark-color-700;
-    color: $white-color;
+    background: $color-table-tr-hover;
+    color: $color-text;
   }
 }
 
 .tab-footer {
-  background: $dark-color-700;
   display: flex;
   justify-content: space-between;
   height: $height-base-element-default;
   width: 100%;
-}
-
-.tab-footer-left {
-  display: flex;
-  justify-content: flex-end;
-  width: 60%;
-}
-
-.tab-footer-right {
-  display: flex;
-  justify-content: flex-start;
+  padding: 0.5rem;
+  & button {
+    margin-right: 0.5rem;
+  }
+  & button:last-child {
+    margin-right: 0;
+  }
 }
 
 .btn-table {
-  background: $btn-default-color-disabled;
-  color: $white-color;
+  background: $button-default-disabled;
+  color: $color-text-dark;
   width: 100%;
   cursor: default;
   margin: 0.5rem 0 0.5rem 0.5rem;
   border: 0;
 }
 
-.btn-table-arrow {
-  color: $white-color;
-  border: 0;
-  margin: 0.5rem 0.5rem 0.5rem 0;
-  width: 4rem;
-  & span {
-    cursor: default;
-  }
+.table-device-tab {
+  background: inherit;
+  color: $button-default;
+}
+
+.table-user-tab {
+  background: inherit;
 }
 
 //Classes to support java script functionality
@@ -102,35 +98,13 @@
 
 
 .row-active {
-  background: $btn-default-color !important;
-  color: $white-color;
-  .offline {
-    color: $white-color;
-  }
-  .online {
-    color: $white-color;
-  }
-}
-
-.online {
-  color: $green-color;
-}
-
-.offline {
-  color: $red-color;
-}
-
-.table-device-tab {
-  background: $dark-color-400;
-}
-
-.table-user-tab {
-  background: $dark-color-700;
+  background: $button-default !important;
+  color: $color-text-dark !important;
 }
 
 //For max-width 1023px
 @include media-breakpoint-lg {
   .table-main-container {
-    font-size: $font-size-lg-n;
+    font-size: $font-size-middle-mobile;
   }
 }

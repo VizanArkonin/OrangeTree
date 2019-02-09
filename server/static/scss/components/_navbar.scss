@@ -1,7 +1,7 @@
 //Styling the navigation bar and sidebar
 
 .sidebar-container {
-  background-color: $nav-default-color;
+  background-color: $color-navigation;
   display: flex;
   min-height: 100vh;
   overflow-y: hidden;
@@ -11,52 +11,46 @@
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
+  font-size: $font-size-middle;
   & li {
     height: $height-base-element-default;
-  }
-  & a {
-    display: flex;
-    align-items: center;
-    height: $height-base-element-default;
-  }
-  & i {
-    padding: 0 1.5rem;
-  }
-}
-
-.sidebar-element {
-  & i, & span {
-    color: $white-color;
-    font-size: $font-size-default-n;
-  }
-}
-
-.navigation-link-hover {
-  opacity: 0.7;
-  &:hover {
-    background: $dark-color-300;
-    opacity: 1;
-  }
-  &:active {
-    background: $btn-default-color;
-    opacity: 1;
+    & a {
+      display: flex;
+      align-items: center;
+      height: $height-base-element-default;
+      color: $color-text;
+      & i {
+        padding: 0 1.5rem;
+      }
+    }
   }
 }
 
  //Styles for the top navigation bar
 .navigation-container {
-  background: $nav-default-color;
+  background: $color-navigation;
   height:$height-base-element-default;
+  font-size: $font-size-middle;
 }
 
 .navigation-right {
   height: $height-base-element-default;
   flex-grow: 10;
-  & li {
-    padding-right: 2rem;
-  }
-  & span {
-    padding-left: 1rem;
+  & ul {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    & li {
+      padding-right: 2rem;
+      & span {
+        color: $color-text;
+        padding-left: 1rem;
+      }
+      & i {
+        color: $color-text;
+      }
+    }
   }
 }
 
@@ -71,26 +65,9 @@
   }
 }
 
-.navigation-left-position-element {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  height: 100%;
-}
-
-.navigation-element {
-  & i, & span {
-    color: $white-color;
-    font-size: $font-size-default-l;
-  }
-  & a {
-    display: block;
-    min-height: 100%;
-  }
-}
 //Mobile navigation
 .mobile-menu-container {
-  background: $nav-default-color;
+  background: $color-navigation;
   height: 100%;
   width: 0;
   z-index: 1010;
@@ -101,29 +78,37 @@
   transition: $navigation-transition;
   & ul {
     width: 100%;
+    & li {
+      height: $height-base-element-default;
+      & a {
+        color: $color-text;
+        display: flex;
+        align-items: center;
+        height: $height-base-element-default;
+        & i {
+          padding: 0 1.5rem;
+        }
+        & span {
+          visibility: hidden;
+        }
+      }
+    }
   }
-  & li {
-    height: $height-base-element-default;
-  }
-  & a {
-    display: flex;
-    align-items: center;
-    height: $height-base-element-default;
-  }
-  & i {
-    padding: 0 1.5rem;
-  }
-  & span {
-    visibility: hidden;
+}
+
+.navigation-link-hover {
+  opacity: 0.8;
+  &:hover {
+    background: $dark-color-300;
+    opacity: 1;
   }
 }
 
 #logo {
-  background-color: $dark-color-400;
+  background: $color-header;
   & span {
     width: 100%;
     text-align: center;
-    font-size: $font-size-default-l;
   }
 }
 
@@ -140,10 +125,10 @@
 .sidebar-responsive-off {
   transition: $navigation-transition;
   width: 5%;
-  .sidebar-element span {
+  .sidebar-navigation span {
     display: none;
   }
-  .sidebar-element a {
+  .sidebar-navigation a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -164,30 +149,19 @@
 }
 
 @include media-breakpoint-lg {
-  .sidebar-element {
-    & i, & span {
-      font-size: $font-size-lg-n;
-    }
-  }
-  .navigation-element {
-    & i, & span {
-      font-size: $font-size-lg-l;
-    }
-  }
-  #logo {
-    & span {
-      font-size: $font-size-lg-l;
-    }
-  }
+
   .sidebar-responsive-on {
     width: 30%;
   }
+
   .sidebar-responsive-off {
     width: 8%;
   }
+
   .content-responsive-on {
     width: 70%;
   }
+
   .content-responsive-off {
     width: 92%;
   }
@@ -201,6 +175,9 @@
     width: 100%;
   }
   .navigation-container {
-    background: $header-default-color;
+    background: $color-header;
+  }
+  .sidebar-navigation, .mobile-menu-container {
+    font-size: $font-size-middle-mobile;
   }
 }

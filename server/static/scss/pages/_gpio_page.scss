@@ -5,7 +5,7 @@
   flex-basis: 40%;
   height: 2.2rem;
   margin: 0.5rem 5%;
-  font-size: $font-size-default-s;
+  font-size: $font-size-small;
 }
 
 .icon-gpio i {
@@ -20,36 +20,36 @@
 }
 
 .btn-gpio {
-  color: $white-color;
+  color: $color-text;
   height: 2.2rem;
   flex: 0 0 15%;
   border: 0;
 }
 
 .btn-off {
-  background: $btn-off-color;
+  background: $button-color-red;
   @include transition-duration;
   &:hover {
-    background: $btn-off-color-hover;
+    background: $button-color-red-hover;
   }
 }
 
 .btn-on {
-  background: $btn-on-color;
+  background: $button-default;
   @include transition-duration;
   &:hover {
-    background: $btn-on-color-hover;
+    background: $button-default-hover;
   }
 }
 
 .pin-power {
-  background: $btn-default-color;
-  color: $white-color;
+  background: $color-red;
+  color: $color-text;
 }
 
 .pin-gnd {
   background: $dark-color-400;
-  color: $white-color;
+  color: $color-text;
 }
 
 .fa-lock, .fa-lock-open {
@@ -59,12 +59,12 @@
 }
 
 .fa-lock {
-  color: $btn-off-color !important;
+  color: $button-color-red !important;
 }
 
 //For max-width 1023px
 @include media-breakpoint-lg {
   .pin-container {
-    font-size: $font-size-lg-s;
+    font-size: $font-size-small-mobile;
   }
 }

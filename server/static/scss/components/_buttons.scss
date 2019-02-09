@@ -1,64 +1,29 @@
-//Styles for common buttons, checkboxes, radio buttons. In addition to links, and specific components.
-
-.checkbox-container {
-  color: $white-color-600;
-  display: flex;
-  height: $height-base-element-default;
-  width: 50%;
-  align-items: center;
-}
-
-.checkbox {
-  background: $white-color-600;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  outline: none;
-  height: 1.5rem;
-  width: 1.5rem;
-  margin-right: 1rem;
-  cursor: pointer;
-  z-index: 1;
-  &:hover {
-    background: $white-color;
-  }
-  &:checked {
-    background: $btn-default-color;
-  }
-  &:checked::before {
-    font-size: $font-size-default-s;
-    color: $white-color;
-    content: '✔';
-    text-align: center;
-    height: 1.5rem;
-    width: 1.5rem;
-    display: inline-block;
-    position: relative;
-    bottom: 0.4rem;
-  }
-}
-
-.button-link {
-  background: $btn-default-color;
-  color: $white-color;
-  display: inline-block;
-  font-size: 3rem;
-  line-height: 6rem;
-  height: 6rem;
+.button {
+  background: $button-default-disabled;
+  color: $color-text;
+  border: 0.1rem solid $button-default;
+  border-radius: 0.4rem;
+  font-size: $font-size-middle;
+  cursor: default;
   width: 100%;
+  height: 100%;
+  @include transition-duration;
+}
+
+.button-active {
+  background: $button-default !important;
+  color: $color-text-dark !important;
+  cursor: pointer !important;
   &:hover {
-    @include transition-duration;
-    background: $btn-default-color-hover;
+    background: $button-default-hover !important;
   }
 }
 
 .button-modal-window {
-  background: $btn-default-color-disabled;
-  color: $white-color;
-  display: block;
+  background: $button-default-disabled;
+  color: $color-text-dark;
   cursor: default;
   border: none;
-  font-size: $font-size-default-n;
   width: 100%;
 }
 
@@ -67,55 +32,7 @@
   margin-right: 0.5rem;
 }
 
-.button-active {
-  background: $btn-default-color !important;
-  cursor: pointer !important;
-  &:hover {
-    background: $btn-default-color-hover !important;
-  }
-}
-
-.toggle-bar {
-  background: transparent;
-  border: none;
-  display: flex;
-  flex-direction: column;
-  & :focus {
-    outline-width: 0;
-  }
-  & [class *='bar-'] {
-    background: $white-color;
-    display: block;
-    transform: rotate(0deg);
-    transition: .3s ease all;
-    height: 2px;
-    width: 25px;
-    margin-bottom: 4px;
-  }
-}
-
-.toggle-bar-opened {
-  .toggle-bar-top {
-    background: $btn-default-color;
-    transform: rotate(45deg);
-    transform-origin: 15% 15%;
-  }
-  .toggle-bar-middle {
-    opacity: 0;
-  }
-  .toggle-bar-bottom {
-    background: $btn-default-color;
-    transform: rotate(-45deg);
-    transform-origin: 15% 95%;
-  }
-}
-
 @include media-breakpoint-sm {
-  .button-link {
-    height: $height-base-element-default;
-    line-height: $height-base-element-default;
-    font-size: $font-size-default-l;
-  }
   .button-modal-window {
     height: 100%;
   }

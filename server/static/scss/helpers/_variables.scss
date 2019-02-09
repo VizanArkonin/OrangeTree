@@ -1,16 +1,35 @@
 // General color scheme
-$danger-color: rgba(246, 73, 73, 1) !important;
-$red-color: rgba(255, 56, 56, 1);
-$green-color: rgba(22, 160, 133, 1);
-$bg-default-color: rgba(75, 75, 75, 1);
-$nav-default-color: rgba(45, 45, 45, 1);
-$header-default-color: rgba(27, 27, 27, 1);
-$white-color: rgb(255, 255, 255);
+$color-red: rgba(238, 82, 83, 1);
+$color-danger: rgba(255, 56, 56, 1) !important;
+$color-green: rgba(33, 140, 116, 1);
+
+
+$color-text: rgb(255, 255, 255);
+$color-text-dark: rgba(52, 50, 51, 1);
+$color-table-tr: rgba(248, 248, 248, 1);
+$color-table-tr-odd: rgba(190, 182, 156, 1);
+$color-table-tr-hover: rgba(54, 52, 47, 1);
+
+$color-white: rgb(255, 255, 255);
+$color-white-300: rgba(255, 255, 255, 0.3);
+$color-white-600: rgba(255, 255, 255, 0.6);
+
+$color-background: rgba(54, 52, 48, 1);
+$color-navigation: rgba(36, 35, 32, 1);
+$color-header: rgba(25, 24, 21, 1);
+
+// Variables for buttons and links
+$button-default-disabled: inherit;
+$button-default: rgba(218, 175, 55, 1);
+$button-default-hover: rgba(255, 195, 31, 1);
+$button-color-red: rgba(238, 82, 83, 1);
+$button-color-red-hover: rgba(255, 107, 107, 1);
+
 $white-color-900: rgba(255, 255, 255, 0.9);
 $white-color-700: rgba(255, 255, 255, 0.7);
-$white-color-600: rgba(255, 255, 255, 0.6);
+
 $white-color-400: rgba(255, 255, 255, 0.4);
-$white-color-300: rgba(255, 255, 255, 0.3);
+
 $dark-color: rgba(0, 0, 0, 1);
 $dark-color-800: rgba(0, 0, 0, 0.8);
 $dark-color-700: rgba(0, 0, 0, 0.7);
@@ -18,24 +37,15 @@ $dark-color-600: rgba(0, 0, 0, 0.6);
 $dark-color-400: rgba(0, 0, 0, 0.4);
 $dark-color-300: rgba(0, 0, 0, 0.3);
 
-// Variables for buttons and links
-$btn-default-color: rgba(229, 122, 70, 1);
-$btn-default-color-disabled: rgba(192, 137, 109, 1);
-$btn-default-color-hover: rgba(223, 99, 39, 1);
-$btn-on-color: rgba(100, 193, 187, 1);
-$btn-on-color-hover: rgba(86, 163, 158, 1);
-$btn-off-color: rgba(255, 93, 93, 1);
-$btn-off-color-hover: rgba(246, 73, 73, 1);
-
-$font-size-default-s: 1.3rem; // Small (s);
-$font-size-default-n: 1.5rem; // Normal (n);
-$font-size-default-l: 1.8rem; // Large (l)
+$font-size-small: 1.3rem;
+$font-size-middle: 1.5rem;
+$font-size-large: 1.8rem;
 // Base variables for other variables
 $height-base-element-default: 5rem;
 
 // For max-width 1023px
-$font-size-lg-s: 1.2rem; // Small (s);
-$font-size-lg-n: 1.3rem; // Normal (n);
-$font-size-lg-l: 1.5rem; // Large (l)
+$font-size-small-mobile: 1.2rem; // Small (s);
+$font-size-middle-mobile: 1.3rem; // Normal (n);
+$font-size-large-mobile: 1.6rem; // Large (l)
 
 $navigation-transition: 0.4s;

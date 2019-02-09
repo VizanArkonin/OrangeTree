@@ -1,0 +1,42 @@
+.checkbox-container {
+  color: $color-white-600;
+  display: flex;
+  height: $height-base-element-default;
+  width: 50%;
+  align-items: center;
+}
+
+.checkbox {
+  background: inherit;
+  border: 0.1rem solid $button-default;
+  border-radius: 0.2rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  height: 1.5rem;
+  width: 1.5rem;
+  min-height: 1.5rem;
+  min-width: 1.5rem;
+  margin-right: 1rem;
+  cursor: pointer;
+  z-index: 1;
+  &:checked {
+    background: $button-default;
+  }
+  &::-ms-check {
+    background: $button-default;
+  }
+  &:checked::before {
+    color: $color-text-dark;
+    content: '✔';
+    text-align: center;
+    height: 1.5rem;
+    width: 1.5rem;
+    min-height: 1.5rem;
+    min-width: 1.5rem;
+    display: inline-block;
+    position: relative;
+    bottom: 0.4rem;
+  }
+}
