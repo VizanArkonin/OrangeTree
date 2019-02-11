@@ -80,10 +80,10 @@ function drawUserRow(rowData) {
 
     $row.children('[data-user-enabled]').attr('data-user-enabled', rowData.active);
 
-    $row.append($("<td><div class='user-roles-container'></div></td>"));
+    $row.append($("<div class='user-roles-container'></div>"));
 
     for (let index = 0; index < rowData.roles.length; index++) {
-        $row.children('td:last-child').children('.user-roles-container').append($("<input data-user-role type='hidden'>").val(rowData.roles[index].name));
+        $row.children('.user-roles-container').append($("<input data-user-role type='hidden'>").val(rowData.roles[index].name));
     }
 }
 

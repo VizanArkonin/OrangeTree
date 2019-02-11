@@ -71,6 +71,9 @@ input:-webkit-autofill:focus {
 ::-webkit-scrollbar-thumb {
   background: #191815; }
 
+::-webkit-scrollbar-corner {
+  background: rgba(27, 27, 27, 0.6); }
+
 .login-form-container {
   background: #242320;
   color: white;
@@ -305,7 +308,12 @@ input:-webkit-autofill:focus {
       flex-direction: column;
       padding: 1rem;
       width: 100%;
-      height: 14rem; } }
+      height: 14rem; }
+
+  .modal-content-delete {
+    margin-bottom: 1.5rem; }
+    .modal-content-delete p {
+      padding: 1rem; } }
 .button {
   background: inherit;
   color: white;
@@ -343,7 +351,10 @@ input:-webkit-autofill:focus {
 
   [id*='modal_user_button'], [id*='modal_device_button'] {
     margin-left: 0;
-    margin-bottom: 2rem; } }
+    margin-bottom: 2rem; }
+
+  .button {
+    font-size: 1.3rem; } }
 .toggle-bar {
   background: transparent;
   border: none;
@@ -429,10 +440,10 @@ input:-webkit-autofill:focus {
   .sidebar-navigation li {
     height: 5rem; }
     .sidebar-navigation li a {
+      color: white;
       display: flex;
       align-items: center;
-      height: 5rem;
-      color: white; }
+      height: 100%; }
       .sidebar-navigation li a i {
         padding: 0 1.5rem; }
 
@@ -484,17 +495,22 @@ input:-webkit-autofill:focus {
         color: white;
         display: flex;
         align-items: center;
-        height: 5rem; }
+        height: 100%; }
         .mobile-menu-container ul li a i {
           padding: 0 1.5rem; }
         .mobile-menu-container ul li a span {
           visibility: hidden; }
 
 .navigation-link-hover {
-  opacity: 0.8; }
+  -webkit-transition-duration: 0.3s;
+  /* Safari */
+  transition-duration: 0.3s;
+  border: 0.1rem; }
   .navigation-link-hover:hover {
-    background: rgba(0, 0, 0, 0.3);
-    opacity: 1; }
+    border-bottom: 0.1rem solid #daaf37;
+    border-top: 0.1rem solid #daaf37; }
+    .navigation-link-hover:hover span, .navigation-link-hover:hover i {
+      color: #daaf37; }
 
 #logo {
   background: #191815; }
@@ -594,14 +610,14 @@ input:-webkit-autofill:focus {
   visibility: hidden; }
 
 @media screen and (max-width: 767px) {
-  .page-title {
-    font-size: 1.6rem; }
-
   .mobile-display-none {
     display: none; }
 
   .desktop-display-none {
     display: flex; } }
+@media screen and (max-width: 479px) {
+  .page-title {
+    font-size: 1.3rem; } }
 .error-message {
   color: #ff3838 !important;
   font-size: 1.3rem; }
@@ -676,20 +692,20 @@ input:-webkit-autofill:focus {
   width: 100%;
   margin: 0 5%; }
 
-.tab-header {
+.table-header {
   display: flex;
   width: 100%;
   font-size: 1.5rem; }
 
-.tab-link {
+.table-tabs {
   color: white;
   border: 0;
   height: 5rem;
   width: 50%; }
 
-.tab-content {
+.table-content {
   display: block;
-  height: 486.4px;
+  height: 65vh;
   margin: 1.5rem 0;
   padding: 0 1.5rem;
   font-size: 1.3rem;
@@ -716,24 +732,16 @@ input:-webkit-autofill:focus {
     background: #36342f;
     color: white; }
 
-.tab-footer {
+.table-footer {
   display: flex;
   justify-content: space-between;
   height: 5rem;
   width: 100%;
   padding: 0.5rem; }
-  .tab-footer button {
+  .table-footer button {
     margin-right: 0.5rem; }
-  .tab-footer button:last-child {
+  .table-footer button:last-child {
     margin-right: 0; }
-
-.btn-table {
-  background: inherit;
-  color: #343233;
-  width: 100%;
-  cursor: default;
-  margin: 0.5rem 0 0.5rem 0.5rem;
-  border: 0; }
 
 .table-device-tab {
   background: inherit;
@@ -749,8 +757,33 @@ input:-webkit-autofill:focus {
   background: #daaf37 !important;
   color: #343233 !important; }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 479px) {
   .table-main-container {
-    font-size: 1.3rem; } }
+    height: 100%;
+    border-radius: 0;
+    margin: 0; }
+
+  .table-header {
+    font-size: 1.3rem; }
+
+  .table-content {
+    height: 65vh;
+    padding: 0 0.5rem;
+    margin: 0;
+    font-size: 1.2rem;
+    overflow: auto; }
+    .table-content th, .table-content td {
+      min-width: 10rem; }
+
+  .table-footer {
+    justify-content: center;
+    height: 100%;
+    flex-wrap: wrap; }
+    .table-footer button {
+      height: 3rem;
+      width: 30%;
+      margin: 0.4rem; }
+    .table-footer button:last-child {
+      margin-right: 0.5rem; } }
 
 /*# sourceMappingURL=main.css.map */

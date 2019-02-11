@@ -52,11 +52,11 @@
 
     <div class="content-container flex-container-center">
         <div class="table-main-container">
-            <div class="tab-header">
-                <button class="tab-link table-device-tab">Devices</button>
-                <button class="tab-link table-user-tab">Users</button>
+            <div class="table-header">
+                <button class="table-tabs table-device-tab">Devices</button>
+                <button class="table-tabs table-user-tab">Users</button>
             </div>
-            <div class="tab-content table-device-window">
+            <div class="table-content table-device-window">
                 <div id="table_device_preloader" class="preloader-container">
                     <div class="preloader"></div>
                 </div>
@@ -70,7 +70,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="tab-content table-user-window">
+            <div class="table-content table-user-window">
                 <div id="table_user_preloader" class="preloader-container">
                     <div class="preloader"></div>
                 </div>
@@ -83,14 +83,15 @@
                     </tr>
                 </table>
             </div>
-            <div class="tab-footer table-device-window">
+            <div class="table-footer table-device-window">
                 <button class="modal-device-button-open button button-active" data-modal="add">Add</button>
                 <button class="modal-device-button-open button" data-modal="edit">Edit</button>
                 <button class="button" data-modal="debug">Debug</button>
+                <button class="button" data-modal="debug">Monitor</button>
                 <button id="modal_deleteDevice_button_open" class="button" data-modal="delete">Delete</button>
                 <button id="table_device_button_refresh" class="button button-active"><i class="fas fa-sync"></i></button>
             </div>
-            <div class="tab-footer table-user-window">
+            <div class="table-footer table-user-window">
                 <button class="modal-user-button-open button button-active" data-modal="add">Add</button>
                 <button class="modal-user-button-open button" data-modal="edit">Edit</button>
                 <button id="modal_deleteUser_button_open" class="button" data-modal="delete">Delete</button>
