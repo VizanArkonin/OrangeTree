@@ -2,24 +2,31 @@
     {% if pin_config %}
         {% for pin in pin_config %}
             {% if pin.type == "ground" %}
-                <div class="pin-container pin-gnd flex-container-center">
+                <div class="pin-container flex-container-center mobile-display-none">
                     <span>Ground</span>
                 </div>
             {% elif pin.type == "3.3_power" %}
-                <div class="pin-container pin-power flex-container-center">
+                <div class="pin-container flex-container-center mobile-display-none">
                     <span>+3.3V Power</span>
                 </div>
             {% elif pin.type == "5_power" %}
-                <div class="pin-container pin-power flex-container-center">
+                <div class="pin-container flex-container-center mobile-display-none">
                     <span>+5V Power</span>
                 </div>
             {% elif pin.type == "wPi" %}
-                <div class="pin-container icon-gpio text-gpio flex-container-center" data-pinId="{{ pin.wPi }}">
-                    <i class="icon-info fas fa-info-circle" data-toggle="tooltip" title="{{ pin.meta }}"></i>
+                <div class="pin-container flex-container-center" data-pinId="{{ pin.wPi }}">
+                    <div class="tooltip mobile-display-none">
+                        <span class="tooltip-content">{{ pin.meta }}</span>
+                        <i class="fas fa-info-circle tooltip-desktop-on"></i>
+                    </div>
+                    <div class="desktop-display-none">
+                        <i class="fas fa-info-circle tooltip-mobile-on"></i>
+                    </div>
                     <span>wPi {{ pin.wPi }}</span>
                     <i class="fas fa-lock-open lock-icon"></i>
-                    <button class="btn-gpio mode-switch btn-off">OUT</button>
-                    <button class="btn-gpio status-switch btn-off">OFF</button>
+                    <span class="content-gpio-info-mobile desktop-display-none">{{ pin.meta }}</span>
+                    <button class="mode-switch button-off">OUT</button>
+                    <button class="status-switch button-off">OFF</button>
                     <input type="hidden" class="mode-switch-input" value="">
                     <input type="hidden" class="status-switch-input" value="">
                     <input type="hidden" class="lock-input" value="">
@@ -27,6 +34,6 @@
             {% endif %}
         {% endfor %}
     {% else %}
-        <h1>Device is not connected at the moment</h1>
+        <h1 class="flex-container-center">Device is not connected at the moment</h1>
     {% endif %}
 {% endmacro %}

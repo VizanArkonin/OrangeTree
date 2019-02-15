@@ -1,9 +1,12 @@
 .checkbox-container {
-  color: $color-white-600;
   display: flex;
   height: $height-base-element-default;
   width: 50%;
   align-items: center;
+  & label {
+    opacity: 0.6;
+    color: $color-text;
+  }
 }
 
 .checkbox {

@@ -1,70 +1,75 @@
-//Main styles for the page "Pin configuration"
-
 .pin-container {
-  background: $white-color-900;
-  flex-basis: 40%;
-  height: 2.2rem;
-  margin: 0.5rem 5%;
-  font-size: $font-size-small;
-}
-
-.icon-gpio i {
-  color: $dark-color-300;
-  flex: 1 1 10%;
-  text-align: center;
-}
-
-.text-gpio span {
-  flex: 1 1 50%;
-  text-align: center;
-}
-
-.btn-gpio {
   color: $color-text;
-  height: 2.2rem;
-  flex: 0 0 15%;
-  border: 0;
-}
-
-.btn-off {
-  background: $button-color-red;
-  @include transition-duration;
-  &:hover {
-    background: $button-color-red-hover;
+  background: $color-navigation;
+  width: 40%;
+  height: 3vh;
+  margin: 0.5rem 5%;
+  padding: 0;
+  font-size: $font-size-small;
+  text-align: center;
+  border-radius: 0.4rem;
+  & i {
+    min-width: 3rem;
+    cursor: pointer;
+  }
+  & span {
+    width: 50%;
+  }
+  & button {
+    height: 100%;
+    width: 25%;
+    border: none;
+    text-decoration: none;
+    border-radius: 0 0.4rem 0.4rem 0;
+  }
+  & button:nth-child(odd) {
+    border-radius: 0.4rem 0 0 0.4rem;
   }
 }
 
-.btn-on {
+.button-off {
   background: $button-default;
+  color: $color-text-dark;
   @include transition-duration;
   &:hover {
     background: $button-default-hover;
   }
 }
 
-.pin-power {
-  background: $color-red;
+.button-on {
+  background: $color-green;
   color: $color-text;
-}
-
-.pin-gnd {
-  background: $dark-color-400;
-  color: $color-text;
-}
-
-.fa-lock, .fa-lock-open {
-  &:before {
-    cursor: pointer;
+  @include transition-duration;
+  &:hover {
+    background: $color-light-green;
   }
 }
 
 .fa-lock {
-  color: $button-color-red !important;
+  color: $color-red;
 }
 
-//For max-width 1023px
-@include media-breakpoint-lg {
+@include media-breakpoint-md {
   .pin-container {
+    height: auto;
+    flex-wrap: wrap;
     font-size: $font-size-small-mobile;
+    justify-content: space-between;
+    & span {
+      width: 75%;
+      height: 2.5rem;
+      line-height: 2.5rem;
+    }
+    & button {
+      width: 50%;
+      height: 2.5rem;
+    }
+  }
+  .content-gpio-info-mobile {
+    & span {
+      text-align: center;
+      width: 100%;
+      height: 2.5rem;
+    }
   }
 }

@@ -61,9 +61,9 @@ $(document).ready(function() {
     // Mode observer
     $(MODE_SWITCH_INPUT).on("change", function() {
         if ($(this).val() === "0") {
-            $(this).siblings(MODE_SWITCH_BUTTON).removeClass("btn-off").addClass("btn-on").html("IN");
+            $(this).siblings(MODE_SWITCH_BUTTON).removeClass("button-off").addClass("button-on").html("IN");
         } else {
-            $(this).siblings(MODE_SWITCH_BUTTON).removeClass("btn-on").addClass("btn-off").html("OUT");
+            $(this).siblings(MODE_SWITCH_BUTTON).removeClass("button-on").addClass("button-off").html("OUT");
         }
     });
 
@@ -85,9 +85,9 @@ $(document).ready(function() {
     // Status observer
     $(STATUS_SWITCH_INPUT).on("change", function() {
         if ($(this).val() === "0") {
-            $(this).siblings(STATUS_SWITCH_BUTTON).removeClass("btn-on").addClass("btn-off").html("OFF");
+            $(this).siblings(STATUS_SWITCH_BUTTON).removeClass("button-on").addClass("button-off").html("OFF");
         } else {
-            $(this).siblings(STATUS_SWITCH_BUTTON).removeClass("btn-off").addClass("btn-on").html("ON");
+            $(this).siblings(STATUS_SWITCH_BUTTON).removeClass("button-off").addClass("button-on").html("ON");
         }
     });
 

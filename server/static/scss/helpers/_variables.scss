@@ -1,7 +1,9 @@
 // General color scheme
-$color-red: rgba(238, 82, 83, 1);
+
 $color-danger: rgba(255, 56, 56, 1) !important;
+$color-red: rgba(238, 82, 83, 1);
 $color-green: rgba(33, 140, 116, 1);
+$color-light-green: #1abc9c;
 
 
 $color-text: rgb(255, 255, 255);
@@ -10,7 +12,6 @@ $color-table-tr: rgba(248, 248, 248, 1);
 $color-table-tr-odd: rgba(190, 182, 156, 1);
 $color-table-tr-hover: rgba(54, 52, 47, 1);
 
-$color-white: rgb(255, 255, 255);
 $color-white-300: rgba(255, 255, 255, 0.3);
 $color-white-600: rgba(255, 255, 255, 0.6);
 
@@ -22,8 +23,7 @@ $color-header: rgba(25, 24, 21, 1);
 $button-default-disabled: inherit;
 $button-default: rgba(218, 175, 55, 1);
 $button-default-hover: rgba(255, 195, 31, 1);
-$button-color-red: rgba(238, 82, 83, 1);
-$button-color-red-hover: rgba(255, 107, 107, 1);
+
 
 $white-color-900: rgba(255, 255, 255, 0.9);
 $white-color-700: rgba(255, 255, 255, 0.7);

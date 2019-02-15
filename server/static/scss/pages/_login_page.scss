@@ -57,7 +57,7 @@
     color: $color-text;
     @include input-box-shadow;
   }
-  &:focus-within i, &:focus-within span {
+  &:focus-within i, &:focus-within span, &:focus-within label {
     opacity: 1;
   }
 }

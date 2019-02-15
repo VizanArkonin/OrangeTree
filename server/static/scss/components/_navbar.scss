@@ -97,7 +97,6 @@
 }
 
 .navigation-link-hover {
-  @include transition-duration;
   border: 0.1rem;
   &:hover {
     border-bottom: 0.1rem solid $button-default;
