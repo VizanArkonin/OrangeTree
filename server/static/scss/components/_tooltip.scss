@@ -1,0 +1,27 @@
+.tooltip {
+  position: relative;
+  .tooltip-content {
+    background-color: $color-header;
+    color: $button-default;
+    border: 1px solid $button-default;
+    border-radius: 0.4rem;
+    visibility: hidden;
+    width: 20rem;
+    padding: 1rem 0;
+    text-align: center;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-bottom: 1.5rem;
+    margin-left: -10rem;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -0.5rem;
+      border: 0.5rem solid transparent;
+      border-top-color: $button-default;
+    }
+  }
+}

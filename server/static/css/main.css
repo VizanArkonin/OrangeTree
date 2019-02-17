@@ -71,6 +71,9 @@ input:-webkit-autofill:focus {
 ::-webkit-scrollbar-thumb {
   background: #191815; }
 
+::-webkit-scrollbar-corner {
+  background: rgba(27, 27, 27, 0.6); }
+
 .login-form-container {
   background: #242320;
   color: white;
@@ -119,7 +122,7 @@ input:-webkit-autofill:focus {
   -webkit-box-shadow: 0px 0px 0.5rem 0.2rem #daaf37;
   -moz-box-shadow: 0px 0px 0.5rem 0.2rem #daaf37;
   box-shadow: 0px 0px 0.5rem 0.2rem #daaf37; }
-.input-focus-within:focus-within i, .input-focus-within:focus-within span {
+.input-focus-within:focus-within i, .input-focus-within:focus-within span, .input-focus-within:focus-within label {
   opacity: 1; }
 
 .login-error-messages {
@@ -305,19 +308,26 @@ input:-webkit-autofill:focus {
       flex-direction: column;
       padding: 1rem;
       width: 100%;
-      height: 14rem; } }
+      height: 14rem; }
+
+  .modal-content-delete {
+    margin-bottom: 1.5rem; }
+    .modal-content-delete p {
+      padding: 1rem; } }
 .button {
   background: inherit;
   color: white;
   border: 0.1rem solid #daaf37;
   border-radius: 0.4rem;
   font-size: 1.5rem;
-  cursor: default;
+  cursor: not-allowed;
   width: 100%;
   height: 100%;
   -webkit-transition-duration: 0.3s;
   /* Safari */
   transition-duration: 0.3s; }
+  .button:disabled {
+    cursor: not-allowed; }
 
 .button-active {
   background: #daaf37 !important;
@@ -343,7 +353,10 @@ input:-webkit-autofill:focus {
 
   [id*='modal_user_button'], [id*='modal_device_button'] {
     margin-left: 0;
-    margin-bottom: 2rem; } }
+    margin-bottom: 2rem; }
+
+  .button {
+    font-size: 1.3rem; } }
 .toggle-bar {
   background: transparent;
   border: none;
@@ -372,11 +385,13 @@ input:-webkit-autofill:focus {
   transform-origin: 15% 95%; }
 
 .checkbox-container {
-  color: rgba(255, 255, 255, 0.6);
   display: flex;
   height: 5rem;
   width: 50%;
   align-items: center; }
+  .checkbox-container label {
+    opacity: 0.6;
+    color: white; }
 
 .checkbox {
   background: inherit;
@@ -429,10 +444,10 @@ input:-webkit-autofill:focus {
   .sidebar-navigation li {
     height: 5rem; }
     .sidebar-navigation li a {
+      color: white;
       display: flex;
       align-items: center;
-      height: 5rem;
-      color: white; }
+      height: 100%; }
       .sidebar-navigation li a i {
         padding: 0 1.5rem; }
 
@@ -484,17 +499,19 @@ input:-webkit-autofill:focus {
         color: white;
         display: flex;
         align-items: center;
-        height: 5rem; }
+        height: 100%; }
         .mobile-menu-container ul li a i {
           padding: 0 1.5rem; }
         .mobile-menu-container ul li a span {
           visibility: hidden; }
 
 .navigation-link-hover {
-  opacity: 0.8; }
+  border: 0.1rem; }
   .navigation-link-hover:hover {
-    background: rgba(0, 0, 0, 0.3);
-    opacity: 1; }
+    border-bottom: 0.1rem solid #daaf37;
+    border-top: 0.1rem solid #daaf37; }
+    .navigation-link-hover:hover span, .navigation-link-hover:hover i {
+      color: #daaf37; }
 
 #logo {
   background: #191815; }
@@ -594,14 +611,14 @@ input:-webkit-autofill:focus {
   visibility: hidden; }
 
 @media screen and (max-width: 767px) {
-  .page-title {
-    font-size: 1.6rem; }
-
   .mobile-display-none {
     display: none; }
 
   .desktop-display-none {
     display: flex; } }
+@media screen and (max-width: 479px) {
+  .page-title {
+    font-size: 1.3rem; } }
 .error-message {
   color: #ff3838 !important;
   font-size: 1.3rem; }
@@ -613,61 +630,99 @@ input:-webkit-autofill:focus {
 @media screen and (max-width: 767px) {
   .error-message, .success-message {
     font-size: 1.2rem; } }
+.tooltip {
+  position: relative; }
+  .tooltip .tooltip-content {
+    background-color: #191815;
+    color: #daaf37;
+    border: 1px solid #daaf37;
+    border-radius: 0.4rem;
+    visibility: hidden;
+    width: 20rem;
+    padding: 1rem 0;
+    text-align: center;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-bottom: 1.5rem;
+    margin-left: -10rem; }
+    .tooltip .tooltip-content::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -0.5rem;
+      border: 0.5rem solid transparent;
+      border-top-color: #daaf37; }
+
 .pin-container {
-  background: rgba(255, 255, 255, 0.9);
-  flex-basis: 40%;
-  height: 2.2rem;
-  margin: 0.5rem 5%;
-  font-size: 1.3rem; }
-
-.icon-gpio i {
-  color: rgba(0, 0, 0, 0.3);
-  flex: 1 1 10%;
-  text-align: center; }
-
-.text-gpio span {
-  flex: 1 1 50%;
-  text-align: center; }
-
-.btn-gpio {
   color: white;
-  height: 2.2rem;
-  flex: 0 0 15%;
-  border: 0; }
+  background: #242320;
+  width: 40%;
+  height: 3vh;
+  margin: 0.5rem 5%;
+  padding: 0;
+  font-size: 1.3rem;
+  text-align: center;
+  border-radius: 0.4rem; }
+  .pin-container .pin-name {
+    width: 50%; }
+  .pin-container i {
+    min-width: 3rem;
+    cursor: pointer; }
+  .pin-container button {
+    height: 100%;
+    width: 25%;
+    border: none;
+    text-decoration: none;
+    border-radius: 0.4rem 0 0 0.4rem; }
+  .pin-container button:nth-child(odd) {
+    border-radius: 0 0.4rem 0.4rem 0; }
 
-.btn-off {
-  background: #ee5253;
-  -webkit-transition-duration: 0.3s;
-  /* Safari */
-  transition-duration: 0.3s; }
-  .btn-off:hover {
-    background: #ff6b6b; }
-
-.btn-on {
+.button-off {
   background: #daaf37;
+  color: #343233;
   -webkit-transition-duration: 0.3s;
   /* Safari */
   transition-duration: 0.3s; }
-  .btn-on:hover {
+  .button-off:hover {
     background: #ffc31f; }
 
-.pin-power {
-  background: #ee5253;
-  color: white; }
-
-.pin-gnd {
-  background: rgba(0, 0, 0, 0.4);
-  color: white; }
-
-.fa-lock:before, .fa-lock-open:before {
-  cursor: pointer; }
+.button-on {
+  background: #218c74;
+  color: white;
+  -webkit-transition-duration: 0.3s;
+  /* Safari */
+  transition-duration: 0.3s; }
+  .button-on:hover {
+    background: #1abc9c; }
 
 .fa-lock {
-  color: #ee5253 !important; }
+  color: #ee5253; }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 767px) {
   .pin-container {
-    font-size: 1.2rem; } }
+    height: auto;
+    flex-wrap: wrap;
+    font-size: 1.2rem;
+    justify-content: space-between; }
+    .pin-container span {
+      height: 2.5rem;
+      line-height: 2.5rem; }
+    .pin-container .pin-name {
+      width: 35%; }
+    .pin-container .pin-info {
+      display: none;
+      width: 100%;
+      text-align: center; }
+    .pin-container button {
+      width: 50%;
+      height: 2.5rem; } }
+@media screen and (max-width: 479px) {
+  .pin-container {
+    width: 100%; }
+    .pin-container .pin-name {
+      width: 75%; } }
 .table-main-container {
   background: #242320;
   border-radius: 0.5rem;
@@ -676,20 +731,20 @@ input:-webkit-autofill:focus {
   width: 100%;
   margin: 0 5%; }
 
-.tab-header {
+.table-header {
   display: flex;
   width: 100%;
   font-size: 1.5rem; }
 
-.tab-link {
+.table-tabs {
   color: white;
   border: 0;
   height: 5rem;
   width: 50%; }
 
-.tab-content {
+.table-content {
   display: block;
-  height: 486.4px;
+  height: 65vh;
   margin: 1.5rem 0;
   padding: 0 1.5rem;
   font-size: 1.3rem;
@@ -716,24 +771,16 @@ input:-webkit-autofill:focus {
     background: #36342f;
     color: white; }
 
-.tab-footer {
+.table-footer {
   display: flex;
   justify-content: space-between;
   height: 5rem;
   width: 100%;
   padding: 0.5rem; }
-  .tab-footer button {
+  .table-footer button {
     margin-right: 0.5rem; }
-  .tab-footer button:last-child {
+  .table-footer button:last-child {
     margin-right: 0; }
-
-.btn-table {
-  background: inherit;
-  color: #343233;
-  width: 100%;
-  cursor: default;
-  margin: 0.5rem 0 0.5rem 0.5rem;
-  border: 0; }
 
 .table-device-tab {
   background: inherit;
@@ -749,8 +796,33 @@ input:-webkit-autofill:focus {
   background: #daaf37 !important;
   color: #343233 !important; }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 479px) {
   .table-main-container {
-    font-size: 1.3rem; } }
+    height: 100%;
+    border-radius: 0;
+    margin: 0; }
+
+  .table-header {
+    font-size: 1.3rem; }
+
+  .table-content {
+    height: 65vh;
+    padding: 0 0.5rem;
+    margin: 0;
+    font-size: 1.2rem;
+    overflow: auto; }
+    .table-content th, .table-content td {
+      min-width: 10rem; }
+
+  .table-footer {
+    justify-content: center;
+    height: auto;
+    flex-wrap: wrap; }
+    .table-footer button {
+      height: 3rem;
+      width: 30%;
+      margin: 0.4rem; }
+    .table-footer button:last-child {
+      margin-right: 0.5rem; } }
 
 /*# sourceMappingURL=main.css.map */

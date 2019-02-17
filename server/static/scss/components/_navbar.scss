@@ -15,10 +15,10 @@
   & li {
     height: $height-base-element-default;
     & a {
+      color: $color-text;
       display: flex;
       align-items: center;
-      height: $height-base-element-default;
-      color: $color-text;
+      height: 100%;
       & i {
         padding: 0 1.5rem;
       }
@@ -84,7 +84,7 @@
         color: $color-text;
         display: flex;
         align-items: center;
-        height: $height-base-element-default;
+        height: 100%;
         & i {
           padding: 0 1.5rem;
         }
@@ -97,10 +97,13 @@
 }
 
 .navigation-link-hover {
-  opacity: 0.8;
+  border: 0.1rem;
   &:hover {
-    background: $dark-color-300;
-    opacity: 1;
+    border-bottom: 0.1rem solid $button-default;
+    border-top: 0.1rem solid $button-default;
+    & span, & i {
+      color: $button-default;
+    }
   }
 }
 

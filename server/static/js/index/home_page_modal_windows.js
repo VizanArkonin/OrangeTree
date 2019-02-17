@@ -59,7 +59,7 @@ function setUserModalWindowValues () {
     let $userLastName = $activeRow.children('[data-user-name]').attr('data-last-name');
     let $userEmail = $activeRow.children('[data-user-email]').text();
     let $userActive = $activeRow.children('[data-user-enabled]').attr('data-user-enabled');
-    let $hiddenContainer = $activeRow.children('td:last-child').children('.user-roles-container').children('input');
+    let $hiddenContainer = $activeRow.children('.user-roles-container').children('input');
     let userRolesList = [];
 
     $(modal.user.field.hidden.id).val($deviceIdHidden);

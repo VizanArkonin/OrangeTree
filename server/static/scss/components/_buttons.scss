@@ -4,10 +4,13 @@
   border: 0.1rem solid $button-default;
   border-radius: 0.4rem;
   font-size: $font-size-middle;
-  cursor: default;
+  cursor: not-allowed;
   width: 100%;
   height: 100%;
   @include transition-duration;
+  &:disabled {
+    cursor: not-allowed;
+  }
 }
 
 .button-active {
@@ -39,5 +42,8 @@
   [id *='modal_user_button'], [id *='modal_device_button'] {
     margin-left: 0;
     margin-bottom: 2rem;
+  }
+  .button {
+    font-size: $font-size-middle-mobile;
   }
 }
