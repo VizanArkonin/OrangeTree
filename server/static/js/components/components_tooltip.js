@@ -7,9 +7,18 @@ $(document).ready(function () {
     $('.tooltip-desktop-on').on('click', function () {
         let tooltipLocator = $(this);
 
-        $(tooltipLocator).prev().css('visibility','visible');
+        $(tooltipLocator).prev().children('.tooltip-content').css('visibility','visible');
         setTimeout(function () {
-            $(tooltipLocator).prev().css('visibility','hidden');
+            $(tooltipLocator).prev().children('.tooltip-content').css('visibility','hidden');
+        }, 3000);
+    });
+
+    $('.tooltip-mobile-on').on('click', function () {
+        let tooltipLocator = $(this);
+
+        $(tooltipLocator).parent().prev().css(DISPLAY_BLOCK);
+        setTimeout(function () {
+            $(tooltipLocator).parent().prev().css(DISPLAY_NONE);
         }, 3000);
     });
 });

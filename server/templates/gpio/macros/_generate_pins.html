@@ -15,16 +15,16 @@
                 </div>
             {% elif pin.type == "wPi" %}
                 <div class="pin-container flex-container-center" data-pinId="{{ pin.wPi }}">
-                    <div class="tooltip mobile-display-none">
-                        <span class="tooltip-content">{{ pin.meta }}</span>
+                    <div class="mobile-display-none">
+                        <div class="tooltip">
+                            <span class="tooltip-content">{{ pin.meta }}</span>
+                        </div>
                         <i class="fas fa-info-circle tooltip-desktop-on"></i>
                     </div>
-                    <div class="desktop-display-none">
-                        <i class="fas fa-info-circle tooltip-mobile-on"></i>
-                    </div>
-                    <span>wPi {{ pin.wPi }}</span>
+                    <div class="desktop-display-none pin-info"><span>{{ pin.meta }}</span></div>
+                    <div class="desktop-display-none"><i class="fas fa-info-circle tooltip-mobile-on"></i></div>
+                    <span class="pin-name">wPi {{ pin.wPi }}</span>
                     <i class="fas fa-lock-open lock-icon"></i>
-                    <span class="content-gpio-info-mobile desktop-display-none">{{ pin.meta }}</span>
                     <button class="mode-switch button-off">OUT</button>
                     <button class="status-switch button-off">OFF</button>
                     <input type="hidden" class="mode-switch-input" value="">

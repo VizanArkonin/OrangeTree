@@ -642,8 +642,9 @@ input:-webkit-autofill:focus {
     padding: 1rem 0;
     text-align: center;
     position: absolute;
-    bottom: 150%;
+    bottom: 100%;
     left: 50%;
+    margin-bottom: 1.5rem;
     margin-left: -10rem; }
     .tooltip .tooltip-content::after {
       content: "";
@@ -664,19 +665,19 @@ input:-webkit-autofill:focus {
   font-size: 1.3rem;
   text-align: center;
   border-radius: 0.4rem; }
+  .pin-container .pin-name {
+    width: 50%; }
   .pin-container i {
     min-width: 3rem;
     cursor: pointer; }
-  .pin-container span {
-    width: 50%; }
   .pin-container button {
     height: 100%;
     width: 25%;
     border: none;
     text-decoration: none;
-    border-radius: 0 0.4rem 0.4rem 0; }
-  .pin-container button:nth-child(odd) {
     border-radius: 0.4rem 0 0 0.4rem; }
+  .pin-container button:nth-child(odd) {
+    border-radius: 0 0.4rem 0.4rem 0; }
 
 .button-off {
   background: #daaf37;
@@ -706,17 +707,22 @@ input:-webkit-autofill:focus {
     font-size: 1.2rem;
     justify-content: space-between; }
     .pin-container span {
-      width: 75%;
       height: 2.5rem;
       line-height: 2.5rem; }
+    .pin-container .pin-name {
+      width: 35%; }
+    .pin-container .pin-info {
+      display: none;
+      width: 100%;
+      text-align: center; }
     .pin-container button {
       width: 50%;
-      height: 2.5rem; }
-
-  .content-gpio-info-mobile span {
-    text-align: center;
-    width: 100%;
-    height: 2.5rem; } }
+      height: 2.5rem; } }
+@media screen and (max-width: 479px) {
+  .pin-container {
+    width: 100%; }
+    .pin-container .pin-name {
+      width: 75%; } }
 .table-main-container {
   background: #242320;
   border-radius: 0.5rem;
