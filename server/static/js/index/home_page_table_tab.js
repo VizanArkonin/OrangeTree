@@ -10,6 +10,7 @@ $(document).ready(function () {
         $(table.device.window).css(DISPLAY_FLEX);
         $(table.device.tab).css(COLOR_YELLOW);
         $(table.user.tab).css(COLOR_WHITE);
+        resetStateTableUserButton();
     });
 
     $(table.user.tab).click(function () {
@@ -17,6 +18,7 @@ $(document).ready(function () {
         $(table.user.window).css(DISPLAY_FLEX);
         $(table.user.tab).css(COLOR_YELLOW);
         $(table.device.tab).css(COLOR_WHITE);
+        resetStateTableDeviceButton();
     });
 });
 

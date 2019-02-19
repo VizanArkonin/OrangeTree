@@ -15,7 +15,7 @@ function drawDevicesTable (data) {
  * @param rowData       - JSON object (format - data.devices[index])
  */
 function drawDeviceRow (rowData) {
-    let $row = $('<tr class="table-row table-remove-row-device">');
+    let $row = $('<tr class="table-row-device table-remove-row-device">');
     let onlineStatus = rowData.online;
     let deviceTypeNumber = rowData.device_type;
     let lastAddress = rowData.last_address;
@@ -72,7 +72,7 @@ function drawUsersTable (data) {
  * @param rowData      - JSON object (format - data.users[index])
  */
 function drawUserRow(rowData) {
-    let $row = $('<tr class="table-row table-remove-row-user">');
+    let $row = $('<tr class="table-row-user table-remove-row-user">');
     let userEnabled = rowData.active;
     let lastLogin = rowData.last_login_at;
 
@@ -127,8 +127,9 @@ function renderDevicesTable () {
     sendJSONRequest("/home/getDevicesList", null, RequestMethod.GET, showLoaderInDevicesTable,
                     drawDevicesTable, debug_callback, process_failures);
     setTimeout(function () {
-        resetRowSelection();
+        resetRowDeviseSelection();
     }, renderTableDelay);
+    resetStateTableDeviceButton();
     hideLoaderInDevicesTable();
 }
 
@@ -137,8 +138,9 @@ function renderUsersTable () {
     sendJSONRequest("/home/getUsersList", null, RequestMethod.GET, showLoaderInUsersTable,
                     drawUsersTable, debug_callback, process_failures);
     setTimeout(function () {
-        resetRowSelection();
+        resetRowUserSelection();
     }, renderTableDelay);
+    resetStateTableUserButton();
     hideLoaderInUsersTable();
 }
 

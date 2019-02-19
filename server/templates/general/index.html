@@ -9,6 +9,7 @@
     <script src="/js/components/components_button.js"></script>
     <script src="/js/components/components_message.js"></script>
     <script src="/js/index/home_page_table_tab.js"></script>
+    <script src="/js/index/home_page_table_row.js"></script>
     <script src="/js/index/home_page_modal_windows.js"></script>
     <script>
     "use strict";
@@ -84,17 +85,17 @@
                 </table>
             </div>
             <div class="table-footer table-device-window">
-                <button class="modal-device-button-open button button-active" data-modal="add">Add</button>
-                <button class="modal-device-button-open button" data-modal="edit">Edit</button>
-                <button class="button" data-modal="debug">Debug</button>
-                <button class="button" data-modal="debug">Monitor</button>
-                <button id="modal_deleteDevice_button_open" class="button" data-modal="delete">Delete</button>
+                <button class="modal-device-button-open button button-active" data-modal-device="add">Add</button>
+                <button class="modal-device-button-open button" data-modal-device="edit">Edit</button>
+                <button class="button" data-modal-device="debug">Debug</button>
+                <button class="button" data-modal-device="debug">Monitor</button>
+                <button id="modal_deleteDevice_button_open" class="button" data-modal-device="delete">Delete</button>
                 <button id="table_device_button_refresh" class="button button-active"><i class="fas fa-sync"></i></button>
             </div>
             <div class="table-footer table-user-window">
-                <button class="modal-user-button-open button button-active" data-modal="add">Add</button>
-                <button class="modal-user-button-open button" data-modal="edit">Edit</button>
-                <button id="modal_deleteUser_button_open" class="button" data-modal="delete">Delete</button>
+                <button class="modal-user-button-open button button-active" data-modal-user="add">Add</button>
+                <button class="modal-user-button-open button" data-modal-user="edit">Edit</button>
+                <button id="modal_deleteUser_button_open" class="button" data-modal-user="delete">Delete</button>
                 <button id="table_user_button_refresh" class="button button-active btn-table-refresh"><i class="fas fa-sync"></i></button>
             </div>
         </div>
@@ -138,7 +139,7 @@
             <div class="modal-footer">
                 <button id="modal_device_button_add" class="button">Add</button>
                 <button id="modal_device_button_edit" class="button">Submit</button>
-                <button class="button button-active modal-window-close" data-modal="device">Close</button>
+                <button class="button button-active modal-window-close" data-modal-device="device">Close</button>
             </div>
         </div>
     </div>
@@ -192,7 +193,7 @@
             <div class="modal-footer">
                 <button id="modal_user_button_add" class="button">Add</button>
                 <button id="modal_user_button_edit" class="button">Submit</button>
-                <button class="button button-active modal-window-close" data-modal="user">Close</button>
+                <button class="button button-active modal-window-close" data-modal-user="user">Close</button>
             </div>
         </div>
     </div>
@@ -209,7 +210,7 @@
             </div>
             <div class="modal-footer">
                 <button id="modal_device_button_delete" class="button button-active">Yes</button>
-                <button class="button button-active modal-window-close" data-modal="device">No</button>
+                <button class="button button-active modal-window-close" data-modal-device="device">No</button>
             </div>
         </div>
     </div>
@@ -226,7 +227,7 @@
             </div>
             <div class="modal-footer">
                 <button id="modal_user_button_delete" class="button button-active">Yes</button>
-                <button class="button button-active modal-window-close" data-modal="user">No</button>
+                <button class="button button-active modal-window-close" data-modal-user="user">No</button>
             </div>
         </div>
     </div>
