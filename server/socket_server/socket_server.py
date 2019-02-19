@@ -147,7 +147,7 @@ class SocketServer(SocketConnector):
         :param device_id: Device ID
         :return: DevicesList instance (or None)
         """
-        return next((device for device in self.allowed_devices if device.device_id == device_id), None)
+        return next((device for device in self.allowed_devices if device.device_id.lower() == device_id.lower()), None)
 
     def update_allowed_devices(self):
         """

@@ -7,6 +7,7 @@ from flask import request
 from flask_login import login_required
 from flask_security import roles_accepted
 from flask_security.utils import hash_password
+from sqlalchemy import func
 from server.database.models.user.roles import Roles
 
 from server.web import db as database
@@ -241,7 +242,7 @@ def get_user_details():
 
     :return: JSON formatted response
     """
-    user = Users.query.filter(Users.email == request.args.get("user_email")).first()
+    user = Users.query.filter(func.lower(Users.email) == func.lower(request.args.get("user_email"))).first()
     return utils.get_response(
         json.dumps({"userExists": True if user else False}),
         mimetype=MimeType.JSON_MIMETYPE.value)
