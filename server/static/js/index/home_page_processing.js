@@ -19,6 +19,7 @@ function drawDeviceRow (rowData) {
     let onlineStatus = rowData.online;
     let deviceTypeNumber = rowData.device_type;
     let lastAddress = rowData.last_address;
+    let lastOnline = rowData.last_connected_at;
     const deviceType = {
         1: "Orange Pi Lite",
         2: "Orange Pi Zero",
@@ -36,12 +37,19 @@ function drawDeviceRow (rowData) {
     $row.append($("<td data-device-type-id>" + rowData.device_id + "</td>"));
     $row.append($("<td data-device-type>" + deviceType[deviceTypeNumber] + "</td>"));
     $row.children('[data-device-type]').attr('data-device-type', rowData.device_type);
+
     if ( lastAddress === null) {
         $row.append($("<td data-device-last-address>" + "N/A" + "</td>"));
     } else {
         $row.append($("<td data-device-last-address>" + lastAddress + "</td>"));
     }
-    $row.append($("<td data-device-last-online>" + rowData.last_connected_at + "</td>"));
+
+    if (lastOnline === null) {
+        $row.append($("<td data-device-last-online>" + "N/A" + "</td>"));
+    } else {
+        $row.append($("<td data-device-last-online>" + lastOnline + "</td>"));
+    }
+
     if (onlineStatus === "Online") {
         $row.append($("<td data-device-status class='online'>" + onlineStatus + "</td>"));
     } else {
@@ -77,16 +85,19 @@ function drawUserRow(rowData) {
     $row.children('[data-user-name]').attr('data-first-name', rowData.first_name);
     $row.children('[data-user-name]').attr('data-last-name', rowData.last_name);
     $row.append($("<td data-user-email>" + rowData.email + "</td>"));
+
     if (lastLogin === null) {
         $row.append($("<td data-user-last-login>" + "N/A" + "</td>"));
     } else {
-        $row.append($("<td data-user-last-login>" + lastLogin + "</td>")); 
+        $row.append($("<td data-user-last-login>" + lastLogin + "</td>"));
     }
+
     if (userEnabled === "Yes") {
         $row.append($("<td data-user-enabled class='online'>" + userEnabled + "</td>"));
     } else {
         $row.append($("<td data-user-enabled class='offline'>" + userEnabled + "</td>"));
     }
+
     $row.children('[data-user-enabled]').attr('data-user-enabled', rowData.active);
 
     $row.append($("<div class='user-roles-container'></div>"));
