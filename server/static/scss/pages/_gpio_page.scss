@@ -49,6 +49,10 @@
   color: $color-red;
 }
 
+.error-message-gpio {
+  padding-top: 2rem;
+}
+
 @include media-breakpoint-md {
   .pin-container {
     height: auto;

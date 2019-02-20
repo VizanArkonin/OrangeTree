@@ -1,33 +1,11 @@
 "use strict";
-const TABLE_ROW = ".table-row";
-
-/**
- * Resets table row event listener, allowing it to be selected/deselected
- * @var $activeRow        - It contains selected row
- * @var rowSelected       - Active row indicator
- */
-let rowSelected = false;
-let $activeRow;
-
-function resetRowSelection () {
-    $(TABLE_ROW).click(function () {
-        $activeRow = $(this);
-        $(TABLE_ROW).removeClass("row-active");
-        $activeRow.addClass("row-active");
-        $('[data-modal="edit"]').activeButton();
-        $('[data-modal="debug"]').activeButton();
-        $('[data-modal="delete"]').activeButton();
-        rowSelected = true;
-    });
-}
-
 /**
  * The function sets the values of the modal window fields in accordance with the selected line (for devices)
  */
 function setDeviceModalWindowValues () {
-    let $deviseType = $activeRow.children('[data-device-type]').attr('data-device-type');
-    let $deviceID = $activeRow.children('[data-device-type-id]').text();
-    let $deviseIdHidden = $activeRow.children('[data-device-id]').val();
+    let $deviseType = $(tableRowsHomePage.active.device).children('[data-device-type]').attr('data-device-type');
+    let $deviceID = $(tableRowsHomePage.active.device).children('[data-device-type-id]').text();
+    let $deviseIdHidden = $(tableRowsHomePage.active.device).children('[data-device-id]').val();
 
     $(modal.device.field.hidden.id).val($deviseIdHidden);
     $(modal.device.field.id).val($deviceID);
@@ -54,12 +32,12 @@ function getDevicePayload () {
  * The function sets the values of the modal window fields in accordance with the selected line (for users)
  */
 function setUserModalWindowValues () {
-    let $deviceIdHidden = $activeRow.children('[data-user-id]').val();
-    let $userFirstName = $activeRow.children('[data-user-name]').attr('data-first-name');
-    let $userLastName = $activeRow.children('[data-user-name]').attr('data-last-name');
-    let $userEmail = $activeRow.children('[data-user-email]').text();
-    let $userActive = $activeRow.children('[data-user-enabled]').attr('data-user-enabled');
-    let $hiddenContainer = $activeRow.children('.user-roles-container').children('input');
+    let $deviceIdHidden = $(tableRowsHomePage.active.user).children('[data-user-id]').val();
+    let $userFirstName = $(tableRowsHomePage.active.user).children('[data-user-name]').attr('data-first-name');
+    let $userLastName = $(tableRowsHomePage.active.user).children('[data-user-name]').attr('data-last-name');
+    let $userEmail = $(tableRowsHomePage.active.user).children('[data-user-email]').text();
+    let $userActive = $(tableRowsHomePage.active.user).children('[data-user-enabled]').attr('data-user-enabled');
+    let $hiddenContainer = $(tableRowsHomePage.active.user).children('.user-roles-container').children('input');
     let userRolesList = [];
 
     $(modal.user.field.hidden.id).val($deviceIdHidden);
@@ -154,20 +132,6 @@ $(document).ready(function () {
         $(modal.window.open).removeClass(modal.animation.open);
         $(modal.window.open).addClass(modal.animation.close);
     }
-
-    /**
-     * Function to reset row status
-     */
-    $(document).mouseup(function (e) {
-        let element = $(".table-main-container");
-        if (!element.is(e.target) && element.has(e.target).length === 0) {
-            $('[data-modal="debug"]').disabledButton();
-            $('[data-modal="edit"]').disabledButton();
-            $('[data-modal="delete"]').disabledButton();
-            $(TABLE_ROW).removeClass("row-active");
-            rowSelected = false;
-        }
-    });
 
     /**
      * Check for duplicate device id
@@ -391,7 +355,7 @@ $(document).ready(function () {
      * Opening modal windows to add a new / edit device
      */
     $(modal.device.button.open).click(function () {
-        if ($(this).data("modal") === "add") {
+        if ($(this).data("modalDevice") === "add") {
             $(modal.device.header).text("Add new device");
             $(modal.device.field.id).attr("placeholder","Enter device ID");
             $(modal.device.field.key).attr("placeholder","Enter device key");
@@ -403,7 +367,7 @@ $(document).ready(function () {
             setDeviceState();
             showErrorMessageDevice();
         }
-        if ($(this).data("modal") === "edit" && rowSelected) {
+        if ($(this).data("modalDevice") === "edit" && tableRowsHomePage.state.device) {
             setDeviceModalWindowValues();
             $(modal.device.header).text("Edit device");
             $(modal.device.field.id).attr("placeholder","Edit device ID");
@@ -422,7 +386,7 @@ $(document).ready(function () {
      * Opening modal windows to add a new / edit user
      */
     $(modal.user.button.open).click(function () {
-        if ($(this).data("modal") === "add") {
+        if ($(this).data("modalUser") === "add") {
             $(modal.user.header).text("Add new user");
             $(modal.user.field.firstName).attr("placeholder","Enter First Name");
             $(modal.user.field.lastName).attr("placeholder","Enter Last Name");
@@ -436,7 +400,7 @@ $(document).ready(function () {
             setUserState();
             showErrorMessageUser();
         }
-        if ($(this).data("modal") === "edit" && rowSelected) {
+        if ($(this).data("modalUser") === "edit" && tableRowsHomePage.state.user) {
             setUserModalWindowValues();
             $(modal.user.header).text("Edit user");
             $(modal.user.field.firstName).attr("placeholder","Edit First Name");
@@ -500,9 +464,10 @@ $(document).ready(function () {
 
     // Close all modal windows
     $(modal.window.close).click(function () {
-        if ($(this).data("modal") === "device") {
+        if ($(this).data("modalDevice") === "device") {
             closeDeviceModalWindow();
-        } else {
+        }
+        if ($(this).data("modalUser") === "user") {
             closeUserModalWindow();
         }
     });
@@ -535,7 +500,9 @@ $(document).ready(function () {
                         renderUsersTable, debug_callback, process_failures);
     });
 
-    //Opening a modal window to remove a device
+    /**
+     * Opening a modal window to remove a device
+     */
     $(modal.deleteDevice.button.open).click(function () {
         setDeviceModalWindowValues();
         openModalAnimation();
@@ -544,14 +511,18 @@ $(document).ready(function () {
         $(modal.deleteDevice.window).css(DISPLAY_FLEX);
     });
 
-    // Create an AJAX request to remove a user
+    /**
+     * Create an AJAX request to remove a user
+     */
     $(modal.deleteDevice.button.del).click(function () {
         closeDeviceModalWindow();
         sendJSONRequest("/home/device.svc", getDevicePayload(), RequestMethod.DELETE, showLoaderInDevicesTable,
                         renderDevicesTable, debug_callback, process_failures);
     });
 
-    // Opening a modal window to remove a user
+    /**
+     * Opening a modal window to remove a user
+     */
     $(modal.deleteUser.button.open).click(function () {
         setUserModalWindowValues();
         openModalAnimation();
@@ -560,20 +531,12 @@ $(document).ready(function () {
         $(modal.deleteUser.window).css(DISPLAY_FLEX);
     });
 
-    // Create an AJAX request to remove a user
+    /**
+     * Create an AJAX request to remove a user
+     */
     $(modal.deleteUser.button.del).click(function () {
         closeUserModalWindow();
         sendJSONRequest("/home/user.svc", getUserPayload(), RequestMethod.DELETE, showLoaderInUsersTable,
                         renderUsersTable, debug_callback, process_failures);
-    });
-
-    //Refresh table devises
-    $(table.device.button.refresh).click(function () {
-        renderDevicesTable();
-    });
-
-    //Refresh table users
-    $(table.user.button.refresh).click(function () {
-       renderUsersTable();
     });
 });
