@@ -11,6 +11,8 @@
     <script src="/js/index/home_page_table_tab.js"></script>
     <script src="/js/index/home_page_table_row.js"></script>
     <script src="/js/index/home_page_modal_windows.js"></script>
+    <script src="/js/index/home_page_refresh_button.js"></script>
+    <script src="/js/index/home_page_debug_button.js"></script>
     <script>
     "use strict";
     /**
@@ -87,8 +89,8 @@
             <div class="table-footer table-device-window">
                 <button class="modal-device-button-open button button-active" data-modal-device="add">Add</button>
                 <button class="modal-device-button-open button" data-modal-device="edit">Edit</button>
-                <button class="button" data-modal-device="debug">Debug</button>
-                <button class="button" data-modal-device="debug">Monitor</button>
+                <button id="table_device_button_debug" class="button" data-modal-device="debug">Debug</button>
+                <button class="button" data-modal-device="monitor">Monitor</button>
                 <button id="modal_deleteDevice_button_open" class="button" data-modal-device="delete">Delete</button>
                 <button id="table_device_button_refresh" class="button button-active"><i class="fas fa-sync"></i></button>
             </div>

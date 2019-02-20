@@ -500,7 +500,9 @@ $(document).ready(function () {
                         renderUsersTable, debug_callback, process_failures);
     });
 
-    //Opening a modal window to remove a device
+    /**
+     * Opening a modal window to remove a device
+     */
     $(modal.deleteDevice.button.open).click(function () {
         setDeviceModalWindowValues();
         openModalAnimation();
@@ -509,14 +511,18 @@ $(document).ready(function () {
         $(modal.deleteDevice.window).css(DISPLAY_FLEX);
     });
 
-    // Create an AJAX request to remove a user
+    /**
+     * Create an AJAX request to remove a user
+     */
     $(modal.deleteDevice.button.del).click(function () {
         closeDeviceModalWindow();
         sendJSONRequest("/home/device.svc", getDevicePayload(), RequestMethod.DELETE, showLoaderInDevicesTable,
                         renderDevicesTable, debug_callback, process_failures);
     });
 
-    // Opening a modal window to remove a user
+    /**
+     * Opening a modal window to remove a user
+     */
     $(modal.deleteUser.button.open).click(function () {
         setUserModalWindowValues();
         openModalAnimation();
@@ -525,20 +531,12 @@ $(document).ready(function () {
         $(modal.deleteUser.window).css(DISPLAY_FLEX);
     });
 
-    // Create an AJAX request to remove a user
+    /**
+     * Create an AJAX request to remove a user
+     */
     $(modal.deleteUser.button.del).click(function () {
         closeUserModalWindow();
         sendJSONRequest("/home/user.svc", getUserPayload(), RequestMethod.DELETE, showLoaderInUsersTable,
                         renderUsersTable, debug_callback, process_failures);
-    });
-
-    //Refresh table devises
-    $(table.device.button.refresh).click(function () {
-        renderDevicesTable();
-    });
-
-    //Refresh table users
-    $(table.user.button.refresh).click(function () {
-       renderUsersTable();
     });
 });
