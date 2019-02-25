@@ -13,7 +13,7 @@ requires = [
 ]
 
 setup(
-    name="Hephaestus",
+    name="OrangeTree",
     version="0.1",
     description="Web-powered Orange PI controller and monitor - Server app",
     packages=find_packages(),
