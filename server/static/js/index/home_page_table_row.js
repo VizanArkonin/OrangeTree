@@ -9,6 +9,7 @@ function resetStateTableDeviceButton () {
     $('[data-modal-device = "edit"]').disabledButton();
     $('[data-modal-device = "debug"]').disabledButton();
     $('[data-modal-device = "delete"]').disabledButton();
+    $('[data-modal-device = "monitor"]').disabledButton();
 
     tableRowsHomePage.state.device = false;
 }
@@ -21,6 +22,7 @@ function setStateTableDeviceButton () {
     $('[data-modal-device = "edit"]').activeButton();
     $('[data-modal-device = "debug"]').activeButton();
     $('[data-modal-device = "delete"]').activeButton();
+    $('[data-modal-device = "monitor"]').activeButton();
 
     tableRowsHomePage.state.device = true;
 }
@@ -45,7 +47,6 @@ function resetRowDeviseSelection () {
 function resetStateTableUserButton () {
     $(TABLE_ROW_USER).removeClass('row-active');
     $('[data-modal-user = "edit"]').disabledButton();
-    $('[data-modal-user = "debug"]').disabledButton();
     $('[data-modal-user = "delete"]').disabledButton();
 
     tableRowsHomePage.state.user = false;
@@ -57,7 +58,6 @@ function resetStateTableUserButton () {
  */
 function setStateTableUserButton () {
     $('[data-modal-user = "edit"]').activeButton();
-    $('[data-modal-user = "debug"]').activeButton();
     $('[data-modal-user = "delete"]').activeButton();
 
     tableRowsHomePage.state.user = true;

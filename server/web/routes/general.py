@@ -34,7 +34,7 @@ def not_found(e):
     :param e: Error
     :return: Rendered template
     """
-    return render_template("service/404.html"), 404
+    return render_template("service/not_found.html"), 404
 
 
 @web_service.route("/index", methods=["GET"])
