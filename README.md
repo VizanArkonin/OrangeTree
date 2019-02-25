@@ -46,6 +46,11 @@ python3 client_setup.py install
 ```bash
 python3 run_server.py
 ```
+- Once server is up, you can navigate to it's home page by going to
+```
+http://127.0.0.1:5000
+```
+- Default administrator credentials are **some@mail.com**/**password**
 
 ### Client
 
