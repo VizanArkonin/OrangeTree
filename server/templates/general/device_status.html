@@ -2,7 +2,8 @@
 
 {% block head %}
 {{ super() }}
-
+    <script src="/vendors/highcharts/highcharts.js" ></script>
+    <script src="/js/device_status/device_status_page_highcharts.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -12,6 +13,22 @@
     </div>
 
     <div class="content-container flex-container-center">
+
+        <div class="flex-container-center device-status-content">
+            <div id="cpu_temp" class="chart-container"></div>
+        </div>
+        <div class="flex-container-center device-status-content">
+            <div id="cpu_load" class="chart-container"></div>
+        </div>
+        <div class="flex-container-center device-status-content">
+            <div id="total_ram" class="chart-container"></div>
+        </div>
+        <div class="flex-container-center device-status-content">
+            <div id="ram_used_kb" class="chart-container"></div>
+        </div>
+        <div class="flex-container-center device-status-content">
+            <div id="ram_used_percent" class="chart-container"></div>
+        </div>
 
     </div>
 
