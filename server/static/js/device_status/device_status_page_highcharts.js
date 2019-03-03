@@ -29,22 +29,43 @@ $(document).ready(function () {
 
     Highcharts.setOptions({
         chart: {
-            backgroundColor: {
-                linearGradient: [0, 0, 500, 500],
-                stops: [
-                    [0, 'rgb(255, 255, 255)'],
-                    [1, 'rgb(240, 240, 255)']
-                    ]
+            backgroundColor: '#191815',
+            borderRadius: 5
+        },
+        yAxis: {
+            labels: {
+                style: {
+                    color: '#fff'
+                }
             },
-            borderWidth: 2,
-            plotBackgroundColor: 'rgba(255, 255, 255, .9)',
-            plotShadow: true,
-            plotBorderWidth: 1
+            title: {
+                style: {
+                    color: '#fff'
+                }
+            }
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    color: '#fff'
+                }
+            },
+            title: {
+                style: {
+                    color: '#fff'
+                }
+            }
+        },
+        colors: ['#DAAF37'],
+        title: {
+            style: {
+                color: '#fff'
+            }
         }
     });
 
     setTimeout(function () {
-          let chartCpuTemp = Highcharts.chart('cpu_temp', {
+        let chartCpuTemp = Highcharts.chart('cpu_temp', {
             chart: {
                 type: 'line'
             },
@@ -55,12 +76,16 @@ $(document).ready(function () {
                 title: {
                     text: 'Time'
                 },
-                categories: cpuTempTime
+                categories: cpuTempTime,
+                tickInterval: 24 * 3600 * 1000
             },
             yAxis: {
                 title: {
                     text: 'Temp °C'
                 }
+            },
+            legend: {
+              enabled: false
             },
             series: [{
                 name: 'CPU Temp DEV_LITE',

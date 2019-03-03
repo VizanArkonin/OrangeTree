@@ -5,8 +5,6 @@
 @import "helpers/_preloader";
 @import "helpers/_animation";
 @import "base/_global";
-@import "pages/_login_page";
-@import "pages/_404_page";
 @import "components/_modal";
 @import "components/_buttons";
 @import "components/_toggle_bar";
@@ -16,6 +14,8 @@
 @import "components/_sections";
 @import "components/_message";
 @import "components/_tooltip";
+@import "pages/_login_page";
+@import "pages/_404_page";
 @import "pages/_gpio_page";
-@import "pages/home_page";
+@import "pages/_home_page";
 @import "pages/device_status_page";
