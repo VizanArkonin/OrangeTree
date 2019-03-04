@@ -828,22 +828,31 @@ input:-webkit-autofill:focus {
       margin: 0.4rem; }
     .table-footer button:last-child {
       margin-right: 0.5rem; } }
-.device-status-content {
-  background: #191815;
+.device-status-container {
+  background: #363430;
   flex-direction: column;
   border-radius: 0.5rem;
   width: 100%;
-  margin: 2rem 5%; }
-  .device-status-content .chart-container {
-    width: 100%;
-    height: 40rem; }
-  .device-status-content .device-status-content-footer {
+  margin: 0 5%; }
+  .device-status-container .device-status-content-header {
     width: 100%;
     height: 5rem;
     padding: 0.5rem; }
-    .device-status-content .device-status-content-footer button {
+    .device-status-container .device-status-content-header button {
       margin-right: 0.5rem; }
-    .device-status-content .device-status-content-footer button:last-child {
+    .device-status-container .device-status-content-header button:last-child {
       margin-right: 0; }
+  .device-status-container .device-status-content {
+    height: 100%;
+    width: 100%;
+    flex-wrap: wrap; }
+    .device-status-container .device-status-content .chart-container {
+      width: 40rem;
+      height: 40rem;
+      margin: 2rem 1rem; }
+
+@media screen and (max-width: 479px) {
+  .device-status-container {
+    margin: 0; } }
 
 /*# sourceMappingURL=main.css.map */

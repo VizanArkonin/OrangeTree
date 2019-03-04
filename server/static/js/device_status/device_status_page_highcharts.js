@@ -29,13 +29,13 @@ $(document).ready(function () {
 
     Highcharts.setOptions({
         chart: {
-            backgroundColor: '#191815',
+            backgroundColor: 'rgba(54, 52, 48, 1)',
             borderRadius: 5
         },
         yAxis: {
             labels: {
                 style: {
-                    color: '#fff'
+                    color: 'rgba(238, 82, 83, 1)'
                 }
             },
             title: {
@@ -47,7 +47,7 @@ $(document).ready(function () {
         xAxis: {
             labels: {
                 style: {
-                    color: '#fff'
+                    color: 'rgba(238, 82, 83, 1)'
                 }
             },
             title: {
@@ -56,7 +56,6 @@ $(document).ready(function () {
                 }
             }
         },
-        colors: ['#DAAF37'],
         title: {
             style: {
                 color: '#fff'
@@ -87,6 +86,7 @@ $(document).ready(function () {
             legend: {
               enabled: false
             },
+            colors: ['#FFC31F'],
             series: [{
                 name: 'CPU Temp DEV_LITE',
                 data: cpuTemp,
@@ -96,4 +96,140 @@ $(document).ready(function () {
             }],
         });
     }, 200);
-});
+
+    setTimeout(function () {
+        let chartCpuTemp = Highcharts.chart('cpu_load', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'CPU Temp'
+            },
+            xAxis: {
+                title: {
+                    text: 'Time'
+                },
+                categories: cpuTempTime,
+                tickInterval: 24 * 3600 * 1000
+            },
+            yAxis: {
+                title: {
+                    text: 'Temp °C'
+                }
+            },
+            legend: {
+              enabled: false
+            },
+            colors: ['#2bcbba'],
+            series: [{
+                name: 'CPU Temp DEV_LITE',
+                data: cpuTemp,
+                tooltip: {
+                    valueDecimals: 1
+                }
+            }],
+        });
+    }, 200);
+
+    setTimeout(function () {
+        let chartCpuTemp = Highcharts.chart('total_ram', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'CPU Temp'
+            },
+            xAxis: {
+                title: {
+                    text: 'Time'
+                },
+                categories: cpuTempTime,
+                tickInterval: 24 * 3600 * 1000
+            },
+            yAxis: {
+                title: {
+                    text: 'Temp °C'
+                }
+            },
+            legend: {
+              enabled: false
+            },
+            colors: ['#ff3838'],
+            series: [{
+                name: 'CPU Temp DEV_LITE',
+                data: cpuTemp,
+                tooltip: {
+                    valueDecimals: 1
+                }
+            }],
+        });
+    }, 200);
+
+    setTimeout(function () {
+        let chartCpuTemp = Highcharts.chart('ram_used_kb', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'CPU Temp'
+            },
+            xAxis: {
+                title: {
+                    text: 'Time'
+                },
+                categories: cpuTempTime,
+                tickInterval: 24 * 3600 * 1000
+            },
+            yAxis: {
+                title: {
+                    text: 'Temp °C'
+                }
+            },
+            legend: {
+              enabled: false
+            },
+            colors: ['#ecf0f1'],
+            series: [{
+                name: 'CPU Temp DEV_LITE',
+                data: cpuTemp,
+                tooltip: {
+                    valueDecimals: 1
+                }
+            }],
+        });
+    }, 200);
+
+    setTimeout(function () {
+        let chartCpuTemp = Highcharts.chart('ram_used_percent', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'CPU Temp'
+            },
+            xAxis: {
+                title: {
+                    text: 'Time'
+                },
+                categories: cpuTempTime,
+                tickInterval: 24 * 3600 * 1000
+            },
+            yAxis: {
+                title: {
+                    text: 'Temp °C'
+                }
+            },
+            legend: {
+              enabled: false
+            },
+            colors: ['#45aaf2'],
+            series: [{
+                name: 'CPU Temp DEV_LITE',
+                data: cpuTemp,
+                tooltip: {
+                    valueDecimals: 1
+                }
+            }],
+        });
+    }, 200);
+ });

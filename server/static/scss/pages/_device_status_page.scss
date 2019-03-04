@@ -1,14 +1,10 @@
-.device-status-content {
-  background: $color-header;
+.device-status-container {
+  background: rgba(54, 52, 48, 1);
   flex-direction: column;
   border-radius: 0.5rem;
   width: 100%;
-  margin: 2rem 5%;
-  .chart-container {
-    width: 100%;
-    height: 40rem;
-  }
-  .device-status-content-footer {
+  margin: 0 5%;
+  .device-status-content-header {
     width: 100%;
     height: $height-base-element-default;
     padding: 0.5rem;
@@ -18,5 +14,21 @@
     & button:last-child {
       margin-right: 0;
     }
+  }
+  .device-status-content {
+    height: 100%;
+    width: 100%;
+    flex-wrap: wrap;
+    .chart-container {
+      width: 40rem;
+      height: 40rem;
+      margin: 2rem 1rem;
+    }
+  }
+}
+
+@include media-breakpoint-sm {
+  .device-status-container {
+    margin: 0;
   }
 }
