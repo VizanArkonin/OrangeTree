@@ -22,6 +22,10 @@
   }
 }
 
+.button-selection {
+  background: $button-default-hover !important;
+}
+
 .button-modal-window {
   background: $button-default-disabled;
   color: $color-text-dark;

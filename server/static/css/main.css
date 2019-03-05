@@ -200,6 +200,9 @@ input:-webkit-autofill:focus {
   .button-active:hover {
     background: #ffc31f !important; }
 
+.button-selection {
+  background: #ffc31f !important; }
+
 .button-modal-window {
   background: inherit;
   color: #343233;

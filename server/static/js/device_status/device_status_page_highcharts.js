@@ -1,48 +1,16 @@
 'use strict';
-
-$(document).ready(function () {
-    let URL = '/deviceStatus/getMetrics/' + window.location.pathname.split("/").pop();
-    // let URL = '/deviceStatus/getMetrics/DEV_LITE?timespan=24';
-    let cpuTemp = [];
-    let cpuTempTime = [];
-    let cpuLoad = [];
-    let cpuLoadTime = [];
-    let ramUsed = [];
-    let ramUsedTime = [];
-    let ramUsedPercent = [];
-    let ramUsedPercentTime = [];
-
-    function showDeviceStatus (AjaxData) {
-        for (let index = 0; index < AjaxData.readings.cpuTemp.length ; index++) {
-            cpuTemp.push(AjaxData.readings.cpuTemp[index].value);
-            cpuTempTime.push(AjaxData.readings.cpuTemp[index].timestamp);
-        }
-        for (let index = 0; index < AjaxData.readings.cpuLoad.length ; index++) {
-            cpuLoad.push(AjaxData.readings.cpuLoad[index].value);
-            cpuLoadTime.push(AjaxData.readings.cpuLoad[index].timestamp);
-        }
-        for (let index = 0; index < AjaxData.readings.ramKbUsed.length ; index++) {
-            ramUsed.push(AjaxData.readings.ramKbUsed[index].value);
-            ramUsedTime.push(AjaxData.readings.ramKbUsed[index].timestamp);
-        }
-        for (let index = 0; index < AjaxData.readings.ramPercentUsed.length ; index++) {
-            ramUsedPercent.push(AjaxData.readings.ramPercentUsed[index].value);
-            ramUsedPercentTime.push(AjaxData.readings.ramPercentUsed[index].timestamp);
-        }
-    }
-
-    sendJSONRequest(URL, null, RequestMethod.GET, beforeSendEmpty,
-                    showDeviceStatus, debug_callback, process_failures);
-
-    Highcharts.setOptions({
+/**
+ * Basic style setting for highcharts
+ */
+Highcharts.setOptions({
         chart: {
-            backgroundColor: 'rgba(54, 52, 48, 1)',
+            backgroundColor: '#363430',
             borderRadius: 5
         },
         yAxis: {
             labels: {
                 style: {
-                    color: 'rgba(238, 82, 83, 1)'
+                    color: '#EE5253'
                 }
             },
             title: {
@@ -54,7 +22,7 @@ $(document).ready(function () {
         xAxis: {
             labels: {
                 style: {
-                    color: 'rgba(238, 82, 83, 1)'
+                    color: '#EE5253'
                 }
             },
             title: {
@@ -70,7 +38,51 @@ $(document).ready(function () {
         }
     });
 
-    setTimeout(function () {
+$(document).ready(function () {
+    let deviceName = window.location.pathname.split("/").pop();
+    let activeTimespan = null;
+    /**
+     * The function makes an AJAX request, and if the call is successful, the function for rendering graphs is called.
+     */
+    function getDataDeviceStatus () {
+        let URL = '/deviceStatus/getMetrics/' + deviceName;
+        activeTimespan = URL;
+
+         sendJSONRequest(URL, null, RequestMethod.GET, beforeSendEmpty,
+                        renderDeviceStatusCharts, debug_callback, process_failures);
+    }
+
+    /**
+     * Getting a JSON object. Rendering highcharts based on received data.
+     * @param ajaxData - JSON object
+     */
+    function renderDeviceStatusCharts (ajaxData) {
+        let cpuTemp = [];
+        let cpuTempTime = [];
+        let cpuLoad = [];
+        let cpuLoadTime = [];
+        let ramUsed = [];
+        let ramUsedTime = [];
+        let ramUsedPercent = [];
+        let ramUsedPercentTime = [];
+
+        for (let index = 0; index < ajaxData.readings.cpuTemp.length ; index++) {
+            cpuTemp.push(ajaxData.readings.cpuTemp[index].value);
+            cpuTempTime.push(ajaxData.readings.cpuTemp[index].timestamp);
+        }
+        for (let index = 0; index < ajaxData.readings.cpuLoad.length ; index++) {
+            cpuLoad.push(ajaxData.readings.cpuLoad[index].value);
+            cpuLoadTime.push(ajaxData.readings.cpuLoad[index].timestamp);
+        }
+        for (let index = 0; index < ajaxData.readings.ramKbUsed.length ; index++) {
+            ramUsed.push(ajaxData.readings.ramKbUsed[index].value);
+            ramUsedTime.push(ajaxData.readings.ramKbUsed[index].timestamp);
+        }
+        for (let index = 0; index < ajaxData.readings.ramPercentUsed.length ; index++) {
+            ramUsedPercent.push(ajaxData.readings.ramPercentUsed[index].value);
+            ramUsedPercentTime.push(ajaxData.readings.ramPercentUsed[index].timestamp);
+        }
+
         let chartCpuTemp = Highcharts.chart('cpu_temp', {
             chart: {
                 type: 'line'
@@ -96,17 +108,15 @@ $(document).ready(function () {
             },
             colors: ['#FFC31F'],
             series: [{
-                name: 'CPU Temp °C ' + window.location.pathname.split("/").pop(),
+                name: 'CPU Temp °C ' + deviceName,
                 data: cpuTemp,
                 tooltip: {
                     valueDecimals: 1
                 }
             }],
         });
-    }, 1000);
 
-    setTimeout(function () {
-        let chartCpuTemp = Highcharts.chart('cpu_load', {
+        let chartCpuLoad = Highcharts.chart('cpu_load', {
             chart: {
                 type: 'line'
             },
@@ -131,17 +141,15 @@ $(document).ready(function () {
             },
             colors: ['#2bcbba'],
             series: [{
-                name: 'CPU Load ' + window.location.pathname.split("/").pop(),
+                name: 'CPU Load ' + deviceName,
                 data: cpuLoad,
                 tooltip: {
                     valueDecimals: 1
                 }
             }],
         });
-    }, 1000);
 
-    setTimeout(function () {
-        let chartCpuTemp = Highcharts.chart('ram_used_kb', {
+        let chartRamUsed = Highcharts.chart('ram_used_kb', {
             chart: {
                 type: 'line'
             },
@@ -166,17 +174,15 @@ $(document).ready(function () {
             },
             colors: ['#ecf0f1'],
             series: [{
-                name: 'RAM Used kB ' + window.location.pathname.split("/").pop(),
+                name: 'RAM Used kB ' + deviceName,
                 data: ramUsed,
                 tooltip: {
                     valueDecimals: 1
                 }
             }],
         });
-    }, 1000);
 
-    setTimeout(function () {
-        let chartCpuTemp = Highcharts.chart('ram_used_percent', {
+        let chartRamUsedPercent = Highcharts.chart('ram_used_percent', {
             chart: {
                 type: 'line'
             },
@@ -201,12 +207,46 @@ $(document).ready(function () {
             },
             colors: ['#ff3838'],
             series: [{
-                name: 'RAM Used (%) - ' + window.location.pathname.split("/").pop(),
+                name: 'RAM Used (%) - ' + deviceName,
                 data: ramUsedPercent,
                 tooltip: {
                     valueDecimals: 1
                 }
             }],
         });
-    }, 1000);
+    }
+
+
+    /**
+     * Selecting the time interval for displaying graph data.
+     */
+    $('.button-timespan').on('click', function () {
+        let URL = '/deviceStatus/getMetrics/' + deviceName + '?timespan=' + $(this).attr('data-timespan');
+        activeTimespan = URL;
+
+        $('.button-timespan').removeClass('button-selection');
+        $(this).addClass('button-selection');
+
+        sendJSONRequest(URL, null, RequestMethod.GET, beforeSendEmpty,
+                        renderDeviceStatusCharts, debug_callback, process_failures);
+    });
+
+    /**
+     *  Function reload charts. Depending on the selected time interval.
+     */
+    $('.button-device-status-refresh').click(function () {
+        sendJSONRequest(activeTimespan, null, RequestMethod.GET, beforeSendEmpty,
+                        renderDeviceStatusCharts, debug_callback, process_failures);
+    });
+
+    getDataDeviceStatus();
+
+    /**
+     * Function reload charts (auto). Depending on the selected time interval.
+     */
+    setTimeout(function () {
+        sendJSONRequest(activeTimespan, null, RequestMethod.GET, beforeSendEmpty,
+                        renderDeviceStatusCharts, debug_callback, process_failures);
+    }, 60000);
+
  });
