@@ -847,7 +847,7 @@ input:-webkit-autofill:focus {
     width: 100%;
     flex-wrap: wrap; }
     .device-status-container .device-status-content .chart-container {
-      width: 40rem;
+      width: 40em;
       height: 40rem;
       margin: 2rem 1rem; }
 

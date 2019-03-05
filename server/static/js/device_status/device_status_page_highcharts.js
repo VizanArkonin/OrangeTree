@@ -2,8 +2,15 @@
 
 $(document).ready(function () {
     let URL = '/deviceStatus/getMetrics/' + window.location.pathname.split("/").pop();
+    // let URL = '/deviceStatus/getMetrics/DEV_LITE?timespan=24';
     let cpuTemp = [];
     let cpuTempTime = [];
+    let cpuLoad = [];
+    let cpuLoadTime = [];
+    let ramUsed = [];
+    let ramUsedTime = [];
+    let ramUsedPercent = [];
+    let ramUsedPercentTime = [];
 
     function showDeviceStatus (AjaxData) {
         for (let index = 0; index < AjaxData.readings.cpuTemp.length ; index++) {
@@ -11,16 +18,16 @@ $(document).ready(function () {
             cpuTempTime.push(AjaxData.readings.cpuTemp[index].timestamp);
         }
         for (let index = 0; index < AjaxData.readings.cpuLoad.length ; index++) {
-
-        }
-        for (let index = 0; index < AjaxData.readings.totalRam.length ; index++) {
-
+            cpuLoad.push(AjaxData.readings.cpuLoad[index].value);
+            cpuLoadTime.push(AjaxData.readings.cpuLoad[index].timestamp);
         }
         for (let index = 0; index < AjaxData.readings.ramKbUsed.length ; index++) {
-
+            ramUsed.push(AjaxData.readings.ramKbUsed[index].value);
+            ramUsedTime.push(AjaxData.readings.ramKbUsed[index].timestamp);
         }
         for (let index = 0; index < AjaxData.readings.ramPercentUsed.length ; index++) {
-
+            ramUsedPercent.push(AjaxData.readings.ramPercentUsed[index].value);
+            ramUsedPercentTime.push(AjaxData.readings.ramPercentUsed[index].timestamp);
         }
     }
 
@@ -81,21 +88,22 @@ $(document).ready(function () {
             yAxis: {
                 title: {
                     text: 'Temp °C'
-                }
+                },
+                max: 100
             },
             legend: {
               enabled: false
             },
             colors: ['#FFC31F'],
             series: [{
-                name: 'CPU Temp DEV_LITE',
+                name: 'CPU Temp °C ' + window.location.pathname.split("/").pop(),
                 data: cpuTemp,
                 tooltip: {
                     valueDecimals: 1
                 }
             }],
         });
-    }, 200);
+    }, 1000);
 
     setTimeout(function () {
         let chartCpuTemp = Highcharts.chart('cpu_load', {
@@ -103,67 +111,34 @@ $(document).ready(function () {
                 type: 'line'
             },
             title: {
-                text: 'CPU Temp'
+                text: 'CPU Load'
             },
             xAxis: {
                 title: {
                     text: 'Time'
                 },
-                categories: cpuTempTime,
+                categories: cpuLoadTime,
                 tickInterval: 24 * 3600 * 1000
             },
             yAxis: {
                 title: {
-                    text: 'Temp °C'
-                }
+                    text: 'CPU Load %'
+                },
+                max: 100
             },
             legend: {
               enabled: false
             },
             colors: ['#2bcbba'],
             series: [{
-                name: 'CPU Temp DEV_LITE',
-                data: cpuTemp,
+                name: 'CPU Load ' + window.location.pathname.split("/").pop(),
+                data: cpuLoad,
                 tooltip: {
                     valueDecimals: 1
                 }
             }],
         });
-    }, 200);
-
-    setTimeout(function () {
-        let chartCpuTemp = Highcharts.chart('total_ram', {
-            chart: {
-                type: 'line'
-            },
-            title: {
-                text: 'CPU Temp'
-            },
-            xAxis: {
-                title: {
-                    text: 'Time'
-                },
-                categories: cpuTempTime,
-                tickInterval: 24 * 3600 * 1000
-            },
-            yAxis: {
-                title: {
-                    text: 'Temp °C'
-                }
-            },
-            legend: {
-              enabled: false
-            },
-            colors: ['#ff3838'],
-            series: [{
-                name: 'CPU Temp DEV_LITE',
-                data: cpuTemp,
-                tooltip: {
-                    valueDecimals: 1
-                }
-            }],
-        });
-    }, 200);
+    }, 1000);
 
     setTimeout(function () {
         let chartCpuTemp = Highcharts.chart('ram_used_kb', {
@@ -171,33 +146,34 @@ $(document).ready(function () {
                 type: 'line'
             },
             title: {
-                text: 'CPU Temp'
+                text: 'RAM Used kB'
             },
             xAxis: {
                 title: {
                     text: 'Time'
                 },
-                categories: cpuTempTime,
+                categories: ramUsedTime,
                 tickInterval: 24 * 3600 * 1000
             },
             yAxis: {
                 title: {
-                    text: 'Temp °C'
-                }
+                    text: 'Used kB'
+                },
+                max: 512000
             },
             legend: {
               enabled: false
             },
             colors: ['#ecf0f1'],
             series: [{
-                name: 'CPU Temp DEV_LITE',
-                data: cpuTemp,
+                name: 'RAM Used kB ' + window.location.pathname.split("/").pop(),
+                data: ramUsed,
                 tooltip: {
                     valueDecimals: 1
                 }
             }],
         });
-    }, 200);
+    }, 1000);
 
     setTimeout(function () {
         let chartCpuTemp = Highcharts.chart('ram_used_percent', {
@@ -205,31 +181,32 @@ $(document).ready(function () {
                 type: 'line'
             },
             title: {
-                text: 'CPU Temp'
+                text: 'RAM Used percent'
             },
             xAxis: {
                 title: {
                     text: 'Time'
                 },
-                categories: cpuTempTime,
+                categories: ramUsedPercentTime,
                 tickInterval: 24 * 3600 * 1000
             },
             yAxis: {
                 title: {
-                    text: 'Temp °C'
-                }
+                    text: 'Used %'
+                },
+                max: 100
             },
             legend: {
               enabled: false
             },
-            colors: ['#45aaf2'],
+            colors: ['#ff3838'],
             series: [{
-                name: 'CPU Temp DEV_LITE',
-                data: cpuTemp,
+                name: 'RAM Used (%) - ' + window.location.pathname.split("/").pop(),
+                data: ramUsedPercent,
                 tooltip: {
                     valueDecimals: 1
                 }
             }],
         });
-    }, 200);
+    }, 1000);
  });
