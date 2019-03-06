@@ -1,4 +1,32 @@
 {% extends 'base.html' %}
 
+{% block head %}
+{{ super() }}
+    <script src="/vendors/highcharts/highcharts.js" ></script>
+    <script src="/js/device_status/device_status_page_highcharts.js"></script>
+{% endblock %}
+
 {% block content %}
+
+    <div class="page-title">
+        <span>Device status</span>
+    </div>
+
+    <div class="content-container flex-container-center">
+        <div class="flex-container-center device-status-container">
+            <div class="device-status-content-header flex-container-center">
+                <button class="button button-active button-timespan button-selection" data-timespan = '1'>1 hour</button>
+                <button class="button button-active button-timespan" data-timespan = '6'>6 hours</button>
+                <button class="button button-active button-timespan" data-timespan = '24'>24 hours</button>
+                <button class="button button-active button-device-status-refresh"><i class="fas fa-sync"></i></button>
+            </div>
+            <div class="device-status-content flex-container-center">
+                <div id="cpu_temp" class="chart-container"></div>
+                <div id="cpu_load" class="chart-container"></div>
+                <div id="ram_used_kb" class="chart-container"></div>
+                <div id="ram_used_percent" class="chart-container"></div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

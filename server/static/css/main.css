@@ -74,142 +74,6 @@ input:-webkit-autofill:focus {
 ::-webkit-scrollbar-corner {
   background: rgba(27, 27, 27, 0.6); }
 
-.login-form-container {
-  background: #242320;
-  color: white;
-  border-radius: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  width: 46rem;
-  margin: 1rem; }
-
-.login-header {
-  font-size: 5rem;
-  width: 100%;
-  padding: 2.5rem 1.5rem 0 1.5rem;
-  text-align: center; }
-
-.login-form {
-  padding: 2rem;
-  font-size: 1.5rem; }
-
-.icon-form {
-  background: #191815;
-  border-radius: 0.4rem 0 0 0.4rem;
-  height: 100%;
-  min-width: 5rem; }
-  .icon-form i {
-    opacity: 0.6; }
-
-.input-container, .input-focus-within {
-  margin: 2rem 0;
-  height: 5rem; }
-  .input-container input[type=text], .input-container input[type=password], .input-container input[type=email], .input-focus-within input[type=text], .input-focus-within input[type=password], .input-focus-within input[type=email] {
-    background: #191815;
-    caret-color: white;
-    padding: 0.5rem 0;
-    height: 100%;
-    width: 100%;
-    border: 0;
-    border-radius: 0  0.4rem 0.4rem 0; }
-    .input-container input[type=text]:valid, .input-container input[type=password]:valid, .input-container input[type=email]:valid, .input-focus-within input[type=text]:valid, .input-focus-within input[type=password]:valid, .input-focus-within input[type=email]:valid {
-      color: rgba(255, 255, 255, 0.6); }
-    .input-container input[type=text]:focus, .input-container input[type=password]:focus, .input-container input[type=email]:focus, .input-focus-within input[type=text]:focus, .input-focus-within input[type=password]:focus, .input-focus-within input[type=email]:focus {
-      color: white; }
-
-.input-focus-within:focus-within {
-  color: white;
-  -webkit-box-shadow: 0px 0px 0.5rem 0.2rem #daaf37;
-  -moz-box-shadow: 0px 0px 0.5rem 0.2rem #daaf37;
-  box-shadow: 0px 0px 0.5rem 0.2rem #daaf37; }
-.input-focus-within:focus-within i, .input-focus-within:focus-within span, .input-focus-within:focus-within label {
-  opacity: 1; }
-
-.login-error-messages {
-  height: 1.5rem;
-  text-align: center; }
-
-@media screen and (max-width: 479px) {
-  .login-form {
-    padding: 1rem;
-    font-size: 1.3rem; }
-
-  .login-form-container {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    border-radius: 0; } }
-.page-not-found-container {
-  color: white; }
-  .page-not-found-container img {
-    padding: 1rem;
-    width: 100%;
-    height: auto; }
-
-.page-not-found-content {
-  text-align: center;
-  width: 42rem;
-  padding: 1.5rem;
-  margin-left: 5rem; }
-  .page-not-found-content h1 {
-    font-size: 6rem;
-    padding-bottom: 1rem; }
-  .page-not-found-content h2 {
-    font-size: 3rem;
-    padding-bottom: 5rem; }
-
-.page-not-found-link {
-  background: #daaf37;
-  color: #343233;
-  border-radius: 0.5rem;
-  display: inline-block;
-  font-size: 3rem;
-  line-height: 8rem;
-  height: 8rem;
-  width: 100%; }
-  .page-not-found-link:hover {
-    -webkit-transition-duration: 0.3s;
-    /* Safari */
-    transition-duration: 0.3s;
-    background: #ffc31f; }
-
-@media screen and (max-width: 1023px) {
-  .page-not-found-container {
-    flex-direction: column; }
-    .page-not-found-container img {
-      width: 28rem;
-      height: auto; }
-
-  .page-not-found-content {
-    width: 47rem;
-    margin-top: 5rem;
-    margin-left: 0; }
-    .page-not-found-content h1 {
-      font-size: 5rem; }
-    .page-not-found-content h2 {
-      font-size: 2.5rem; }
-
-  .page-not-found-link {
-    font-size: 2.5rem; } }
-@media screen and (max-width: 479px) {
-  .page-not-found-container img {
-    width: 19rem; }
-
-  .page-not-found-content {
-    width: 100%;
-    padding: 0 1rem;
-    margin-top: 1rem; }
-    .page-not-found-content h1 {
-      font-size: 4rem;
-      padding-bottom: 1.5rem; }
-    .page-not-found-content h2 {
-      font-size: 2rem;
-      padding-bottom: 4rem; }
-
-  .page-not-found-link {
-    font-size: 2rem;
-    height: 5rem;
-    line-height: 5rem; } }
 .modal {
   background: rgba(255, 255, 255, 0.3);
   display: none;
@@ -336,6 +200,9 @@ input:-webkit-autofill:focus {
   .button-active:hover {
     background: #ffc31f !important; }
 
+.button-selection {
+  background: #ffc31f !important; }
+
 .button-modal-window {
   background: inherit;
   color: #343233;
@@ -454,7 +321,8 @@ input:-webkit-autofill:focus {
 .navigation-container {
   background: #242320;
   height: 5rem;
-  font-size: 1.5rem; }
+  font-size: 1.5rem;
+  z-index: 1000; }
 
 .navigation-right {
   height: 5rem;
@@ -655,6 +523,142 @@ input:-webkit-autofill:focus {
       border: 0.5rem solid transparent;
       border-top-color: #daaf37; }
 
+.login-form-container {
+  background: #242320;
+  color: white;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  width: 46rem;
+  margin: 1rem; }
+
+.login-header {
+  font-size: 5rem;
+  width: 100%;
+  padding: 2.5rem 1.5rem 0 1.5rem;
+  text-align: center; }
+
+.login-form {
+  padding: 2rem;
+  font-size: 1.5rem; }
+
+.icon-form {
+  background: #191815;
+  border-radius: 0.4rem 0 0 0.4rem;
+  height: 100%;
+  min-width: 5rem; }
+  .icon-form i {
+    opacity: 0.6; }
+
+.input-container, .input-focus-within {
+  margin: 2rem 0;
+  height: 5rem; }
+  .input-container input[type=text], .input-container input[type=password], .input-container input[type=email], .input-focus-within input[type=text], .input-focus-within input[type=password], .input-focus-within input[type=email] {
+    background: #191815;
+    caret-color: white;
+    padding: 0.5rem 0;
+    height: 100%;
+    width: 100%;
+    border: 0;
+    border-radius: 0  0.4rem 0.4rem 0; }
+    .input-container input[type=text]:valid, .input-container input[type=password]:valid, .input-container input[type=email]:valid, .input-focus-within input[type=text]:valid, .input-focus-within input[type=password]:valid, .input-focus-within input[type=email]:valid {
+      color: rgba(255, 255, 255, 0.6); }
+    .input-container input[type=text]:focus, .input-container input[type=password]:focus, .input-container input[type=email]:focus, .input-focus-within input[type=text]:focus, .input-focus-within input[type=password]:focus, .input-focus-within input[type=email]:focus {
+      color: white; }
+
+.input-focus-within:focus-within {
+  color: white;
+  -webkit-box-shadow: 0px 0px 0.5rem 0.2rem #daaf37;
+  -moz-box-shadow: 0px 0px 0.5rem 0.2rem #daaf37;
+  box-shadow: 0px 0px 0.5rem 0.2rem #daaf37; }
+.input-focus-within:focus-within i, .input-focus-within:focus-within span, .input-focus-within:focus-within label {
+  opacity: 1; }
+
+.login-error-messages {
+  height: 1.5rem;
+  text-align: center; }
+
+@media screen and (max-width: 479px) {
+  .login-form {
+    padding: 1rem;
+    font-size: 1.3rem; }
+
+  .login-form-container {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border-radius: 0; } }
+.page-not-found-container {
+  color: white; }
+  .page-not-found-container img {
+    padding: 1rem;
+    width: 100%;
+    height: auto; }
+
+.page-not-found-content {
+  text-align: center;
+  width: 42rem;
+  padding: 1.5rem;
+  margin-left: 5rem; }
+  .page-not-found-content h1 {
+    font-size: 6rem;
+    padding-bottom: 1rem; }
+  .page-not-found-content h2 {
+    font-size: 3rem;
+    padding-bottom: 5rem; }
+
+.page-not-found-link {
+  background: #daaf37;
+  color: #343233;
+  border-radius: 0.5rem;
+  display: inline-block;
+  font-size: 3rem;
+  line-height: 8rem;
+  height: 8rem;
+  width: 100%; }
+  .page-not-found-link:hover {
+    -webkit-transition-duration: 0.3s;
+    /* Safari */
+    transition-duration: 0.3s;
+    background: #ffc31f; }
+
+@media screen and (max-width: 1023px) {
+  .page-not-found-container {
+    flex-direction: column; }
+    .page-not-found-container img {
+      width: 28rem;
+      height: auto; }
+
+  .page-not-found-content {
+    width: 47rem;
+    margin-top: 5rem;
+    margin-left: 0; }
+    .page-not-found-content h1 {
+      font-size: 5rem; }
+    .page-not-found-content h2 {
+      font-size: 2.5rem; }
+
+  .page-not-found-link {
+    font-size: 2.5rem; } }
+@media screen and (max-width: 479px) {
+  .page-not-found-container img {
+    width: 19rem; }
+
+  .page-not-found-content {
+    width: 100%;
+    padding: 0 1rem;
+    margin-top: 1rem; }
+    .page-not-found-content h1 {
+      font-size: 4rem;
+      padding-bottom: 1.5rem; }
+    .page-not-found-content h2 {
+      font-size: 2rem;
+      padding-bottom: 4rem; }
+
+  .page-not-found-link {
+    font-size: 2rem;
+    height: 5rem;
+    line-height: 5rem; } }
 .pin-container {
   color: white;
   background: #242320;
@@ -827,5 +831,31 @@ input:-webkit-autofill:focus {
       margin: 0.4rem; }
     .table-footer button:last-child {
       margin-right: 0.5rem; } }
+.device-status-container {
+  background: #363430;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  width: 100%;
+  margin: 0 5%; }
+  .device-status-container .device-status-content-header {
+    width: 100%;
+    height: 5rem;
+    padding: 0.5rem; }
+    .device-status-container .device-status-content-header button {
+      margin-right: 0.5rem; }
+    .device-status-container .device-status-content-header button:last-child {
+      margin-right: 0; }
+  .device-status-container .device-status-content {
+    height: 100%;
+    width: 100%;
+    flex-wrap: wrap; }
+    .device-status-container .device-status-content .chart-container {
+      width: 52rem;
+      height: 40rem;
+      margin: 2rem 1rem; }
+
+@media screen and (max-width: 479px) {
+  .device-status-container {
+    margin: 0; } }
 
 /*# sourceMappingURL=main.css.map */

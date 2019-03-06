@@ -51,7 +51,6 @@ def get_device_status_metrics(device_id):
         "readings": {
             "cpuTemp": [],
             "cpuLoad": [],
-            "totalRam": [],
             "ramKbUsed": [],
             "ramPercentUsed": []
         }
@@ -80,11 +79,9 @@ def get_device_status_metrics(device_id):
             readings["readings"]["cpuTemp"].append(reading.get_value_timestamp_dict())
         elif reading.reading_id == 2:
             readings["readings"]["cpuLoad"].append(reading.get_value_timestamp_dict())
-        elif reading.reading_id == 3:
-            readings["readings"]["totalRam"].append(reading.get_value_timestamp_dict())
         elif reading.reading_id == 4:
             readings["readings"]["ramKbUsed"].append(reading.get_value_timestamp_dict())
         elif reading.reading_id == 5:
-            readings["readings"]["ramKbUsed"].append(reading.get_value_timestamp_dict())
+            readings["readings"]["ramPercentUsed"].append(reading.get_value_timestamp_dict())
 
     return utils.get_response(json.dumps(readings), mimetype=MimeType.JSON_MIMETYPE.value)

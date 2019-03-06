@@ -31,6 +31,7 @@
   background: $color-navigation;
   height:$height-base-element-default;
   font-size: $font-size-middle;
+  z-index:1000;
 }
 
 .navigation-right {

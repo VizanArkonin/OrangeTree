@@ -259,6 +259,8 @@ $(document).ready(function () {
         }
         if (stateModalButtonUser.edit === true) {
             stateModalUser.password = !($(modal.user.field.password).val() !== $(modal.user.field.confirmPassword).val());
+            stateModalUser.passwordEmpty = true;
+            stateModalUser.confirmPassword = true;
         }
     }
 

@@ -98,7 +98,8 @@ const table = {
         preloader: "#table_device_preloader",
         button: {
             refresh: "#table_device_button_refresh",
-            debug: "#table_device_button_debug"
+            debug: "#table_device_button_debug",
+            monitor: "#table_device_button_monitor"
         }
     }
 };
