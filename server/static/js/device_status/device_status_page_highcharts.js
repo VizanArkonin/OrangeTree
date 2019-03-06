@@ -40,13 +40,12 @@ Highcharts.setOptions({
 
 $(document).ready(function () {
     let deviceName = window.location.pathname.split("/").pop();
-    let activeTimespan = null;
+    let URL = null;
     /**
      * The function makes an AJAX request, and if the call is successful, the function for rendering graphs is called.
      */
     function getDataDeviceStatus () {
-        let URL = '/deviceStatus/getMetrics/' + deviceName;
-        activeTimespan = URL;
+        URL = '/deviceStatus/getMetrics/' + deviceName;
 
          sendJSONRequest(URL, null, RequestMethod.GET, beforeSendEmpty,
                         renderDeviceStatusCharts, debug_callback, process_failures);
@@ -221,8 +220,8 @@ $(document).ready(function () {
      * Selecting the time interval for displaying graph data.
      */
     $('.button-timespan').on('click', function () {
-        let URL = '/deviceStatus/getMetrics/' + deviceName + '?timespan=' + $(this).attr('data-timespan');
-        activeTimespan = URL;
+        URL = '/deviceStatus/getMetrics/' + deviceName + '?timespan=' + $(this).attr('data-timespan');
+
 
         $('.button-timespan').removeClass('button-selection');
         $(this).addClass('button-selection');
@@ -235,7 +234,7 @@ $(document).ready(function () {
      *  Function reload charts. Depending on the selected time interval.
      */
     $('.button-device-status-refresh').click(function () {
-        sendJSONRequest(activeTimespan, null, RequestMethod.GET, beforeSendEmpty,
+        sendJSONRequest(URL, null, RequestMethod.GET, beforeSendEmpty,
                         renderDeviceStatusCharts, debug_callback, process_failures);
     });
 
@@ -244,8 +243,8 @@ $(document).ready(function () {
     /**
      * Function reload charts (auto). Depending on the selected time interval.
      */
-    setTimeout(function () {
-        sendJSONRequest(activeTimespan, null, RequestMethod.GET, beforeSendEmpty,
+    setInterval(function () {
+        sendJSONRequest(URL, null, RequestMethod.GET, beforeSendEmpty,
                         renderDeviceStatusCharts, debug_callback, process_failures);
     }, 60000);
 
