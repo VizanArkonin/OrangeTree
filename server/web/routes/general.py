@@ -4,7 +4,7 @@ General routing library
 
 from flask import render_template, redirect, url_for
 from flask_login import user_logged_in
-from flask_security import login_required, roles_accepted
+from flask_security import login_required, roles_accepted, logout_user
 from datetime import datetime
 
 from server.web import web_service
@@ -55,3 +55,10 @@ def empty_index_redirect():
     :return: Redirect instance
     """
     return redirect(url_for("index"))
+
+
+@web_service.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect("/login")

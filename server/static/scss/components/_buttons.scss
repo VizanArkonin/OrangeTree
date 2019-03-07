@@ -24,29 +24,14 @@
 
 .button-selection {
   background: $button-default-hover !important;
-}
-
-.button-modal-window {
-  background: $button-default-disabled;
-  color: $color-text-dark;
-  cursor: default;
-  border: none;
-  width: 100%;
+  color: $dark-color !important;
 }
 
 [id *='modal_user_button'], [id *='modal_device_button'] {
   display: none;
-  margin-right: 0.5rem;
 }
 
 @include media-breakpoint-sm {
-  .button-modal-window {
-    height: 100%;
-  }
-  [id *='modal_user_button'], [id *='modal_device_button'] {
-    margin-left: 0;
-    margin-bottom: 2rem;
-  }
   .button {
     font-size: $font-size-middle-mobile;
   }
