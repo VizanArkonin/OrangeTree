@@ -25,6 +25,7 @@
     <script src="/js/jquery/jquery.js"></script>
     <script src="/js/main/responsive.js"></script>
     <script src="/js/uni/ajax.js"></script>
+    <script src="/js/main/navbar_buttons.js"></script>
     {% endblock %}
 </head>
 
@@ -99,8 +100,8 @@
                     <li>
                         <a href="#"><i class="fas fa-exclamation-triangle"></i></a>
                     </li>
-                    <li class="mobile-display-none">
-                        <a href="#"><i class="fas fa-power-off"></i></a>
+                    <li>
+                        <button class="button-logout"><i class="fas fa-power-off"></i></button>
                     </li>
                 </ul>
             </div>
@@ -127,12 +128,6 @@
                         <span class="text-visibility-mobile">User settings</span>
                     </a>
                 </li>
-                <li class="navigation-link-hover">
-                    <a href="#">
-                        <i class="fas fa-power-off"></i>
-                        <span class="text-visibility-mobile">Logout</span>
-                    </a>
-                </li>
             </ul>
         </nav>
 
@@ -143,6 +138,19 @@
     </div>
 
     {% block modal_content %}{% endblock %}
+
+    <!--Modal window for logout -->
+    <div id="modal_window_logout" class="modal full-size-display position-fixed">
+        <div class="modal-container">
+            <div class="modal-header">
+                <span>Are you sure want to log-out ?</span>
+            </div>
+            <div class="modal-footer">
+                <a href="/logout" class="button button-active flex-container-center">Logout</a>
+                <button id="modal_window_logout_button_close" class="button button-active">Close</button>
+            </div>
+        </div>
+    </div>
 
 
 </body>

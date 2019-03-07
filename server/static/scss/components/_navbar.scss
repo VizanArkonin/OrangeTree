@@ -48,6 +48,11 @@
         color: $color-text;
         padding-left: 1rem;
       }
+      & button {
+        background: inherit;
+        border: none;
+        padding: 0;
+      }
       & i {
         color: $color-text;
       }

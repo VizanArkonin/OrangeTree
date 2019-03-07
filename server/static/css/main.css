@@ -156,6 +156,10 @@ input:-webkit-autofill:focus {
   display: flex;
   height: 5rem;
   padding: 0.5rem; }
+  .modal-footer button, .modal-footer a {
+    margin-right: 0.5rem; }
+  .modal-footer button:last-child {
+    margin-right: 0; }
 
 @media screen and (max-width: 479px) {
   .modal-container {
@@ -173,6 +177,9 @@ input:-webkit-autofill:focus {
       padding: 1rem;
       width: 100%;
       height: 14rem; }
+      .modal-container .modal-footer button, .modal-container .modal-footer a {
+        margin-left: 0;
+        margin-bottom: 2rem; }
 
   .modal-content-delete {
     margin-bottom: 1.5rem; }
@@ -198,30 +205,16 @@ input:-webkit-autofill:focus {
   color: #343233 !important;
   cursor: pointer !important; }
   .button-active:hover {
-    background: #ffc31f !important; }
+    background: #ffc30a !important; }
 
 .button-selection {
-  background: #ffc31f !important; }
-
-.button-modal-window {
-  background: inherit;
-  color: #343233;
-  cursor: default;
-  border: none;
-  width: 100%; }
+  background: #ffc30a !important;
+  color: black !important; }
 
 [id*='modal_user_button'], [id*='modal_device_button'] {
-  display: none;
-  margin-right: 0.5rem; }
+  display: none; }
 
 @media screen and (max-width: 479px) {
-  .button-modal-window {
-    height: 100%; }
-
-  [id*='modal_user_button'], [id*='modal_device_button'] {
-    margin-left: 0;
-    margin-bottom: 2rem; }
-
   .button {
     font-size: 1.3rem; } }
 .toggle-bar {
@@ -337,6 +330,10 @@ input:-webkit-autofill:focus {
       .navigation-right ul li span {
         color: white;
         padding-left: 1rem; }
+      .navigation-right ul li button {
+        background: inherit;
+        border: none;
+        padding: 0; }
       .navigation-right ul li i {
         color: white; }
 
@@ -620,7 +617,7 @@ input:-webkit-autofill:focus {
     -webkit-transition-duration: 0.3s;
     /* Safari */
     transition-duration: 0.3s;
-    background: #ffc31f; }
+    background: #ffc30a; }
 
 @media screen and (max-width: 1023px) {
   .page-not-found-container {
@@ -690,7 +687,7 @@ input:-webkit-autofill:focus {
   /* Safari */
   transition-duration: 0.3s; }
   .button-off:hover {
-    background: #ffc31f; }
+    background: #ffc30a; }
 
 .button-on {
   background: #218c74;
