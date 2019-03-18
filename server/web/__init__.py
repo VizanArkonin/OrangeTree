@@ -39,9 +39,10 @@ db.create_all()
 # Flask-Security
 from server.database.models.user.users import Users
 from server.database.models.user.roles import Roles
+from server.web.utils import ModifiedLoginForm
 
 user_datastore = SQLAlchemySessionUserDatastore(db.session, Users, Roles)
-security = Security(web_service, user_datastore)
+security = Security(web_service, user_datastore, login_form=ModifiedLoginForm)
 
 # Then we import modules with routes
 import server.web.routes

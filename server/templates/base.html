@@ -90,8 +90,8 @@
                     <li>
                         <a href="#">
                         <i class="fas fa-user-circle"></i>
-                        {% if g.user %}
-                        <span>{{ g.user['username'] }}</span>
+                        {% if current_user.is_authenticated %}
+                        <span>{{ session['userName'] }}</span>
                         {% else %}
                         <span>Anonymous</span>
                         {% endif %}

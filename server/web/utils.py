@@ -4,7 +4,10 @@ Web service utility functions and decorators
 import json
 from enum import Enum
 
-from flask import Response, request
+from flask import Response, request, session
+from flask_security import LoginForm
+
+from server.database.models.user.users import Users
 
 
 class MimeType(Enum):
@@ -30,6 +33,28 @@ class ResponseStatus(Enum):
 
     INTERNAL_SERVER_ERROR = 500
     NOT_IMPLEMENTED = 501
+
+
+class ModifiedLoginForm(LoginForm):
+    """
+    Modified login form, used instead of flask-security standard form.
+    """
+    def validate(self):
+        # Before-validation code section
+        # --------------------------------------------------------------------------------------------------------------
+
+        # --------------------------------------------------------------------------------------------------------------
+
+        # Validation
+        response = super(ModifiedLoginForm, self).validate()
+
+        # After-validation code section
+        # --------------------------------------------------------------------------------------------------------------
+        user = Users.query.filter(Users.email == request.form['email']).first()
+        session['userName'] = "{0} {1}".format(user.first_name, user.last_name)
+        # --------------------------------------------------------------------------------------------------------------
+
+        return response
 
 
 def get_response(content, mimetype=MimeType.DEFAULT_MIMETYPE.value, status=ResponseStatus.OK.value):
