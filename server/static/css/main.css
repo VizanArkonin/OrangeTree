@@ -128,7 +128,6 @@ input:-webkit-autofill:focus {
   height: 100%;
   border-radius: 0.4rem; }
   .modal-content-block-roles span {
-    height: 100%;
     min-width: 11rem;
     padding-left: 1rem;
     opacity: 0.6; }

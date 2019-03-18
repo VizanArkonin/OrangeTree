@@ -86,22 +86,6 @@ function getUserPayload () {
     return payload;
 }
 
-/**
- * Animation when opening a modal window
- */
-function openModalAnimation () {
-    $(modal.window.open).removeClass(modal.animation.close);
-    $(modal.window.open).addClass(modal.animation.open);
-}
-
-/**
- * Animation when closing a modal window
- */
-function closeModalAnimation () {
-    $(modal.window.open).removeClass(modal.animation.open);
-    $(modal.window.open).addClass(modal.animation.close);
-}
-
 $(document).ready(function () {
 
     const setTimeAnimation = 400;
