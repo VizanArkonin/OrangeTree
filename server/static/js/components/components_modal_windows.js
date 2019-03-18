@@ -1,4 +1,5 @@
 'use strict';
+// Common components for all modal windows
 
 const modal = {
     window: {
@@ -75,31 +76,33 @@ const modal = {
             name: "#modal_deleteDevice_message_name"
         }
     },
+    logout: {
+        window: "#modal_window_logout",
+        button: {
+            open: ".button-logout",
+            close: "#modal_window_logout_button_close"
+        }
+    },
     animation: {
         open: "modal-animation-open",
         close: "modal-animation-close"
     }
 };
 
-const table = {
-    user: {
-        window: ".table-user-window",
-        tab: ".table-user-tab",
-        content: "#table_user_content",
-        preloader: "#table_user_preloader",
-        button: {
-            refresh: "#table_user_button_refresh"
-        }
-    },
-    device: {
-        window: ".table-device-window",
-        tab: ".table-device-tab",
-        content: "#table_device_content",
-        preloader: "#table_device_preloader",
-        button: {
-            refresh: "#table_device_button_refresh",
-            debug: "#table_device_button_debug",
-            monitor: "#table_device_button_monitor"
-        }
-    }
-};
+/**
+ * Animation when opening a modal window
+ */
+function openModalAnimation () {
+    $(modal.window.open).removeClass(modal.animation.close);
+    $(modal.window.open).addClass(modal.animation.open);
+}
+
+/**
+ * Animation when closing a modal window
+ */
+function closeModalAnimation () {
+    $(modal.window.open).removeClass(modal.animation.open);
+    $(modal.window.open).addClass(modal.animation.close);
+}
+
+
