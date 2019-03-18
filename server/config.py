@@ -27,6 +27,7 @@ WEB_SERVICE_CONFIG = {
     "security_secret_key": "super-secret",
     "security_password_hash": "bcrypt",
     "security_password_salt": "$2a$06$6sSyl34Zw.48NBXwGBSURO",
+    "expire_session": False,
     "session_timeout_in_minutes": 10,
     "refresh_session_on_each_request": True,
     "static_url_path": "",
