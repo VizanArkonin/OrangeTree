@@ -10,7 +10,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 from server.config import DATABASE_CONFIG
 
-from flask import Flask
+from flask import Flask, session
 from flask_security import Security, SQLAlchemySessionUserDatastore
 from flask_security.utils import hash_password
 from flask_socketio import SocketIO
@@ -28,8 +28,10 @@ web_service.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_CONFIG["connection_stri
 web_service.config['SECRET_KEY'] = WEB_SERVICE_CONFIG["security_secret_key"]
 web_service.config['SECURITY_PASSWORD_HASH'] = WEB_SERVICE_CONFIG["security_password_hash"]
 web_service.config['SECURITY_PASSWORD_SALT'] = WEB_SERVICE_CONFIG["security_password_salt"]
-web_service.config['SESSION_REFRESH_EACH_REQUEST'] = WEB_SERVICE_CONFIG["refresh_session_on_each_request"]
-web_service.permanent_session_lifetime = timedelta(minutes=WEB_SERVICE_CONFIG["session_timeout_in_minutes"])
+if WEB_SERVICE_CONFIG["expire_session"]:
+    session.permanent = True
+    web_service.permanent_session_lifetime = timedelta(minutes=WEB_SERVICE_CONFIG["session_timeout_in_minutes"])
+    web_service.config['SESSION_REFRESH_EACH_REQUEST'] = WEB_SERVICE_CONFIG["refresh_session_on_each_request"]
 
 # Flask-SQLAlchemy
 db = SQLAlchemy(web_service)
